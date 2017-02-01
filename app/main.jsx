@@ -4,6 +4,4 @@ import React from 'react';
 
 import routes from 'lib/routes';
 
-const App = ({routes});
-
-ReactDOM.render(App, document.getElementById('root'));
+ReactDOM.render(routes, document.getElementById('root'));
