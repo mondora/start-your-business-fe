@@ -1,5 +1,5 @@
 import React from 'react';
-import {browserHistory ,Router, Route} from 'react-router';
+import {browserHistory, Router, Route} from 'react-router';
 
 import Root from 'containers/Root';
 
