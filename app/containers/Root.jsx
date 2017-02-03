@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 
+import Home from 'components/home';
+
 export default class Root extends Component {
 
     render () {
-        return <div>{'i am empty'}</div>;
+        return <Home />;
     }
 }
