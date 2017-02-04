@@ -35,13 +35,18 @@ const styles = {
         padding: 10
     },
     bottom: {
+        height: 150,
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
         padding: 10
     },
+    confirmButtonContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
     confirmButton: {
-        marginTop: 20,
         backgroundColor: '#d8d8d8',
         borderColor: '#d8d8d8',
         height: 40,
@@ -102,6 +107,8 @@ export default class SupplierPlanCard extends Component {
                             {f}
                         </div>
                     ))}
+                </div>
+                <div style={styles.confirmButtonContainer}>
                     <Button style={styles.confirmButton} onClick={onConfirm}>
                         {'INIZIA ORA!'}
                     </Button>
