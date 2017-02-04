@@ -32,12 +32,16 @@
     "chai": "^3.5.0",
     "chai-enzyme": "^0.6.1",
     "enzyme": "^2.7.1",
-    "eslint": "^3.14.1",
+    "eslint": "^3.15.0",
+    "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-react": "^6.9.0",
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
+    "react-addons-test-utils": "^15.4.2",
     "sd-builder": "^4.0.0",
-    "sd-mock-server": "^1.0.4"
+    "sd-mock-server": "^1.0.4",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
   }
 }
