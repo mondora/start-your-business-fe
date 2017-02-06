@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Home from 'components/home';
+import Home from 'containers/Home';
 
 export default class Root extends Component {
 
