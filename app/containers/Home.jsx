@@ -1,11 +1,22 @@
 import React, {Component} from 'react';
 
 import Header from 'components/Header';
+import HorizontalLine from 'components/HorizontalLine';
+import Button from 'components/CustomButton';
+import StepCard from 'components/StepCard';
 import SupplierPlanCard from 'components/SupplierPlanCard';
 
 const styles = {
     part1Container: {
         backgroundImage: 'url(\'./_assets/images/home1.jpeg\')',
+        height: 800,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+    },
+    part2Container: {
+        backgroundColor: '#ffffff',
         height: 800,
         display: 'flex',
         justifyContent: 'center',
@@ -44,8 +55,74 @@ export default class Home extends Component {
                             exercitation ullamco laboris nisi ut`
                         }
                     </div>
+                    <HorizontalLine color={'#20bda9'} width={100} />
+                    <Button
+                        backgroundColor={'#ffffff'}
+                        onClick={() => console.log('inizia ora')}
+                        text={'INIZIA ORA!'}
+                        textColor={'#20bda9'}
+                    />
                 </div>
-
+                <div style={styles.part2Container}>
+                    <div style={{color: '#d8d8d8', fontSize: 20}}>{'PROCESSO'}</div>
+                    <div style={{color: '#000000', fontSize: 45}}>{'COME FUNZIONA?'}</div>
+                    <div style={{color: '#000000', fontSize: 20, width: '50%'}}>
+                        {
+                            `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut`
+                        }
+                    </div>
+                    <HorizontalLine color={'#20bda9'} width={100} />
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-around',
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-around',
+                                width: 200
+                            }}
+                        >
+                            <StepCard
+                                number={1}
+                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
+                                title={'REGISTRATI'}
+                            />
+                            <StepCard
+                                number={2}
+                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
+                                title={'SCEGLI UN TEMPLATE'}
+                            />
+                        </div>
+                        <img src='./_assets/images/iPhone.png' style={{height: 400, width: 350}} />
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-around',
+                                width: 200
+                            }}
+                        >
+                            <StepCard
+                                number={3}
+                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
+                                title={'INSERISCI LE SOTTOSCRIZIONI'}
+                            />
+                            <StepCard
+                                number={4}
+                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
+                                title={'METTI ONLINE IL TUO BUSINESS'}
+                            />
+                        </div>
+                    </div>
+                </div>
                 <div style={styles.cardsContainer}>
                     <SupplierPlanCard
                         backgroundColor='#20bda9'
@@ -66,4 +143,5 @@ export default class Home extends Component {
             </div>
         );
     }
+
 }

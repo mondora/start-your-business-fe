@@ -45,7 +45,9 @@ describe('HorizontalLine', () => {
                         .prop('style')
                 ).to.include({width: 200});
             });
+
         });
+
     });
 
 });
