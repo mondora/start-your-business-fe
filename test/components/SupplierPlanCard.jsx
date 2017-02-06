@@ -1,10 +1,11 @@
 import chai, {expect} from 'chai';
 import {shallow} from 'enzyme';
-import {Button, Glyphicon} from 'react-bootstrap';
+import {Glyphicon} from 'react-bootstrap';
 import React from 'react';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
+import Button from 'components/CustomButton';
 import SupplierPlanCard from 'components/SupplierPlanCard';
 
 chai.use(sinonChai);
@@ -40,12 +41,12 @@ describe('SupplierPlanCard', () => {
 
         describe('topBackroundColor', () => {
 
-            it('applies #FFFFFF color as default', () => {
+            it('applies #ffffff color as default', () => {
                 expect(
                     shallow(<SupplierPlanCard onConfirm={sinon.spy()} />)
                         .find('.top')
                         .prop('style')
-                ).to.include({backgroundColor: '#FFFFFF'});
+                ).to.include({backgroundColor: '#ffffff'});
             });
 
             it('applies provided color at the top of the card', () => {
