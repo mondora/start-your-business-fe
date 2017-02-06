@@ -107,6 +107,7 @@ export default class SupplierPlanCard extends Component {
                         backgroundColor={'#d8d8d8'}
                         onClick={onConfirm}
                         text={'INIZIA ORA!'}
+                        textColor={'#000000'}
                     />
                 </div>
             </div>

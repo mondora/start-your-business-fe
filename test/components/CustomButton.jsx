@@ -33,6 +33,17 @@ describe('Custom button', () => {
 
         });
 
+        describe('onClick', () => {
+
+            it('calls provided function', () => {
+                const onClick = sinon.spy();
+                const element = shallow(<CustomButton onClick={onClick} />);
+                element.find(Button).simulate('click');
+                expect(onClick).to.have.callCount(1);
+            });
+
+        });
+
         describe('text', () => {
 
             it('renders provided text', () => {
@@ -45,17 +56,24 @@ describe('Custom button', () => {
 
         });
 
-        describe('onClick', () => {
+        describe('textColor', () => {
 
-            it('calls provided function', () => {
-                const onClick = sinon.spy();
-                const element = shallow(<CustomButton onClick={onClick} />);
-                element.find(Button).simulate('click');
-                expect(onClick).to.have.callCount(1);
+            it('renders text with default color #ffffff without providing any color', () => {
+                expect(
+                    shallow(<CustomButton onClick={sinon.spy()} />)
+                        .find(Button)
+                        .prop('style')
+                ).to.include({color: '#ffffff'});
             });
 
+            it('renders text with provided color', () => {
+                expect(
+                    shallow(<CustomButton onClick={sinon.spy()} textColor={'#f2f2f2'} />)
+                        .find(Button)
+                        .prop('style')
+                ).to.include({color: '#f2f2f2'});
+            });
         });
-
     });
 
 });

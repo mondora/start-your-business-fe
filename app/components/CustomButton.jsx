@@ -6,15 +6,17 @@ export default class CustomButton extends Component {
     static propTypes = {
         backgroundColor: PropTypes.string,
         onClick: PropTypes.func.isRequired,
-        text: PropTypes.string
+        text: PropTypes.string,
+        textColor: PropTypes.string
     }
 
     static defaultProps = {
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        textColor: '#ffffff'
     }
 
     render () {
-        const {backgroundColor, onClick, text} = this.props;
+        const {backgroundColor, onClick, text, textColor} = this.props;
         return (
             <Button
                 style={{
@@ -24,7 +26,7 @@ export default class CustomButton extends Component {
                     paddingLeft: 50,
                     paddingRight: 50,
                     borderRadius: 20,
-                    color: '#000'
+                    color: textColor
                 }}
                 onClick={onClick}
             >
