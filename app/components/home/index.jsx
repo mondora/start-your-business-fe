@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 import SupplierPlanCard from 'components/SupplierPlanCard';
+import UserRegistrationForm from 'components/UserRegistrationForm';
+
 const styles = {
     part1Container: {
         backgroundImage: 'url(\'./_assets/images/home1.jpeg\')',
@@ -44,6 +46,8 @@ export default class Home extends Component {
                     />
                 </div>
                 <div style={{height: 300}} />
+
+                <UserRegistrationForm />
             </div>
         );
     }
