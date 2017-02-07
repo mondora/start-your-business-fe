@@ -1,5 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import {Button, Glyphicon} from 'react-bootstrap';
+import {Glyphicon} from 'react-bootstrap';
+
+import Button from 'components/CustomButton';
+import HorizontalLine from 'components/HorizontalLine';
 
 const styles = {
     container: {
@@ -11,11 +14,6 @@ const styles = {
     name: {
         color: '#fff',
         fontSize: 25,
-    },
-    line: {
-        border: 'solid #fff 1px',
-        display: 'block',
-        width: 100
     },
     price: {
         color: '#fff',
@@ -45,14 +43,6 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
-    },
-    confirmButton: {
-        backgroundColor: '#d8d8d8',
-        borderColor: '#d8d8d8',
-        height: 40,
-        width: 180,
-        borderRadius: 20,
-        color: '#000'
     }
 };
 
@@ -68,7 +58,7 @@ export default class SupplierPlanCard extends Component {
 
     static defaultProps = {
         features: [],
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#ffffff'
     }
 
     render () {
@@ -85,7 +75,7 @@ export default class SupplierPlanCard extends Component {
                     <div style={styles.name}>
                         {name}
                     </div>
-                    <hr style={styles.line} />
+                    <HorizontalLine color={'#ffffff'} width={100} />
                     <div style={styles.price}>
                         {'€'}{price}
                     </div>
@@ -108,10 +98,13 @@ export default class SupplierPlanCard extends Component {
                         </div>
                     ))}
                 </div>
-                <div style={styles.confirmButtonContainer}>
-                    <Button style={styles.confirmButton} onClick={onConfirm}>
-                        {'INIZIA ORA!'}
-                    </Button>
+                <div style={styles.confirmButtonContainer} >
+                    <Button
+                        backgroundColor={'#d8d8d8'}
+                        onClick={onConfirm}
+                        text={'INIZIA ORA!'}
+                        textColor={'#000000'}
+                    />
                 </div>
             </div>
         );
