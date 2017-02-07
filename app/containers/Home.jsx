@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 
+import Button from 'components/CustomButton';
 import Header from 'components/Header';
 import HorizontalLine from 'components/HorizontalLine';
-import Button from 'components/CustomButton';
 import StepCard from 'components/StepCard';
 import SupplierPlanCard from 'components/SupplierPlanCard';
+import UserRegistrationForm from 'components/UserRegistrationForm';
+import UserRegistrationConfirmationForm from 'components/UserRegistrationConfirmationForm';
 
 const styles = {
     part1Container: {

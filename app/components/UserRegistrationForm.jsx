@@ -1,18 +1,6 @@
-import {CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
-import {Config, CognitoIdentityCredentials} from 'aws-sdk';
 import React, {Component} from 'react';
 
-import {AWS_COGNITO, AWS_REGION} from 'lib/config';
-
-Config.region = AWS_REGION;
-Config.credentials = new CognitoIdentityCredentials({
-    IdentityPoolId: AWS_COGNITO.identityPoolId
-});
-
-const userPool = new CognitoUserPool({
-    ClientId: AWS_COGNITO.clientId,
-    UserPoolId: AWS_COGNITO.userPoolId
-});
+import {registerNewUser} from 'lib/aws-cognito-utils';
 
 export default class UserRegistrationForm extends Component {
     constructor (props) {
@@ -43,28 +31,17 @@ export default class UserRegistrationForm extends Component {
         e.preventDefault();
         const email = this.state.email.trim();
         const password = this.state.password.trim();
-        const attributeList = [
-            new CognitoUserAttribute({
-                Name: 'email',
-                Value: email
-            }),
-            new CognitoUserAttribute({
-                Name: 'family_name',
-                Value: this.state.familyName.trim()
-            }),
-            new CognitoUserAttribute({
-                Name: 'given_name',
-                Value: this.state.givenName.trim()
-            })
-        ];
-        userPool.signUp(email, password, attributeList, null, (err, result) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log(`user name is ${result.user.getUsername()}!`);
-            console.log(`call result: ${result}`);
-        });
+        const attributes = [{
+            name: 'email',
+            value: email
+        }, {
+            name: 'family_name',
+            value: this.state.familyName.trim()
+        }, {
+            name: 'given_name',
+            value: this.state.givenName.trim()
+        }];
+        registerNewUser(email, password, attributes);
     }
 
     render () {
