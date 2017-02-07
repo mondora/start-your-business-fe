@@ -1,4 +1,4 @@
-import {CognitoUser, CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
+import {AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
 import {Config, CognitoIdentityCredentials} from 'aws-sdk';
 import {map} from 'ramda';
 
@@ -47,3 +47,34 @@ export function confirmRegistration (username, confirmationCode) {
         console.log(`call result: ${result}`);
     });
 }
+
+export function login (username, password) {
+    const authenticationData = {
+        Username : username,
+        Password : password
+    };
+    const userData = {
+        Username : username,
+        Pool : userPool
+    };
+    const authenticationDetails = new AuthenticationDetails(authenticationData);
+    const cognitoUser = new CognitoUser(userData);
+    cognitoUser.authenticateUser(authenticationDetails, {
+        //TODO manage a callback for result
+        onSuccess: function (result) {
+            console.log(`access token: ${result.getAccessToken().getJwtToken()}`);
+            let login = {};
+            login[`cognito-idp.${AWS_REGION}.amazonaws.com/${AWS_COGNITO.userPoolId}`] = result.getIdToken().getJwtToken();
+            Config.credentials = new CognitoIdentityCredentials({
+                IdentityPoolId : AWS_COGNITO.identityPoolId,
+                Logins : login
+            });
+        },
+
+        onFailure: function (err) {
+            console.error(err);
+        }
+
+    });
+}
+
