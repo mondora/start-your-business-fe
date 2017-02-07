@@ -32,13 +32,13 @@ export function registerNewUser (email, password, attributes) {
 }
 
 export function confirmRegistration (username, confirmationCode) {
-    var userData = {
+    const userData = {
         Username : username,
         Pool : userPool
     };
 
     const cognitoUser = new CognitoUser(userData);
-    cognitoUser.confirmRegistration(confirmationCode, true, function(err, result) {
+    cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
         //TODO manage a callback for result
         if (err) {
             console.error(err);
