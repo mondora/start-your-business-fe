@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Button from 'components/CustomButton';
+import LoginButton from 'components/LoginButton';
 
 const styles = {
     container: {
@@ -34,11 +34,8 @@ export default class Header extends Component {
                     >
                         {'LOGIN'}
                     </span>
-                    <Button
+                    <LoginButton
                         backgroundColor={'#20bda9'}
-                        onClick={() => console.log('login')}
-                        text={'INIZIA ORA!'}
-                        textColor={'#ffffff'}
                     />
                 </div>
             </div>

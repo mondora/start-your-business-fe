@@ -48,7 +48,7 @@ export function confirmRegistration (username, confirmationCode) {
     });
 }
 
-export function login (username, password) {
+export function login (username, password, callback) {
     const authenticationData = {
         Username : username,
         Password : password
@@ -60,7 +60,6 @@ export function login (username, password) {
     const authenticationDetails = new AuthenticationDetails(authenticationData);
     const cognitoUser = new CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
-        //TODO manage a callback for result
         onSuccess: function (result) {
             console.log(`access token: ${result.getAccessToken().getJwtToken()}`);
             let login = {};
@@ -69,10 +68,12 @@ export function login (username, password) {
                 IdentityPoolId : AWS_COGNITO.identityPoolId,
                 Logins : login
             });
+            callback({success: true});
         },
 
         onFailure: function (err) {
             console.error(err);
+            callback({error: err});
         }
 
     });

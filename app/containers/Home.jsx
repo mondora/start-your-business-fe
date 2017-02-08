@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import Button from 'components/CustomButton';
 import Header from 'components/Header';
+import LoginButton from 'components/LoginButton';
 import HorizontalLine from 'components/HorizontalLine';
 import StepCard from 'components/StepCard';
 import SupplierPlanCard from 'components/SupplierPlanCard';
@@ -56,10 +56,7 @@ export default class Home extends Component {
                         }
                     </div>
                     <HorizontalLine color={'#20bda9'} width={100} />
-                    <Button
-                        backgroundColor={'#ffffff'}
-                        onClick={() => console.log('inizia ora')}
-                        text={'INIZIA ORA!'}
+                    <LoginButton
                         textColor={'#20bda9'}
                     />
                 </div>
@@ -79,7 +76,7 @@ export default class Home extends Component {
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
-                            justifyContent: 'space-around',
+                            justifyContent: 'space-around'
                         }}
                     >
                         <div
