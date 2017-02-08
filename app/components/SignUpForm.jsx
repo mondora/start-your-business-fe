@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
+import {FormControl} from 'react-bootstrap';
 
-import {registerNewUser} from 'lib/aws-cognito-utils';
+import Button from 'components/CustomButton';
 
-export default class UserRegistrationForm extends Component {
+import {signUpUser} from 'lib/aws-cognito-utils';
+
+export default class SignUpForm extends Component {
     constructor (props) {
         super(props);
         this.state = {
             email: '',
+            errorMessage: null,
             familyName: '',
             givenName: '',
             password: ''
@@ -27,7 +31,7 @@ export default class UserRegistrationForm extends Component {
         this.setState({password: e.target.value});
     }
 
-    registerNewUser (e) {
+    signUpUser (e) {
         e.preventDefault();
         const email = this.state.email.trim();
         const password = this.state.password.trim();
@@ -41,37 +45,50 @@ export default class UserRegistrationForm extends Component {
             name: 'given_name',
             value: this.state.givenName.trim()
         }];
-        registerNewUser(email, password, attributes);
+        signUpUser(email, password, attributes, this.checkSignUp.bind(this));
+    }
+
+    checkSignUp (result) {
+        if (result.success) {
+            //TODO go to next step
+        } else {
+            this.setState({errorMessage: result.error});
+        }
     }
 
     render () {
         return (
-            <form onSubmit={this.registerNewUser.bind(this)}>
-                <input
+            <form onSubmit={this.signUpUser.bind(this)}>
+                <FormControl
                     type='text'
                     value={this.state.givenName}
                     placeholder='Nome'
                     onChange={this.handleGivenNameChange.bind(this)}
                 />
-                <input
+                <FormControl
                     type='text'
                     value={this.state.familyName}
                     placeholder='Cognome'
                     onChange={this.handleFamilyNameChange.bind(this)}
                 />
-                <input
+                <FormControl
                     type='text'
                     value={this.state.email}
                     placeholder='Email'
                     onChange={this.handleEmailChange.bind(this)}
                 />
-                <input
+                <FormControl
                     type='password'
                     value={this.state.password}
                     placeholder='Password'
                     onChange={this.handlePasswordChange.bind(this)}
                 />
-                <input type='submit' />
+                {this.state.errorMessage}
+                <Button
+                    backgroundColor={'#708090'}
+                    text='REGISTRATI >'
+                    type='submit'
+                />
             </form>
         );
     }

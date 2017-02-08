@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import Header from 'components/Header';
 import LoginButton from 'components/LoginButton';
 import HorizontalLine from 'components/HorizontalLine';
 import StepCard from 'components/StepCard';
@@ -44,7 +43,6 @@ export default class Home extends Component {
         return (
             <div style={{backgroundColor: '#eae9ed'}}>
                 <div style={styles.part1Container}>
-                    <Header />
                     <div style={{color: '#ffffff', fontSize: 50}}>{'INIZIA ORA'}</div>
                     <div style={{color: '#ffffff', fontSize: 45}}>{'IL TUO NUOVO BUSINESS'}</div>
                     <div style={{color: '#ffffff', fontSize: 20, width: '50%'}}>

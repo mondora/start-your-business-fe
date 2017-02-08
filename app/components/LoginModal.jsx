@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {FormControl, Modal} from 'react-bootstrap';
+import {Link} from 'react-router';
 
 import Button from 'components/CustomButton';
 
@@ -91,6 +92,10 @@ export default class LoginModal extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     {'INIZIA ORA!'}
+                    <p>
+                        {'Non hai un account?'}
+                        <Link to='signup' onClick={this.closeModal.bind(this)}>{'Registrati ora'}</Link>
+                    </p>
                 </Modal.Footer>
             </Modal>
         );

@@ -14,20 +14,21 @@ const userPool = new CognitoUserPool({
     UserPoolId: AWS_COGNITO.userPoolId
 });
 
-export function registerNewUser (email, password, attributes) {
+export function signUpUser (email, password, attributes, callback) {
     const attributeList = map(attr => new CognitoUserAttribute({
         Name: attr.name,
         Value: attr.value
     }), attributes);
 
     userPool.signUp(email, password, attributeList, null, (err, result) => {
-        //TODO manage a callback for result
         if (err) {
             console.error(err);
+            callback({error: err.message});
             return;
         }
         console.log(`user name is ${result.user.getUsername()}!`);
         console.log(`call result: ${result}`);
+        callback({success: true});
     });
 }
 
