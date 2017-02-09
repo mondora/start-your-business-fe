@@ -7,12 +7,14 @@ import {confirmSignUp, login} from 'actions/user';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
+import Spinner from 'components/Spinner';
 
 class RootContainer extends Component {
     static propTypes = {
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
+        spinner: PropTypes.object,
         user: PropTypes.object
     };
 
@@ -30,6 +32,7 @@ class RootContainer extends Component {
                     signUpConfirmed={this.props.user.isConfirmed}
                     username={this.props.user.username}
                 />
+                <Spinner show={this.props.spinner.active} />
                 <Footer />
             </div>
         );
@@ -38,6 +41,7 @@ class RootContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        spinner: state.spinner,
         user: state.user
     };
 };
