@@ -14,42 +14,7 @@ const userPool = new CognitoUserPool({
     UserPoolId: AWS_COGNITO.userPoolId
 });
 
-export function signUpUser (email, password, attributes, callback) {
-    const attributeList = map(attr => new CognitoUserAttribute({
-        Name: attr.name,
-        Value: attr.value
-    }), attributes);
-
-    userPool.signUp(email, password, attributeList, null, (err, result) => {
-        if (err) {
-            console.error(err);
-            callback({error: err.message});
-            return;
-        }
-        console.log(`user name is ${result.user.getUsername()}!`);
-        console.log(`call result: ${result}`);
-        callback({success: true});
-    });
-}
-
-export function confirmRegistration (username, confirmationCode) {
-    const userData = {
-        Username : username,
-        Pool : userPool
-    };
-
-    const cognitoUser = new CognitoUser(userData);
-    cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
-        //TODO manage a callback for result
-        if (err) {
-            console.error(err);
-            return;
-        }
-        console.log(`call result: ${result}`);
-    });
-}
-
-export function login (username, password, callback) {
+export function authenticateUser (username, password, callback) {
     const authenticationData = {
         Username : username,
         Password : password
@@ -76,7 +41,42 @@ export function login (username, password, callback) {
             console.error(err);
             callback({error: err});
         }
+    });
+}
 
+export function confirmRegistration (username, confirmationCode, callback) {
+    const userData = {
+        Username : username,
+        Pool : userPool
+    };
+
+    const cognitoUser = new CognitoUser(userData);
+    cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
+        if (err) {
+            console.error(err);
+            callback({error: err});
+            return;
+        }
+        console.log(`call result: ${result}`);
+        callback({success: true});
+    });
+}
+
+export function signUp (email, password, attributes, callback) {
+    const attributeList = map(attr => new CognitoUserAttribute({
+        Name: attr.name,
+        Value: attr.value
+    }), attributes);
+
+    userPool.signUp(email, password, attributeList, null, (err, result) => {
+        if (err) {
+            console.error(err);
+            callback({error: err});
+            return;
+        }
+        console.log(`user name is ${result.user.getUsername()}!`);
+        console.log(`call result: ${result}`);
+        callback({success: true});
     });
 }
 

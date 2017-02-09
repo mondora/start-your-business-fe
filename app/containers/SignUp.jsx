@@ -1,4 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import {signUpUser} from 'actions/user';
 
 import SignUpForm from 'components/SignUpForm';
 
@@ -13,18 +17,41 @@ const styles = {
     }
 };
 
-export default class SignUp extends Component {
-
+class SignUpContainer extends Component {
+    static propTypes = {
+        signUpUser: PropTypes.func.isRequired,
+        user: PropTypes.object
+    };
+    
     render () {
         return (
             <div style={{backgroundColor: '#eae9ed'}}>
                 <div style={styles.part1Container}>
                     <div style={{color: '#ffffff', fontSize: 50}}>{'REGISTRATI'}</div>
-                    <SignUpForm />
+                    <SignUpForm
+                        errorMessage={this.props.user.signupErrorMessage}
+                        signUpUser={this.props.signUpUser}
+                    />
                 </div>
                 <div style={{height: 300}} />
             </div>
         );
     }
-
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUpUser: bindActionCreators(signUpUser, dispatch)
+    };
+};
+
+
+const SignUp = connect(mapStateToProps, mapDispatchToProps)(SignUpContainer);
+
+export default SignUp;

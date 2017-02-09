@@ -4,10 +4,10 @@ import {Link} from 'react-router';
 
 import Button from 'components/CustomButton';
 
-import {login} from 'lib/aws-cognito-utils';
-
 export default class LoginModal extends Component {
     static propTypes = {
+        errorMessage: PropTypes.string,
+        login: PropTypes.func.isRequired,
         onClose: PropTypes.func,
         show: PropTypes.bool
     };
@@ -18,7 +18,6 @@ export default class LoginModal extends Component {
     }
 
     defaultState = {
-        errorMessage: null,
         username: '',
         password: ''
     };
@@ -35,15 +34,7 @@ export default class LoginModal extends Component {
         e.preventDefault();
         const username = this.state.username.trim();
         const password = this.state.password.trim();
-        login(username, password, this.checkLogin.bind(this));
-    }
-
-    checkLogin (result) {
-        if (result.success) {
-            this.closeModal();
-        } else {
-            this.setState({errorMessage: 'Username o password non validi'});
-        }
+        this.props.login(username, password);
     }
 
     closeModal () {
@@ -66,7 +57,7 @@ export default class LoginModal extends Component {
                     placeholder='Password'
                     onChange={this.handlePasswordChange.bind(this)}
                 />
-                {this.state.errorMessage}
+                {this.props.errorMessage}
                 <Button
                     backgroundColor={'#708090'}
                     text={'LOGIN >'}

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import LoginButton from 'components/LoginButton';
 
@@ -23,21 +23,48 @@ const styles = {
 };
 
 export default class Header extends Component {
+    static propTypes = {
+        user: PropTypes.object
+    };
+
+    renderWelcomeWidget () {
+        return (
+            <div>
+                {`Ciao ${this.props.user.username}`}
+            </div>
+        );
+    }
+
+    renderLoginButton () {
+        return (
+            <div>
+                <span
+                    style={{color: '#ffffff', fontSize: 20, paddingRight: 10}}
+                >
+                    {'LOGIN'}
+                </span>
+                <LoginButton
+                    backgroundColor={'#20bda9'}
+                    errorMessage={this.props.user.loginErrorMessage}
+                    {...this.props}
+                />
+            </div>
+        );
+    }
+
+    renderLoginSection () {
+        return (
+            <div style={styles.loginContainer}>
+                {this.props.user.isLoggedIn ? this.renderWelcomeWidget() : this.renderLoginButton()}
+            </div>
+        );
+    }
 
     render () {
         return (
             <div style={styles.container} >
                 <div style={styles.text}>{'logo'}</div>
-                <div style={styles.loginContainer}>
-                    <span
-                        style={{color: '#ffffff', fontSize: 20, paddingRight: 10}}
-                    >
-                        {'LOGIN'}
-                    </span>
-                    <LoginButton
-                        backgroundColor={'#20bda9'}
-                    />
-                </div>
+                {this.renderLoginSection()}
             </div>
         );
     }

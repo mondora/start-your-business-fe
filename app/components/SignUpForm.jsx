@@ -1,16 +1,18 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {FormControl} from 'react-bootstrap';
 
 import Button from 'components/CustomButton';
 
-import {signUpUser} from 'lib/aws-cognito-utils';
-
 export default class SignUpForm extends Component {
+    static propTypes = {
+        errorMessage: PropTypes.string,
+        signUpUser: PropTypes.func.isRequired
+    };
+    
     constructor (props) {
         super(props);
         this.state = {
             email: '',
-            errorMessage: null,
             familyName: '',
             givenName: '',
             password: ''
@@ -45,15 +47,7 @@ export default class SignUpForm extends Component {
             name: 'given_name',
             value: this.state.givenName.trim()
         }];
-        signUpUser(email, password, attributes, this.checkSignUp.bind(this));
-    }
-
-    checkSignUp (result) {
-        if (result.success) {
-            //TODO go to next step
-        } else {
-            this.setState({errorMessage: result.error});
-        }
+        this.props.signUpUser(email, password, attributes);
     }
 
     render () {
@@ -83,7 +77,7 @@ export default class SignUpForm extends Component {
                     placeholder='Password'
                     onChange={this.handlePasswordChange.bind(this)}
                 />
-                {this.state.errorMessage}
+                {this.props.errorMessage}
                 <Button
                     backgroundColor={'#708090'}
                     text='REGISTRATI >'

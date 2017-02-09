@@ -24,7 +24,11 @@
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
-    "react-router": "^3.0.2"
+    "react-redux": "^5.0.2",
+    "react-router": "^3.0.2",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.8.1",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
@@ -42,6 +46,7 @@
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
     "react-addons-test-utils": "^15.4.2",
+    "redux-devtools": "^3.3.2",
     "sd-builder": "^4.0.0",
     "sd-mock-server": "^1.0.4",
     "sinon": "^1.17.7",

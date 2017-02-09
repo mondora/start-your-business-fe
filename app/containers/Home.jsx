@@ -1,4 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import {login} from 'actions/user';
 
 import LoginButton from 'components/LoginButton';
 import HorizontalLine from 'components/HorizontalLine';
@@ -37,8 +41,12 @@ const styles = {
     }
 };
 
-export default class Home extends Component {
-
+class HomeContainer extends Component {
+    static propTypes = {
+        login: PropTypes.func.isRequired,
+        user: PropTypes.object
+    };
+    
     render () {
         return (
             <div style={{backgroundColor: '#eae9ed'}}>
@@ -55,6 +63,8 @@ export default class Home extends Component {
                     </div>
                     <HorizontalLine color={'#20bda9'} width={100} />
                     <LoginButton
+                        errorMessage={this.props.user.loginErrorMessage}
+                        login={this.props.login}
                         textColor={'#20bda9'}
                     />
                 </div>
@@ -138,5 +148,21 @@ export default class Home extends Component {
             </div>
         );
     }
-
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: bindActionCreators(login, dispatch)
+    };
+};
+
+
+const Home = connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+
+export default Home;

@@ -27,6 +27,7 @@ export default class LoginButton extends Component {
                 <LoginModal
                     show={this.state.showLoginModal}
                     onClose={() => this.setState({showLoginModal: false})}
+                    {...this.props}
                 />
             </div>
         );
