@@ -18,7 +18,7 @@ export const login = (username, password) => {
     };
 };
 
-export const openSignUpConfirmationModal = (username) => ({
+export const openSignUpConfirmationModal = username => ({
     type: 'OPEN_SIGNUP_CONFIRMATION_MODAL',
     username: username
 });
