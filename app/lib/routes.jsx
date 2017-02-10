@@ -4,7 +4,8 @@ import {syncHistoryWithStore} from 'react-router-redux';
 
 import store from 'lib/redux-store';
 
-import ChoseTemplate from 'containers/ChoseTemplate';
+import ChoosePlan from 'containers/ChoosePlan';
+import ChooseTemplate from 'containers/ChooseTemplate';
 import Home from 'containers/Home';
 import Root from 'containers/Root';
 import SignUp from 'containers/SignUp';
@@ -16,7 +17,8 @@ export default (
         <Route name='root' component={Root}>
             <Route name='home' path='/' component={Home} />
             <Route name='signup' path='/signup' component={SignUp} />
-            <Route name='choseTemplate' path='/chose-template' component={ChoseTemplate} />
+            <Route name='chooseTemplate' path='/choose-template' component={ChooseTemplate} />
+            <Route name='choosePlan' path='/choose-plan' component={ChoosePlan} />
         </Route>
     </Router>
 );

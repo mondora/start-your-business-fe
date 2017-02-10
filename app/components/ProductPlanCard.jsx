@@ -15,7 +15,7 @@ const styles = {
     },
     name: {
         color: '#fff',
-        fontSize: 25,
+        fontSize: 25
     },
     price: {
         color: '#fff',

@@ -14,7 +14,7 @@ const styles = {
     }
 };
 
-class ChoseTemplateContainer extends Component {
+class ChooseTemplateContainer extends Component {
 
     render () {
         return (
@@ -40,6 +40,6 @@ const mapDispatchToProps = () => {
 };
 
 
-const ChoseTemplate = connect(mapStateToProps, mapDispatchToProps)(ChoseTemplateContainer);
+const ChooseTemplate = connect(mapStateToProps, mapDispatchToProps)(ChooseTemplateContainer);
 
-export default ChoseTemplate;
+export default ChooseTemplate;

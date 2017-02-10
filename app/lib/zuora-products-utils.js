@@ -11,3 +11,7 @@ export function getDefaultPricing (productPlan) {
     }
     return {};
 }
+
+export function allowOwnDomain (productPlan) {
+    return productPlan.allowOwnDomain__c === 'Yes';
+}

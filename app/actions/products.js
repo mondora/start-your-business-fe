@@ -1,6 +1,11 @@
 import axios from 'axios';
 import {API_ENDPOINT} from 'lib/config';
 
+export const choosePlan = productPlanId => ({
+    type: 'CHOOSE_PLAN',
+    productPlanId: productPlanId
+});
+
 export const getSYBProductPlans = () => {
     return dispatch => {
         axios.get(`https://${API_ENDPOINT}/products/start-your-business`)
