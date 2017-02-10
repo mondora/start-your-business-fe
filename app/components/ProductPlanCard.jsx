@@ -4,6 +4,8 @@ import {Glyphicon} from 'react-bootstrap';
 import Button from 'components/CustomButton';
 import HorizontalLine from 'components/HorizontalLine';
 
+import {getDefaultPricing} from 'lib/zuora-products-utils';
+
 const styles = {
     container: {
         backgroundColor: '#fff',
@@ -46,23 +48,23 @@ const styles = {
     }
 };
 
-export default class SupplierPlanCard extends Component {
+export default class ProductPlanCard extends Component {
 
     static propTypes = {
         backgroundColor: PropTypes.string,
-        features: PropTypes.arrayOf(PropTypes.string),
-        name: PropTypes.string,
         onConfirm: PropTypes.func.isRequired,
-        price: PropTypes.number
-    }
+        productPlan: PropTypes.object.isRequired
+    };
 
     static defaultProps = {
-        features: [],
         backgroundColor: '#ffffff'
-    }
+    };
 
     render () {
-        const {backgroundColor, features, name, onConfirm, price} = this.props;
+        const {backgroundColor, onConfirm, productPlan} = this.props;
+        //TODO ask to PO for features to put on Zuora
+        const features = [];
+        const pricing = getDefaultPricing(productPlan);
         return (
             <div style={styles.container}>
                 <div
@@ -73,14 +75,14 @@ export default class SupplierPlanCard extends Component {
                     }}
                 >
                     <div style={styles.name}>
-                        {name}
+                        {productPlan.name}
                     </div>
                     <HorizontalLine color={'#ffffff'} width={100} />
                     <div style={styles.price}>
-                        {'€'}{price}
+                        {pricing.currency}{pricing.price}
                     </div>
                     <div style={styles.frequency}>
-                        {'(annui)'}
+                        {`(${productPlan.Frequency__c})`}
                     </div>
                 </div>
                 <div style={styles.bottom}>

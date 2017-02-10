@@ -2,12 +2,13 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
+import {getSYBProductPlans} from 'actions/products';
 import {login} from 'actions/user';
 
 import LoginButton from 'components/LoginButton';
 import HorizontalLine from 'components/HorizontalLine';
 import StepCard from 'components/StepCard';
-import SupplierPlanCard from 'components/SupplierPlanCard';
+import ProductPlanCardList from 'components/ProductPlanCardList';
 
 const styles = {
     part1Container: {
@@ -26,12 +27,6 @@ const styles = {
         alignItems: 'center',
         flexDirection: 'column'
     },
-    cardsContainer: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        width: '100%'
-    },
     h1: {
         color: '#ffffff',
         fontSize: 50
@@ -43,7 +38,9 @@ const styles = {
 
 class HomeContainer extends Component {
     static propTypes = {
+        getSYBProductPlans: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
+        products: PropTypes.object,
         user: PropTypes.object
     };
     
@@ -128,22 +125,10 @@ class HomeContainer extends Component {
                         </div>
                     </div>
                 </div>
-                <div style={styles.cardsContainer}>
-                    <SupplierPlanCard
-                        backgroundColor='#20bda9'
-                        features={['feat 1', 'feat 2']}
-                        name='STANDARD'
-                        onConfirm={() => console.log('confirm')}
-                        price={20}
-                    />
-                    <SupplierPlanCard
-                        backgroundColor='#f69232'
-                        features={['feat 1', 'feat 2', 'feat 3']}
-                        name='PROFESIONAL'
-                        onConfirm={() => console.log('confirm')}
-                        price={40}
-                    />
-                </div>
+                <ProductPlanCardList
+                    getSYBProductPlans={this.props.getSYBProductPlans}
+                    productPlans={this.props.products.productPlans}
+                />
                 <div style={{height: 300}} />
             </div>
         );
@@ -152,12 +137,14 @@ class HomeContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        products: state.products,
         user: state.user
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getSYBProductPlans: bindActionCreators(getSYBProductPlans, dispatch),
         login: bindActionCreators(login, dispatch)
     };
 };

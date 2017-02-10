@@ -34,9 +34,6 @@ export const signUpUser = (email, password, attributes) => {
 
 function getDefaultCognitoCallback (dispatch, actionName, successObj = {}, failObj = {}) {
     return result => {
-        dispatch({
-            type: `${actionName}_END`
-        });
         if (result.success) {
             dispatch({
                 type: `${actionName}_SUCCESS`,
