@@ -1,5 +1,7 @@
+import {formReducer, modelReducer} from 'react-redux-form';
 import {routerReducer} from 'react-router-redux';
 import {combineReducers} from 'redux';
+import billingInformation from './billing-information';
 import payment from './payment';
 import products from './products';
 import spinner from './spinner';
@@ -10,7 +12,9 @@ const reducers = combineReducers({
     payment,
     products,
     spinner,
-    user
+    user,
+    billingInformation: modelReducer('billingInformation', billingInformation),
+    billingInformationForm: formReducer('billingInformation', billingInformation)
 });
 
 export default reducers;

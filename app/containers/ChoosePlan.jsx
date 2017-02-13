@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {getPaymentParams} from 'actions/payment';
 import {choosePlan, getSYBProductPlans} from 'actions/products';
 
+import BillingInformationForm from 'components/BillingInformationForm';
 import Button from 'components/CustomButton';
 import CreditCardForm from 'components/CreditCardForm';
 import ProductPlanCardList from 'components/ProductPlanCardList';
@@ -22,6 +23,7 @@ const styles = {
 
 class ChoosePlanContainer extends Component {
     static propTypes = {
+        billingInformation: PropTypes.object,
         choosePlan: PropTypes.func.isRequired,
         getPaymentParams: PropTypes.func.isRequired,
         getSYBProductPlans: PropTypes.func.isRequired,
@@ -42,6 +44,11 @@ class ChoosePlanContainer extends Component {
                         chosenPlanId={chosenPlanId}
                         getSYBProductPlans={this.props.getSYBProductPlans}
                         productPlans={productPlans}
+                    />
+                </div>
+                <div>
+                    <BillingInformationForm
+                        billingInformation={this.props.billingInformation}
                     />
                 </div>
                 <div>
@@ -66,6 +73,7 @@ class ChoosePlanContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        billingInformation: state.billingInformation,
         payment: state.payment,
         products: state.products
     };
