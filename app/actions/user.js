@@ -1,3 +1,4 @@
+import {browserHistory} from 'react-router';
 import {authenticateUser, confirmRegistration, signUp} from 'lib/aws-cognito-utils';
 
 export const confirmSignUp = (username, confirmationCode) => {
@@ -5,7 +6,7 @@ export const confirmSignUp = (username, confirmationCode) => {
         dispatch({
             type: 'SIGNUP_CONFIRMATION_START'
         });
-        confirmRegistration(username, confirmationCode, getDefaultCognitoCallback(dispatch, 'SIGNUP_CONFIRMATION')); 
+        confirmRegistration(username, confirmationCode, getDefaultCognitoCallback(dispatch, 'SIGNUP_CONFIRMATION'));
     };
 };
 
@@ -39,6 +40,7 @@ function getDefaultCognitoCallback (dispatch, actionName, successObj = {}, failO
                 type: `${actionName}_SUCCESS`,
                 ...successObj
             });
+            browserHistory.push('/');
         } else {
             dispatch({
                 type: `${actionName}_FAIL`,
