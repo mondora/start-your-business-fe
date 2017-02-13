@@ -10,6 +10,9 @@
     "node": true,
     "es6": true
   },
+  "globals": {
+    "Z": true
+  },
   "ecmaFeatures": {
     "modules": true
   },

@@ -11,12 +11,17 @@
     <body>
         <!-- React mount point -->
         <div id="root"></div>
-        <!-- App configuration -->
+
         <script src="./app-config.js"></script>
-        <!-- App vendor scripts -->
         <script src="./_assets/js/vendor.js"></script>
-        <!-- App scripts -->
         <script src="./_assets/js/app.js"></script>
+
+        <!-- @if EXEC_ENV=='production' -->
+        <script type="text/javascript" src="https://static.zuora.com/Resources/libs/hosted/1.3.0/zuora-min.js"></script>
+        <!-- @endif -->
+        <!-- @if EXEC_ENV!='production' -->
+        <script type="text/javascript" src="https://apisandboxstatic.zuora.com/Resources/libs/hosted/1.3.0/zuora-min.js"></script>
+        <!-- @endif -->
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     </body>
