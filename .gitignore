@@ -5,3 +5,4 @@ npm-debug.log
 coverage/
 .idea/
 tests_output/
+.DS_Store

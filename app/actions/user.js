@@ -6,7 +6,13 @@ export const confirmSignUp = (username, confirmationCode) => {
         dispatch({
             type: 'SIGNUP_CONFIRMATION_START'
         });
-        confirmRegistration(username, confirmationCode, getDefaultCognitoCallback(dispatch, 'SIGNUP_CONFIRMATION'));
+        confirmRegistration(username, confirmationCode, getDefaultCognitoCallback(
+            dispatch,
+            'SIGNUP_CONFIRMATION',
+            {},
+            {},
+            () => browserHistory.push('/choose-template')
+        ));
     };
 };
 
@@ -15,7 +21,13 @@ export const login = (username, password) => {
         dispatch({
             type: 'LOGIN_START'
         });
-        authenticateUser(username, password, getDefaultCognitoCallback(dispatch, 'LOGIN', {}, {username: username}));
+        authenticateUser(username, password, getDefaultCognitoCallback(
+            dispatch,
+            'LOGIN',
+            {},
+            {username: username},
+            () => browserHistory.push('/choose-template')
+        ));
     };
 };
 
@@ -33,14 +45,16 @@ export const signUpUser = (email, password, attributes) => {
     };
 };
 
-function getDefaultCognitoCallback (dispatch, actionName, successObj = {}, failObj = {}) {
+function getDefaultCognitoCallback (dispatch, actionName, successObj = {}, failObj = {}, successAction) {
     return result => {
         if (result.success) {
             dispatch({
                 type: `${actionName}_SUCCESS`,
                 ...successObj
             });
-            browserHistory.push('/');
+            if (successAction) {
+                successAction();
+            }
         } else {
             dispatch({
                 type: `${actionName}_FAIL`,

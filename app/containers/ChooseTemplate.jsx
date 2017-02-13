@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 
 import Button from 'components/CustomButton';
 
@@ -22,6 +23,7 @@ class ChooseTemplateContainer extends Component {
                 <div style={styles.part1Container}>
                     <Button
                         backgroundColor={'#708090'}
+                        onClick={() => browserHistory.push('/choose-plan')}
                         text={'SALVA E PROSEGUI >'}
                     />
                 </div>
