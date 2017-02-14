@@ -24,12 +24,14 @@ const styles = {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center top',
-        height: 'calc(100vh - 80px)',
+        height: 'auto',
         minHeight: 500,
-        paddingTop: '200px',
+        padding: '20% 0 8% 0',
         '@media screen and (max-width: 767px)': {
-            paddingTop: '220px',
-            height: '500'
+            paddingTop: '220px'
+        },
+        '@media screen and (min-width: 1200px)': {
+            height: '100vh',
         }
     },
     titleTeaser: {
