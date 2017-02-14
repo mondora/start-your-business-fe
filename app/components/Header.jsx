@@ -36,7 +36,7 @@ const styles = {
         flexDirection:'row',
         alignItems: 'center',
         justifyContent: 'flex-end'
-    },
+    }
 };
 
 class Header extends Component {
@@ -110,6 +110,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const SiteHeader = connect(mapDispatchToProps)(Header);
-
-export default Radium(SiteHeader);
+export default connect(mapDispatchToProps)(Radium(Header));
