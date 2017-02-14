@@ -1,29 +1,47 @@
 import React, {Component, PropTypes} from 'react';
+import {Col, Row} from 'react-bootstrap';
+import Radium from 'radium';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
+import {login} from 'actions/user';
+
+import * as colors from 'lib/colors';
+import Button from 'components/CustomButton';
 import LoginButton from 'components/LoginButton';
+// import SignUpButton from 'components/SignUpButton';
 
 const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '100%',
-        position: 'absolute',
-        top: 10
-    },
-    text: {
-        color: '#ffffff',
-        fontSize: 50
+    headerLogo: {
+        height: 80,
+        '@media screen and (max-width: 767px)': {
+            height: 'auto',
+            marginBottom: 20,
+            textAlign: 'center'
+        },
     },
     loginContainer: {
         display: 'flex',
-        flexdirection: 'row',
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        height: 80,
+        '@media screen and (max-width: 767px)': {
+            height: 'auto',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }
+    },
+    loginButtons: {
+        display: 'flex',
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
 };
 
-export default class Header extends Component {
+class Header extends Component {
     static propTypes = {
+        login: PropTypes.func.isRequired,
         user: PropTypes.object
     };
 
@@ -35,17 +53,25 @@ export default class Header extends Component {
         );
     }
 
-    renderLoginButton () {
+    renderButtons () {
         return (
-            <div>
-                <span
-                    style={{color: '#ffffff', fontSize: 20, paddingRight: 10}}
-                >
-                    {'LOGIN'}
-                </span>
-                <LoginButton
-                    backgroundColor={'#20bda9'}
-                    loginState={this.props.user.login}
+            <div style={styles.loginButtons}>
+                <div style={{marginRight: 10}}>
+                    <LoginButton
+                        backgroundColor={colors.transparent}
+                        border={`1px solid ${colors.grey}`}
+                        height={40}
+                        errorMessage={this.props.user.loginErrorMessage}
+                        login={this.props.login}
+                        loginState={this.props.user.login}
+                        {...this.props}
+                    />
+
+                </div>
+                <Button
+                    height={40}
+                    text={'INIZIA ORA!'}
+                    backgroundColor={colors.primaryColor}
                     {...this.props}
                 />
             </div>
@@ -55,19 +81,35 @@ export default class Header extends Component {
     renderLoginSection () {
         return (
             <div style={styles.loginContainer}>
-                {this.props.user.isLoggedIn ? this.renderWelcomeWidget() : this.renderLoginButton()}
+                {this.props.user.isLoggedIn ? this.renderWelcomeWidget() : this.renderButtons()}
             </div>
         );
     }
 
     render () {
         return (
-            <div style={styles.container} >
-                <div style={styles.text}>{'logo'}</div>
-                {this.renderLoginSection()}
+            <div className='container' style={{position: 'absolute', width: '100%'}}>
+                <Row style={{padding: '20px 0'}}>
+                    <Col xs={12} sm={6}>
+                        <div style={styles.headerLogo}>
+                            <img src='../_assets/images/common/logo.png' style={{maxHeight: 80}} />
+                        </div>
+                    </Col>
+                    <Col xs={12} sm={6}>
+                        {this.renderLoginSection()}
+                    </Col>
+                </Row>
             </div>
         );
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: bindActionCreators(login, dispatch)
+    };
+};
 
+const SiteHeader = connect(mapDispatchToProps)(Header);
+
+export default Radium(SiteHeader);

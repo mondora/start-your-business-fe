@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import * as colors from 'lib/colors';
 
 export default class StepCard extends Component {
 
@@ -14,6 +15,7 @@ export default class StepCard extends Component {
         return (
             <div
                 style={{
+                    padding: '4vw 0',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center'
@@ -22,8 +24,8 @@ export default class StepCard extends Component {
                 <div
                     className='number'
                     style={{
-                        backgroundColor: '#39414F',
-                        color: '#ffffff',
+                        backgroundColor: colors.darkGrey,
+                        color: colors.white,
                         fontSize: 25,
                         width: 40,
                         height: 40,
@@ -37,17 +39,24 @@ export default class StepCard extends Component {
                 <div
                     className='title'
                     style={{
-                        color: '#20bda9',
-                        fontSize: 18,
+                        color: colors.primaryColor,
+                        fontSize: 'calc(20px + .25vw)',
+                        lineHeight: 'calc(22px + .25vw)',
                         marginBottom: 10,
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        fontWeight: '800'
                     }}
                 >
                     {title}
                 </div>
                 <div
                     className='text'
-                    style={{textAlign: 'center', width: 200}}
+                    style={{
+                        fontSize: 'calc(14px + .25vw)',
+                        lineHeight: 'calc(16px + .25vw)',
+                        textAlign: 'center',
+                        width: '80%'
+                    }}
                 >
                     {text}
                 </div>
@@ -55,5 +64,3 @@ export default class StepCard extends Component {
         );
     }
 }
-
-

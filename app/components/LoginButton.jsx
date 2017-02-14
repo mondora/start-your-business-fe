@@ -21,7 +21,7 @@ export default class LoginButton extends Component {
             <div>
                 <Button
                     onClick={() => this.setState({showLoginModal: true})}
-                    text={'INIZIA ORA'}
+                    text={'LOGIN'}
                     {...this.props}
                 />
                 <LoginModal
@@ -33,5 +33,3 @@ export default class LoginButton extends Component {
         );
     }
 }
-
-

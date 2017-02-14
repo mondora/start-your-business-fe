@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Glyphicon} from 'react-bootstrap';
+import * as colors from 'lib/colors';
+import {Col} from 'react-bootstrap';
 
 import Button from 'components/CustomButton';
 import HorizontalLine from 'components/HorizontalLine';
@@ -8,27 +10,27 @@ import {getDefaultPricing} from 'lib/zuora-products-utils';
 
 const styles = {
     container: {
-        backgroundColor: '#fff',
-        width: 300,
-        height: 400,
-        borderRadius: 10
+        backgroundColor: colors.white,
+        maxWidth: 370,
+        margin: '0 auto',
+        borderRadius: 15
     },
     name: {
-        color: '#fff',
-        fontSize: 25
+        color: colors.white,
+        fontWeight: 800,
+        fontSize: 'calc(18px + .5vw)',
     },
     price: {
-        color: '#fff',
-        fontSize: 40
+        color: colors.white,
+        fontSize: 'calc(35px + .5vw)',
+        fontWeight: 800
     },
     frequency: {
-        color: '#fff',
-        fontSize: 20
+        color: colors.white,
+        fontSize: 'calc(14px + .5vw)',
+        fontWeight: 800
     },
     top: {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
         borderRadius: '10px 10px 0 0',
         height: 200,
         width: '100%',
@@ -36,15 +38,10 @@ const styles = {
     },
     bottom: {
         height: 150,
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
         padding: 10
     },
     confirmButtonContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
+        padding: '20px 0'
     }
 };
 
@@ -57,7 +54,7 @@ export default class ProductPlanCard extends Component {
     };
 
     static defaultProps = {
-        backgroundColor: '#ffffff'
+        backgroundColor: colors.white
     };
 
     render () {
@@ -66,51 +63,51 @@ export default class ProductPlanCard extends Component {
         const features = [];
         const pricing = getDefaultPricing(productPlan);
         return (
-            <div style={styles.container}>
-                <div
-                    className='top'
-                    style={{
-                        ...styles.top,
-                        ...{backgroundColor: backgroundColor}
-                    }}
-                >
-                    <div style={styles.name}>
-                        {productPlan.name}
-                    </div>
-                    <HorizontalLine color={'#ffffff'} width={100} />
-                    <div style={styles.price}>
-                        {pricing.currency}{pricing.price}
-                    </div>
-                    <div style={styles.frequency}>
-                        {`(${productPlan.Frequency__c})`}
-                    </div>
-                </div>
-                <div style={styles.bottom}>
-                    {features.map((f, i) => (
-                        <div key={i}>
-                            <Glyphicon
-                                glyph='glyphicon glyphicon-ok-circle'
-                                style={{
-                                    color: backgroundColor,
-                                    fontSize: 30,
-                                    paddingRight: 10
-                                }}
-                            />
-                            {f}
+            <Col xs={12} sm={6} style={{paddingTop: '4vw', paddingBottom: '4vw'}}>
+                <div style={styles.container}>
+                    <div
+                        className='top'
+                        style={{
+                            ...styles.top,
+                            ...{backgroundColor: backgroundColor}
+                        }}
+                    >
+                        <div style={styles.name}>
+                            {productPlan.name}
                         </div>
-                    ))}
+                        <HorizontalLine color={colors.white} width={100} />
+                        <div style={styles.price}>
+                            {pricing.currency}{pricing.price}
+                        </div>
+                        <div style={styles.frequency}>
+                            {`(${productPlan.Frequency__c})`}
+                        </div>
+                    </div>
+                    <div style={styles.bottom}>
+                        {features.map((f, i) => (
+                            <div key={i}>
+                                <Glyphicon
+                                    glyph='glyphicon glyphicon-ok-circle'
+                                    style={{
+                                        color: backgroundColor,
+                                        fontSize: 30,
+                                        paddingRight: 10
+                                    }}
+                                />
+                                {f}
+                            </div>
+                        ))}
+                    </div>
+                    <div style={styles.confirmButtonContainer} >
+                        <Button
+                            backgroundColor={colors.lightGrey}
+                            onClick={onConfirm}
+                            text={'INIZIA ORA!'}
+                            textColor={colors.darkGrey}
+                        />
+                    </div>
                 </div>
-                <div style={styles.confirmButtonContainer} >
-                    <Button
-                        backgroundColor={'#d8d8d8'}
-                        onClick={onConfirm}
-                        text={'INIZIA ORA!'}
-                        textColor={'#000000'}
-                    />
-                </div>
-            </div>
+            </Col>
         );
     }
 }
-
-

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import Radium from 'radium';
 
 import {confirmSignUp, login} from 'actions/user';
 
@@ -20,7 +21,7 @@ class RootContainer extends Component {
 
     render () {
         return (
-            <div>
+            <div style={{minWidth: 320}}>
                 <Header
                     login={this.props.login}
                     user={this.props.user}
@@ -56,4 +57,4 @@ const mapDispatchToProps = (dispatch) => {
 
 const Root = connect(mapStateToProps, mapDispatchToProps)(RootContainer);
 
-export default Root;
+export default Radium(Root);

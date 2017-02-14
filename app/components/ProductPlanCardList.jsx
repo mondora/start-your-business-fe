@@ -1,20 +1,19 @@
 import React, {Component, PropTypes} from 'react';
+import * as colors from 'lib/colors';
+import {Row} from 'react-bootstrap';
 
 import ChoosablePlanCard from 'components/ChoosablePlanCard';
 import ProductPlanCard from 'components/ProductPlanCard';
 
 const styles = {
     cardsContainer: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        width: '100%'
+        width: 'calc(100vw -50%)'
     }
 };
 
 const cardColors = [
-    '#20bda9',
-    '#f69232'
+    colors.primaryColor,
+    colors.secondaryColor
 ];
 
 export default class ProductPlanCardList extends Component {
@@ -53,7 +52,9 @@ export default class ProductPlanCardList extends Component {
     render () {
         return (
             <div style={styles.cardsContainer}>
-                {this.renderPlanCardList()}
+                <Row>
+                    {this.renderPlanCardList()}
+                </Row>
             </div>
         );
     }
