@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
-import {Col, Row} from 'react-bootstrap';
+// import {Col, Row} from 'react-bootstrap';
 
 import {getSYBProductPlans} from 'actions/products';
 import {login} from 'actions/user';
@@ -10,10 +10,12 @@ import * as colors from 'lib/colors';
 
 // import SignUpButton from 'components/SignUpButton';
 import Button from 'components/CustomButton';
-import FeaturesIcons from 'components/FeaturesIcons';
 import HomeSectionTitle from 'components/HomeSectionTitle';
 import HorizontalLine from 'components/HorizontalLine';
-import StepCard from 'components/StepCard';
+import FaqSection from 'components/FaqSection';
+import ProcessSection from 'components/ProcessSection';
+import TemplateSection from 'components/TemplateSection';
+
 import ProductPlanCardList from 'components/ProductPlanCardList';
 
 const styles = {
@@ -28,7 +30,7 @@ const styles = {
         '@media screen and (max-width: 767px)': {
             paddingTop: '220px',
             height: '500'
-        },
+        }
     },
     titleTeaser: {
         margin: 0,
@@ -42,34 +44,22 @@ const styles = {
         margin: '20px auto',
         width: '60%',
         textAlign: 'center',
+        fontSize: 'calc(18px + .25vw)',
         lineHeight: 'calc(18px + 1vw)',
         '@media screen and (max-width: 767px)': {
             width: '100%'
-        },
-    },
-    processWrp: {
-        padding: '8% 0',
-        backgroundColor: colors.white
+        }
     },
     imgResponsive: {
         display: 'block',
         height: 'auto',
-        maxWidth: '85%',
-        margin: '40px 0'
+        maxWidth: '100%',
+        margin: '40px auto'
     },
     planWrp: {
         padding: '8% 0',
         backgroundColor: colors.backgroundLightGrey
-    },
-    templateWrp: {
-        padding: '8% 0',
-        backgroundImage: 'url(\'./_assets/images/home/bg_template.jpg\')',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top',
-        height: 'auto',
-        minHeight: 500
-    },
+    }
 };
 
 class HomeContainer extends Component {
@@ -80,116 +70,21 @@ class HomeContainer extends Component {
         user: PropTypes.object
     };
 
-    getFeaturesIcons () {
-        return [
-            {
-                icon: 'responsive_white',
-                title: '100% RESPONSIVE',
-                text:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
-            },
-            {
-                icon: 'template_white',
-                title: '2 TEMPLATE ACCATTIVANTI',
-                text:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
-            },
-            {
-                icon: 'customizable_white',
-                title: 'FACILI DA PERSONALIZZARE',
-                text:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
-            }
-        ];
-    }
-
     renderProcess () {
         return (
-            <div style={styles.processWrp}>
-                <div className='container' style={{textAlign: 'center'}}>
-                    <HomeSectionTitle
-                        subtitle={'PROCESSO'}
-                        title={'COME FUNZIONA?'}
-                        description={
-                            `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua. Ut enim ad minim veniam.`
-                        }
-                    />
-                    <HorizontalLine color={colors.primaryColor} width={140} />
-                    <Row>
-                        <Col xs={12} sm={4}>
-                            <StepCard
-                                number={1}
-                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
-                                title={'REGISTRATI'}
-                            />
-                            <StepCard
-                                number={2}
-                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
-                                title={'SCEGLI UN TEMPLATE'}
-                            />
-                        </Col>
-                        <Col xs={12} sm={4} smPush={4}>
-                            <StepCard
-                                number={3}
-                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
-                                title={'INSERISCI LE SOTTOSCRIZIONI'}
-                            />
-                            <StepCard
-                                number={4}
-                                text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'}
-                                title={'METTI ONLINE IL TUO BUSINESS'}
-                            />
-                        </Col>
-                        <Col xs={12} sm={4} smPull={4}>
-                            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                <img src='./_assets/images/home/iPhone.png' style={styles.imgResponsive} />
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-            </div>
+            <ProcessSection />
         );
     }
 
     renderTemplate () {
         return (
-            <div style={styles.templateWrp}>
-                <div className='container' style={{textAlign: 'center'}}>
-                    <HomeSectionTitle
-                        subtitle={'DESIGN'}
-                        textColor={colors.white}
-                        title={'SCEGLI UN TEMPLATE'}
-                        description={
-                            `Ut veniam lorem ipsum Consectetur ut in in eu do
-                            sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.`
-                        }
-                    />
-                    <Row>
-                        {this.getFeaturesIcons().map((featureIcon, index) =>
-                            <Col key={index} xs={12} sm={4}>
-                                <FeaturesIcons
-                                    key={index}
-                                    icon={featureIcon.icon}
-                                    iconStyle={{margin: '0 auto'}}
-                                    title={featureIcon.title}
-                                    titleColor={colors.primaryColor}
-                                    textColor={colors.white}
-                                    text={featureIcon.text}
-                                />
-                            </Col>
-                        )}
-                    </Row>
-                </div>
-            </div>
+            <TemplateSection />
+        );
+    }
+
+    renderFAQ () {
+        return (
+            <FaqSection />
         );
     }
 
@@ -217,7 +112,7 @@ class HomeContainer extends Component {
 
     render () {
         return (
-            <div style={{backgroundColor: colors.white}}>
+            <div style={{backgroundColor: colors.backgroundLightGrey}}>
                 <div style={styles.teaserWrp}>
                     <div className='container' style={{textAlign: 'center'}}>
                         <h1 style={{...styles.titleTeaser, ...{fontSize: 'calc(60px + 1vw)'}}}>
@@ -226,7 +121,7 @@ class HomeContainer extends Component {
                         <h2 style={{...styles.titleTeaser, ...{fontSize: 'calc(40px + 2vw)'}}}>
                             {'IL TUO NUOVO BUSINESS'}
                         </h2>
-                        <div style={{...styles.textTeaser, ...{fontSize: 'calc(18px + .25vw)'}}}>
+                        <div style={styles.textTeaser}>
                             {
                                 `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                 sed do eiusmod tempor incididunt ut labore et dolore
@@ -244,6 +139,7 @@ class HomeContainer extends Component {
                 {this.renderProcess()}
                 {this.renderTemplate()}
                 {this.renderPlan()}
+                {this.renderFAQ()}
             </div>
         );
     }
