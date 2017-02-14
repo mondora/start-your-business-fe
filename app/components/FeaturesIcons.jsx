@@ -31,10 +31,10 @@ class FeaturesIcons extends Component {
                     iconSize={80}
                     iconStyle={this.props.iconStyle}
                 />
-                <h3 style={{color: this.props.titleColor, fontWeight: '800'}}>
+                <h3 style={{color: this.props.titleColor, fontWeight: '800', margin: '0'}}>
                     {this.props.title}
                 </h3>
-                <p style={{color: this.props.textColor}}>
+                <p style={{color: this.props.textColor, fontSize: '1.2em'}}>
                     {this.props.text}
                 </p>
             </div>

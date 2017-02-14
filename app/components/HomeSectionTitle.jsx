@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import Radium from 'radium';
 
 import * as colors from 'lib/colors';
+import HorizontalLine from 'components/HorizontalLine';
 
 const styles = {
     subtitleSection: {
@@ -51,6 +52,7 @@ class HomeSectionTitle extends Component {
                 <div style={{...styles.textSection, ...{color: this.props.textColor}}}>
                     {this.props.description}
                 </div>
+                <HorizontalLine color={colors.primaryColor} width={100} />
             </div>
         );
     }
