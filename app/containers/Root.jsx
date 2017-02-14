@@ -28,8 +28,8 @@ class RootContainer extends Component {
                 {this.props.children}
                 <SignUpConfirmationModal
                     confirmSignUp={this.props.confirmSignUp}
-                    errorMessage={this.props.user.confirmationErrorMessage}
-                    signUpConfirmed={this.props.user.isConfirmed}
+                    signupConfirmation={this.props.user.signup.confirmation}
+                    signupConfirmed={this.props.user.isConfirmed}
                     username={this.props.user.username}
                 />
                 <Spinner show={this.props.spinner.active} />

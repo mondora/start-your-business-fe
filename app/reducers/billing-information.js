@@ -1,4 +1,6 @@
-const billingInformation = {
+import {modeled} from 'react-redux-form';
+
+export const initialBillingState = {
     givenName: '',
     familyName: '',
     company: '',
@@ -13,4 +15,13 @@ const billingInformation = {
     country: ''
 };
 
-export default billingInformation;
+const billingInformation = (state = initialBillingState, action) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+};
+
+const modeledBillingInformation = modeled(billingInformation, 'billing');
+
+export default modeledBillingInformation;

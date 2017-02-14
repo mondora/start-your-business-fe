@@ -1,55 +1,46 @@
 import React, {Component, PropTypes} from 'react';
-import {FormControl, Modal} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
+import {Field, Form} from 'react-redux-form';
 
 import Button from 'components/CustomButton';
 
 export default class SignUpConfirmationModal extends Component {
     static propTypes = {
         confirmSignUp: PropTypes.func.isRequired,
-        errorMessage: PropTypes.string,
-        signUpConfirmed: PropTypes.bool.isRequired,
+        signupConfirmation: PropTypes.object.isRequired,
+        signupConfirmed: PropTypes.bool.isRequired,
         username: PropTypes.string
     };
-    
-    constructor (props) {
-        super(props);
-        this.state = {
-            confirmationCode: ''
-        };
-    }
 
-    handleConfirmationCodeChange (e) {
-        this.setState({confirmationCode: e.target.value});
-    }
-
-    confirmRegistration (e) {
-        e.preventDefault();
+    confirmRegistration ({code}) {
         const {confirmSignUp, username} = this.props;
-        confirmSignUp(username, this.state.confirmationCode.trim());
+        confirmSignUp(username, code);
     }
 
     renderSignUpConfirmationForm () {
         return (
-            <form onSubmit={this.confirmRegistration.bind(this)}>
-                <FormControl
-                    type='text'
-                    value={this.state.confirmationCode}
-                    placeholder='Codice di conferma'
-                    onChange={this.handleConfirmationCodeChange.bind(this)}
-                />
-                {this.props.errorMessage}
+            <Form
+                model={'user.signup.confirmation'}
+                onSubmit={this.confirmRegistration.bind(this)}
+            >
+                <Field model='user.signup.confirmation.code'>
+                    <input type='text' placeholder='Codice di conferma' />
+                </Field>
+                
+                {this.props.signupConfirmation.errorMessage}
+                
                 <Button
                     backgroundColor={'#708090'}
                     text='TERMINA REGISTRAZIONE >'
                     type='submit'
                 />
-            </form>
+            </Form>
         );
     }
 
     render () {
         return (
-            <Modal show={!this.props.signUpConfirmed}>
+            <Modal show={!this.props.signupConfirmed}>
                 <Modal.Header>
                     <Modal.Title>
                         {'VALIDA LA REGISTRAZIONE'}

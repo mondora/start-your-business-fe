@@ -60,8 +60,8 @@ class HomeContainer extends Component {
                     </div>
                     <HorizontalLine color={'#20bda9'} width={100} />
                     <LoginButton
-                        errorMessage={this.props.user.loginErrorMessage}
                         login={this.props.login}
+                        loginState={this.props.user.login}
                         textColor={'#20bda9'}
                     />
                 </div>

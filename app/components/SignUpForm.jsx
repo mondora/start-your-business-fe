@@ -1,89 +1,91 @@
 import React, {Component, PropTypes} from 'react';
-import {FormControl} from 'react-bootstrap';
+import {Field, Form} from 'react-redux-form';
+// import validator from 'validator';
 
 import Button from 'components/CustomButton';
 
+// const required = validator.isNull;
+// const isEmail = validator.isEmail;
+//
+// const passwordsMatch = ({password, confirmPassword}) => {
+//     return password === confirmPassword;
+// };
+//
+// const validPassword = password => {
+//     //TODO
+//     /***
+//         Minimum length 8
+//         Require numbers
+//         Require special character
+//         Require uppercase letters
+//         Require lowercase letters
+//      ***/
+//     return password;
+// };
+
 export default class SignUpForm extends Component {
     static propTypes = {
-        errorMessage: PropTypes.string,
-        signUpUser: PropTypes.func.isRequired
+        signUpUser: PropTypes.func.isRequired,
+        signupState: PropTypes.object.isRequired
     };
     
-    constructor (props) {
-        super(props);
-        this.state = {
-            email: '',
-            familyName: '',
-            givenName: '',
-            password: ''
-        };
-    }
-
-    handleEmailChange (e) {
-        this.setState({email: e.target.value});
-    }
-
-    handleFamilyNameChange (e) {
-        this.setState({familyName: e.target.value});
-    }
-    handleGivenNameChange (e) {
-        this.setState({givenName: e.target.value});
-    }
-    handlePasswordChange (e) {
-        this.setState({password: e.target.value});
-    }
-
-    signUpUser (e) {
-        e.preventDefault();
-        const email = this.state.email.trim();
-        const password = this.state.password.trim();
+    signUpUser ({email, password, familyName, givenName}) {
         const attributes = [{
             name: 'email',
             value: email
         }, {
             name: 'family_name',
-            value: this.state.familyName.trim()
+            value: familyName
         }, {
             name: 'given_name',
-            value: this.state.givenName.trim()
+            value: givenName
         }];
         this.props.signUpUser(email, password, attributes);
     }
 
     render () {
+        //TODO put validators inside Form and verify why is not working correctly
+        // validators={{
+        //     '': {passwordsMatch},
+        //     email: {required, isEmail},
+        //     familyName: {required},
+        //     givenName: {required},
+        //     password: {required, validPassword},
+        //     confirmPassword: {required}
+        // }}
         return (
-            <form onSubmit={this.signUpUser.bind(this)}>
-                <FormControl
-                    type='text'
-                    value={this.state.givenName}
-                    placeholder='Nome'
-                    onChange={this.handleGivenNameChange.bind(this)}
-                />
-                <FormControl
-                    type='text'
-                    value={this.state.familyName}
-                    placeholder='Cognome'
-                    onChange={this.handleFamilyNameChange.bind(this)}
-                />
-                <FormControl
-                    type='text'
-                    value={this.state.email}
-                    placeholder='Email'
-                    onChange={this.handleEmailChange.bind(this)}
-                />
-                <FormControl
-                    type='password'
-                    value={this.state.password}
-                    placeholder='Password'
-                    onChange={this.handlePasswordChange.bind(this)}
-                />
-                {this.props.errorMessage}
+            <Form
+                model={'user.signup'}
+                onSubmit={this.signUpUser.bind(this)}
+            >
+                <Field model='user.signup.givenName'>
+                    <input type='text' placeholder='Nome' />
+                </Field>
+
+                <Field model='user.signup.familyName'>
+                    <input type='text' placeholder='Cognome' />
+                </Field>
+
+                <Field model='user.signup.email'>
+                    <input type='email' placeholder='Email' />
+                </Field>
+
+                <Field model='user.signup.password'>
+                    <input type='password' placeholder='Password' />
+                </Field>
+
+                <Field model='user.signup.confirmPassword'>
+                    <input type='password' placeholder='Conferma password' />
+                </Field>
+
+                {this.props.signupState.errorMessage}
+
                 <Button
                     backgroundColor={'#708090'}
                     text='REGISTRATI >'
                     type='submit'
                 />
-            </form>
+            </Form>
         );
     }
 }

@@ -1,9 +1,31 @@
+import {modeled} from 'react-redux-form';
+
+export const initialConfirmationState = {
+    code: '',
+    errorMessage: null
+};
+
+export const initialSignupState = {
+    confirmation: initialConfirmationState,
+    confirmPassword: '',
+    email: '',
+    errorMessage: null,
+    familyName: '',
+    givenName: '',
+    password: ''
+};
+
+export const initialLoginState = {
+    email: '',
+    errorMessage: null,
+    password: ''
+};
+
 const defaultState = {
-    confirmationErrorMessage: null,
     isConfirmed: true,
     isLoggedIn: false,
-    loginErrorMessage: null,
-    signupErrorMessage: null,
+    login: initialLoginState,
+    signup: initialSignupState,
     username: null
 };
 
@@ -14,7 +36,10 @@ const user = (state = defaultState, action) => {
         case 'LOGIN_SUCCESS':
             return {
                 ...state,
-                loginErrorMessage: null,
+                login: {
+                    ...state.login,
+                    errorMessage: null
+                },
                 isConfirmed: true,
                 isLoggedIn: true,
                 username: action.username
@@ -29,24 +54,30 @@ const user = (state = defaultState, action) => {
             return {
                 ...state,
                 isConfirmed: false,
-                confirmationErrorMessage: action.error.message
+                ...getSignupConfirmationState(state, action.error.message)
             };
         case 'SIGNUP_CONFIRMATION_SUCCESS':
             return {
                 ...state,
                 isConfirmed: true,
                 isLoggedIn: true,
-                confirmationErrorMessage: null
+                ...getSignupConfirmationState(state, null)
             };
         case 'SIGNUP_FAIL':
             return {
                 ...state,
-                signupErrorMessage: action.error.message
+                signup: {
+                    ...state.signup,
+                    errorMessage: action.error.message
+                }
             };
         case 'SIGNUP_SUCCESS':
             return {
                 ...state,
-                signupErrorMessage: null,
+                signup: {
+                    ...state.signup,
+                    errorMessage: null
+                },
                 isConfirmed: false,
                 username: action.username
             };
@@ -66,10 +97,26 @@ function getLoginErrorState (state, action) {
         default:
             return {
                 ...state,
-                loginErrorMessage: action.error.message
+                login: {
+                    ...state.login,
+                    errorMessage: action.error.message
+                }
             };
     }
-
 }
 
-export default user;
+function getSignupConfirmationState (state, errorMessage) {
+    return {
+        signup: {
+            ...state.signup,
+            confirmation: {
+                ...state.signup.confirmation,
+                errorMessage: errorMessage
+            }
+        }
+    };
+}
+
+const modeledUser = modeled(user, 'user');
+
+export default modeledUser;

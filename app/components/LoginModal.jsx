@@ -1,69 +1,57 @@
 import React, {Component, PropTypes} from 'react';
-import {FormControl, Modal} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
+import {Field, Form} from 'react-redux-form';
+// import validator from 'validator';
 import {Link} from 'react-router';
 
 import Button from 'components/CustomButton';
 
+// const required = validator.isNull;
+// const isEmail = validator.isEmail;
+
 export default class LoginModal extends Component {
     static propTypes = {
-        errorMessage: PropTypes.string,
         login: PropTypes.func.isRequired,
+        loginState: PropTypes.object.isRequired,
         onClose: PropTypes.func,
         show: PropTypes.bool
     };
 
-    constructor (props) {
-        super(props);
-        this.state = this.defaultState;
-    }
-
-    defaultState = {
-        username: '',
-        password: ''
-    };
-
-    handleUsernameChange (e) {
-        this.setState({username: e.target.value});
-    }
-
-    handlePasswordChange (e) {
-        this.setState({password: e.target.value});
-    }
-
-    login (e) {
-        e.preventDefault();
-        const username = this.state.username.trim();
-        const password = this.state.password.trim();
-        this.props.login(username, password);
+    login ({email, password}) {
+        this.props.login(email, password);
     }
 
     closeModal () {
-        this.setState(this.defaultState);
         this.props.onClose();
     }
 
     renderLoginForm () {
+        //TODO find out why validators on Form generate infinite setFieldsValidity actions
+        // validators={{
+        //     email: {required, isEmail},
+        //     password: {required}
+        // }}
         return (
-            <form onSubmit={this.login.bind(this)}>
-                <FormControl
-                    type='text'
-                    value={this.state.username}
-                    placeholder='Username'
-                    onChange={this.handleUsernameChange.bind(this)}
-                />
-                <FormControl
-                    type='password'
-                    value={this.state.password}
-                    placeholder='Password'
-                    onChange={this.handlePasswordChange.bind(this)}
-                />
-                {this.props.errorMessage}
+            <Form
+                model={'user.login'}
+                onSubmit={this.login.bind(this)}
+            >
+                <Field model='user.login.email'>
+                    <input type='email' placeholder='Email' />
+                </Field>
+    
+                <Field model='user.login.password'>
+                    <input type='password' placeholder='Password' />
+                </Field>
+    
+                {this.props.loginState.errorMessage}
+    
                 <Button
                     backgroundColor={'#708090'}
                     text={'LOGIN >'}
                     type='submit'
                 />
-            </form>
+            </Form>
         );
     }
 

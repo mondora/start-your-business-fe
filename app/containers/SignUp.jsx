@@ -29,8 +29,8 @@ class SignUpContainer extends Component {
                 <div style={styles.part1Container}>
                     <div style={{color: '#ffffff', fontSize: 50}}>{'REGISTRATI'}</div>
                     <SignUpForm
-                        errorMessage={this.props.user.signupErrorMessage}
                         signUpUser={this.props.signUpUser}
+                        signupState={this.props.user.signup}
                     />
                 </div>
                 <div style={{height: 300}} />

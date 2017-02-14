@@ -9,12 +9,12 @@ export default class BillingInformationForm extends Component {
 
     render () {
         return (
-            <Form model='billingInformation'>
+            <Form model='billing'>
                 <label>{'Nome *'}</label>
-                <Control.text model='billingInformation.givenName' />
+                <Control.text model='billing.givenName' />
 
                 <label>{'Cognome *'}</label>
-                <Control.text model='billingInformation.familyName' />
+                <Control.text model='billing.familyName' />
 
             </Form>
         );

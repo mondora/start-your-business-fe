@@ -45,7 +45,7 @@ export default class Header extends Component {
                 </span>
                 <LoginButton
                     backgroundColor={'#20bda9'}
-                    errorMessage={this.props.user.loginErrorMessage}
+                    loginState={this.props.user.login}
                     {...this.props}
                 />
             </div>
