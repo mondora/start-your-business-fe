@@ -27,7 +27,7 @@ export function authenticateUser (username, password, callback) {
     const cognitoUser = new CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
-            console.log(`access token: ${result.getAccessToken().getJwtToken()}`);
+            console.log(`Cogito authorizer token: ${result.getIdToken().getJwtToken()}`);
             let login = {};
             login[`cognito-idp.${AWS_REGION}.amazonaws.com/${AWS_COGNITO.userPoolId}`] = result.getIdToken().getJwtToken();
             Config.credentials = new CognitoIdentityCredentials({
