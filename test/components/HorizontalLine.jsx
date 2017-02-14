@@ -15,7 +15,7 @@ describe('HorizontalLine', () => {
                     shallow(<HorizontalLine />)
                         .find('hr')
                         .prop('style')
-                ).to.include({border: 'solid #ffffff 1px'});
+                ).to.include({border: 'solid #ffffff 2px'});
             });
 
             it('renders line with provided color', () => {
@@ -23,7 +23,7 @@ describe('HorizontalLine', () => {
                     shallow(<HorizontalLine color={'#f1f1f1'} />)
                         .find('hr')
                         .prop('style')
-                ).to.include({border: 'solid #f1f1f1 1px'});
+                ).to.include({border: 'solid #f1f1f1 2px'});
             });
 
         });
