@@ -17,7 +17,7 @@ export default class HorizontalLine extends Component {
         return (
             <hr
                 style={{
-                    border: `solid ${color} 1px`,
+                    border: `solid ${color} 2px`,
                     display: 'block',
                     width: width
                 }}
@@ -25,5 +25,3 @@ export default class HorizontalLine extends Component {
         );
     }
 }
-
-
