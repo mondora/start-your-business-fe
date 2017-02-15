@@ -1,31 +1,19 @@
 import React, {Component, PropTypes} from 'react';
-import {Field, Form} from 'react-redux-form';
-// import validator from 'validator';
+import {Form} from 'react-redux-form';
 
 import Button from 'components/CustomButton';
+import FormInput from 'components/FormInput';
 
-// const required = validator.isNull;
-// const isEmail = validator.isEmail;
-//
-// const passwordsMatch = ({password, confirmPassword}) => {
-//     return password === confirmPassword;
-// };
-//
-// const validPassword = password => {
-//     //TODO
-//     /***
-//         Minimum length 8
-//         Require numbers
-//         Require special character
-//         Require uppercase letters
-//         Require lowercase letters
-//      ***/
-//     return password;
-// };
+import {genericRequiredValidator, requiredEmailValidator, requiredPasswordValidator} from 'lib/form-utils';
+
+const passwordsMatch = ({password, confirmPassword}) => {
+    return password !== confirmPassword;
+};
 
 export default class SignUpForm extends Component {
     static propTypes = {
         signUpUser: PropTypes.func.isRequired,
+        signupForm: PropTypes.object.isRequired,
         signupState: PropTypes.object.isRequired
     };
     
@@ -44,40 +32,61 @@ export default class SignUpForm extends Component {
     }
 
     render () {
-        //TODO put validators inside Form and verify why is not working correctly
-        // validators={{
-        //     '': {passwordsMatch},
-        //     email: {required, isEmail},
-        //     familyName: {required},
-        //     givenName: {required},
-        //     password: {required, validPassword},
-        //     confirmPassword: {required}
-        // }}
+        const {$form, confirmPassword} = this.props.signupForm;
         return (
             <Form
                 model={'user.signup'}
                 onSubmit={this.signUpUser.bind(this)}
+                validateOn='submit'
+                validators={{
+                    '': {passwordsMatch}
+                }}
             >
-                <Field model='user.signup.givenName'>
-                    <input type='text' placeholder='Nome' />
-                </Field>
+                <FormInput
+                    field={this.props.signupForm.givenName}
+                    inputType='text'
+                    model='user.signup.givenName'
+                    placeholder='Nome'
+                    validator={genericRequiredValidator}
+                />
+                
+                <FormInput
+                    field={this.props.signupForm.familyName}
+                    inputType='text'
+                    model='user.signup.familyName'
+                    placeholder='Cognome'
+                    validator={genericRequiredValidator}
+                />
+                
+                <FormInput
+                    field={this.props.signupForm.email}
+                    inputType='email'
+                    model='user.signup.email'
+                    placeholder='Email'
+                    validator={requiredEmailValidator}
+                />
 
-                <Field model='user.signup.familyName'>
-                    <input type='text' placeholder='Cognome' />
-                </Field>
+                <FormInput
+                    field={this.props.signupForm.password}
+                    inputType='password'
+                    model='user.signup.password'
+                    placeholder='Password'
+                    validator={requiredPasswordValidator}
+                />
 
-                <Field model='user.signup.email'>
-                    <input type='email' placeholder='Email' />
-                </Field>
+                <FormInput
+                    field={confirmPassword}
+                    inputType='password'
+                    model='user.signup.confirmPassword'
+                    placeholder='Conferma password'
+                />
 
-                <Field model='user.signup.password'>
-                    <input type='password' placeholder='Password' />
-                </Field>
-
-                <Field model='user.signup.confirmPassword'>
-                    <input type='password' placeholder='Conferma password' />
-                </Field>
-
+                {
+                    confirmPassword.touched && !$form.valid && $form.submitFailed && !$form.errors.passwordsMatch &&
+                    <strong>
+                        {'La password di conferma non coincide'}
+                    </strong>
+                }
                 {this.props.signupState.errorMessage}
 
                 <Button

@@ -20,6 +20,7 @@ const styles = {
 class SignUpContainer extends Component {
     static propTypes = {
         signUpUser: PropTypes.func.isRequired,
+        signupForm: PropTypes.object,
         user: PropTypes.object
     };
     
@@ -30,6 +31,7 @@ class SignUpContainer extends Component {
                     <div style={{color: '#ffffff', fontSize: 50}}>{'REGISTRATI'}</div>
                     <SignUpForm
                         signUpUser={this.props.signUpUser}
+                        signupForm={this.props.signupForm}
                         signupState={this.props.user.signup}
                     />
                 </div>
@@ -41,6 +43,7 @@ class SignUpContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        signupForm: state.userSignupForm,
         user: state.user
     };
 };
