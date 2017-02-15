@@ -1,6 +1,6 @@
+import Radium from 'radium';
 import React, {Component} from 'react';
 import {Col, Row} from 'react-bootstrap';
-import Radium from 'radium';
 
 import * as colors from 'lib/colors';
 import Button from 'components/CustomButton';
@@ -44,7 +44,9 @@ class Footer extends Component {
                         <Col xs={12} md={6} style={styles.footerCol}>
                             <div style={styles.textWrp}>
                                 <strong>
-                                    {'TeamSystem S.p.A. società con socio unico soggetta all’attività di direzione e coordinamento di TeamSystem Holding S.p.A.'}
+                                    {`TeamSystem S.p.A. società con socio unico
+                                    soggetta all’attività di direzione e coordinamento
+                                    di TeamSystem Holding S.p.A.`}
                                     <br /><br />
                                     {'Sede Legale: Via Sandro Pertini, 88 - 61122 Pesaro (PU)'}
                                 </strong>
@@ -52,7 +54,11 @@ class Footer extends Component {
                         </Col>
                         <Col xs={12} sm={6} md={3} style={styles.footerCol}>
                             <div style={styles.textWrp}>
-                                <a href='#' style={{color: colors.primaryColorLighter}}>
+                                <a
+                                    href='/privacy'
+                                    style={{color: colors.primaryColorLighter}}
+                                    target='_blank'
+                                >
                                     <strong>{'Privacy Policy'}</strong>
                                 </a>
                                 <br />
@@ -94,7 +100,8 @@ class Footer extends Component {
                         <Row>
                             <Col xs={12}>
                                 <p style={{margin: '0', padding: '15px 0'}}>
-                                    {'© 2017 TeamSystem S.p.A. - PIVA: 01035310414 - Cap. Soc. € 24.000.000 I.v.  Tutti i diritti riservati.'}
+                                    {`© 2017 TeamSystem S.p.A. - PIVA: 01035310414
+                                    - Cap. Soc. € 24.000.000 I.v.  Tutti i diritti riservati.`}
                                 </p>
                             </Col>
                         </Row>
