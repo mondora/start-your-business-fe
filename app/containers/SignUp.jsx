@@ -81,8 +81,8 @@ class SignUpContainer extends Component {
                 <PageTeaser
                     pageTitle={'REGISTRATI'}
                 />
-                <div className='container'>
-                    <Row style={styles.rowStyle}>
+                <div className='container' style={styles.rowStyle}>
+                    <Row>
                         <Col xs={12} md={6} mdPush={6}>
                             <SignUpForm
                                 form={this.props.signupForm}

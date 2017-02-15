@@ -11,6 +11,15 @@ const styles = {
         backgroundColor: colors.white,
         padding: '8px',
         fontWeight: '300'
+    },
+    errorsWrp: {
+        display: 'block',
+        borderRadius: '4px',
+        margin: '2px 0',
+        padding: '5px 10px',
+        border: `1px solid ${colors.errorText}`,
+        backgroundColor: colors.backgroundError,
+        color: colors.errorText
     }
 };
 
@@ -41,7 +50,7 @@ export default class FormInput extends Component {
                 />
                 {
                     field.touched && !field.valid &&
-                    <strong>
+                    <strong style={styles.errorsWrp}>
                         {field.errors.invalid}
                     </strong>
                 }

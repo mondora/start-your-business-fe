@@ -14,8 +14,8 @@ export const darkGrey = '#38424e';
 export const black = '#000000';
 export const blackOpacity = 'rgba(0, 0, 0, 0.5)';
 // Error
-export const backgroundError = '#ff1744';
-export const backgroundIconError = '#c41637';
+export const backgroundError = '#ebccd1';
+export const errorText = '#a94442';
 // Footer
 export const backgroundFooter = '#171b23';
 export const backgroundBottomFooter = '#0c0e11';
