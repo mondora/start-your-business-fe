@@ -2,7 +2,6 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import {Col, Row} from 'react-bootstrap';
 
 import {getSYBProductPlans} from 'actions/products';
 import {login} from 'actions/user';
@@ -60,6 +59,12 @@ const styles = {
     planWrp: {
         padding: '8% 0',
         backgroundColor: colors.backgroundLightGrey
+    },
+    plan: {
+        textAlign: 'center',
+        '@media screen and (min-width: 991px)': {
+            padding: '0 10%',
+        }
     }
 };
 
@@ -74,20 +79,22 @@ class HomeContainer extends Component {
     renderPlan () {
         return (
             <div style={styles.planWrp}>
-                <div className='container' style={{textAlign: 'center'}}>
-                    <HomeSectionTitle
-                        subtitle={'ECONOMICS'}
-                        title={'SCEGLI IL PIANO CHE FA PER TE'}
-                        description={
-                            `Consectetur adipiscing elit, aliqua incididunt
-                            sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.`
-                        }
-                    />
-                    <ProductPlanCardList
-                        getSYBProductPlans={this.props.getSYBProductPlans}
-                        productPlans={this.props.products.productPlans}
-                    />
+                <div className='container'>
+                    <div style={styles.plan}>
+                        <HomeSectionTitle
+                            subtitle={'ECONOMICS'}
+                            title={'SCEGLI IL PIANO CHE FA PER TE'}
+                            description={
+                                `Consectetur adipiscing elit, aliqua incididunt
+                                sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua.`
+                            }
+                        />
+                        <ProductPlanCardList
+                            getSYBProductPlans={this.props.getSYBProductPlans}
+                            productPlans={this.props.products.productPlans}
+                        />
+                    </div>
                 </div>
             </div>
         );

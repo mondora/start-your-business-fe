@@ -4,7 +4,6 @@ import {browserHistory} from 'react-router';
 import Button from 'components/CustomButton';
 
 export default class SignUpButton extends Component {
-
     render () {
         return (
             <Button

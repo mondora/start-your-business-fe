@@ -70,7 +70,6 @@ class Header extends Component {
                 <SignUpButton
                     height={40}
                     backgroundColor={colors.primaryColor}
-                    {...this.props}
                 />
             </div>
         );
