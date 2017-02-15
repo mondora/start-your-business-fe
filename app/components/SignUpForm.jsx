@@ -27,6 +27,15 @@ const styles = {
         color: colors.darkGrey,
         fontSize: '1em',
         fontWeight: '300'
+    },
+    errorsWrp: {
+        display: 'block',
+        borderRadius: '4px',
+        margin: '2px 0',
+        padding: '5px 10px',
+        border: `1px solid ${colors.errorText}`,
+        backgroundColor: colors.backgroundError,
+        color: colors.errorText
     }
 };
 
@@ -134,15 +143,14 @@ export default class SignUpForm extends Component {
                         model='user.signup.confirmPassword'
                         placeholder='Conferma password'
                     />
+                    {
+                        confirmPassword.touched && !$form.valid && $form.submitFailed && !$form.errors.passwordsMatch &&
+                        <strong style={styles.errorsWrp}>
+                            {'La password di conferma non coincide'}
+                        </strong>
+                    }
+                    {this.props.signupState.errorMessage}
                 </label>
-
-                {
-                    confirmPassword.touched && !$form.valid && $form.submitFailed && !$form.errors.passwordsMatch &&
-                    <strong>
-                        {'La password di conferma non coincide'}
-                    </strong>
-                }
-                {this.props.signupState.errorMessage}
 
                 <label>
                     <input
@@ -154,7 +162,13 @@ export default class SignUpForm extends Component {
                     <span style={{...styles.text, ...{cursor: 'pointer'}}}>
                         {`  Acconsento e dichiaro di aver letto i termini
                         e condizioni del servizio e l’informativa sulla `}
-                        <a href='#' style={{color: colors.darkGrey, textDecoration: 'underline'}}>{'Privacy'}</a> {' *'}
+                        <a
+                            href='/privacy'
+                            style={{color: colors.darkGrey, textDecoration: 'underline'}}
+                            target='_blank'
+                        >
+                            {'Privacy'}
+                        </a> {' *'}
                     </span>
                 </label>
                 <label>
