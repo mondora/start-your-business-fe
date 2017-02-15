@@ -1,10 +1,34 @@
 import React, {Component, PropTypes} from 'react';
 import {Form} from 'react-redux-form';
 
+import * as colors from 'lib/colors';
+
 import Button from 'components/CustomButton';
 import FormInput from 'components/FormInput';
 
 import {genericRequiredValidator, requiredEmailValidator, requiredPasswordValidator} from 'lib/form-utils';
+
+const styles = {
+    formWrp: {
+        backgroundColor: colors.primaryColorLighter,
+        borderRadius: '5px',
+        padding: '20px',
+        marginBottom: '30px'
+    },
+    blockWrp: {
+        width: '100%',
+        marginBottom: '20px'
+    },
+    label: {
+        color: colors.darkGrey,
+        fontSize: '1em'
+    },
+    text: {
+        color: colors.darkGrey,
+        fontSize: '1em',
+        fontWeight: '300'
+    }
+};
 
 const passwordsMatch = ({password, confirmPassword}) => {
     return password !== confirmPassword;
@@ -16,7 +40,26 @@ export default class SignUpForm extends Component {
         signUpUser: PropTypes.func.isRequired,
         signupState: PropTypes.object.isRequired
     };
-    
+
+    constructor (props) {
+        super(props);
+        this.state = {
+            accept: false
+        };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange (event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
     signUpUser ({email, password, familyName, givenName}) {
         const attributes = [{
             name: 'email',
@@ -41,45 +84,57 @@ export default class SignUpForm extends Component {
                 validators={{
                     '': {passwordsMatch}
                 }}
+                style={styles.formWrp}
             >
-                <FormInput
-                    field={this.props.form.givenName}
-                    inputType='text'
-                    model='user.signup.givenName'
-                    placeholder='Nome'
-                    validator={genericRequiredValidator}
-                />
-                
-                <FormInput
-                    field={this.props.form.familyName}
-                    inputType='text'
-                    model='user.signup.familyName'
-                    placeholder='Cognome'
-                    validator={genericRequiredValidator}
-                />
-                
-                <FormInput
-                    field={this.props.form.email}
-                    inputType='email'
-                    model='user.signup.email'
-                    placeholder='Email'
-                    validator={requiredEmailValidator}
-                />
-
-                <FormInput
-                    field={this.props.form.password}
-                    inputType='password'
-                    model='user.signup.password'
-                    placeholder='Password'
-                    validator={requiredPasswordValidator}
-                />
-
-                <FormInput
-                    field={confirmPassword}
-                    inputType='password'
-                    model='user.signup.confirmPassword'
-                    placeholder='Conferma password'
-                />
+                <label style={styles.blockWrp}>
+                    <span style={styles.label}>{'Nome: *'}</span>
+                    <FormInput
+                        field={this.props.form.givenName}
+                        inputType='text'
+                        model='user.signup.givenName'
+                        placeholder='Nome'
+                        validator={genericRequiredValidator}
+                    />
+                </label>
+                <label style={styles.blockWrp}>
+                    <span style={styles.label}>{'Cognome: *'}</span>
+                    <FormInput
+                        field={this.props.form.familyName}
+                        inputType='text'
+                        model='user.signup.familyName'
+                        placeholder='Cognome'
+                        validator={genericRequiredValidator}
+                    />
+                </label>
+                <label style={styles.blockWrp}>
+                    <span style={styles.label}>{'Email: *'}</span>
+                    <FormInput
+                        field={this.props.form.email}
+                        inputType='email'
+                        model='user.signup.email'
+                        placeholder='Email'
+                        validator={requiredEmailValidator}
+                    />
+                </label>
+                <label style={styles.blockWrp}>
+                    <span style={styles.label}>{'Password: *'}</span>
+                    <FormInput
+                        field={this.props.form.password}
+                        inputType='password'
+                        model='user.signup.password'
+                        placeholder='Password'
+                        validator={requiredPasswordValidator}
+                    />
+                </label>
+                <label style={styles.blockWrp}>
+                    <span style={styles.label}>{'Ripeti password: *'}</span>
+                    <FormInput
+                        field={confirmPassword}
+                        inputType='password'
+                        model='user.signup.confirmPassword'
+                        placeholder='Conferma password'
+                    />
+                </label>
 
                 {
                     confirmPassword.touched && !$form.valid && $form.submitFailed && !$form.errors.passwordsMatch &&
@@ -89,11 +144,32 @@ export default class SignUpForm extends Component {
                 }
                 {this.props.signupState.errorMessage}
 
-                <Button
-                    backgroundColor={'#708090'}
-                    text='REGISTRATI >'
-                    type='submit'
-                />
+                <label>
+                    <input
+                        name='accept'
+                        type='checkbox'
+                        checked={this.state.accept}
+                        onChange={this.handleInputChange}
+                    />
+                    <span style={{...styles.text, ...{cursor: 'pointer'}}}>
+                        {`  Acconsento e dichiaro di aver letto i termini
+                        e condizioni del servizio e l’informativa sulla `}
+                        <a href='#' style={{color: colors.darkGrey, textDecoration: 'underline'}}>{'Privacy'}</a> {' *'}
+                    </span>
+                </label>
+                <label>
+                    <span style={styles.text}>{'( * Campi obbligatori)'}</span>
+                </label>
+
+                <label style={styles.blockWrp}>
+                    <div style={{float: 'right', textAlign: 'right'}}>
+                        <Button
+                            backgroundColor={colors.darkGrey}
+                            text='REGISTRATI >'
+                            type='submit'
+                        />
+                    </div>
+                </label>
             </Form>
         );
     }

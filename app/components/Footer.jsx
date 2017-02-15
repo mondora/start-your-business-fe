@@ -33,6 +33,9 @@ const styles = {
 };
 
 class Footer extends Component {
+    sendEmail () {
+        window.location = 'mailto:support@email.com';
+    }
     render () {
         return (
             <div style={styles.footerWrp}>
@@ -49,7 +52,7 @@ class Footer extends Component {
                         </Col>
                         <Col xs={12} sm={6} md={3} style={styles.footerCol}>
                             <div style={styles.textWrp}>
-                                <a href='' style={{color: colors.primaryColorLighter}}>
+                                <a href='#' style={{color: colors.primaryColorLighter}}>
                                     <strong>{'Privacy Policy'}</strong>
                                 </a>
                                 <br />
@@ -76,6 +79,7 @@ class Footer extends Component {
                         >
                             <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                                 <Button
+                                    onClick={this.sendEmail}
                                     backgroundColor={colors.primaryColor}
                                     height={40}
                                     text={'SERVE AIUTO ?'}
