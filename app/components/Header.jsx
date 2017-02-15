@@ -60,8 +60,8 @@ class Header extends Component {
                         border={`1px solid ${colors.grey}`}
                         height={40}
                         errorMessage={this.props.user.loginErrorMessage}
+                        form={this.props.loginForm}
                         login={this.props.login}
-                        loginForm={this.props.loginForm}
                         loginState={this.props.user.login}
                         {...this.props}
                     />

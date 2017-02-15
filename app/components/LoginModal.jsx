@@ -10,8 +10,8 @@ import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 
 export default class LoginModal extends Component {
     static propTypes = {
+        form: PropTypes.object.isRequired,
         login: PropTypes.func.isRequired,
-        loginForm: PropTypes.object.isRequired,
         loginState: PropTypes.object.isRequired,
         onClose: PropTypes.func,
         show: PropTypes.bool
@@ -32,7 +32,7 @@ export default class LoginModal extends Component {
                 onSubmit={this.login.bind(this)}
             >
                 <FormInput
-                    field={this.props.loginForm.email}
+                    field={this.props.form.email}
                     inputType='email'
                     model='user.login.email'
                     placeholder='Email'
@@ -40,7 +40,7 @@ export default class LoginModal extends Component {
                 />
 
                 <FormInput
-                    field={this.props.loginForm.password}
+                    field={this.props.form.password}
                     inputType='password'
                     model='user.login.password'
                     placeholder='Password'

@@ -23,7 +23,7 @@ const styles = {
 
 class ChoosePlanContainer extends Component {
     static propTypes = {
-        billingInformation: PropTypes.object,
+        billingInformationForm: PropTypes.object,
         choosePlan: PropTypes.func.isRequired,
         getPaymentParams: PropTypes.func.isRequired,
         getSYBProductPlans: PropTypes.func.isRequired,
@@ -48,7 +48,7 @@ class ChoosePlanContainer extends Component {
                 </div>
                 <div>
                     <BillingInformationForm
-                        billingInformation={this.props.billingInformation}
+                        form={this.props.billingInformationForm}
                     />
                 </div>
                 <div>
@@ -73,7 +73,7 @@ class ChoosePlanContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        billingInformation: state.billingInformation,
+        billingInformationForm: state.billingInformationForm,
         payment: state.payment,
         products: state.products
     };

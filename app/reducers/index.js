@@ -9,7 +9,7 @@ import user, {initialConfirmationState, initialLoginState, initialSignupState} f
 
 const reducers = combineReducers({
     routing: routerReducer,
-    billingInformation,
+    billing: billingInformation,
     billingInformationForm: formReducer('billing', initialBillingState),
     payment,
     products,

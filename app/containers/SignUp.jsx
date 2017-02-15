@@ -30,8 +30,8 @@ class SignUpContainer extends Component {
                 <div style={styles.part1Container}>
                     <div style={{color: '#ffffff', fontSize: 50}}>{'REGISTRATI'}</div>
                     <SignUpForm
+                        form={this.props.signupForm}
                         signUpUser={this.props.signUpUser}
-                        signupForm={this.props.signupForm}
                         signupState={this.props.user.signup}
                     />
                 </div>

@@ -12,8 +12,8 @@ const passwordsMatch = ({password, confirmPassword}) => {
 
 export default class SignUpForm extends Component {
     static propTypes = {
+        form: PropTypes.object.isRequired,
         signUpUser: PropTypes.func.isRequired,
-        signupForm: PropTypes.object.isRequired,
         signupState: PropTypes.object.isRequired
     };
     
@@ -32,7 +32,7 @@ export default class SignUpForm extends Component {
     }
 
     render () {
-        const {$form, confirmPassword} = this.props.signupForm;
+        const {$form, confirmPassword} = this.props.form;
         return (
             <Form
                 model={'user.signup'}
@@ -43,7 +43,7 @@ export default class SignUpForm extends Component {
                 }}
             >
                 <FormInput
-                    field={this.props.signupForm.givenName}
+                    field={this.props.form.givenName}
                     inputType='text'
                     model='user.signup.givenName'
                     placeholder='Nome'
@@ -51,7 +51,7 @@ export default class SignUpForm extends Component {
                 />
                 
                 <FormInput
-                    field={this.props.signupForm.familyName}
+                    field={this.props.form.familyName}
                     inputType='text'
                     model='user.signup.familyName'
                     placeholder='Cognome'
@@ -59,7 +59,7 @@ export default class SignUpForm extends Component {
                 />
                 
                 <FormInput
-                    field={this.props.signupForm.email}
+                    field={this.props.form.email}
                     inputType='email'
                     model='user.signup.email'
                     placeholder='Email'
@@ -67,7 +67,7 @@ export default class SignUpForm extends Component {
                 />
 
                 <FormInput
-                    field={this.props.signupForm.password}
+                    field={this.props.form.password}
                     inputType='password'
                     model='user.signup.password'
                     placeholder='Password'

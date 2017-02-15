@@ -12,6 +12,7 @@ export const initialBillingState = {
     CAP: '',
     city: '',
     province: '',
+    region: '',
     country: ''
 };
 
