@@ -1,17 +1,17 @@
+import Radium from 'radium';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+import {Col, Row, Alert} from 'react-bootstrap';
+
+import * as colors from 'lib/colors';
 
 import Button from 'components/CustomButton';
+import PageTeaser from 'components/PageTeaser';
 
 const styles = {
-    part1Container: {
-        backgroundImage: 'url(\'./_assets/images/home1.jpeg\')',
-        height: 800,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column'
+    buttonWrp: {
+        
     }
 };
 
@@ -19,15 +19,28 @@ class ChooseTemplateContainer extends Component {
 
     render () {
         return (
-            <div style={{backgroundColor: '#eae9ed'}}>
-                <div style={styles.part1Container}>
-                    <Button
-                        backgroundColor={'#708090'}
-                        onClick={() => browserHistory.push('/choose-plan')}
-                        text={'SALVA E PROSEGUI >'}
-                    />
+            <div>
+                <PageTeaser
+                    pageTitle={'SCEGLI UN TEMPLATE'}
+                />
+                <div className='container'>
+                    <Row>
+                        <Col xs={12} sm={8}>
+                            <Alert bsStyle='success'>
+                                <strong>{'Holy guacamole!'}</strong>
+                            </Alert>
+                        </Col>
+                        <Col xs={12} sm={4}>
+                            <div style={styles.buttonWrp}>
+                                <Button
+                                    backgroundColor={colors.darkGrey}
+                                    onClick={() => browserHistory.push('/choose-plan')}
+                                    text={'SALVA E PROSEGUI >'}
+                                />
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
-                <div style={{height: 300}} />
             </div>
         );
     }
@@ -42,6 +55,4 @@ const mapDispatchToProps = () => {
 };
 
 
-const ChooseTemplate = connect(mapStateToProps, mapDispatchToProps)(ChooseTemplateContainer);
-
-export default ChooseTemplate;
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(ChooseTemplateContainer));
