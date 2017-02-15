@@ -1,5 +1,5 @@
 import chai, {expect} from 'chai';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 // import {Glyphicon} from 'react-bootstrap';
 import React from 'react';
 import sinon from 'sinon';
@@ -149,7 +149,7 @@ describe('ProductPlanCard', () => {
 
             it('calls onConfirm prop clicking on the button', () => {
                 const onConfirm = sinon.spy();
-                const element = shallow(<ProductPlanCard productPlan={productPlan} onConfirm={onConfirm} />);
+                const element = mount(<ProductPlanCard productPlan={productPlan} onConfirm={onConfirm} />);
                 element.find(Button).simulate('click');
                 expect(onConfirm).to.have.callCount(1);
             });

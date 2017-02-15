@@ -106,7 +106,7 @@ class TemplateSection extends Component {
                             <Col key={index} xs={12} sm={4} style={{paddingTop: 40, paddingBottom: 40}}>
                                 <FeaturesIcons
                                     icon={featureIcon.icon}
-                                    iconStyle={{margin: '0 auto'}}
+                                    iconStyle={{margin: '0 auto', width: 80}}
                                     title={featureIcon.title}
                                     titleColor={colors.primaryColor}
                                     textColor={colors.white}

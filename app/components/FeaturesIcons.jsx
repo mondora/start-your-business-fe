@@ -10,6 +10,7 @@ class FeaturesIcons extends Component {
         iconStyle: PropTypes.object,
         text: PropTypes.string,
         textColor: PropTypes.string,
+        textStyle: PropTypes.object,
         title: PropTypes.string.isRequired,
         titleColor: PropTypes.string
     };
@@ -19,6 +20,7 @@ class FeaturesIcons extends Component {
         iconStyle: {},
         text: '',
         textColor: colors.darkGrey,
+        textStyle: {},
         title: '',
         titleColor: colors.darkGrey,
     };
@@ -28,15 +30,16 @@ class FeaturesIcons extends Component {
             <div>
                 <Icon
                     iconName={this.props.icon}
-                    iconSize={80}
                     iconStyle={this.props.iconStyle}
                 />
-                <h3 style={{color: this.props.titleColor, fontWeight: '800', margin: '0'}}>
-                    {this.props.title}
-                </h3>
-                <p style={{color: this.props.textColor, fontSize: '1.2em'}}>
-                    {this.props.text}
-                </p>
+                <div style={this.props.textStyle}>
+                    <h3 style={{color: this.props.titleColor, fontWeight: '800', margin: '0'}}>
+                        {this.props.title}
+                    </h3>
+                    <p style={{color: this.props.textColor, fontSize: '1.2em'}}>
+                        {this.props.text}
+                    </p>
+                </div>
             </div>
         );
     }

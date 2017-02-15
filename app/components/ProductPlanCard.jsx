@@ -3,7 +3,7 @@ import {Glyphicon} from 'react-bootstrap';
 import * as colors from 'lib/colors';
 import {Col} from 'react-bootstrap';
 
-import Button from 'components/CustomButton';
+import SignUpButton from 'components/SignUpButton';
 import HorizontalLine from 'components/HorizontalLine';
 
 import {getDefaultPricing} from 'lib/zuora-products-utils';
@@ -17,7 +17,7 @@ const styles = {
     },
     name: {
         color: colors.white,
-        fontWeight: 800,
+        paddingTop: 10,
         fontSize: 'calc(18px + .5vw)',
     },
     price: {
@@ -32,12 +32,12 @@ const styles = {
     },
     top: {
         borderRadius: '10px 10px 0 0',
-        height: 200,
+        height: 220,
         width: '100%',
         padding: 10
     },
     bottom: {
-        height: 150,
+        height: 200,
         padding: 10
     },
     confirmButtonContainer: {
@@ -75,7 +75,7 @@ export default class ProductPlanCard extends Component {
                         <div style={styles.name}>
                             {productPlan.name}
                         </div>
-                        <HorizontalLine color={colors.white} width={100} />
+                        <HorizontalLine color={colors.white} width={50} />
                         <div style={styles.price}>
                             {pricing.currency}{pricing.price}
                         </div>
@@ -99,10 +99,9 @@ export default class ProductPlanCard extends Component {
                         ))}
                     </div>
                     <div style={styles.confirmButtonContainer} >
-                        <Button
+                        <SignUpButton
                             backgroundColor={colors.lightGrey}
                             onClick={onConfirm}
-                            text={'INIZIA ORA!'}
                             textColor={colors.darkGrey}
                         />
                     </div>
