@@ -15,6 +15,7 @@ class RootContainer extends Component {
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object,
         spinner: PropTypes.object,
         user: PropTypes.object
     };
@@ -24,6 +25,7 @@ class RootContainer extends Component {
             <div style={{minWidth: 320}}>
                 <Header
                     login={this.props.login}
+                    loginForm={this.props.loginForm}
                     user={this.props.user}
                 />
                 {this.props.children}
@@ -42,6 +44,7 @@ class RootContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loginForm: state.userLoginForm,
         spinner: state.spinner,
         user: state.user
     };

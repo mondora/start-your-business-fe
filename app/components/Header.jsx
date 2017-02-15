@@ -1,11 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import Radium from 'radium';
-import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-import {bindActionCreators} from 'redux';
-
-import {login} from 'actions/user';
 
 import * as colors from 'lib/colors';
 
@@ -43,6 +39,7 @@ const styles = {
 class Header extends Component {
     static propTypes = {
         login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object,
         user: PropTypes.object
     };
 
@@ -64,6 +61,7 @@ class Header extends Component {
                         height={40}
                         errorMessage={this.props.user.loginErrorMessage}
                         login={this.props.login}
+                        loginForm={this.props.loginForm}
                         loginState={this.props.user.login}
                         {...this.props}
                     />
@@ -111,10 +109,4 @@ class Header extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login: bindActionCreators(login, dispatch)
-    };
-};
-
-export default connect(mapDispatchToProps)(Radium(Header));
+export default Radium(Header);

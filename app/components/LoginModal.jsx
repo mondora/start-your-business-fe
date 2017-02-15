@@ -1,17 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 import {Modal} from 'react-bootstrap';
-import {Field, Form} from 'react-redux-form';
-// import validator from 'validator';
+import {Form} from 'react-redux-form';
 import {Link} from 'react-router';
 
 import Button from 'components/CustomButton';
+import FormInput from 'components/FormInput';
 
-// const required = validator.isNull;
-// const isEmail = validator.isEmail;
+import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 
 export default class LoginModal extends Component {
     static propTypes = {
         login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object.isRequired,
         loginState: PropTypes.object.isRequired,
         onClose: PropTypes.func,
         show: PropTypes.bool
@@ -26,23 +26,26 @@ export default class LoginModal extends Component {
     }
 
     renderLoginForm () {
-        //TODO find out why validators on Form generate infinite setFieldsValidity actions
-        // validators={{
-        //     email: {required, isEmail},
-        //     password: {required}
-        // }}
         return (
             <Form
                 model={'user.login'}
                 onSubmit={this.login.bind(this)}
             >
-                <Field model='user.login.email'>
-                    <input type='email' placeholder='Email' />
-                </Field>
-    
-                <Field model='user.login.password'>
-                    <input type='password' placeholder='Password' />
-                </Field>
+                <FormInput
+                    field={this.props.loginForm.email}
+                    inputType='email'
+                    model='user.login.email'
+                    placeholder='Email'
+                    validator={requiredEmailValidator}
+                />
+
+                <FormInput
+                    field={this.props.loginForm.password}
+                    inputType='password'
+                    model='user.login.password'
+                    placeholder='Password'
+                    validator={genericRequiredValidator}
+                />
     
                 {this.props.loginState.errorMessage}
     
