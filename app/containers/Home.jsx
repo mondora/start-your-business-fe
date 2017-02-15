@@ -1,19 +1,18 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import Radium from 'radium';
 // import {Col, Row} from 'react-bootstrap';
 
 import {getSYBProductPlans} from 'actions/products';
 import {login} from 'actions/user';
 import * as colors from 'lib/colors';
 
-// import SignUpButton from 'components/SignUpButton';
-import Button from 'components/CustomButton';
+import FaqSection from 'components/FaqSection';
 import HomeSectionTitle from 'components/HomeSectionTitle';
 import HorizontalLine from 'components/HorizontalLine';
-import FaqSection from 'components/FaqSection';
 import ProcessSection from 'components/ProcessSection';
+import SignUpButton from 'components/SignUpButton';
 import TemplateSection from 'components/TemplateSection';
 
 import ProductPlanCardList from 'components/ProductPlanCardList';
@@ -31,7 +30,7 @@ const styles = {
             paddingTop: '220px'
         },
         '@media screen and (min-width: 1200px)': {
-            height: '100vh',
+            height: '100vh'
         }
     },
     titleTeaser: {
@@ -71,24 +70,6 @@ class HomeContainer extends Component {
         products: PropTypes.object,
         user: PropTypes.object
     };
-
-    renderProcess () {
-        return (
-            <ProcessSection />
-        );
-    }
-
-    renderTemplate () {
-        return (
-            <TemplateSection />
-        );
-    }
-
-    renderFAQ () {
-        return (
-            <FaqSection />
-        );
-    }
 
     renderPlan () {
         return (
@@ -131,17 +112,16 @@ class HomeContainer extends Component {
                             }
                         </div>
                         <HorizontalLine color={colors.primaryColor} width={100} />
-                        <Button
-                            text={'INIZIA ORA!'}
+                        <SignUpButton
                             backgroundColor={colors.white}
                             textColor={colors.primaryColor}
                         />
                     </div>
                 </div>
-                {this.renderProcess()}
-                {this.renderTemplate()}
+                <ProcessSection />
+                <TemplateSection />
                 {this.renderPlan()}
-                {this.renderFAQ()}
+                <FaqSection />
             </div>
         );
     }

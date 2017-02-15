@@ -2,14 +2,15 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import Radium from 'radium';
 import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 import {bindActionCreators} from 'redux';
 
 import {login} from 'actions/user';
 
 import * as colors from 'lib/colors';
-import Button from 'components/CustomButton';
+
 import LoginButton from 'components/LoginButton';
-// import SignUpButton from 'components/SignUpButton';
+import SignUpButton from 'components/SignUpButton';
 
 const styles = {
     headerLogo: {
@@ -18,7 +19,7 @@ const styles = {
             height: 'auto',
             marginBottom: 20,
             textAlign: 'center'
-        },
+        }
     },
     loginContainer: {
         display: 'flex',
@@ -68,9 +69,8 @@ class Header extends Component {
                     />
 
                 </div>
-                <Button
+                <SignUpButton
                     height={40}
-                    text={'INIZIA ORA!'}
                     backgroundColor={colors.primaryColor}
                     {...this.props}
                 />
@@ -92,7 +92,14 @@ class Header extends Component {
                 <Row style={{padding: '20px 0'}}>
                     <Col xs={12} sm={6}>
                         <div style={styles.headerLogo}>
-                            <img src='../_assets/images/common/logo.png' style={{maxHeight: 80}} />
+                            <img
+                                onClick={() => browserHistory.push('/')}
+                                src='../_assets/images/common/logo.png'
+                                style={{
+                                    cursor: 'pointer',
+                                    maxHeight: 80
+                                }}
+                            />
                         </div>
                     </Col>
                     <Col xs={12} sm={6}>
