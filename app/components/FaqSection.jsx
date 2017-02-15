@@ -1,6 +1,6 @@
+import Radium from 'radium';
 import React, {Component} from 'react';
 import {Col, Row} from 'react-bootstrap';
-import Radium from 'radium';
 
 import * as colors from 'lib/colors';
 import HomeSectionTitle from 'components/HomeSectionTitle';
@@ -10,7 +10,19 @@ const styles = {
         padding: '8% 0',
         backgroundColor: colors.white
     },
+    faq: {
+        paddingTop: 30,
+        paddingBottom: 30,
+        paddingLeft: 30,
+        '@media screen and (max-width: 767px)': {
+            paddingLeft: 0,
+            paddingTop: 20,
+            paddingBottom: 20,
+            borderBottom: `1px solid ${colors.lightGrey}`
+        }
+    },
     question: {
+        color: colors.darkGrey,
         fontSize: 'calc(18px + .25vw)',
         lineHeight: 'calc(18px + .5vw)',
         fontWeight: 800,
@@ -20,8 +32,9 @@ const styles = {
         }
     },
     answer: {
+        color: colors.darkGrey,
         fontSize: 'calc(14px + .25vw)',
-        lineHeight: 'calc(14px + .5vw)',
+        lineHeight: 'calc(15px + .5vw)',
         textAlign: 'left',
         '@media screen and (max-width: 767px)': {
             textAlign: 'center'
@@ -79,9 +92,11 @@ class FaqSection extends Component {
                     />
                     <Row>
                         {this.getFaq().map((singleFaq, index) =>
-                            <Col key={index} xs={12} sm={6} style={{paddingTop: 40, paddingBottom: 40}}>
-                                <h4 style={styles.question}>{singleFaq.question}</h4>
-                                <p style={styles.answer}>{singleFaq.answer}</p>
+                            <Col key={index} xs={12} sm={6}>
+                                <div style={styles.faq}>
+                                    <h4 style={styles.question}>{singleFaq.question}</h4>
+                                    <p style={styles.answer}>{singleFaq.answer}</p>
+                                </div>
                             </Col>
                         )}
                     </Row>
