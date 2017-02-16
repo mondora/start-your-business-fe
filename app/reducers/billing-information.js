@@ -13,7 +13,8 @@ export const initialBillingState = {
     city: '',
     province: '',
     region: '',
-    country: ''
+    country: '',
+    termsCheck: false
 };
 
 const billingInformation = (state = initialBillingState, action) => {

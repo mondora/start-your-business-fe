@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {Form} from 'react-redux-form';
 
 import FormInput from 'components/FormInput';
 
@@ -13,8 +12,7 @@ export default class BillingInformationForm extends Component {
 
     render () {
         return (
-            <Form model='billing'>
-
+            <div>
                 <FormInput
                     field={this.props.form.givenName}
                     inputType='text'
@@ -118,8 +116,7 @@ export default class BillingInformationForm extends Component {
                     placeholder='Stato'
                     validator={genericRequiredValidator}
                 />
-
-            </Form>
+            </div>
         );
     }
 }

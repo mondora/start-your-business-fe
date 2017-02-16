@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {Form} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
 
 import {getPaymentParams} from 'actions/payment';
@@ -8,7 +9,11 @@ import {choosePlan, getSYBProductPlans} from 'actions/products';
 import BillingInformationForm from 'components/BillingInformationForm';
 import Button from 'components/CustomButton';
 import CreditCardForm from 'components/CreditCardForm';
+import FormInputCheckbox from 'components/FormInputCheckbox';
 import ProductPlanCardList from 'components/ProductPlanCardList';
+
+import * as colors from 'lib/colors';
+import {isCheckedValidator} from 'lib/form-utils';
 
 const styles = {
     part1Container: {
@@ -18,6 +23,11 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column'
+    },
+    text: {
+        color: colors.darkGrey,
+        fontSize: '1em',
+        fontWeight: '300'
     }
 };
 
@@ -31,41 +41,73 @@ class ChoosePlanContainer extends Component {
         products: PropTypes.object
     };
 
+    submitBilling (data) {
+        console.log('submitting Z');
+        console.log(data);
+        Z.submit();
+    }
 
     render () {
         const {chosenPlanId, productPlans} = this.props.products;
         return (
             <div style={{backgroundColor: '#eae9ed'}}>
-                <div style={styles.part1Container}>
-                    {'1. Seleziona uno dei due piani:'}
-                    <ProductPlanCardList
-                        chooseMode={true}
-                        choosePlan={this.props.choosePlan}
-                        chosenPlanId={chosenPlanId}
-                        getSYBProductPlans={this.props.getSYBProductPlans}
-                        productPlans={productPlans}
-                    />
-                </div>
-                <div>
+                <Form model='billing' onSubmit={this.submitBilling.bind(this)}>
+                    <div style={styles.part1Container}>
+                        {'1. Seleziona un piano:'}
+                        <ProductPlanCardList
+                            chooseMode={true}
+                            choosePlan={this.props.choosePlan}
+                            chosenPlanId={chosenPlanId}
+                            getSYBProductPlans={this.props.getSYBProductPlans}
+                            productPlans={productPlans}
+                        />
+                    </div>
+                    
                     <BillingInformationForm
                         form={this.props.billingInformationForm}
                     />
-                </div>
-                <div>
+                    
                     <CreditCardForm
                         getPaymentParams={this.props.getPaymentParams}
                         paymentPageParams={this.props.payment.pageParams}
                     />
-                </div>
 
-                <Button
-                    backgroundColor={'#708090'}
-                    text={'< INDIETRO'}
-                />
-                <Button
-                    backgroundColor={'#708090'}
-                    text={'ACQUISTA'}
-                />
+                    <FormInputCheckbox
+                        field={this.props.billingInformationForm.termsCheck}
+                        model='billing.termsCheck'
+                        text={
+                            <span style={{...styles.text, ...{cursor: 'pointer'}}}>
+                                {'  Acconsento e dichiaro di aver letto i '}
+                                <a
+                                    href='/privacy'
+                                    style={{color: colors.darkGrey, textDecoration: 'underline'}}
+                                    target='_blank'
+                                >
+                                    {'termini e condizioni'}
+                                </a>
+                                {' del servizio e l’informativa sulla '}
+                                <a
+                                    href='/privacy'
+                                    style={{color: colors.darkGrey, textDecoration: 'underline'}}
+                                    target='_blank'
+                                >
+                                    {'Privacy'}
+                                </a> {' *'}
+                            </span>
+                        }
+                        validator={isCheckedValidator}
+                    />
+
+                    <Button
+                        backgroundColor='#708090'
+                        text='< INDIETRO'
+                    />
+                    <Button
+                        backgroundColor='#708090'
+                        text='ACQUISTA'
+                        type='submit'
+                    />
+                </Form>
             </div>
         );
     }
@@ -86,7 +128,6 @@ const mapDispatchToProps = (dispatch) => {
         getSYBProductPlans: bindActionCreators(getSYBProductPlans, dispatch)
     };
 };
-
 
 const ChoosePlan = connect(mapStateToProps, mapDispatchToProps)(ChoosePlanContainer);
 
