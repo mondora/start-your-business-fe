@@ -6,12 +6,22 @@ import Button from 'components/CustomButton';
 import FormErrorMessage from 'components/FormErrorMessage';
 import FormInput from 'components/FormInput';
 
+import * as colors from 'lib/colors';
 import {genericRequiredValidator} from 'lib/form-utils';
+
+const styles = {
+    newCode: {
+        cursor: 'pointer',
+        textDecoration: 'underline',
+        color: colors.grey
+    }
+};
 
 export default class SignUpConfirmationModal extends Component {
     static propTypes = {
         confirmSignUp: PropTypes.func.isRequired,
         form: PropTypes.object.isRequired,
+        sendNewCode: PropTypes.func.isRequired,
         signupConfirmation: PropTypes.object.isRequired,
         signupConfirmed: PropTypes.bool.isRequired,
         username: PropTypes.string
@@ -51,8 +61,9 @@ export default class SignUpConfirmationModal extends Component {
     }
 
     render () {
+        const {sendNewCode, signupConfirmed, username} = this.props;
         return (
-            <Modal show={!this.props.signupConfirmed}>
+            <Modal show={!signupConfirmed}>
                 <Modal.Header>
                     <Modal.Title>
                         {'VALIDA LA REGISTRAZIONE'}
@@ -65,9 +76,9 @@ export default class SignUpConfirmationModal extends Component {
                     {this.renderSignUpConfirmationForm()}
                 </Modal.Body>
                 <Modal.Footer>
-                    <p>
+                    <label style={styles.newCode} onClick={() => sendNewCode(username)}>
                         {'INVIA UN NUOVO CODICE'}
-                    </p>
+                    </label>
                 </Modal.Footer>
             </Modal>
         );

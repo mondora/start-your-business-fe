@@ -14,17 +14,21 @@ const userPool = new CognitoUserPool({
     UserPoolId: AWS_COGNITO.userPoolId
 });
 
+function getCognitoUser (username) {
+    const userData = {
+        Username : username,
+        Pool : userPool
+    };
+    return new CognitoUser(userData);
+}
+
 export function authenticateUser (username, password, callback) {
     const authenticationData = {
         Username : username,
         Password : password
     };
-    const userData = {
-        Username : username,
-        Pool : userPool
-    };
     const authenticationDetails = new AuthenticationDetails(authenticationData);
-    const cognitoUser = new CognitoUser(userData);
+    const cognitoUser = getCognitoUser(username);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
             console.log(`Cogito authorizer token: ${result.getIdToken().getJwtToken()}`);
@@ -45,12 +49,7 @@ export function authenticateUser (username, password, callback) {
 }
 
 export function confirmRegistration (username, confirmationCode, callback) {
-    const userData = {
-        Username : username,
-        Pool : userPool
-    };
-
-    const cognitoUser = new CognitoUser(userData);
+    const cognitoUser = getCognitoUser(username);
     cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
         if (err) {
             console.error(err);
@@ -59,6 +58,17 @@ export function confirmRegistration (username, confirmationCode, callback) {
         }
         console.log(`call result: ${result}`);
         callback({success: true});
+    });
+}
+
+export function resendConfirmationCode (username) {
+    const cognitoUser = getCognitoUser(username);
+    cognitoUser.resendConfirmationCode((err, result) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log(`call result: ${result}`);
     });
 }
 

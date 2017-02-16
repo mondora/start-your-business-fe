@@ -1,5 +1,5 @@
 import {browserHistory} from 'react-router';
-import {authenticateUser, confirmRegistration, signUp} from 'lib/aws-cognito-utils';
+import {authenticateUser, confirmRegistration, resendConfirmationCode, signUp} from 'lib/aws-cognito-utils';
 
 export const confirmSignUp = (username, confirmationCode) => {
     return dispatch => {
@@ -28,6 +28,15 @@ export const login = (username, password) => {
             {username: username},
             () => browserHistory.push('/choose-template')
         ));
+    };
+};
+
+export const sendNewConfirmationCode = username => {
+    return dispatch => {
+        dispatch({
+            type: 'SENDING_NEW_CONFIRMATION_CODE'
+        });
+        resendConfirmationCode(username);
     };
 };
 

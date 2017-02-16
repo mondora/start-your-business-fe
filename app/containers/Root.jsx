@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
-import {confirmSignUp, login} from 'actions/user';
+import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -16,6 +16,7 @@ class RootContainer extends Component {
         confirmSignUp: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
+        sendNewConfirmationCode: PropTypes.func.isRequired,
         signUpConfirmationForm: PropTypes.object,
         spinner: PropTypes.object,
         user: PropTypes.object
@@ -33,6 +34,7 @@ class RootContainer extends Component {
                 <SignUpConfirmationModal
                     confirmSignUp={this.props.confirmSignUp}
                     form={this.props.signUpConfirmationForm}
+                    sendNewCode={this.props.sendNewConfirmationCode}
                     signupConfirmation={this.props.user.signup.confirmation}
                     signupConfirmed={this.props.user.isConfirmed}
                     username={this.props.user.username}
@@ -56,7 +58,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         confirmSignUp: bindActionCreators(confirmSignUp, dispatch),
-        login: bindActionCreators(login, dispatch)
+        login: bindActionCreators(login, dispatch),
+        sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch)
     };
 };
 
