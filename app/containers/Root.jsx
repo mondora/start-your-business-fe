@@ -16,6 +16,7 @@ class RootContainer extends Component {
         confirmSignUp: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
+        signUpConfirmationForm: PropTypes.object,
         spinner: PropTypes.object,
         user: PropTypes.object
     };
@@ -31,6 +32,7 @@ class RootContainer extends Component {
                 {this.props.children}
                 <SignUpConfirmationModal
                     confirmSignUp={this.props.confirmSignUp}
+                    form={this.props.signUpConfirmationForm}
                     signupConfirmation={this.props.user.signup.confirmation}
                     signupConfirmed={this.props.user.isConfirmed}
                     username={this.props.user.username}
@@ -45,6 +47,7 @@ class RootContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         loginForm: state.userLoginForm,
+        signUpConfirmationForm: state.userSignupConfirmationForm,
         spinner: state.spinner,
         user: state.user
     };

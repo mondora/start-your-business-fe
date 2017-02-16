@@ -4,11 +4,11 @@ import {Form} from 'react-redux-form';
 import {Link} from 'react-router';
 
 import Button from 'components/CustomButton';
+import FormErrorMessage from 'components/FormErrorMessage';
 import FormInput from 'components/FormInput';
 import HorizontalLine from 'components/HorizontalLine';
+
 import {darkGrey, primaryColor} from 'lib/colors';
-
-
 import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 
 // const styles = {
@@ -57,7 +57,9 @@ export default class LoginModal extends Component {
                         validator={genericRequiredValidator}
                     />
 
-                    {this.props.loginState.errorMessage}
+                    <FormErrorMessage
+                        message={this.props.loginState.errorMessage}
+                    />
                 </div>
 
                 <div style={{textAlign: 'center', width: '100%', marginTop: 20}}>

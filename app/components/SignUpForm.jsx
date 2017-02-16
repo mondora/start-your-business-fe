@@ -4,6 +4,7 @@ import {Form} from 'react-redux-form';
 import * as colors from 'lib/colors';
 
 import Button from 'components/CustomButton';
+import FormErrorMessage from 'components/FormErrorMessage';
 import FormInput from 'components/FormInput';
 import FormInputCheckbox from 'components/FormInputCheckbox';
 
@@ -59,14 +60,6 @@ export default class SignUpForm extends Component {
             value: givenName
         }];
         this.props.signUpUser(email, password, attributes);
-    }
-
-    renderSignUpError () {
-        return this.props.signupState.errorMessage ? (
-            <strong style={{...styles.errorsWrp, marginBottom: '20px'}}>
-                {this.props.signupState.errorMessage}
-            </strong>
-        ) : null;
     }
 
     render () {
@@ -148,7 +141,9 @@ export default class SignUpForm extends Component {
                     <span style={styles.text}>{'( * Campi obbligatori)'}</span>
                 </label>
 
-                {this.renderSignUpError()}
+                <FormErrorMessage
+                    message={this.props.signupState.errorMessage}
+                />
 
                 <label style={styles.blockWrp}>
                     <div style={{float: 'right', textAlign: 'right'}}>

@@ -1,12 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 import {Modal} from 'react-bootstrap';
-import {Field, Form} from 'react-redux-form';
+import {Form} from 'react-redux-form';
 
 import Button from 'components/CustomButton';
+import FormErrorMessage from 'components/FormErrorMessage';
+import FormInput from 'components/FormInput';
+
+import {genericRequiredValidator} from 'lib/form-utils';
 
 export default class SignUpConfirmationModal extends Component {
     static propTypes = {
         confirmSignUp: PropTypes.func.isRequired,
+        form: PropTypes.object.isRequired,
         signupConfirmation: PropTypes.object.isRequired,
         signupConfirmed: PropTypes.bool.isRequired,
         username: PropTypes.string
@@ -23,11 +28,18 @@ export default class SignUpConfirmationModal extends Component {
                 model={'user.signup.confirmation'}
                 onSubmit={this.confirmRegistration.bind(this)}
             >
-                <Field model='user.signup.confirmation.code'>
-                    <input type='text' placeholder='Codice di conferma' />
-                </Field>
+                <FormInput
+                    field={this.props.form.code}
+                    inputType='text'
+                    label='Codice'
+                    model='user.signup.confirmation.code'
+                    placeholder='Codice'
+                    validator={genericRequiredValidator}
+                />
                 
-                {this.props.signupConfirmation.errorMessage}
+                <FormErrorMessage
+                    message={this.props.signupConfirmation.errorMessage}
+                />
                 
                 <Button
                     backgroundColor={'#708090'}
