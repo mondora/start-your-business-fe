@@ -12,7 +12,8 @@ export const initialSignupState = {
     errorMessage: null,
     familyName: '',
     givenName: '',
-    password: ''
+    password: '',
+    privacyCheck: false 
 };
 
 export const initialLoginState = {

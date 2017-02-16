@@ -4,6 +4,10 @@ export function genericRequiredValidator (val) {
     return (!val || validator.isEmpty(val.trim())) && 'Campo richiesto';
 }
 
+export function isCheckedValidator (val) {
+    return !val;
+}
+
 export function requiredEmailValidator (val) {
     return genericRequiredValidator(val) || (!validator.isEmail(val) && 'Indirizzo email non valido');
 }
