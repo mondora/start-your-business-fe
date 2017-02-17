@@ -1,5 +1,6 @@
 const defaultState = {
-    pageParams: null
+    pageParams: null,
+    subscriptionSuccess: false
 };
 
 const payment = (state = defaultState, action) => {

@@ -13,3 +13,7 @@ export const getPaymentParams = () => {
             }));
     };
 };
+
+export const subscribeNewCustomer = () => {
+    
+};

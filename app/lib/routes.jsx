@@ -7,7 +7,7 @@ import store from 'lib/redux-store';
 import ChoosePlan from 'containers/ChoosePlan';
 import ChooseTemplate from 'containers/ChooseTemplate';
 import Home from 'containers/Home';
-import PaymentSuccess from 'containers/PaymentSuccess';
+import PaymentResult from 'containers/PaymentResult';
 import Privacy from 'containers/Privacy';
 import Root from 'containers/Root';
 import SignUp from 'containers/SignUp';
@@ -24,7 +24,7 @@ export default (
             <Route name='chooseTemplate' path='/choose-template' component={ChooseTemplate} />
             <Route name='choosePlan' path='/choose-plan' component={ChoosePlan} />
             <Route name='privacy' path='/privacy' component={Privacy} />
-            <Route name='paymentResult' path='/payment-result' component={PaymentSuccess} />
+            <Route name='paymentResult' path='/payment-result' component={PaymentResult} />
         </Route>
     </Router>
 );

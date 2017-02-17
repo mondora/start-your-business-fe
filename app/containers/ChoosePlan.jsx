@@ -31,7 +31,7 @@ const styles = {
     }
 };
 
-class ChoosePlanContainer extends Component {
+class ChoosePlan extends Component {
     static propTypes = {
         billingInformationForm: PropTypes.object,
         choosePlan: PropTypes.func.isRequired,
@@ -41,9 +41,7 @@ class ChoosePlanContainer extends Component {
         products: PropTypes.object
     };
 
-    submitBilling (data) {
-        console.log('submitting Z');
-        console.log(data);
+    submitBilling () {
         Z.submit();
     }
 
@@ -129,6 +127,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const ChoosePlan = connect(mapStateToProps, mapDispatchToProps)(ChoosePlanContainer);
-
-export default ChoosePlan;
+export default connect(mapStateToProps, mapDispatchToProps)(ChoosePlan);
