@@ -14,6 +14,21 @@ export const getPaymentParams = () => {
     };
 };
 
-export const subscribeNewCustomer = () => {
-    
+export const subscribeNewCustomer = (chosenPlanId, billingInfo, paymentMethodId) => {
+    return dispatch => {
+        dispatch({
+            type: 'SUBSCRIBE_NEW_CUSTOMER_START'
+        });
+        axios.post(`https://${API_ENDPOINT}/subscribe-new-customer`, {
+            billingInfo: billingInfo,
+            subscriptionPlanId: chosenPlanId,
+            paymentMethodId: paymentMethodId
+        })
+        .then(() => dispatch({
+            type: 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS'
+        }))
+        .catch(() => dispatch({
+            type: 'SUBSCRIBE_NEW_CUSTOMER_FAIL'
+        }));
+    };
 };

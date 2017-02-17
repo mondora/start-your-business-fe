@@ -38,26 +38,28 @@ class PaymentResult extends Component {
         billing: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,
         payment: PropTypes.object.isRequired,
-        products: PropTypes.object.isRequired
+        products: PropTypes.object.isRequired,
+        subscribeNewCustomer: PropTypes.func.isRequired
     };
 
     constructor (props) {
         super(props);
-        console.log('constructor');
-        console.log(props.location);
         this.state = {
             subscriptionResult: subscriptionStatus.IN_PROGRESS
         };
-        if (this.isCreditCardSuccess(props.location.query)) {
-            //TODO call subscription action
+        const {query} = props.location;
+        if (this.isCreditCardSuccess(query)) {
+            props.subscribeNewCustomer(
+                props.products.chosenPlanId,
+                props.billing,
+                query.refId
+            );
         }
     }
 
     componentWillReceiveProps (nextProps) {
-        console.log('receive props');
-        console.log(nextProps);
         this.setState({
-            subscriptionResult: nextProps.payment.subscriptionSuccess
+            subscriptionResult: nextProps.payment.subscriptionSuccess ? subscriptionStatus.SUCCESS : subscriptionStatus.FAIL
         });
     }
 

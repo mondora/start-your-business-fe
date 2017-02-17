@@ -10,6 +10,16 @@ const payment = (state = defaultState, action) => {
                 ...state,
                 pageParams: action.data
             };
+        case 'SUBSCRIBE_NEW_CUSTOMER_FAIL':
+            return {
+                ...state,
+                subscriptionSuccess: false
+            };
+        case 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS':
+            return {
+                ...state,
+                subscriptionSuccess: true
+            };
         default:
             return state;
     }
