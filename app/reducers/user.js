@@ -118,6 +118,4 @@ function getSignupConfirmationState (state, errorMessage) {
     };
 }
 
-const modeledUser = modeled(user, 'user');
-
-export default modeledUser;
+export default modeled(user, 'user');

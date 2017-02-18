@@ -49,7 +49,7 @@ class ChoosePlan extends Component {
         const {chosenPlanId, productPlans} = this.props.products;
         return (
             <div style={{backgroundColor: '#eae9ed'}}>
-                <Form model='billing' onSubmit={this.submitBilling.bind(this)}>
+                <Form model='billing' onSubmit={this.submitBilling}>
                     <div style={styles.part1Container}>
                         {'1. Seleziona un piano:'}
                         <ProductPlanCardList

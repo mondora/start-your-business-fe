@@ -27,7 +27,7 @@ const styles = {
     }
 };
 
-class SignUpContainer extends Component {
+class SignUp extends Component {
     static propTypes = {
         signUpUser: PropTypes.func.isRequired,
         signupForm: PropTypes.object,
@@ -136,4 +136,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(SignUpContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(SignUp));

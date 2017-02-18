@@ -63,12 +63,12 @@ const styles = {
     plan: {
         textAlign: 'center',
         '@media screen and (min-width: 991px)': {
-            padding: '0 10%',
+            padding: '0 10%'
         }
     }
 };
 
-class HomeContainer extends Component {
+class Home extends Component {
     static propTypes = {
         getSYBProductPlans: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
@@ -149,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(HomeContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(Home));

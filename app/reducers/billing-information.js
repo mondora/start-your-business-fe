@@ -24,6 +24,4 @@ const billingInformation = (state = initialBillingState, action) => {
     }
 };
 
-const modeledBillingInformation = modeled(billingInformation, 'billing');
-
-export default modeledBillingInformation;
+export default modeled(billingInformation, 'billing');

@@ -10,7 +10,7 @@ import Footer from 'components/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
-class RootContainer extends Component {
+class Root extends Component {
     static propTypes = {
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
@@ -64,6 +64,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-const Root = connect(mapStateToProps, mapDispatchToProps)(RootContainer);
-
-export default Radium(Root);
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(Root));

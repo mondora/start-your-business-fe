@@ -1,5 +1,5 @@
 import Radium from 'radium';
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {Col, Row, Alert} from 'react-bootstrap';
@@ -16,6 +16,9 @@ const styles = {
 };
 
 class BuildSite extends Component {
+    static propTypes = {
+        businessSite: PropTypes.object.isRequired
+    };
 
     renderSaveBar () {
         return (
@@ -52,8 +55,10 @@ class BuildSite extends Component {
     }
 }
 
-const mapStateToProps = () => {
-    return {};
+const mapStateToProps = (state) => {
+    return {
+        businessSite: state.businessSite
+    };
 };
 
 const mapDispatchToProps = () => {
