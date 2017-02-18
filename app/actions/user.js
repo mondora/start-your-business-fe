@@ -11,7 +11,7 @@ export const confirmSignUp = (username, confirmationCode) => {
             'SIGNUP_CONFIRMATION',
             {},
             {},
-            () => browserHistory.push('/choose-template')
+            () => browserHistory.push('/build-site')
         ));
     };
 };
@@ -26,7 +26,7 @@ export const login = (username, password) => {
             'LOGIN',
             {},
             {username: username},
-            () => browserHistory.push('/choose-template')
+            () => browserHistory.push('/build-site')
         ));
     };
 };
