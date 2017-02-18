@@ -12,11 +12,14 @@ const products = (state = defaultState, action) => {
                 ...state,
                 chosenPlanId: action.productPlanId
             };
-        case 'GET_SYB_PRODUCT_SUCCESS':
+        case 'GET_SYB_PRODUCT_SUCCESS': {
+            const productPlans = getProductPlans(action.data);
             return {
                 ...state,
-                productPlans: getProductPlans(action.data)
+                chosenPlanId: productPlans[0].id,
+                productPlans: productPlans
             };
+        }
         default:
             return state;
     }
