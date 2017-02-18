@@ -1,6 +1,8 @@
+import {subscriptionStatus} from 'lib/subscription-utils';
+
 const defaultState = {
     pageParams: null,
-    subscriptionSuccess: false
+    subscriptionSuccess: subscriptionStatus.IN_PROGRESS
 };
 
 const payment = (state = defaultState, action) => {
@@ -13,12 +15,12 @@ const payment = (state = defaultState, action) => {
         case 'SUBSCRIBE_NEW_CUSTOMER_FAIL':
             return {
                 ...state,
-                subscriptionSuccess: false
+                subscriptionSuccess: subscriptionStatus.SUCCESS
             };
         case 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS':
             return {
                 ...state,
-                subscriptionSuccess: true
+                subscriptionSuccess: subscriptionStatus.FAIL
             };
         default:
             return state;

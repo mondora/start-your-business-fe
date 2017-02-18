@@ -6,11 +6,12 @@ import store from 'lib/redux-store';
 
 import BuildSite from 'containers/BuildSite';
 import ChoosePlan from 'containers/ChoosePlan';
+import CreditCardResult from 'containers/CreditCardResult';
 import Home from 'containers/Home';
-import PaymentResult from 'containers/PaymentResult';
 import Privacy from 'containers/Privacy';
 import Root from 'containers/Root';
 import SignUp from 'containers/SignUp';
+import SubscriptionResult from 'containers/SubscriptionResult';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -22,7 +23,8 @@ export default (
             <Route name='buildSite' path='/build-site' component={BuildSite} />
             <Route name='choosePlan' path='/choose-plan' component={ChoosePlan} />
             <Route name='privacy' path='/privacy' component={Privacy} />
-            <Route name='paymentResult' path='/payment-result' component={PaymentResult} />
+            <Route name='subscriptionResult' path='/subscription-result' component={SubscriptionResult} />
         </Route>
+        <Route name='creditCardResult' path='/credit-card-result' component={CreditCardResult} />
     </Router>
 );

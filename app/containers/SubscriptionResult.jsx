@@ -2,11 +2,9 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-import {bindActionCreators} from 'redux';
-
-import {subscribeNewCustomer} from 'actions/payment';
 
 import * as colors from 'lib/colors';
+import {subscriptionStatus} from 'lib/subscription-utils';
 
 import Button from 'components/CustomButton';
 import PageTeaser from 'components/PageTeaser';
@@ -27,62 +25,11 @@ const styles = {
     }
 };
 
-const subscriptionStatus = {
-    IN_PROGRESS: 1,
-    SUCCESS: 2,
-    FAIL: 3
-};
-
-class PaymentResult extends Component {
+class SubscriptionResult extends Component {
     static propTypes = {
-        billing: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,
-        payment: PropTypes.object.isRequired,
-        products: PropTypes.object.isRequired,
-        subscribeNewCustomer: PropTypes.func.isRequired
+        payment: PropTypes.object.isRequired
     };
-
-    constructor (props) {
-        super(props);
-        this.state = {
-            subscriptionResult: subscriptionStatus.IN_PROGRESS
-        };
-        const {query} = props.location;
-        if (this.isCreditCardSuccess(query)) {
-            props.subscribeNewCustomer(
-                props.products.chosenPlanId,
-                props.billing,
-                query.refId
-            );
-        }
-    }
-
-    componentWillReceiveProps (nextProps) {
-        this.setState({
-            subscriptionResult: nextProps.payment.subscriptionSuccess ? subscriptionStatus.SUCCESS : subscriptionStatus.FAIL
-        });
-    }
-
-    isCreditCardSuccess (queryString) {
-        let success = false;
-        if (queryString && queryString.success) {
-            const successParam = queryString.success;
-            success = Array.isArray(successParam) ? this.checkMultiple(successParam) : this.checkSingle(successParam);
-        }
-        return success;
-    }
-
-    checkMultiple (successParam) {
-        let success = true;
-        successParam.forEach(el => {
-            success = success && this.checkSingle(el);
-        });
-        return success;
-    }
-
-    checkSingle (successParam) {
-        return successParam === 'true';
-    }
 
     renderContent (title, message, button) {
         return (
@@ -144,8 +91,8 @@ class PaymentResult extends Component {
     }
 
     render () {
-        if (this.isCreditCardSuccess(this.props.location.query)) {
-            switch (this.state.subscriptionResult) {
+        if (this.props.location.query.creditCardSuccess === 'true') {
+            switch (this.props.payment.subscriptionSuccess) {
                 case subscriptionStatus.IN_PROGRESS:
                     return this.renderSubscriptionInProgress();
                 case subscriptionStatus.SUCCESS:
@@ -161,16 +108,12 @@ class PaymentResult extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        billing: state.billing,
-        payment: state.payment,
-        products: state.products
+        payment: state.payment
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        subscribeNewCustomer: bindActionCreators(subscribeNewCustomer, dispatch)
-    };
+const mapDispatchToProps = () => {
+    return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(PaymentResult));
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(SubscriptionResult));
