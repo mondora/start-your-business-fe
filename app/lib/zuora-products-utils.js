@@ -1,5 +1,14 @@
+import R from 'ramda';
+
 export function getProductPlans (product) {
-    return product && product.productRatePlans ? product.productRatePlans : [];
+    return product && product.productRatePlans ? R.compose(
+        R.map(sortedPlan => sortedPlan.plan),
+        R.sortBy(R.prop('price')),
+        R.map(plan => ({
+            price: getDefaultPricing(plan).price,
+            plan: plan
+        }))
+    )(product.productRatePlans) : [];
 }
 
 export function getDefaultPricing (productPlan) {
@@ -14,4 +23,9 @@ export function getDefaultPricing (productPlan) {
 
 export function allowOwnDomain (productPlan) {
     return productPlan.allowOwnDomain__c === 'Yes';
+}
+
+
+export function isActive (productPlan) {
+    return productPlan.status === 'Active';
 }

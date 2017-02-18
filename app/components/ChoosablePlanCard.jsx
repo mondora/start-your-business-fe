@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import DomainInput from 'components/DomainInput';
 
-import {allowOwnDomain, getDefaultPricing} from 'lib/zuora-products-utils';
+import {allowOwnDomain, getDefaultPricing, isActive} from 'lib/zuora-products-utils';
 
 const styles = {
     container: {
@@ -59,6 +59,7 @@ export default class ChoosablePlanCard extends Component {
                         ...{backgroundColor: backgroundColor}
                     }}
                 >
+                    {!isActive(productPlan) ? 'Piano non attivo' : null}
                     <div style={styles.name}>
                         {productPlan.name}
                     </div>

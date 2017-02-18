@@ -6,7 +6,7 @@ import {Col} from 'react-bootstrap';
 import SignUpButton from 'components/SignUpButton';
 import HorizontalLine from 'components/HorizontalLine';
 
-import {getDefaultPricing} from 'lib/zuora-products-utils';
+import {getDefaultPricing, isActive} from 'lib/zuora-products-utils';
 
 const styles = {
     container: {
@@ -18,7 +18,7 @@ const styles = {
     name: {
         color: colors.white,
         paddingTop: 10,
-        fontSize: 'calc(18px + .5vw)',
+        fontSize: 'calc(18px + .5vw)'
     },
     price: {
         color: colors.white,
@@ -72,6 +72,7 @@ export default class ProductPlanCard extends Component {
                             ...{backgroundColor: backgroundColor}
                         }}
                     >
+                        {!isActive(productPlan) ? 'Piano non attivo' : null}
                         <div style={styles.name}>
                             {productPlan.name}
                         </div>
