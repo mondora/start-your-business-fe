@@ -1,3 +1,4 @@
+import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 
@@ -14,11 +15,15 @@ export default class CreditCardForm extends Component {
 
     componentWillReceiveProps (nextProps) {
         const {paymentPageParams} = nextProps;
-        if (paymentPageParams) {
+        if (paymentPageParams && this.shouldComponentUpdate(nextProps)) {
             paymentPageParams.style = 'inline';
             paymentPageParams.submitEnabled = false;
             Z.render(paymentPageParams, {}, this.handleZuoraResponse.bind(this));
         }
+    }
+
+    shouldComponentUpdate (nextProps) {
+        return !R.equals(this.props.paymentPageParams, nextProps.paymentPageParams);
     }
 
     handleZuoraResponse (response) {
