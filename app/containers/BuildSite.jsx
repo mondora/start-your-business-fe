@@ -7,6 +7,7 @@ import {Col, Row, Alert} from 'react-bootstrap';
 import * as colors from 'lib/colors';
 
 import Button from 'components/CustomButton';
+import ChooseTemplateWidget from 'components/ChooseTemplateWidget';
 import PageTeaser from 'components/PageTeaser';
 
 const styles = {
@@ -50,6 +51,7 @@ class BuildSite extends Component {
                 <div className='container'>
                     {this.renderSaveBar()}
                 </div>
+                <ChooseTemplateWidget />
             </div>
         );
     }

@@ -41,7 +41,6 @@ const styles = (isSelected) => ({
 });
 
 export default class ChoosablePlanCard extends Component {
-
     static propTypes = {
         backgroundColor: PropTypes.string,
         isSelected: PropTypes.bool,
@@ -95,5 +94,3 @@ export default class ChoosablePlanCard extends Component {
         );
     }
 }
-
-

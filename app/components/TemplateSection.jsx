@@ -24,7 +24,7 @@ const styles = {
     },
     templateRow: {
         '@media screen and (min-width: 767px)': {
-            position: 'absolute',
+            position: 'absolute'
         },
         '@media screen and (max-width: 767px)': {
             backgroundColor: colors.blackOpacity
@@ -38,7 +38,7 @@ const styles = {
         height: 'auto',
         maxWidth: '100%',
         margin: '40px auto'
-    },
+    }
 };
 
 class TemplateSection extends Component {

@@ -22,7 +22,7 @@ class FeaturesIcons extends Component {
         textColor: colors.darkGrey,
         textStyle: {},
         title: '',
-        titleColor: colors.darkGrey,
+        titleColor: colors.darkGrey
     };
 
     render () {
