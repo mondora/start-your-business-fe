@@ -20,7 +20,9 @@ export default class OverlayTriggerIcon extends Component {
         iconName: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired,
-        showOverlay: PropTypes.bool
+        onClose: PropTypes.func,
+        showOverlay: PropTypes.bool,
+        title: PropTypes.string
     };
     
     renderOverlay () {
@@ -33,7 +35,15 @@ export default class OverlayTriggerIcon extends Component {
                 show={this.props.showOverlay}
                 target={() => ReactDOM.findDOMNode(this.refs[name])}
             >
-                {this.props.children}
+                <div>
+                    <div>
+                        {this.props.title}
+                        <label onClick={this.props.onClose}>
+                            {'x'}
+                        </label>
+                    </div>
+                    {this.props.children}
+                </div>
             </Overlay>
         );
     }

@@ -11,16 +11,22 @@ export default class ChooseTemplateWidget extends Component {
         setEditMode: PropTypes.func.isRequired
     };
 
+    setEditMode (editMode) {
+        return () => this.props.setEditMode(editMode);
+    }
+
     render () {
         return (
             <OverlayTriggerIcon
                 iconName='change_template_white'
                 name='choose-template-widget'
-                onClick={() => this.props.setEditMode(editModes.CHOOSE_TEMPLATE)}
+                onClick={this.setEditMode(editModes.CHOOSE_TEMPLATE)}
+                onClose={this.setEditMode(editModes.VIEW)}
                 showOverlay={this.props.editMode === editModes.CHOOSE_TEMPLATE}
+                title='SCEGLI UN TEMPLATE'
             >
                 <div>
-                    {'SCEGLI UN TEMPLATE'}
+                    {'lista di template'}
                 </div>
             </OverlayTriggerIcon>
         );
