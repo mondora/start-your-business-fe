@@ -1,13 +1,17 @@
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import {Overlay} from 'react-bootstrap';
 
 import Icon from 'components/Icon';
+
+import * as colors from 'lib/colors';
 
 const iconStyle = {
     display: 'block',
     width: 55,
     float: 'left',
-    marginTop: '-8px'
+    marginTop: '-8px',
+    backgroundColor: colors.primaryColor
 };
 
 export default class OverlayTriggerIcon extends Component {
@@ -26,13 +30,13 @@ export default class OverlayTriggerIcon extends Component {
     
     renderOverlay () {
         const {name} = this.props;
-        console.log(this.state.showOverlay);
         return (
             <Overlay
                 container={this}
-                show={this.state.showOverlay}
                 id={name}
-                target={this[name]}
+                placement='right'
+                show={this.state.showOverlay}
+                target={() => ReactDOM.findDOMNode(this.refs[name])}
             >
                 {this.props.children}
             </Overlay>
@@ -46,7 +50,7 @@ export default class OverlayTriggerIcon extends Component {
                     iconName={this.props.iconName}
                     iconStyle={iconStyle}
                     onClick={() => this.setState({showOverlay: !this.state.showOverlay})}
-                    ref={component => this[this.props.name] = component}
+                    ref={this.props.name}
                 />
                 {this.renderOverlay()}
             </div>

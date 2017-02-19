@@ -10,6 +10,9 @@ import Button from 'components/CustomButton';
 import ChooseTemplateWidget from 'components/ChooseTemplateWidget';
 import PageTeaser from 'components/PageTeaser';
 
+import BusinessHome from 'containers/business/Home';
+import BusinessRoot from 'containers/business/Root';
+
 const styles = {
     buttonWrp: {
         
@@ -42,6 +45,14 @@ class BuildSite extends Component {
         );
     }
 
+    renderBusinessSite () {
+        return (
+            <BusinessRoot buildSiteMode={true}>
+                <BusinessHome buildSiteMode={true} />
+            </BusinessRoot>
+        );
+    }
+
     render () {
         return (
             <div>
@@ -50,8 +61,15 @@ class BuildSite extends Component {
                 />
                 <div className='container'>
                     {this.renderSaveBar()}
+                    <Row>
+                        <Col xs={12} sm={3}>
+                            <ChooseTemplateWidget />
+                        </Col>
+                        <Col xs={12} sm={9}>
+                            {this.renderBusinessSite()}
+                        </Col>
+                    </Row>
                 </div>
-                <ChooseTemplateWidget />
             </div>
         );
     }
