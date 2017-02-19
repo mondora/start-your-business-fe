@@ -12,6 +12,7 @@ import Spinner from 'components/Spinner';
 
 class Root extends Component {
     static propTypes = {
+        businessSiteHeaderForm: PropTypes.object,
         businessSiteState: PropTypes.object,
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
@@ -38,6 +39,7 @@ class Root extends Component {
             <div style={{minWidth: 320}}>
                 <Header
                     buildSiteMode={editMode}
+                    form={this.props.businessSiteHeaderForm}
                     headerInfo={siteConfig.header}
                 />
                 
@@ -68,6 +70,7 @@ class Root extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        businessSiteHeaderForm: state.businessSiteHeaderForm,
         businessSiteState: state.businessSite,
         loginForm: state.userLoginForm,
         signUpConfirmationForm: state.userSignupConfirmationForm,

@@ -1,3 +1,9 @@
+import {modeled} from 'react-redux-form';
+
+export const initialHeaderInfo = {
+    emailAddress: 'info@emaildisupporto.it',
+    phoneNumber: '+39 012 3456789'
+};
 
 const defaultState = {
     editMode: null,
@@ -10,10 +16,7 @@ const defaultState = {
             line3: 'Email: info@maildisupporto.it',
             line4: 'Tel: 012-3456789'
         },
-        header: {
-            emailAddress: 'info@emaildisupporto.it',
-            phoneNumber: '+39 012 3456789'
-        },
+        header: initialHeaderInfo,
         logoId: null,
         mainColorCode: null,
         templateId: null
@@ -32,4 +35,4 @@ const businessSite = (state = defaultState, action) => {
     }
 };
 
-export default businessSite;
+export default modeled(businessSite, 'businessSite');

@@ -2,7 +2,7 @@ import {formReducer} from 'react-redux-form';
 import {routerReducer} from 'react-router-redux';
 import {combineReducers} from 'redux';
 import billingInformation, {initialBillingState} from './billing-information';
-import businessSite from './business-site';
+import businessSite, {initialHeaderInfo} from './business-site';
 import payment from './payment';
 import products from './products';
 import spinner from './spinner';
@@ -13,6 +13,7 @@ const reducers = combineReducers({
     billing: billingInformation,
     billingInformationForm: formReducer('billing', initialBillingState),
     businessSite,
+    businessSiteHeaderForm: formReducer('businessSite.siteConfig.header', initialHeaderInfo),
     payment,
     products,
     spinner,
