@@ -6,7 +6,7 @@ import Radium from 'radium';
 import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
 
 import Header from 'components/business/Header';
-import Footer from 'components/Footer';
+import Footer from 'components/business/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
@@ -57,7 +57,10 @@ class Root extends Component {
 
                 {!editMode ? <Spinner show={this.props.spinner.active} /> : null}
                 
-                <Footer />
+                <Footer
+                    buildSiteMode={editMode}
+                    footerInfo={siteConfig.footer}
+                />
             </div>
         );
     }

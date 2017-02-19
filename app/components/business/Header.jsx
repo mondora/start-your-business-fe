@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import {Col, Row} from 'react-bootstrap';
+
 export default class Header extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
@@ -10,9 +12,15 @@ export default class Header extends Component {
         const {emailAddress, phoneNumber} = this.props.headerInfo;
         return (
             <div>
-                {phoneNumber}
-                {emailAddress}
-                {'| LOGIN | REGISTRATI |'}
+                <Row>
+                    <Col xs={12} sm={6}>
+                        {phoneNumber}
+                        {emailAddress}
+                    </Col>
+                    <Col xs={12} sm={6}>
+                        {'| LOGIN | REGISTRATI |'}
+                    </Col>
+                </Row>
             </div>
         );
     }

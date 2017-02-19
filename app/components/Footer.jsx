@@ -27,7 +27,7 @@ const styles = {
         },
         '@media screen and (min-width: 991px)': {
             borderRight: `1px solid ${colors.grey}`,
-            minHeight: 100,
+            minHeight: 100
         }
     }
 };
