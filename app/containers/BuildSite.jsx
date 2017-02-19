@@ -3,7 +3,11 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {Col, Row, Alert} from 'react-bootstrap';
+import {bindActionCreators} from 'redux';
 
+import {setEditMode} from 'actions/business-site';
+
+import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import Button from 'components/CustomButton';
@@ -21,9 +25,15 @@ const styles = {
 
 class BuildSite extends Component {
     static propTypes = {
-        businessSite: PropTypes.object.isRequired
+        businessSite: PropTypes.object.isRequired,
+        setEditMode: PropTypes.func.isRequired
     };
 
+    constructor (props) {
+        super(props);
+        props.setEditMode(editModes.VIEW);
+    }
+    
     renderSaveBar () {
         return (
             <Row>
@@ -47,8 +57,8 @@ class BuildSite extends Component {
 
     renderBusinessSite () {
         return (
-            <BusinessRoot buildSiteMode={true}>
-                <BusinessHome buildSiteMode={true} />
+            <BusinessRoot>
+                <BusinessHome />
             </BusinessRoot>
         );
     }
@@ -63,7 +73,10 @@ class BuildSite extends Component {
                     {this.renderSaveBar()}
                     <Row>
                         <Col xs={12} sm={3}>
-                            <ChooseTemplateWidget />
+                            <ChooseTemplateWidget
+                                editMode={this.props.businessSite.editMode}
+                                setEditMode={this.props.setEditMode}
+                            />
                         </Col>
                         <Col xs={12} sm={9}>
                             {this.renderBusinessSite()}
@@ -81,8 +94,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = () => {
-    return {};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setEditMode: bindActionCreators(setEditMode, dispatch)
+    };
 };
 
 

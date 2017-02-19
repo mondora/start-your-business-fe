@@ -5,14 +5,14 @@ import Radium from 'radium';
 
 import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
 
-import Header from 'components/Header';
+import Header from 'components/business/Header';
 import Footer from 'components/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
 class Root extends Component {
     static propTypes = {
-        buildSiteMode: PropTypes.bool,
+        businessSiteState: PropTypes.object,
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
@@ -26,24 +26,25 @@ class Root extends Component {
 
     constructor (props) {
         super(props);
-        if (!props.buildSiteMode) {
+        if (!props.businessSiteState.editMode) {
             //TODO check for businessName and render business site or redirect
             console.log(this.props.params.businessName);
         }
     }
 
     render () {
+        const {editMode, siteConfig} = this.props.businessSiteState;
         return (
             <div style={{minWidth: 320}}>
                 <Header
-                    login={this.props.login}
-                    loginForm={this.props.loginForm}
-                    user={this.props.user}
+                    buildSiteMode={editMode}
+                    headerInfo={siteConfig.header}
                 />
+                
                 {this.props.children}
 
                 {
-                    !this.props.buildSiteMode ?
+                    !editMode ?
                         <SignUpConfirmationModal
                             confirmSignUp={this.props.confirmSignUp}
                             form={this.props.signUpConfirmationForm}
@@ -54,7 +55,7 @@ class Root extends Component {
                         /> : null
                 }
 
-                {!this.props.buildSiteMode ? <Spinner show={this.props.spinner.active} /> : null}
+                {!editMode ? <Spinner show={this.props.spinner.active} /> : null}
                 
                 <Footer />
             </div>
@@ -64,6 +65,7 @@ class Root extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        businessSiteState: state.businessSite,
         loginForm: state.userLoginForm,
         signUpConfirmationForm: state.userSignupConfirmationForm,
         spinner: state.spinner,

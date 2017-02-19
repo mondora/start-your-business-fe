@@ -18,15 +18,10 @@ export default class OverlayTriggerIcon extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         iconName: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired,
+        onClick: PropTypes.func.isRequired,
+        showOverlay: PropTypes.bool
     };
-
-    constructor (props) {
-        super(props);
-        this.state = {
-            showOverlay: false
-        };
-    }
     
     renderOverlay () {
         const {name} = this.props;
@@ -35,7 +30,7 @@ export default class OverlayTriggerIcon extends Component {
                 container={this}
                 id={name}
                 placement='right'
-                show={this.state.showOverlay}
+                show={this.props.showOverlay}
                 target={() => ReactDOM.findDOMNode(this.refs[name])}
             >
                 {this.props.children}
@@ -49,7 +44,7 @@ export default class OverlayTriggerIcon extends Component {
                 <Icon
                     iconName={this.props.iconName}
                     iconStyle={iconStyle}
-                    onClick={() => this.setState({showOverlay: !this.state.showOverlay})}
+                    onClick={this.props.onClick}
                     ref={this.props.name}
                 />
                 {this.renderOverlay()}

@@ -38,7 +38,7 @@ const styles = {
 
 class Home extends Component {
     static propTypes = {
-        buildSiteMode: PropTypes.bool
+        businessSiteState: PropTypes.object
     };
 
     render () {
@@ -65,8 +65,9 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
+        businessSiteState: state.businessSite
     };
 };
 
