@@ -6,13 +6,13 @@ import Icon from 'components/Icon';
 
 import * as colors from 'lib/colors';
 
-const iconStyle = {
+const iconStyle = (active) => ({
     display: 'block',
     width: 55,
     float: 'left',
     marginTop: '-8px',
-    backgroundColor: colors.primaryColor
-};
+    backgroundColor: active ? colors.primaryColor : colors.primaryColorLight
+});
 
 export default class OverlayTriggerIcon extends Component {
     static propTypes = {
@@ -50,10 +50,10 @@ export default class OverlayTriggerIcon extends Component {
 
     render () {
         return (
-            <div>
+            <div style={{display: 'table-row'}}>
                 <Icon
                     iconName={this.props.iconName}
-                    iconStyle={iconStyle}
+                    iconStyle={iconStyle(this.props.showOverlay)}
                     onClick={this.props.onClick}
                     ref={this.props.name}
                 />

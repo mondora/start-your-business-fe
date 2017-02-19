@@ -4,5 +4,6 @@ export const editModes = {
     UPLOAD_LOGO: 3,
     CHOOSE_COLOR: 4,
     UPLOAD_IMAGES: 5,
-    EDIT_TEXTS: 6
+    EDIT_TEXTS: 6,
+    CHANGE_PAYMENT: 7
 };

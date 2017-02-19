@@ -11,7 +11,10 @@ import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import Button from 'components/CustomButton';
+import ChangeColorWidget from 'components/ChangeColorWidget';
+import ChangeLogoWidget from 'components/ChangeLogoWidget';
 import ChooseTemplateWidget from 'components/ChooseTemplateWidget';
+import Icon from 'components/Icon';
 import PageTeaser from 'components/PageTeaser';
 
 import BusinessHome from 'containers/business/Home';
@@ -22,6 +25,14 @@ const styles = {
         
     }
 };
+
+const iconStyle = (active) => ({
+    display: 'block',
+    width: 55,
+    float: 'left',
+    marginTop: '-8px',
+    backgroundColor: active ? colors.primaryColor : colors.primaryColorLight
+});
 
 class BuildSite extends Component {
     static propTypes = {
@@ -76,6 +87,29 @@ class BuildSite extends Component {
                             <ChooseTemplateWidget
                                 editMode={this.props.businessSite.editMode}
                                 setEditMode={this.props.setEditMode}
+                            />
+                            <ChangeLogoWidget
+                                editMode={this.props.businessSite.editMode}
+                                setEditMode={this.props.setEditMode}
+                            />
+                            <ChangeColorWidget
+                                editMode={this.props.businessSite.editMode}
+                                setEditMode={this.props.setEditMode}
+                            />
+                            <Icon
+                                iconName='change_image_white'
+                                iconStyle={iconStyle(this.props.businessSite.editMode === editModes.UPLOAD_IMAGES)}
+                                onClick={() => this.props.setEditMode(editModes.UPLOAD_IMAGES)}
+                            />
+                            <Icon
+                                iconName='change_text_white'
+                                iconStyle={iconStyle(this.props.businessSite.editMode === editModes.EDIT_TEXTS)}
+                                onClick={() => this.props.setEditMode(editModes.EDIT_TEXTS)}
+                            />
+                            <Icon
+                                iconName='change_payment_white'
+                                iconStyle={iconStyle(this.props.businessSite.editMode === editModes.CHANGE_PAYMENT)}
+                                onClick={() => this.props.setEditMode(editModes.CHANGE_PAYMENT)}
                             />
                         </Col>
                         <Col xs={12} sm={9}>
