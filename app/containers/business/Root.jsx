@@ -12,6 +12,7 @@ import Spinner from 'components/Spinner';
 
 class Root extends Component {
     static propTypes = {
+        businessSiteFooterForm: PropTypes.object,
         businessSiteHeaderForm: PropTypes.object,
         businessSiteState: PropTypes.object,
         children: PropTypes.node,
@@ -62,6 +63,7 @@ class Root extends Component {
                 <Footer
                     buildSiteMode={editMode}
                     footerInfo={siteConfig.footer}
+                    form={this.props.businessSiteFooterForm}
                 />
             </div>
         );
@@ -70,6 +72,7 @@ class Root extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        businessSiteFooterForm: state.businessSiteFooterForm,
         businessSiteHeaderForm: state.businessSiteHeaderForm,
         businessSiteState: state.businessSite,
         loginForm: state.userLoginForm,

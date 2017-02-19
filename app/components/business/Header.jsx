@@ -12,6 +12,17 @@ export default class Header extends Component {
         form: PropTypes.object,
         headerInfo: PropTypes.object.isRequired
     };
+    
+    renderTextField (isEditMode, fieldName, placeholder, readNode) {
+        return isEditMode ? (
+            <FormInput
+                field={this.props.form[fieldName]}
+                inputType='text'
+                model={`businessSite.siteConfig.header.${fieldName}`}
+                placeholder={placeholder}
+            />
+        ) : readNode;
+    }
 
     render () {
         const {emailAddress, phoneNumber} = this.props.headerInfo;
@@ -21,24 +32,8 @@ export default class Header extends Component {
                 <Row>
                     <Form model={'businessSite.siteConfig.header'}>
                         <Col xs={12} sm={6}>
-                            {
-                                isEditMode ?
-                                    <FormInput
-                                        field={this.props.form.phoneNumber}
-                                        inputType='text'
-                                        model='businessSite.siteConfig.header.phoneNumber'
-                                        placeholder='+39 012 3456789'
-                                    /> : phoneNumber
-                            }
-                            {
-                                isEditMode ?
-                                    <FormInput
-                                        field={this.props.form.emailAddress}
-                                        inputType='text'
-                                        model='businessSite.siteConfig.header.emailAddress'
-                                        placeholder='info@emaildisupporto.it'
-                                    /> : emailAddress
-                            }
+                            {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
+                            {this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress)}
                         </Col>
                         <Col xs={12} sm={6}>
                             {'| LOGIN | REGISTRATI |'}
