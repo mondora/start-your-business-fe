@@ -41,9 +41,8 @@ class BuildSite extends Component {
         setTemplate: PropTypes.func.isRequired
     };
 
-    constructor (props) {
-        super(props);
-        props.setEditMode(editModes.VIEW);
+    componentWillMount () {
+        this.props.setEditMode(editModes.VIEW);
     }
     
     renderSaveBar () {

@@ -10,17 +10,25 @@ import Footer from 'components/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
+import {userHasAccess} from 'lib/auth-utils';
+
 class Root extends Component {
     static propTypes = {
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
+        routes: PropTypes.array.isRequired,
         sendNewConfirmationCode: PropTypes.func.isRequired,
         signUpConfirmationForm: PropTypes.object,
         spinner: PropTypes.object,
         user: PropTypes.object
     };
+
+    componentWillUpdate (nextProps) {
+        //TODO decide what to do when user cannot access to a page
+        console.log(userHasAccess(nextProps.user, nextProps.routes));
+    }
 
     render () {
         return (
