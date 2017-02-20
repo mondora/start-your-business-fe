@@ -1,8 +1,25 @@
 import React, {Component, PropTypes} from 'react';
 
+import {editModes} from 'lib/business-site-utils';
+import * as colors from 'lib/colors';
+
 import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
 
-import {editModes} from 'lib/business-site-utils';
+const styles = {
+    subTitle: {
+        display: 'inline-block',
+        width: '100%',
+        fontSize: 18,
+        color: colors.white,
+        float: 'left'
+    },
+    inputFile: {
+        backgroundColor: colors.white,
+        color: colors.grey,
+        padding: 10,
+        borderRadius: 6
+    }
+};
 
 export default class ChangeLogoWidget extends Component {
     static propTypes = {
@@ -26,7 +43,17 @@ export default class ChangeLogoWidget extends Component {
                 title='CARICA IL TUO LOGO'
             >
                 <div>
-                    {'logo uploader'}
+                    <p style={styles.subTitle}>{'Scegli file dal computer'}</p>
+                    <input
+                        id='upload'
+                        ref='upload'
+                        type='file'
+                        accept='image/*'
+                        onChange={(event)=> {
+                            this.readFile(event);
+                        }}
+                        style={styles.inputFile}
+                    />
                 </div>
             </OverlayTriggerIcon>
         );

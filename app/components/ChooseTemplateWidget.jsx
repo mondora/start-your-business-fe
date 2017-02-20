@@ -1,10 +1,10 @@
 import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
 
+import {editModes, templates} from 'lib/business-site-utils';
+
 import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
 import TemplateCard from 'components/TemplateCard';
-
-import {editModes, templates} from 'lib/business-site-utils';
 
 export default class ChooseTemplateWidget extends Component {
     static propTypes = {
@@ -39,9 +39,7 @@ export default class ChooseTemplateWidget extends Component {
                 showOverlay={this.props.editMode === editModes.CHOOSE_TEMPLATE}
                 title='SCEGLI UN TEMPLATE'
             >
-                <div>
-                    {this.renderTemplates()}
-                </div>
+                {this.renderTemplates()}
             </OverlayTriggerIcon>
         );
     }
