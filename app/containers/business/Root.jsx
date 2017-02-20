@@ -37,13 +37,13 @@ class Root extends Component {
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
         return (
-            <div style={{minWidth: 320}}>
+            <div>
                 <Header
                     buildSiteMode={editMode}
                     form={this.props.businessSiteHeaderForm}
                     headerInfo={siteConfig.header}
                 />
-                
+
                 {this.props.children}
 
                 {
@@ -59,7 +59,7 @@ class Root extends Component {
                 }
 
                 {!editMode ? <Spinner show={this.props.spinner.active} /> : null}
-                
+
                 <Footer
                     buildSiteMode={editMode}
                     footerInfo={siteConfig.footer}
