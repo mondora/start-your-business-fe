@@ -1,20 +1,86 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {Overlay} from 'react-bootstrap';
 
-import Icon from 'components/Icon';
-
 import * as colors from 'lib/colors';
+
+import Icon from 'components/Icon';
+import Button from 'components/CustomButton';
 
 const iconStyle = (active) => ({
     display: 'block',
-    width: 55,
-    float: 'left',
-    marginTop: '-8px',
+    borderRadius: '100%',
+    marginBottom: '10px',
+    padding: 4,
+    width: 52,
+    height: 52,
     backgroundColor: active ? colors.primaryColor : colors.primaryColorLight
 });
 
-export default class OverlayTriggerIcon extends Component {
+const styles = {
+    TooltipIconClose: {
+        float: 'right',
+        cursor: 'pointer',
+        width: 30,
+        height: 30,
+        borderRadius: 30,
+        border: `1px solid ${colors.white}`,
+        textAlign: 'center',
+        fontSize: 26,
+        lineHeight: '26px',
+        fontWeight: 200
+    },
+    TooltipContainer: {
+        position: 'absolute',
+        padding: 20,
+        width: '70vw',
+        maxWidth: 600,
+        zIndex: 10000,
+        marginTop: -30,
+        marginLeft: -7,
+        '@media screen and (max-width: 767px)': {
+            width: '80vw',
+            marginLeft: -10
+        }
+    },
+    TooltipTitle: {
+        width: 'calc(100% - 40px)',
+        float: 'left',
+        fontSize: '22px',
+        lineHeight: '20px',
+        fontWeight: 'bold'
+    },
+    TooltipInner: {
+        padding: '15px 30px',
+        minHeight: 200,
+        color: colors.white,
+        textAlign: 'left',
+        borderRadius: 3,
+        backgroundColor: colors.primaryColor,
+        '@media screen and (max-width: 767px)': {
+            padding: '15px',
+        }
+    },
+    TooltipArrow: {
+        position: 'absolute',
+        left: 4,
+        marginTop: 28,
+        borderWidth: '8px 8px 8px 8px',
+        borderStyle: 'solid',
+        borderRightColor: colors.primaryColor,
+        borderLeftColor: 'transparent',
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent'
+    },
+    TooltipButtonWrp: {
+        width: '100%',
+        textAlign: 'right',
+        margin: '20px 0'
+    }
+};
+
+class OverlayTriggerIcon extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         iconName: PropTypes.string.isRequired,
@@ -24,7 +90,7 @@ export default class OverlayTriggerIcon extends Component {
         showOverlay: PropTypes.bool,
         title: PropTypes.string
     };
-    
+
     renderOverlay () {
         const {name} = this.props;
         return (
@@ -35,22 +101,39 @@ export default class OverlayTriggerIcon extends Component {
                 show={this.props.showOverlay}
                 target={() => ReactDOM.findDOMNode(this.refs[name])}
             >
-                <div>
-                    <div>
-                        {this.props.title}
-                        <label onClick={this.props.onClose}>
-                            {'x'}
+                <div style={styles.TooltipContainer}>
+                    <div style={styles.TooltipArrow} />
+                    <div style={styles.TooltipInner}>
+                        <p style={styles.TooltipTitle}>{this.props.title}</p>
+                        <label onClick={this.props.onClose} style={styles.TooltipIconClose}>
+                            {'×'}
                         </label>
+                        {this.props.children}
+                        {this.renderSaveButton()}
                     </div>
-                    {this.props.children}
                 </div>
             </Overlay>
         );
     }
 
+    renderSaveButton () {
+        return (
+            <div style={styles.TooltipButtonWrp}>
+                <Button
+                    backgroundColor={colors.white}
+                    onClick={this.props.onClose}
+                    text='SALVA'
+                    height={42}
+                    textColor={colors.primaryColor}
+                    style={{float: 'right'}}
+                />
+            </div>
+        );
+    }
+
     render () {
         return (
-            <div style={{display: 'table-row'}}>
+            <div style={{position: 'relative'}}>
                 <Icon
                     iconName={this.props.iconName}
                     iconStyle={iconStyle(this.props.showOverlay)}
@@ -62,3 +145,5 @@ export default class OverlayTriggerIcon extends Component {
         );
     }
 }
+
+export default Radium(OverlayTriggerIcon);
