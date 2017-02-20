@@ -11,12 +11,6 @@ import HorizontalLine from 'components/HorizontalLine';
 import {darkGrey, primaryColor} from 'lib/colors';
 import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 
-// const styles = {
-//     loginModalContainer: {
-//         textAlign: 'center'
-//     }
-// };
-
 export default class LoginModal extends Component {
     static propTypes = {
         form: PropTypes.object.isRequired,
@@ -40,7 +34,7 @@ export default class LoginModal extends Component {
                 model={'user.login'}
                 onSubmit={this.login.bind(this)}
             >
-                <div style={{maxWidth: 400, margin: '0 auto'}}>
+                <div style={{maxWidth: 400, margin: '10px auto 20px auto'}}>
                     <FormInput
                         field={this.props.form.email}
                         inputType='email'
@@ -62,16 +56,25 @@ export default class LoginModal extends Component {
                     />
                 </div>
 
-                <div style={{textAlign: 'center', width: '100%', marginTop: 20}}>
+                <div style={{textAlign: 'center', width: '100%'}}>
                     <Button
                         backgroundColor={darkGrey}
                         text={'LOGIN >'}
                         type='submit'
                     />
+                    <a
+                        href='#'
+                        style={{
+                            display: 'block',
+                            margin: '20px 0',
+                            color: darkGrey,
+                            fontSize: 14,
+                            textDecoration: 'underline'
+                        }}
+                    >
+                        {'Password dimenticata?'}
+                    </a>
                 </div>
-                <b><p style={{textAlign: 'center', marginTop: 20, color: primaryColor, fontSize: 20}}>
-                    {'INIZIA ORA!'}
-                </p></b>
             </Form>
         );
     }
@@ -92,9 +95,15 @@ export default class LoginModal extends Component {
                         {this.renderLoginForm()}
                     </Modal.Body>
                     <Modal.Footer style={{textAlign: 'center'}}>
-                        <p>
+                        <p style={{fontWeight: 'bold'}}>
                             {'Non hai un account? '}
-                            <Link to='signup' onClick={this.closeModal.bind(this)}>{'Registrati ora'}</Link>
+                            <Link
+                                to='signup'
+                                onClick={this.closeModal.bind(this)}
+                                style={{color: darkGrey}}
+                            >
+                                {'Registrati ora'}
+                            </Link>
                         </p>
                     </Modal.Footer>
                 </Modal>

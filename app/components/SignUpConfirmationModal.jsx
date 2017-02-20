@@ -5,6 +5,7 @@ import {Form} from 'react-redux-form';
 import Button from 'components/CustomButton';
 import FormErrorMessage from 'components/FormErrorMessage';
 import FormInput from 'components/FormInput';
+import HorizontalLine from 'components/HorizontalLine';
 
 import * as colors from 'lib/colors';
 import {genericRequiredValidator} from 'lib/form-utils';
@@ -46,13 +47,13 @@ export default class SignUpConfirmationModal extends Component {
                     placeholder='Codice'
                     validator={genericRequiredValidator}
                 />
-                
+
                 <FormErrorMessage
                     message={this.props.signupConfirmation.errorMessage}
                 />
-                
+
                 <Button
-                    backgroundColor={'#708090'}
+                    backgroundColor={colors.darkGrey}
                     text='TERMINA REGISTRAZIONE >'
                     type='submit'
                 />
@@ -65,11 +66,11 @@ export default class SignUpConfirmationModal extends Component {
         return (
             <Modal show={!signupConfirmed}>
                 <Modal.Header>
-                    <Modal.Title>
-                        {'VALIDA LA REGISTRAZIONE'}
-                        <p>
-                            {'Inserisci qui il codice che abbiamo inviato alla tua casella email'}
-                        </p>
+                    <Modal.Title style={{textAlign: 'center'}}>
+                        <b style={{fontSize: 25}}>{'VALIDA LA REGISTRAZIONE'}</b>
+                        <br />
+                        <b>{'Inserisci qui il codice che abbiamo inviato alla tua casella email'}</b>
+                        <HorizontalLine color={colors.primaryColor} width={60} />
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
