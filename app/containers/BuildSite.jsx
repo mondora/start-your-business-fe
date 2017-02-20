@@ -22,15 +22,17 @@ import BusinessRoot from 'containers/business/Root';
 
 const styles = {
     buttonWrp: {
-        
+        float: 'right'
     }
 };
 
 const iconStyle = (active) => ({
     display: 'block',
-    width: 55,
-    float: 'left',
-    marginTop: '-8px',
+    borderRadius: '100%',
+    marginBottom: '10px',
+    padding: 4,
+    width: 52,
+    height: 52,
     backgroundColor: active ? colors.primaryColor : colors.primaryColorLight
 });
 
@@ -44,13 +46,17 @@ class BuildSite extends Component {
     componentWillMount () {
         this.props.setEditMode(editModes.VIEW);
     }
-    
+
     renderSaveBar () {
         return (
-            <Row>
+            <Row style={{marginBottom: 25}}>
                 <Col xs={12} sm={8}>
                     <Alert bsStyle='success'>
-                        <strong>{'Holy guacamole!'}</strong>
+                        <strong>{'Grazie per esserti registrato! '}</strong>
+                        {`Ora potrai scegliere il tuo template. Non disponi
+                        di tutti i testi e immagini? Non ti preoccupare,
+                        potrai modificare e aggiungere testi e immagini
+                        anche in seguito.`}
                     </Alert>
                 </Col>
                 <Col xs={12} sm={4}>
@@ -82,40 +88,44 @@ class BuildSite extends Component {
                 />
                 <div className='container'>
                     {this.renderSaveBar()}
-                    <Row>
-                        <Col xs={12} sm={3}>
-                            <ChooseTemplateWidget
-                                editMode={this.props.businessSite.editMode}
-                                selectTemplate={this.props.setTemplate}
-                                selectedTemplateId={this.props.businessSite.siteConfig.templateId}
-                                setEditMode={this.props.setEditMode}
-                            />
-                            <ChangeLogoWidget
-                                editMode={this.props.businessSite.editMode}
-                                setEditMode={this.props.setEditMode}
-                            />
-                            <ChangeColorWidget
-                                editMode={this.props.businessSite.editMode}
-                                setEditMode={this.props.setEditMode}
-                            />
-                            <Icon
-                                iconName='change_image_white'
-                                iconStyle={iconStyle(this.props.businessSite.editMode === editModes.UPLOAD_IMAGES)}
-                                onClick={() => this.props.setEditMode(editModes.UPLOAD_IMAGES)}
-                            />
-                            <Icon
-                                iconName='change_text_white'
-                                iconStyle={iconStyle(this.props.businessSite.editMode === editModes.EDIT_TEXTS)}
-                                onClick={() => this.props.setEditMode(editModes.EDIT_TEXTS)}
-                            />
-                            <Icon
-                                iconName='change_payment_white'
-                                iconStyle={iconStyle(this.props.businessSite.editMode === editModes.CHANGE_PAYMENT)}
-                                onClick={() => this.props.setEditMode(editModes.CHANGE_PAYMENT)}
-                            />
-                        </Col>
-                        <Col xs={12} sm={9}>
-                            {this.renderBusinessSite()}
+                    <Row style={{marginBottom: 25}}>
+                        <Col xs={12}>
+                            <div style={{width: 65, float: 'left'}}>
+                                <ChooseTemplateWidget
+                                    editMode={this.props.businessSite.editMode}
+                                    selectTemplate={this.props.setTemplate}
+                                    selectedTemplateId={this.props.businessSite.siteConfig.templateId}
+                                    setEditMode={this.props.setEditMode}
+                                />
+                                <ChangeLogoWidget
+                                    editMode={this.props.businessSite.editMode}
+                                    setEditMode={this.props.setEditMode}
+                                />
+                                <ChangeColorWidget
+                                    editMode={this.props.businessSite.editMode}
+                                    setEditMode={this.props.setEditMode}
+                                />
+                                <Icon
+                                    iconName='change_image_white'
+                                    iconStyle={iconStyle(this.props.businessSite.editMode === editModes.UPLOAD_IMAGES)}
+                                    onClick={() => this.props.setEditMode(editModes.UPLOAD_IMAGES)}
+                                />
+                                <Icon
+                                    iconName='change_text_white'
+                                    iconStyle={iconStyle(this.props.businessSite.editMode === editModes.EDIT_TEXTS)}
+                                    onClick={() => this.props.setEditMode(editModes.EDIT_TEXTS)}
+                                />
+                                <Icon
+                                    iconName='change_payment_white'
+                                    iconStyle={iconStyle(this.props.businessSite.editMode === editModes.CHANGE_PAYMENT)}
+                                    onClick={() => this.props.setEditMode(editModes.CHANGE_PAYMENT)}
+                                />
+                            </div>
+                            <div style={{width:'calc(100% - 65px)', float: 'right'}}>
+                                <div style={{border: `2px solid ${colors.lightGrey}`}}>
+                                    {this.renderBusinessSite()}
+                                </div>
+                            </div>
                         </Col>
                     </Row>
                 </div>
