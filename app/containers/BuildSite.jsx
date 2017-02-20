@@ -121,10 +121,8 @@ class BuildSite extends Component {
                                     onClick={() => this.props.setEditMode(editModes.CHANGE_PAYMENT)}
                                 />
                             </div>
-                            <div style={{width:'calc(100% - 65px)', float: 'right'}}>
-                                <div style={{border: `2px solid ${colors.lightGrey}`}}>
-                                    {this.renderBusinessSite()}
-                                </div>
+                            <div style={{width:'calc(100% - 65px)', float: 'right', border: `2px solid ${colors.lightGrey}`, overflow: 'hidden'}}>
+                                {this.renderBusinessSite()}
                             </div>
                         </Col>
                     </Row>

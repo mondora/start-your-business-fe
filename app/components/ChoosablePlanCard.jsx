@@ -7,7 +7,7 @@ import {allowOwnDomain, getDefaultPricing, isActive} from 'lib/zuora-products-ut
 
 const styles = (isSelected) => ({
     checkCircle: {
-        backgroundColor: isSelected ? colors.buttonPrimary : colors.background,
+        backgroundColor: isSelected ? colors.primaryColor : colors.background,
         minHeight: '30px',
         minWidth: '30px'
     },

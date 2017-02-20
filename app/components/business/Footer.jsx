@@ -45,7 +45,7 @@ class Footer extends Component {
     renderBottomFooter (isEditMode) {
         return (
             <div style={styles.bottomFooterWrp}>
-                <div className='container'>
+                <div className='container-fluid' style={{maxWidth: '1200px'}}>
                     <Row>
                         <Col xs={12} sm={6}>
                             {this.renderTextField(isEditMode, 'bottom', '© 2017 Nome Azienda - PIVA: 0123456789',
