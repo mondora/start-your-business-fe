@@ -1,10 +1,12 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
-
-import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
 
 import {editModes} from 'lib/business-site-utils';
 
-export default class ChangeColorWidget extends Component {
+import CustomColorPicker from 'components/CustomColorPicker';
+import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
+
+class ChangeColorWidget extends Component {
     static propTypes = {
         editMode: PropTypes.number,
         selectedTemplateId: PropTypes.string,
@@ -26,9 +28,11 @@ export default class ChangeColorWidget extends Component {
                 title='SCEGLI IL COLORE'
             >
                 <div>
-                    {'color selector'}
+                    <CustomColorPicker />
                 </div>
             </OverlayTriggerIcon>
         );
     }
 }
+
+export default Radium(ChangeColorWidget);
