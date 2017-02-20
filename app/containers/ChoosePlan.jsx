@@ -48,7 +48,7 @@ class ChoosePlan extends Component {
     render () {
         const {chosenPlanId, productPlans} = this.props.products;
         return (
-            <div style={{backgroundColor: '#eae9ed'}}>
+            <div style={{backgroundColor: colors.lightGrey}}>
                 <Form model='billing' onSubmit={this.submitBilling}>
                     <div style={styles.part1Container}>
                         {'1. Seleziona un piano:'}
@@ -60,11 +60,11 @@ class ChoosePlan extends Component {
                             productPlans={productPlans}
                         />
                     </div>
-                    
+
                     <BillingInformationForm
                         form={this.props.billingInformationForm}
                     />
-                    
+
                     <CreditCardForm
                         getPaymentParams={this.props.getPaymentParams}
                         paymentPageParams={this.props.payment.pageParams}
@@ -97,11 +97,11 @@ class ChoosePlan extends Component {
                     />
 
                     <Button
-                        backgroundColor='#708090'
+                        backgroundColor={colors.darkGrey}
                         text='< INDIETRO'
                     />
                     <Button
-                        backgroundColor='#708090'
+                        backgroundColor={colors.darkGrey}
                         text='ACQUISTA'
                         type='submit'
                     />
