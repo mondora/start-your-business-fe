@@ -7,6 +7,7 @@ import * as colors from 'lib/colors';
 
 import LoginButton from 'components/LoginButton';
 import SignUpButton from 'components/SignUpButton';
+import UserMenu from 'components/UserMenu';
 
 const styles = {
     headerLogo: {
@@ -45,9 +46,10 @@ class Header extends Component {
 
     renderWelcomeWidget () {
         return (
-            <div>
-                {`Ciao ${this.props.user.username}`}
-            </div>
+            <UserMenu
+                logout={() => console.log('logout')}
+                user={this.props.user}
+            />
         );
     }
 

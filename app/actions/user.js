@@ -24,7 +24,7 @@ export const login = (username, password) => {
         authenticateUser(username, password, getDefaultCognitoCallback(
             dispatch,
             'LOGIN',
-            {},
+            {username: username},
             {username: username},
             () => browserHistory.push('/build-site')
         ));
