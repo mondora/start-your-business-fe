@@ -1,5 +1,7 @@
 import {modeled} from 'react-redux-form';
 
+import {templatesIds} from 'lib/business-site-utils';
+
 export const initialFooterInfo = {
     bottom: '© 2017 Nome Azienda - PIVA: 0123456789',
     companyName: 'Nome Azienda',
@@ -21,7 +23,7 @@ const defaultState = {
         header: initialHeaderInfo,
         logoId: null,
         mainColorCode: null,
-        templateId: null
+        templateId: templatesIds.TEMPLATE_1
     }
 };
 
@@ -31,6 +33,14 @@ const businessSite = (state = defaultState, action) => {
             return {
                 ...state,
                 editMode: action.editMode
+            };
+        case 'SET_TEMPLATE':
+            return {
+                ...state,
+                siteConfig: {
+                    ...state.siteConfig,
+                    templateId: action.templateId 
+                }
             };
         default:
             return state;

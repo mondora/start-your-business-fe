@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
-import {setEditMode} from 'actions/business-site';
+import {setEditMode, setTemplate} from 'actions/business-site';
 
 import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
@@ -37,7 +37,8 @@ const iconStyle = (active) => ({
 class BuildSite extends Component {
     static propTypes = {
         businessSite: PropTypes.object.isRequired,
-        setEditMode: PropTypes.func.isRequired
+        setEditMode: PropTypes.func.isRequired,
+        setTemplate: PropTypes.func.isRequired
     };
 
     constructor (props) {
@@ -86,6 +87,8 @@ class BuildSite extends Component {
                         <Col xs={12} sm={3}>
                             <ChooseTemplateWidget
                                 editMode={this.props.businessSite.editMode}
+                                selectTemplate={this.props.setTemplate}
+                                selectedTemplateId={this.props.businessSite.siteConfig.templateId}
                                 setEditMode={this.props.setEditMode}
                             />
                             <ChangeLogoWidget
@@ -130,7 +133,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setEditMode: bindActionCreators(setEditMode, dispatch)
+        setEditMode: bindActionCreators(setEditMode, dispatch),
+        setTemplate: bindActionCreators(setTemplate, dispatch)
     };
 };
 

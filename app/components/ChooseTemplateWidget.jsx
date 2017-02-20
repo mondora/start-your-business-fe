@@ -1,18 +1,32 @@
+import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
 
 import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
+import TemplateCard from 'components/TemplateCard';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes, templates} from 'lib/business-site-utils';
 
 export default class ChooseTemplateWidget extends Component {
     static propTypes = {
         editMode: PropTypes.number,
-        selectedTemplateId: PropTypes.string,
+        selectTemplate: PropTypes.func.isRequired,
+        selectedTemplateId: PropTypes.number,
         setEditMode: PropTypes.func.isRequired
     };
 
     setEditMode (editMode) {
         return () => this.props.setEditMode(editMode);
+    }
+
+    renderTemplates () {
+        return R.map(template => (
+            <TemplateCard
+                key={template.id}
+                onSelect={this.props.selectTemplate}
+                selectedTemplate={this.props.selectedTemplateId}
+                template={template}
+            />
+        ), templates);
     }
 
     render () {
@@ -26,7 +40,7 @@ export default class ChooseTemplateWidget extends Component {
                 title='SCEGLI UN TEMPLATE'
             >
                 <div>
-                    {'lista di template'}
+                    {this.renderTemplates()}
                 </div>
             </OverlayTriggerIcon>
         );
