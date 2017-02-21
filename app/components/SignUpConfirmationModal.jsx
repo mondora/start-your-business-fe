@@ -13,8 +13,10 @@ import {genericRequiredValidator} from 'lib/form-utils';
 const styles = {
     newCode: {
         cursor: 'pointer',
+        width: '100%',
+        textAlign: 'center',
         textDecoration: 'underline',
-        color: colors.grey
+        color: colors.darkGrey
     }
 };
 
@@ -46,17 +48,20 @@ export default class SignUpConfirmationModal extends Component {
                     model='user.signup.confirmation.code'
                     placeholder='Codice'
                     validator={genericRequiredValidator}
+                    style={{width: '100%', marginBottom: '20px'}}
                 />
 
                 <FormErrorMessage
                     message={this.props.signupConfirmation.errorMessage}
                 />
 
-                <Button
-                    backgroundColor={colors.darkGrey}
-                    text='TERMINA REGISTRAZIONE >'
-                    type='submit'
-                />
+                <div style={{textAlign: 'center', width: '100%'}}>
+                    <Button
+                        backgroundColor={colors.darkGrey}
+                        text='TERMINA REGISTRAZIONE >'
+                        type='submit'
+                    />
+                </div>
             </Form>
         );
     }

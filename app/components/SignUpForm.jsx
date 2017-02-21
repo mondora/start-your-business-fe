@@ -81,6 +81,7 @@ export default class SignUpForm extends Component {
                     model='user.signup.givenName'
                     placeholder='Nome'
                     validator={genericRequiredValidator}
+                    style={styles.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.familyName}
@@ -89,6 +90,7 @@ export default class SignUpForm extends Component {
                     model='user.signup.familyName'
                     placeholder='Cognome'
                     validator={genericRequiredValidator}
+                    style={styles.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.email}
@@ -97,6 +99,7 @@ export default class SignUpForm extends Component {
                     model='user.signup.email'
                     placeholder='youremail@email.it'
                     validator={requiredEmailValidator}
+                    style={styles.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.password}
@@ -105,6 +108,7 @@ export default class SignUpForm extends Component {
                     model='user.signup.password'
                     placeholder='••••••••••••'
                     validator={requiredPasswordValidator}
+                    style={styles.blockWrp}
                 />
                 <FormInput
                     error={() => confirmPassword.touched && !$form.valid && $form.submitFailed && $form.errors.passwordsMatch &&
@@ -117,6 +121,7 @@ export default class SignUpForm extends Component {
                     label='Ripeti password: *'
                     model='user.signup.confirmPassword'
                     placeholder='••••••••••••'
+                    style={styles.blockWrp}
                 />
                 <FormInputCheckbox
                     field={this.props.form.privacyCheck}

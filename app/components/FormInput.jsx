@@ -4,10 +4,6 @@ import {Field} from 'react-redux-form';
 import * as colors from 'lib/colors';
 
 const styles = {
-    blockWrp: {
-        width: '100%',
-        marginBottom: '20px'
-    },
     errorsWrp: {
         display: 'block',
         borderRadius: '4px',
@@ -40,6 +36,7 @@ export default class FormInput extends Component {
         label: PropTypes.string,
         model: PropTypes.string.isRequired,
         placeholder: PropTypes.string,
+        style: PropTypes.object,
         validator: PropTypes.func
     };
 
@@ -48,11 +45,11 @@ export default class FormInput extends Component {
             <span style={styles.label}>{this.props.label}</span>
         ) : null;
     }
-    
+
     render () {
         const {error, field, model, inputType, placeholder, validator} = this.props;
         return (
-            <label style={styles.blockWrp}>
+            <label style={this.props.style}>
                 {this.renderLabel()}
                 <Field
                     model={model}

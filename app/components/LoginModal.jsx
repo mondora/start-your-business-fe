@@ -41,6 +41,7 @@ export default class LoginModal extends Component {
                         model='user.login.email'
                         placeholder='Email'
                         validator={requiredEmailValidator}
+                        style={{width: '100%', marginBottom: '20px'}}
                     />
                     <br />
                     <FormInput
@@ -49,6 +50,7 @@ export default class LoginModal extends Component {
                         model='user.login.password'
                         placeholder='Password'
                         validator={genericRequiredValidator}
+                        style={{width: '100%', marginBottom: '20px'}}
                     />
 
                     <FormErrorMessage
