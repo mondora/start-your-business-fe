@@ -102,6 +102,7 @@ class BuildSite extends Component {
                                     setEditMode={this.props.setEditMode}
                                 />
                                 <ChangeColorWidget
+                                    colors={this.props.businessSite.siteConfig.colors}
                                     editMode={this.props.businessSite.editMode}
                                     setEditMode={this.props.setEditMode}
                                 />

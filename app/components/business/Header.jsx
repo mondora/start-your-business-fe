@@ -8,10 +8,10 @@ import * as colors from 'lib/colors';
 import FormInput from 'components/FormInput';
 import Icon from 'components/Icon';
 
-const styles = ({
+const styles = (siteColors) => ({
     headerWrp: {
         minHeight: 50,
-        backgroundColor: colors.templatePrimaryColor,
+        backgroundColor: siteColors.mainColor,
         color: colors.white,
         lineHeight: '50px'
     },
@@ -20,7 +20,7 @@ const styles = ({
         marginRight: 20
     },
     headerIcons: {
-        color: colors.templatePrimaryColor,
+        color: siteColors.mainColor,
         fontSize: 18,
         padding: 5,
         backgroundColor: colors.white,
@@ -45,7 +45,7 @@ export default class Header extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
-        headerInfo: PropTypes.object.isRequired
+        siteConfig: PropTypes.object.isRequired
     };
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
@@ -60,26 +60,27 @@ export default class Header extends Component {
     }
 
     render () {
-        const {emailAddress, phoneNumber} = this.props.headerInfo;
+        const {emailAddress, phoneNumber} = this.props.siteConfig.header;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
+        const style = styles(this.props.siteConfig.colors);
         return (
             <div>
-                <div style={styles.headerWrp}>
+                <div style={style.headerWrp}>
                     <div className='container-fluid' style={{maxWidth: '1200px'}}>
                         <Row>
                             <Form model={'businessSite.siteConfig.header'}>
                                 <Col xs={12} sm={6}>
-                                    <div style={styles.iconWrp}>
+                                    <div style={style.iconWrp}>
                                         <Glyphicon
                                             glyph='glyphicon glyphicon-phone'
-                                            style={styles.headerIcons}
+                                            style={style.headerIcons}
                                         />
                                         {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
                                     </div>
-                                    <div style={styles.iconWrp}>
+                                    <div style={style.iconWrp}>
                                         <Glyphicon
                                             glyph='glyphicon glyphicon-envelope'
-                                            style={styles.headerIcons}
+                                            style={style.headerIcons}
                                         />
                                         {this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress)}
                                     </div>
@@ -94,18 +95,18 @@ export default class Header extends Component {
                 <div className='container-fluid' style={{maxWidth: '1200px'}}>
                     <Row style={{marginTop: 20, marginBottom: 20}}>
                         <Col xs={12} sm={6}>
-                            <img src='./_assets/images/templates/logo_example.jpg' style={styles.imgResponsive} />
+                            <img src='./_assets/images/templates/logo_example.jpg' style={style.imgResponsive} />
                         </Col>
                         <Col xs={12} sm={6}>
                             <Icon
                                 onClick={() => {}}
                                 iconName={'/templates/ico_twitter_01'}
-                                iconStyle={styles.icon}
+                                iconStyle={style.icon}
                             />
                             <Icon
                                 onClick={() => {}}
                                 iconName={'/templates/ico_facebook_01'}
-                                iconStyle={styles.icon}
+                                iconStyle={style.icon}
                             />
                         </Col>
                     </Row>

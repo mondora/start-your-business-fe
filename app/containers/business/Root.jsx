@@ -41,7 +41,7 @@ class Root extends Component {
                 <Header
                     buildSiteMode={editMode}
                     form={this.props.businessSiteHeaderForm}
-                    headerInfo={siteConfig.header}
+                    siteConfig={siteConfig}
                 />
 
                 {this.props.children}

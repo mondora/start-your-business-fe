@@ -1,71 +1,101 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {TwitterPicker, SwatchesPicker} from 'react-color';
+import {connect} from 'react-redux';
+import {actions, Form} from 'react-redux-form';
 import reactCSS from 'reactcss';
 
 import * as colors from 'lib/colors';
 
-export default class CustomColorPicker extends Component {
-    state = {
-        color: {
-            r: '241',
-            g: '112',
-            b: '19',
-            a: '1'
-        },
-    };
-
-    handleChange = (color) => {
-        this.setState({color: color.rgb});
+class WrappedSwatchesPicker extends Component {
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired,
+        model: PropTypes.string.isRequired
     };
 
     render () {
-        const styles = reactCSS ({
-            'default': {
-                color: {
-                    width: '100%',
-                    height: '100px',
-                    borderRadius: '2px',
-                    background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
-                },
-                swatch: {
-                    width: '100%',
-                    padding: '16px',
-                    background: colors.white,
-                    borderRadius: '4px',
-                    display: 'inline-block',
-                    cursor: 'pointer',
-                    boxShadow: 'rgba(0, 0, 0, 0.4) 0px 2px 5px'
-                }
-            },
-
-        });
-
         return (
-            <div>
+            <SwatchesPicker
+                {...this.props}
+                onChange={e => this.props.dispatch(actions.change(this.props.model, e.hex))}
+            />
+        );
+    }
+}
+
+const SwatchesPickerField = connect(s => s)(WrappedSwatchesPicker);
+
+class WrappedTwitterPicker extends Component {
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired,
+        model: PropTypes.string.isRequired
+    };
+
+    render () {
+        return (
+            <TwitterPicker
+                {...this.props}
+                onChange={e => this.props.dispatch(actions.change(this.props.model, e.hex))}
+            />
+        );
+    }
+}
+
+const TwitterPickerField = connect(s => s)(WrappedTwitterPicker);
+
+const styles = (color) => reactCSS({
+    default: {
+        color: {
+            width: '100%',
+            height: '100px',
+            borderRadius: '2px',
+            background: color
+        },
+        swatch: {
+            width: '100%',
+            padding: '16px',
+            background: colors.white,
+            borderRadius: '4px',
+            display: 'inline-block',
+            cursor: 'pointer',
+            boxShadow: 'rgba(0, 0, 0, 0.4) 0px 2px 5px'
+        }
+    }
+});
+
+export default class CustomColorPicker extends Component {
+    static propTypes = {
+        colors: PropTypes.object.isRequired
+    };
+
+    render () {
+        const {mainColor} = this.props.colors;
+        const {color, swatch} = styles(mainColor);
+        return (
+            <Form model={'businessSite.siteConfig.colors'}>
                 <p style={{fontSize: 18, marginTop: 20}}>
                     {'Scegli il colore principale per il tuo sito'}
                 </p>
-                <div style={styles.swatch}>
-                    <div style={styles.color} color={this.state.color} />
+                <div style={swatch}>
+                    <div style={color} color={mainColor} />
                 </div>
-                <SwatchesPicker
-                    width={'100%'}
+                <SwatchesPickerField
+                    color={mainColor}
                     height={'100%'}
-                    color={this.state.color}
-                    onChange={this.handleChange}
+                    model='businessSite.siteConfig.colors.mainColor'
                     triangle={'hide'}
+                    width={'100%'}
                 />
                 <p style={{fontSize: 18, marginTop: 20}}>
                     {'Oppure inserisci il codice esadecimale'}
                 </p>
-                <TwitterPicker
-                    width={'100%'}
-                    color={this.state.color}
+                <TwitterPickerField
+                    color={mainColor}
                     colors={[]}
-                    onChange={this.handleChange}
+                    model='businessSite.siteConfig.colors.mainColor'
                     triangle={'hide'}
+                    width={'100%'}
                 />
-            </div>
+            </Form>
         );
     }
 }

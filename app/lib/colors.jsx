@@ -21,7 +21,6 @@ export const backgroundBottomFooter = '#0c0e11';
 
 
 // First Template styles
-export const templatePrimaryColor = '#8cc63f';
 export const templateBg = '#ffffff';
 export const templateGreyBg = '#e6e6e6';
 export const templateFooterBg = '#333333';

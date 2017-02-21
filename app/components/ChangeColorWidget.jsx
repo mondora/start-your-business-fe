@@ -8,8 +8,8 @@ import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
 
 class ChangeColorWidget extends Component {
     static propTypes = {
+        colors: PropTypes.object.isRequired,
         editMode: PropTypes.number,
-        selectedTemplateId: PropTypes.string,
         setEditMode: PropTypes.func.isRequired
     };
 
@@ -27,9 +27,9 @@ class ChangeColorWidget extends Component {
                 showOverlay={this.props.editMode === editModes.CHOOSE_COLOR}
                 title='SCEGLI IL COLORE'
             >
-                <div>
-                    <CustomColorPicker />
-                </div>
+                <CustomColorPicker
+                    colors={this.props.colors}
+                />
             </OverlayTriggerIcon>
         );
     }

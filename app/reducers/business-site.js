@@ -2,6 +2,10 @@ import {modeled} from 'react-redux-form';
 
 import {templatesIds} from 'lib/business-site-utils';
 
+export const initialColors = {
+    mainColor: '#8cc63f'
+};
+
 export const initialFooterInfo = {
     bottom: '© 2017 Nome Azienda - PIVA: 0123456789',
     companyName: 'Nome Azienda',
@@ -19,10 +23,10 @@ export const initialHeaderInfo = {
 const defaultState = {
     editMode: null,
     siteConfig: {
+        colors: initialColors,
         footer: initialFooterInfo,
         header: initialHeaderInfo,
         logoId: null,
-        mainColorCode: null,
         templateId: templatesIds.TEMPLATE_1
     }
 };
