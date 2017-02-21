@@ -47,14 +47,14 @@ class FaqSection extends Component {
     getFaq () {
         return [
             {
-                question: 'Quali sono le features principali?',
+                question: 'Perchè mettere un business online a sottoscrizione?',
                 answer:
                     `Lorem ipsum Do commodo in proident enim in dolor
                     cupidatat adipisicing dolore officia nisi aliqua incididunt
                     Ut veniam lorem ipsum Consectetur ut in in eu do.`
             },
             {
-                question: 'Come faccio a presonalizzare i template?',
+                question: 'Website aziendale e template personalizzato: come funziona?',
                 answer:
                     `Lorem ipsum Do commodo in proident enim in dolor
                     cupidatat adipisicing dolore officia nisi aliqua incididunt
@@ -82,12 +82,12 @@ class FaqSection extends Component {
             <div style={styles.faqWrp}>
                 <div className='container' style={{textAlign: 'center'}}>
                     <HomeSectionTitle
-                        subtitle={'FAQ'}
-                        title={'DOMANDE E RISPOSTE'}
+                        subtitle={'INFORMAZIONI'}
+                        title={'DOMANDE FREQUENTI'}
                         description={
-                            `Lorem ipsum Do commodo in proident enim in dolor
-                            sed do eiusmod tempor incididunt ut labore et dolore.
-                            Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                            `Hai bisogno di aiuto o desideri ricevere maggiori
+                            informazioni su scais.io e i suoi servizi?
+                            Ecco le risposte alle domande più frequenti`
                         }
                     />
                     <Row>

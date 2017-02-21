@@ -96,9 +96,9 @@ class TemplateSection extends Component {
                         textColor={colors.white}
                         title={'SCEGLI UN TEMPLATE'}
                         description={
-                            `Ut veniam lorem ipsum Consectetur ut in in eu do
-                            sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.`
+                            `Entova.it ti offre la possibilità di scegliere tra
+                            i vari templates preimpostati e di personalizzarli
+                            come vuoi tu`
                         }
                     />
                     <Row>

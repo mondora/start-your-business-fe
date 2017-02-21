@@ -1,5 +1,6 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
+import {Alert, Glyphicon} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -76,20 +77,64 @@ class Home extends Component {
         user: PropTypes.object
     };
 
+    getInitialState () {
+        return {
+            alertVisible: true
+        };
+    }
+
+    handleAlertDismiss () {
+        this.setState({
+            alertVisible: false
+        });
+    }
+
+    renderAlert () {
+        if (this.state.alertVisible) {
+            return (
+                <Alert
+                    onDismiss={this.handleAlertDismiss}
+                    style={{
+                        color: colors.white,
+                        lineHeight: '22px',
+                        backgroundColor: colors.primaryColor,
+                        'button.close': {
+                            fontSize: '38px',
+                            fontWeight: '300'
+                        }
+                    }}
+                >
+                    <Glyphicon
+                        glyph='glyphicon glyphicon-info-sign'
+                        style={{
+                            color: colors.white,
+                            fontSize: 22,
+                            marginRight: 8
+                        }}
+                    />
+                    <strong>{'LA SOTTOSCRIZIONE PROFESSIONAL SARÁ DISPONIBILE DA AUTUNNO 2017'}</strong>
+                </Alert>
+            );
+        }
+    }
+
     renderPlan () {
         return (
             <div style={styles.planWrp}>
                 <div className='container'>
                     <div style={styles.plan}>
                         <HomeSectionTitle
-                            subtitle={'ECONOMICS'}
-                            title={'SCEGLI IL PIANO CHE FA PER TE'}
+                            subtitle={'SOTTOSCRIZIONI'}
+                            title={'SCEGLI IL TUO PIANO'}
                             description={
-                                `Consectetur adipiscing elit, aliqua incididunt
-                                sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.`
+                                `Sei alla ricerca di una soluzione semplice,
+                                veloce ed economica? Oppure hai bisogno di un
+                                prodotto più funzionale e con maggiori possibilità?
+                                Scegli la sottoscrizione che meglio corrisponde
+                                alle tue esigenze`
                             }
                         />
+                        {this.renderAlert()}
                         <ProductPlanCardList
                             getSYBProductPlans={this.props.getSYBProductPlans}
                             productPlans={this.props.products.productPlans}
