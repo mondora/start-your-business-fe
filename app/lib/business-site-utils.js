@@ -25,3 +25,8 @@ export const templates = [
         label: 'template 2'
     }
 ];
+
+//TODO decide how persist users's images and retrieve them
+export function getS3ImagePath (imageId) {
+    return imageId;
+}

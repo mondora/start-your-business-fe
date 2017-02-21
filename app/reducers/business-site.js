@@ -27,6 +27,9 @@ const defaultState = {
         footer: initialFooterInfo,
         header: initialHeaderInfo,
         logoId: null,
+        teaserImages: [{
+            id: null
+        }],
         templateId: templatesIds.TEMPLATE_1
     }
 };

@@ -6,7 +6,7 @@ import {Overlay} from 'react-bootstrap';
 import * as colors from 'lib/colors';
 
 import Icon from 'components/Icon';
-import Button from 'components/CustomButton';
+import SaveButton from 'components/BuildSiteSaveButton';
 
 const iconStyle = (active) => ({
     display: 'block',
@@ -59,7 +59,7 @@ const styles = {
         borderRadius: 3,
         backgroundColor: colors.primaryColor,
         '@media screen and (max-width: 767px)': {
-            padding: '15px',
+            padding: '15px'
         }
     },
     TooltipArrow: {
@@ -72,11 +72,6 @@ const styles = {
         borderLeftColor: 'transparent',
         borderTopColor: 'transparent',
         borderBottomColor: 'transparent'
-    },
-    TooltipButtonWrp: {
-        width: '100%',
-        textAlign: 'right',
-        margin: '20px 0'
     }
 };
 
@@ -109,25 +104,10 @@ class OverlayTriggerIcon extends Component {
                             {'×'}
                         </label>
                         {this.props.children}
-                        {this.renderSaveButton()}
+                        <SaveButton />
                     </div>
                 </div>
             </Overlay>
-        );
-    }
-
-    renderSaveButton () {
-        return (
-            <div style={styles.TooltipButtonWrp}>
-                <Button
-                    backgroundColor={colors.white}
-                    onClick={this.props.onClose}
-                    text='SALVA'
-                    height={42}
-                    textColor={colors.primaryColor}
-                    style={{float: 'right'}}
-                />
-            </div>
         );
     }
 

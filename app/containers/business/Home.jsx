@@ -14,7 +14,10 @@ class Home extends Component {
 
     render () {
         return (
-            <Teaser />
+            <Teaser
+                buildSiteMode={this.props.businessSiteState.editMode}
+                images={this.props.businessSiteState.siteConfig.teaserImages}
+            />
         );
     }
 }
