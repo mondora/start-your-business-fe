@@ -95,7 +95,7 @@ export default class Header extends Component {
                 <div className='container-fluid' style={{maxWidth: '1200px'}}>
                     <Row style={{marginTop: 20, marginBottom: 20}}>
                         <Col xs={12} sm={6}>
-                            <img src='./_assets/images/templates/logo_example.jpg' style={style.imgResponsive} />
+                            <img src='./_assets/images/template_01/logo_example.jpg' style={style.imgResponsive} />
                         </Col>
                         <Col xs={12} sm={6}>
                             <Icon

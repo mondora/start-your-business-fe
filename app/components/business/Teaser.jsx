@@ -36,7 +36,7 @@ export default class Teaser extends Component {
             </div>
         );
     }
-    
+
     renderCarousel () {
         return (
             <Carousel>
@@ -44,7 +44,7 @@ export default class Teaser extends Component {
                     <Carousel.Item
                         key={img.id}
                     >
-                        <img src={img.id ? getS3ImagePath(img.id) : './_assets/images/templates/carousel01.jpg'} />
+                        <img src={img.id ? getS3ImagePath(img.id) : './_assets/images/template_01/carousel01.jpg'} />
                     </Carousel.Item>
                 )}
             </Carousel>
