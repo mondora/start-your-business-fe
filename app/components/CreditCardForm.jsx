@@ -1,8 +1,9 @@
+import Radium from 'radium';
 import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 
-export default class CreditCardForm extends Component {
+class CreditCardForm extends Component {
 
     static propTypes = {
         getPaymentParams: PropTypes.func.isRequired,
@@ -40,9 +41,17 @@ export default class CreditCardForm extends Component {
 
     render () {
         return (
-            <div id='zuora_payment' />
+            <div>
+                <div id='zuora_payment' style={{backgroundColor: 'black !important'}} />
+                <Radium.Style
+                    rules={{
+                        '.popup': {
+                            backgroundColor: 'black !important'
+                        }
+                    }}
+                />
+            </div>
         );
     }
 }
-
-
+export default Radium(CreditCardForm);

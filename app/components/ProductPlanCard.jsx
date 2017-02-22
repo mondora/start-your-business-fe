@@ -71,9 +71,7 @@ export default class ProductPlanCard extends Component {
                     top: 0,
                     left: 0,
                     position: 'absolute',
-                    backgroundColor: colors.blackOpacity,
-                    color: colors.white,
-                    fontSize: '16px'
+                    backgroundColor: colors.blackOpacity
                 }}
             />
         );

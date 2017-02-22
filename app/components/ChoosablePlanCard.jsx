@@ -13,21 +13,21 @@ const styles = (isSelected) => ({
     },
     container: {
         position: 'relative',
-        backgroundColor: '#fff',
+        backgroundColor: colors.white,
         width: 300,
         height: 400,
         borderRadius: 10
     },
     name: {
-        color: '#fff',
+        color: colors.white,
         fontSize: 25
     },
     price: {
-        color: '#fff',
+        color: colors.white,
         fontSize: 40
     },
     frequency: {
-        color: '#fff',
+        color: colors.white,
         fontSize: 20
     },
     top: {
@@ -50,7 +50,7 @@ export default class ChoosablePlanCard extends Component {
     };
 
     static defaultProps = {
-        backgroundColor: '#D3D3D3'
+        backgroundColor: colors.primaryColor
     };
 
     renderCheckCircle (activePlan, isSelected) {
@@ -66,20 +66,18 @@ export default class ChoosablePlanCard extends Component {
         return (
             <div
                 style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    borderRadius: 10,
                     width: '100%',
                     height: '100%',
                     top: 0,
                     left: 0,
-                    right: 0,
-                    bottom: 0,
                     position: 'absolute',
-                    backgroundColor: colors.blackOpacity,
-                    color: colors.white,
-                    fontSize: '30px'
+                    backgroundColor: colors.blackOpacity
                 }}
-            >
-                {'Piano non attivo'}
-            </div>
+            />
         );
     }
 

@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Form} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
+import {Row, Col} from 'react-bootstrap';
 
 import {getPaymentParams} from 'actions/payment';
 import {choosePlan, getSYBProductPlans} from 'actions/products';
@@ -11,23 +12,33 @@ import Button from 'components/CustomButton';
 import CreditCardForm from 'components/CreditCardForm';
 import FormInputCheckbox from 'components/FormInputCheckbox';
 import ProductPlanCardList from 'components/ProductPlanCardList';
+import PageTeaser from 'components/PageTeaser';
 
 import * as colors from 'lib/colors';
 import {isCheckedValidator} from 'lib/form-utils';
 
 const styles = {
-    part1Container: {
-        backgroundImage: 'url(\'./_assets/images/home1.jpeg\')',
-        height: 800,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column'
+    title: {
+        width: '80vw',
+        marginBottom: 40,
+        textAlign: 'center',
+        color: colors.primaryColor,
+        fontWeight: 800,
+        fontSize: 'calc(30px + 1vw)',
+        lineHeight: 'calc(30px + 1vw)'
+    },
+    section: {
+        borderRadius: '10px',
+        backgroundColor: colors.primaryColorLighter,
+        padding: 20,
+        marginBottom: 40
+    },
+    sectionTitle: {
+        fontWeight: '700',
+        fontSize: '1.3em',
     },
     text: {
-        color: colors.darkGrey,
-        fontSize: '1em',
-        fontWeight: '300'
+
     }
 };
 
@@ -48,64 +59,104 @@ class ChoosePlan extends Component {
     render () {
         const {chosenPlanId, productPlans} = this.props.products;
         return (
-            <div style={{backgroundColor: colors.lightGrey}}>
-                <Form model='billing' onSubmit={this.submitBilling}>
-                    <div style={styles.part1Container}>
-                        {'1. Seleziona un piano:'}
-                        <ProductPlanCardList
-                            chooseMode={true}
-                            choosePlan={this.props.choosePlan}
-                            chosenPlanId={chosenPlanId}
-                            getSYBProductPlans={this.props.getSYBProductPlans}
-                            productPlans={productPlans}
-                        />
-                    </div>
-
-                    <BillingInformationForm
-                        form={this.props.billingInformationForm}
-                    />
-
-                    <CreditCardForm
-                        getPaymentParams={this.props.getPaymentParams}
-                        paymentPageParams={this.props.payment.pageParams}
-                    />
-
-                    <FormInputCheckbox
-                        field={this.props.billingInformationForm.termsCheck}
-                        model='billing.termsCheck'
-                        text={
-                            <span style={{...styles.text, ...{cursor: 'pointer'}}}>
-                                {'  Acconsento e dichiaro di aver letto i '}
-                                <a
-                                    href='/privacy'
-                                    style={{color: colors.darkGrey, textDecoration: 'underline'}}
-                                    target='_blank'
-                                >
-                                    {'termini e condizioni'}
-                                </a>
-                                {' del servizio e l’informativa sulla '}
-                                <a
-                                    href='/privacy'
-                                    style={{color: colors.darkGrey, textDecoration: 'underline'}}
-                                    target='_blank'
-                                >
-                                    {'Privacy'}
-                                </a> {' *'}
-                            </span>
-                        }
-                        validator={isCheckedValidator}
-                    />
-
-                    <Button
-                        backgroundColor={colors.darkGrey}
-                        text='< INDIETRO'
-                    />
-                    <Button
-                        backgroundColor={colors.darkGrey}
-                        text='ACQUISTA'
-                        type='submit'
-                    />
-                </Form>
+            <div>
+                <PageTeaser
+                    pageTitle={'SCEGLI UN PIANO'}
+                />
+                <div className='container'>
+                    <h3 style={styles.title}>
+                        {'CI SEI QUASI, UN ULTIMO PASSO PER COMINCIARE IL TUO BUSINESS'}
+                    </h3>
+                    <Form model='billing' onSubmit={this.submitBilling}>
+                        <Row>
+                            <Col xs={12}>
+                                <div style={styles.section}>
+                                    <p style={styles.sectionTitle}>
+                                        {'1. Seleziona un piano:'}
+                                    </p>
+                                    <ProductPlanCardList
+                                        chooseMode={true}
+                                        choosePlan={this.props.choosePlan}
+                                        chosenPlanId={chosenPlanId}
+                                        getSYBProductPlans={this.props.getSYBProductPlans}
+                                        productPlans={productPlans}
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                                <div style={styles.section}>
+                                    <p style={styles.sectionTitle}>
+                                        {'2. Dati di fatturazione:'}
+                                    </p>
+                                    <BillingInformationForm
+                                        form={this.props.billingInformationForm}
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                                <div style={styles.section}>
+                                    <p style={styles.sectionTitle}>
+                                        {'3. Pagamento:'}
+                                    </p>
+                                    <CreditCardForm
+                                        getPaymentParams={this.props.getPaymentParams}
+                                        paymentPageParams={this.props.payment.pageParams}
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row style={{marginBottom: 30}}>
+                            <Col xs={12}>
+                                <FormInputCheckbox
+                                    field={this.props.billingInformationForm.termsCheck}
+                                    model='billing.termsCheck'
+                                    text={
+                                        <span style={{...styles.text, ...{cursor: 'pointer'}}}>
+                                            {'  Acconsento e dichiaro di aver letto i '}
+                                            <a
+                                                href='/privacy'
+                                                style={{color: colors.darkGrey, textDecoration: 'underline'}}
+                                                target='_blank'
+                                            >
+                                                {'termini e condizioni'}
+                                            </a>
+                                            {' del servizio e l’informativa sulla '}
+                                            <a
+                                                href='/privacy'
+                                                style={{color: colors.darkGrey, textDecoration: 'underline'}}
+                                                target='_blank'
+                                            >
+                                                {'Privacy'}
+                                            </a> {' *'}
+                                        </span>
+                                    }
+                                    validator={isCheckedValidator}
+                                />
+                            </Col>
+                        </Row>
+                        <Row style={{marginBottom: 60}}>
+                            <Col xs={12}>
+                                <div style={{float: 'left'}}>
+                                    <Button
+                                        backgroundColor={colors.darkGrey}
+                                        text='< INDIETRO'
+                                    />
+                                </div>
+                                <div style={{float: 'right'}}>
+                                    <Button
+                                        backgroundColor={colors.primaryColor}
+                                        text='ACQUISTA'
+                                        type='submit'
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                    </Form>
+                </div>
             </div>
         );
     }
