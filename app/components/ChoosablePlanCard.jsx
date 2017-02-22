@@ -12,6 +12,7 @@ const styles = (isSelected) => ({
         minWidth: '30px'
     },
     container: {
+        position: 'relative',
         backgroundColor: '#fff',
         width: 300,
         height: 400,
@@ -61,6 +62,27 @@ export default class ChoosablePlanCard extends Component {
         );
     }
 
+    renderPlanStatus () {
+        return (
+            <div
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    position: 'absolute',
+                    backgroundColor: colors.blackOpacity,
+                    color: colors.white,
+                    fontSize: '30px'
+                }}
+            >
+                {'Piano non attivo'}
+            </div>
+        );
+    }
+
     render () {
         const {backgroundColor, isSelected, productPlan} = this.props;
         const pricing = getDefaultPricing(productPlan);
@@ -75,7 +97,7 @@ export default class ChoosablePlanCard extends Component {
                     }}
                 >
                     {this.renderCheckCircle(activePlan, isSelected)}
-                    {!activePlan ? 'Piano non attivo' : null}
+                    {!activePlan ? this.renderPlanStatus() : null}
                     <div style={styles(isSelected).name}>
                         {productPlan.name}
                     </div>

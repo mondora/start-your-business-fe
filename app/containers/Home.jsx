@@ -77,45 +77,38 @@ class Home extends Component {
         user: PropTypes.object
     };
 
-    getInitialState () {
-        return {
-            alertVisible: true
-        };
-    }
-
-    handleAlertDismiss () {
-        this.setState({
-            alertVisible: false
-        });
-    }
-
     renderAlert () {
-        if (this.state.alertVisible) {
-            return (
-                <Alert
-                    onDismiss={this.handleAlertDismiss}
-                    style={{
-                        color: colors.white,
-                        lineHeight: '22px',
-                        backgroundColor: colors.primaryColor,
-                        'button.close': {
-                            fontSize: '38px',
-                            fontWeight: '300'
-                        }
-                    }}
-                >
+        return (
+            <Alert
+                onDismiss={this.handleAlertDismiss}
+                style={{
+                    width: '70vw',
+                    margin: '0 auto',
+                    color: colors.white,
+                    borderRadius: '30px',
+                    backgroundColor: colors.grey,
+                    textAlign: 'left',
+                    fontSize: 'calc(12px + .7vw)',
+                    border: 0
+                }}
+            >
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                     <Glyphicon
                         glyph='glyphicon glyphicon-info-sign'
                         style={{
+                            display: 'block',
+                            float: 'left',
                             color: colors.white,
-                            fontSize: 22,
+                            fontSize: 38,
                             marginRight: 8
                         }}
                     />
-                    <strong>{'LA SOTTOSCRIZIONE PROFESSIONAL SARÁ DISPONIBILE DA AUTUNNO 2017'}</strong>
-                </Alert>
-            );
-        }
+                    <span>
+                        <strong>{'LA SOTTOSCRIZIONE PROFESSIONAL SARÁ DISPONIBILE DA AUTUNNO 2017'}</strong>
+                    </span>
+                </div>
+            </Alert>
+        );
     }
 
     renderPlan () {

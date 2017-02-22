@@ -10,6 +10,7 @@ import {getDefaultPricing, isActive} from 'lib/zuora-products-utils';
 
 const styles = {
     container: {
+        position: 'relative',
         backgroundColor: colors.white,
         maxWidth: 370,
         margin: '0 auto',
@@ -57,6 +58,27 @@ export default class ProductPlanCard extends Component {
         backgroundColor: colors.white
     };
 
+    renderPlanStatus () {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '10px',
+                    top: 0,
+                    left: 0,
+                    position: 'absolute',
+                    backgroundColor: colors.blackOpacity,
+                    color: colors.white,
+                    fontSize: '16px'
+                }}
+            />
+        );
+    }
+
     render () {
         const {backgroundColor, onConfirm, productPlan} = this.props;
         //TODO ask to PO for features to put on Zuora
@@ -72,7 +94,7 @@ export default class ProductPlanCard extends Component {
                             ...{backgroundColor: backgroundColor}
                         }}
                     >
-                        {!isActive(productPlan) ? 'Piano non attivo' : null}
+                        {!isActive(productPlan) ? this.renderPlanStatus() : null}
                         <div style={styles.name}>
                             {productPlan.name}
                         </div>
