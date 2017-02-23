@@ -1,47 +1,110 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
-
-import DomainInput from 'components/DomainInput';
+import {Col} from 'react-bootstrap';
 
 import * as colors from 'lib/colors';
 import {allowOwnDomain, getDefaultPricing, isActive} from 'lib/zuora-products-utils';
 
-const styles = (isSelected) => ({
+import Icon from 'components/Icon';
+import DomainInput from 'components/DomainInput';
+
+const styles = {
     checkCircle: {
-        backgroundColor: isSelected ? colors.primaryColor : colors.background,
-        minHeight: '30px',
-        minWidth: '30px'
+        backgroundColor: colors.white,
+        width: 30,
+        height: 30,
+        borderRadius: '100%',
+        '@media screen and (max-width: 390px)': {
+            width: 24,
+            height: 24
+        }
     },
     container: {
         position: 'relative',
         backgroundColor: colors.white,
-        width: 300,
-        height: 400,
-        borderRadius: 10
-    },
-    name: {
-        color: colors.white,
-        fontSize: 25
-    },
-    price: {
-        color: colors.white,
-        fontSize: 40
-    },
-    frequency: {
-        color: colors.white,
-        fontSize: 20
+        height: 245,
+        borderRadius: 10,
+        marginBottom: 20
     },
     top: {
         display: 'flex',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection: 'column',
+        flexDirection: 'row',
         borderRadius: '10px 10px 0 0',
-        height: 200,
+        height: 65,
         width: '100%',
-        padding: 10
+        padding: '5px 10px',
+        '@media screen and (max-width: 390px)': {
+            height: 50
+        }
+    },
+    iconStyle: {
+        width: 30,
+        height: 30,
+        '@media screen and (max-width: 390px)': {
+            width: 24,
+            height: 24
+        }
+    },
+    nameWrp: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    name: {
+        marginLeft: 10,
+        color: colors.white,
+        fontSize: 20,
+        fontWeight: '600',
+        '@media screen and (max-width: 390px)': {
+            marginLeft: 5,
+            fontSize: 14,
+            lineHeight: '14px',
+            fontWeight: '300',
+        }
+    },
+    price: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        color: colors.white,
+        fontSize: 26,
+        lineHeight: '24px',
+        fontWeight: '700',
+        '@media screen and (min-width: 991px)': {
+            fontSize: 34,
+            lineHeight: '32px'
+        },
+        '@media screen and (max-width: 390px)': {
+            fontSize: 20,
+            lineHeight: '22px'
+        }
+    },
+    frequency: {
+        color: colors.white,
+        fontSize: 16,
+        lineHeight: '16px',
+        fontWeight: '300'
+    },
+    description: {
+        display: 'flex',
+        fontSize: 16,
+        fontWeight: '700',
+        marginBottom: 10,
+        minHeight: 40
+    },
+    planContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'space-between',
+        padding: '0px 20px',
+        height: 180
     }
-});
+};
 
-export default class ChoosablePlanCard extends Component {
+class ChoosablePlanCard extends Component {
     static propTypes = {
         backgroundColor: PropTypes.string,
         isSelected: PropTypes.bool,
@@ -50,16 +113,25 @@ export default class ChoosablePlanCard extends Component {
     };
 
     static defaultProps = {
-        backgroundColor: colors.primaryColor
+        backgroundColor: colors.white
     };
 
-    renderCheckCircle (activePlan, isSelected) {
-        return (
-            <div
-                style={styles(isSelected).checkCircle}
-                onClick={activePlan ? this.props.onSelect : null}
-            />
-        );
+    renderCheckCircle (activePlan) {
+        if (!activePlan) {
+            return (
+                <div
+                    style={styles.checkCircle}
+                    onClick={activePlan ? this.props.onSelect : null}
+                />
+            );
+        } else {
+            return (
+                <Icon
+                    iconName='check_white'
+                    iconStyle={styles.iconStyle}
+                />
+            );
+        }
     }
 
     renderPlanStatus () {
@@ -86,31 +158,40 @@ export default class ChoosablePlanCard extends Component {
         const pricing = getDefaultPricing(productPlan);
         const activePlan = isActive(productPlan);
         return (
-            <div style={styles(isSelected).container}>
-                <div
-                    className='top'
-                    style={{
-                        ...styles(isSelected).top,
-                        ...{backgroundColor: backgroundColor}
-                    }}
-                >
-                    {this.renderCheckCircle(activePlan, isSelected)}
-                    {!activePlan ? this.renderPlanStatus() : null}
-                    <div style={styles(isSelected).name}>
-                        {productPlan.name}
+            <Col xs={12} sm={6}>
+                <div style={styles.container}>
+                    <div
+                        className='top'
+                        style={{
+                            ...styles.top,
+                            ...{backgroundColor: isSelected ? backgroundColor : colors.grey}
+                        }}
+                    >
+                        <div style={styles.nameWrp}>
+                            {this.renderCheckCircle(activePlan, isSelected)}
+                            {!activePlan ? this.renderPlanStatus() : null}
+                            <span style={styles.name}>{productPlan.name}</span>
+                        </div>
+                        <div style={styles.price}>
+                            {pricing.currency}{pricing.price}
+                            <br />
+                            <span style={styles.frequency}>
+                                {`(${productPlan.Frequency__c})`}
+                            </span>
+                        </div>
                     </div>
-                    <div style={styles(isSelected).price}>
-                        {pricing.currency}{pricing.price}
+                    <div style={styles.planContent}>
+                        <div style={styles.description}>
+                            {productPlan.description}
+                        </div>
+                        <DomainInput
+                            customDomain={allowOwnDomain(productPlan)}
+                        />
                     </div>
-                    <div style={styles(isSelected).frequency}>
-                        {`(${productPlan.Frequency__c})`}
-                    </div>
-                    {productPlan.description}
-                    <DomainInput
-                        customDomain={allowOwnDomain(productPlan)}
-                    />
                 </div>
-            </div>
+            </Col>
         );
     }
 }
+
+export default Radium(ChoosablePlanCard);

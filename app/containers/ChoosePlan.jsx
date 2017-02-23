@@ -1,3 +1,4 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Form} from 'react-redux-form';
@@ -19,13 +20,16 @@ import {isCheckedValidator} from 'lib/form-utils';
 
 const styles = {
     title: {
-        width: '80vw',
-        marginBottom: 40,
+        width: '100%',
+        margin: '0px auto 40px auto',
         textAlign: 'center',
         color: colors.primaryColor,
         fontWeight: 800,
         fontSize: 'calc(30px + 1vw)',
-        lineHeight: 'calc(30px + 1vw)'
+        lineHeight: 'calc(30px + 1vw)',
+        '@media screen and (min-width: 991px)': {
+            width: '80%',
+        }
     },
     section: {
         borderRadius: '10px',
@@ -178,4 +182,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChoosePlan);
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(ChoosePlan));

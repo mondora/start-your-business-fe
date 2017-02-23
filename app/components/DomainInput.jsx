@@ -1,7 +1,29 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {FormControl} from 'react-bootstrap';
 
-export default class DomainInput extends Component {
+import * as colors from 'lib/colors';
+
+const styles = {
+    inputWrp: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: '100%',
+        backgroundColor: colors.lightGrey,
+        padding: '5px 5px 5px 10px',
+        borderRadius: 5,
+        '@media screen and (max-width: 991px)': {
+            flexDirection: 'column',
+            padding: 5,
+            alignItems: 'flex-start'
+        },
+    }
+};
+
+class DomainInput extends Component {
     static propTypes = {
         customDomain: PropTypes.bool
     };
@@ -19,7 +41,7 @@ export default class DomainInput extends Component {
 
     render () {
         return (
-            <div>
+            <div style={styles.inputWrp}>
                 {this.props.customDomain ? 'http://' : 'www.wallabusiness.it/'}
                 <FormControl
                     type={'text'}
@@ -31,4 +53,4 @@ export default class DomainInput extends Component {
     }
 }
 
-
+export default Radium(DomainInput);

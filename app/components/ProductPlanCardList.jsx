@@ -1,15 +1,10 @@
 import React, {Component, PropTypes} from 'react';
-import * as colors from 'lib/colors';
 import {Row} from 'react-bootstrap';
+
+import * as colors from 'lib/colors';
 
 import ChoosablePlanCard from 'components/ChoosablePlanCard';
 import ProductPlanCard from 'components/ProductPlanCard';
-
-const styles = {
-    cardsContainer: {
-        width: 'calc(100vw -50%)'
-    }
-};
 
 const cardColors = [
     colors.primaryColor,
@@ -34,6 +29,7 @@ export default class ProductPlanCardList extends Component {
             return this.props.chooseMode ? (
                 <ChoosablePlanCard
                     key={productPlan.id}
+                    backgroundColor={cardColors[index]}
                     isSelected={this.props.chosenPlanId === productPlan.id}
                     onSelect={() => this.props.choosePlan(productPlan.id)}
                     productPlan={productPlan}
@@ -51,11 +47,9 @@ export default class ProductPlanCardList extends Component {
 
     render () {
         return (
-            <div style={styles.cardsContainer}>
-                <Row>
-                    {this.renderPlanCardList()}
-                </Row>
-            </div>
+            <Row>
+                {this.renderPlanCardList()}
+            </Row>
         );
     }
 }

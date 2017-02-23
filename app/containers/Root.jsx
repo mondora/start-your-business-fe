@@ -32,7 +32,7 @@ class Root extends Component {
 
     render () {
         return (
-            <div style={{minWidth: 320}}>
+            <div>
                 <Header
                     login={this.props.login}
                     loginForm={this.props.loginForm}

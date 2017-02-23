@@ -1,12 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import {Glyphicon} from 'react-bootstrap';
-import * as colors from 'lib/colors';
 import {Col} from 'react-bootstrap';
+import {Glyphicon} from 'react-bootstrap';
+
+import * as colors from 'lib/colors';
+import {getDefaultPricing, isActive} from 'lib/zuora-products-utils';
 
 import SignUpButton from 'components/SignUpButton';
 import HorizontalLine from 'components/HorizontalLine';
-
-import {getDefaultPricing, isActive} from 'lib/zuora-products-utils';
 
 const styles = {
     container: {

@@ -14,7 +14,6 @@ import HorizontalLine from 'components/HorizontalLine';
 import ProcessSection from 'components/ProcessSection';
 import SignUpButton from 'components/SignUpButton';
 import TemplateSection from 'components/TemplateSection';
-
 import ProductPlanCardList from 'components/ProductPlanCardList';
 
 const styles = {
@@ -82,7 +81,6 @@ class Home extends Component {
             <Alert
                 onDismiss={this.handleAlertDismiss}
                 style={{
-                    width: '70vw',
                     margin: '0 auto',
                     color: colors.white,
                     borderRadius: '30px',
