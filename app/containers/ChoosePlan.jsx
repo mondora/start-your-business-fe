@@ -76,7 +76,7 @@ class ChoosePlan extends Component {
                             <Col xs={12}>
                                 <div style={styles.section}>
                                     <p style={styles.sectionTitle}>
-                                        {'1. Seleziona un piano:'}
+                                        {'1. Scelta del piano (al momento il piano professional non è attivo):'}
                                     </p>
                                     <ProductPlanCardList
                                         chooseMode={true}
