@@ -1,8 +1,9 @@
+import Radium from 'radium';
 import React, {Component} from 'react';
 import {Col, Row} from 'react-bootstrap';
-import Radium from 'radium';
 
 import * as colors from 'lib/colors';
+
 import FeaturesIcons from 'components/FeaturesIcons';
 import HomeSectionTitle from 'components/HomeSectionTitle';
 
