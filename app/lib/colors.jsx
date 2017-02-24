@@ -12,7 +12,7 @@ export const blackOpacity = 'rgba(0, 0, 0, 0.5)';
 
 // Site Style
 export const backgroundLightGrey = '#eaeaed';
-export const primaryColor = '#11bb9b';
+export const primaryColor = '#20bda9';
 export const primaryColorLight = '#cdd2dc';
 export const primaryColorLighter = '#eaf4f4';
 export const secondaryColor = '#662d91';
