@@ -24,4 +24,5 @@ export const backgroundBottomFooter = '#0c0e11';
 export const templateBg = '#ffffff';
 export const templateGreyBg = '#e6e6e6';
 export const templateFooterBg = '#333333';
+export const templatePrimaryColor = '#8cc63f';
 export const templateBottomFooterBg = '#1a1a1a';

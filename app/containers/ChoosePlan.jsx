@@ -40,9 +40,6 @@ const styles = {
     sectionTitle: {
         fontWeight: '700',
         fontSize: '1.3em',
-    },
-    text: {
-
     }
 };
 
@@ -119,7 +116,7 @@ class ChoosePlan extends Component {
                                     field={this.props.billingInformationForm.termsCheck}
                                     model='billing.termsCheck'
                                     text={
-                                        <span style={{...styles.text, ...{cursor: 'pointer'}}}>
+                                        <span style={{cursor: 'pointer'}}>
                                             {'  Acconsento e dichiaro di aver letto i '}
                                             <a
                                                 href='/privacy'
