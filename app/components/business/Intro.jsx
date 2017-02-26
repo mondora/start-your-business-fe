@@ -10,18 +10,14 @@ import FormInput from 'components/FormInput';
 const styles = (siteColors) => ({
     introWrp: {
         textAlign: 'center',
-        marginBottom: 40
+        margin: '60px 0'
     },
-    step: {
-        margin: '30px 20px'
-    },
-    stepTitle: {
+    introTitle: {
         fontWeight: '700',
-        padding: '20px 0px',
-        margin: 0,
-        borderBottom: `1px solid ${colors.white}`
+        color: colors.darkGrey
     },
     button: {
+        color: siteColors.mainColor,
         borderColor: siteColors.mainColor
     }
 });
@@ -45,7 +41,7 @@ export default class Steps extends Component {
     }
 
     render () {
-        const {introText, introTitle} = this.props.siteConfig.intro;
+        const {introTitle, introText} = this.props.siteConfig.intro;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (

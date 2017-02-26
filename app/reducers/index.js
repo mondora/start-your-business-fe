@@ -2,7 +2,15 @@ import {formReducer} from 'react-redux-form';
 import {routerReducer} from 'react-router-redux';
 import {combineReducers} from 'redux';
 import billingInformation, {initialBillingState} from './billing-information';
-import businessSite, {initialColors, initialFooterInfo, initialHeaderInfo, initialIntroInfo, initialStepsInfo} from './business-site';
+import businessSite, {
+    initialColors,
+    initialFooterInfo,
+    initialHeaderInfo,
+    initialIntroInfo,
+    initialStepsInfo,
+    initialSubscriptionsInfo,
+    initialOtherInfo
+} from './business-site';
 import payment from './payment';
 import products from './products';
 import spinner from './spinner';
@@ -18,6 +26,8 @@ const reducers = combineReducers({
     businessSiteHeaderForm: formReducer('businessSite.siteConfig.header', initialHeaderInfo),
     businessSiteIntroForm: formReducer('businessSite.siteConfig.intro', initialIntroInfo),
     businessSiteStepsForm: formReducer('businessSite.siteConfig.steps', initialStepsInfo),
+    businessSiteSubscriptionsForm: formReducer('businessSite.siteConfig.subscriptions', initialSubscriptionsInfo),
+    businessSiteOtherInfoForm: formReducer('businessSite.siteConfig.info', initialOtherInfo),
     payment,
     products,
     spinner,

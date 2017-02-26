@@ -21,6 +21,12 @@ export const initialHeaderInfo = {
     phoneNumber: '+39 012 3456789'
 };
 
+export const initialIntroInfo = {
+    introTitle: 'CASSETTINE BIOLOGICHE',
+    introText: `Scegliamo i prodotti migliori e te li consegnamo a
+                casa nella formula più adatta alle tue esigenze!`
+};
+
 export const initialStepsInfo = {
     stepsTitle: 'COME FUNZIONA',
     titleStep1: 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI',
@@ -34,10 +40,36 @@ export const initialStepsInfo = {
                 non ricevere più le nostre cassettine`
 };
 
-export const initialIntroInfo = {
-    introTitle: 'CASSETTINE BIOLOGICHE',
-    textIntro: `Scegliamo i prodotti migliori e te li consegnamo a
-                casa nella formula più adatta alle tue esigenze!`
+export const initialSubscriptionsInfo = {
+    subscriptionsTitle: 'SCEGLI LA TUA SOTTOSCRIZIONE',
+
+    subscriptionType1: 'CASSETTINA PICCOLA',
+    subscriptionFeature1a: 'Adatta per un consumo mensile di una persona',
+    subscriptionFeature1b: 'Assortimento: verdura mista (frutta a richiesta)',
+    subscriptionPrice1: '€ 35',
+    subscriptionFrequency1: 'al mese',
+
+    subscriptionType2: 'CASSETTINA MEDIA',
+    subscriptionFeature2a: 'Adatta per un consumo mensile di 2/3 persone',
+    subscriptionFeature2b: 'Assortimento: verdura mista (frutta a richiesta)',
+    subscriptionPrice2: '€ 45',
+    subscriptionFrequency2: 'al mese',
+
+    subscriptionType3: 'CASSETTINA GRANDE',
+    subscriptionFeature3a: 'Adatta per un consumo mensile di 4/5 persone',
+    subscriptionFeature3b: 'Assortimento: verdura mista (frutta a richiesta)',
+    subscriptionPrice3: '€ 55',
+    subscriptionFrequency3: 'al mese'
+};
+
+export const initialOtherInfo = {
+    textBox1: `Scopri altro riguardo ai nostri prodotti, sul nostro sito
+                troverai tutte le informazioni che cercavi`,
+    buttonBox1: 'PER SAPERNE DI PIÙ',
+    textBox2: `Hai delle domande riguardo al tuo ordine o desideri
+                sospendere le tue consegne?`,
+    buttonBox2: 'SCRIVICI UN EMAIL',
+
 };
 
 const defaultState = {
@@ -46,7 +78,10 @@ const defaultState = {
         colors: initialColors,
         footer: initialFooterInfo,
         header: initialHeaderInfo,
+        intro: initialIntroInfo,
         steps: initialStepsInfo,
+        subscriptions: initialSubscriptionsInfo,
+        info: initialOtherInfo,
         logoId: null,
         teaserImages: [{
             id: null

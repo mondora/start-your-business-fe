@@ -10,8 +10,7 @@ import SaveButton from 'components/BuildSiteSaveButton';
 const styles = {
     teaserWrp: {
         maxWidth: '1200px',
-        height: 'auto',
-        marginBottom: 40
+        height: 'auto'
     }
 };
 
