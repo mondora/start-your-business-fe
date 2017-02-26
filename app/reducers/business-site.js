@@ -1,9 +1,10 @@
 import {modeled} from 'react-redux-form';
 
 import {templatesIds} from 'lib/business-site-utils';
+import * as colors from 'lib/colors';
 
 export const initialColors = {
-    mainColor: '#8cc63f'
+    mainColor: colors.templatePrimaryColor
 };
 
 export const initialFooterInfo = {
@@ -20,12 +21,32 @@ export const initialHeaderInfo = {
     phoneNumber: '+39 012 3456789'
 };
 
+export const initialStepsInfo = {
+    stepsTitle: 'COME FUNZIONA',
+    titleStep1: 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI',
+    titleStep2: 'RISPARMI E NON DOVRAI PENSARE A NULLA',
+    titleStep3: 'POTRAI DISISCRIVERTI QUANDO VUOI',
+    textStep1: `Abbiamo pensato a tutti, ma se desideri
+                personalizzare il tuo ordine, chiama al 012-3456789`,
+    textStep2: `Ogni mese ti arriverà una cassettina con
+                frutta e verdura biologica di stagione`,
+    textStep3: `Se non sei soddisfatto del servizio, puoi decidere di
+                non ricevere più le nostre cassettine`
+};
+
+export const initialIntroInfo = {
+    introTitle: 'CASSETTINE BIOLOGICHE',
+    textIntro: `Scegliamo i prodotti migliori e te li consegnamo a
+                casa nella formula più adatta alle tue esigenze!`
+};
+
 const defaultState = {
     editMode: null,
     siteConfig: {
         colors: initialColors,
         footer: initialFooterInfo,
         header: initialHeaderInfo,
+        steps: initialStepsInfo,
         logoId: null,
         teaserImages: [{
             id: null
@@ -46,7 +67,7 @@ const businessSite = (state = defaultState, action) => {
                 ...state,
                 siteConfig: {
                     ...state.siteConfig,
-                    templateId: action.templateId 
+                    templateId: action.templateId
                 }
             };
         default:
