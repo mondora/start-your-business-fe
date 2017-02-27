@@ -26,7 +26,7 @@ const styles = (siteColors) => ({
         fontWeight: '700',
         lineHeight: '70px',
         borderRadius: '100%',
-        color: colors.templatePrimaryColor,
+        color: siteColors.mainColor,
         backgroundColor: colors.white
     },
     stepTitle: {

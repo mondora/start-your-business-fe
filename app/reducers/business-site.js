@@ -1,10 +1,15 @@
 import {modeled} from 'react-redux-form';
+import Color from 'color';
 
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
+
+const mainColor = Color(colors.templatePrimaryColor);
 export const initialColors = {
-    mainColor: colors.templatePrimaryColor
+    mainColorLighter: mainColor.alpha(0.7).rgb().string(),
+    mainColorLight: mainColor.alpha(0.85).rgb().string(),
+    mainColor: mainColor
 };
 
 export const initialFooterInfo = {

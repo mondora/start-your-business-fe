@@ -48,7 +48,7 @@ export default class Steps extends Component {
             <Form model={'businessSite.siteConfig.intro'}>
                 <Row>
                     <Col xs={12} style={style.introWrp}>
-                        <h2>{this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}</h2>
+                        <h2 style={style.introTitle}>{this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}</h2>
                         <p>
                             {this.renderTextField(isEditMode, 'introText', `Scegliamo i prodotti migliori e te li consegnamo a
                             casa nella formula più adatta alle tue esigenze!`, introText)}

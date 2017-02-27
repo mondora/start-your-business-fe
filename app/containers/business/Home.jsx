@@ -7,7 +7,7 @@ import * as colors from 'lib/colors';
 import Teaser from 'components/business/Teaser';
 import Intro from 'components/business/Intro';
 import Steps from 'components/business/Steps';
-import Subscriptions from 'components/business/Subscriptions';
+import SubscriptionsList from 'components/business/SubscriptionsList';
 import OtherInfo from 'components/business/OtherInfo';
 
 const styles = {
@@ -54,7 +54,7 @@ class Home extends Component {
                             form={this.props.businessSiteStepsForm}
                             siteConfig={siteConfig}
                         />
-                        <Subscriptions
+                        <SubscriptionsList
                             buildSiteMode={editMode}
                             form={this.props.businessSiteSubscriptionsForm}
                             siteConfig={siteConfig}
