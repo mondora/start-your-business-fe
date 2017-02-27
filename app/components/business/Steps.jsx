@@ -22,7 +22,7 @@ const styles = (siteColors) => ({
         width: 70,
         height: 70,
         textAlign: 'center',
-        fontSize: 40,
+        fontSize: '4em',
         fontWeight: '700',
         lineHeight: '70px',
         borderRadius: '100%',
@@ -30,6 +30,7 @@ const styles = (siteColors) => ({
         backgroundColor: colors.white
     },
     stepTitle: {
+        fontSize: '2.5em',
         fontWeight: '700',
         padding: '20px 0px',
         margin: 0,
@@ -99,10 +100,10 @@ export default class Steps extends Component {
                                             <div style={style.stepNumber}>
                                                 {stepInfo.number}
                                             </div>
-                                            <h4>
+                                            <h4 style={{fontSize: '1.6em', fontWeight: '700'}}>
                                                 {stepInfo.title}
                                             </h4>
-                                            <p>
+                                            <p style={{fontSize: '1.2em'}}>
                                                 {stepInfo.text}
                                             </p>
                                         </div>

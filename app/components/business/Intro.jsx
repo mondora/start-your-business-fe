@@ -13,7 +13,12 @@ const styles = (siteColors) => ({
         margin: '60px 0'
     },
     introTitle: {
+        fontSize: '2.5em',
         fontWeight: '700',
+        color: colors.darkGrey
+    },
+    introText: {
+        fontSize: '1.3em',
         color: colors.darkGrey
     },
     button: {
@@ -49,7 +54,7 @@ export default class Steps extends Component {
                 <Row>
                     <Col xs={12} style={style.introWrp}>
                         <h2 style={style.introTitle}>{this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}</h2>
-                        <p>
+                        <p style={style.introText}>
                             {this.renderTextField(isEditMode, 'introText', `Scegliamo i prodotti migliori e te li consegnamo a
                             casa nella formula più adatta alle tue esigenze!`, introText)}
                         </p>

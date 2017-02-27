@@ -1,15 +1,10 @@
 import {modeled} from 'react-redux-form';
-import Color from 'color';
 
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-
-const mainColor = Color(colors.templatePrimaryColor);
 export const initialColors = {
-    mainColorLighter: mainColor.alpha(0.7).rgb().string(),
-    mainColorLight: mainColor.alpha(0.85).rgb().string(),
-    mainColor: mainColor
+    mainColor: colors.templatePrimaryColor
 };
 
 export const initialFooterInfo = {
@@ -49,7 +44,7 @@ export const initialSubscriptionsInfo = {
     subscriptionsTitle: 'SCEGLI LA TUA SOTTOSCRIZIONE',
 
     subscriptionType1: 'CASSETTINA PICCOLA',
-    subscriptionFeature1a: 'Adatta per un consumo mensile di una persona',
+    subscriptionFeature1a: 'Adatta per un consumo mensile di una persona, adatta per un consumo mensile di una persona',
     subscriptionFeature1b: 'Assortimento: verdura mista (frutta a richiesta)',
     subscriptionPrice1: '€ 35',
     subscriptionFrequency1: 'al mese',
@@ -86,6 +81,9 @@ const defaultState = {
         intro: initialIntroInfo,
         steps: initialStepsInfo,
         subscriptions: initialSubscriptionsInfo,
+        subscriptionsImages: [{
+            id: null
+        }],
         info: initialOtherInfo,
         logoId: null,
         teaserImages: [{

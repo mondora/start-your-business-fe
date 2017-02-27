@@ -1,4 +1,6 @@
+
 import Color from 'color';
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
@@ -16,13 +18,25 @@ const styles = {
         margin: '80px 0'
     },
     subscriptionsTitle: {
+        fontSize: '2.5em',
         fontWeight: '700',
         color: colors.darkGrey,
         marginBottom: 20
+    },
+    subscription: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        flexFlow: 'no-wrap',
+        justifyContent: 'space-between',
+        '@media screen and (max-width: 767px)': {
+            display: 'block',
+            width: '100%'
+        }
     }
 };
 
-export default class SubscriptionsList extends Component {
+class SubscriptionsList extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         businessSiteState: PropTypes.object,
@@ -44,13 +58,18 @@ export default class SubscriptionsList extends Component {
             subscriptionFeature3b,
             subscriptionPrice1,
             subscriptionPrice2,
-            subscriptionPrice3
+            subscriptionPrice3,
+            subscriptionFrequency1,
+            subscriptionFrequency2,
+            subscriptionFrequency3
         } = this.props.siteConfig.subscriptions;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return [
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType1', 'CASSETTINA PICCOLA', subscriptionType1),
+                photo: 'subscription01.jpg',
+                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency1', 'al mese', subscriptionFrequency1),
                 feature1: this.renderTextField(isEditMode, 'subscriptionFeature1a', `Adatta per un
                 consumo mensile di una persona`, subscriptionFeature1a),
                 feature2: this.renderTextField(isEditMode, 'subscriptionFeature1b', `Assortimento:
@@ -60,6 +79,8 @@ export default class SubscriptionsList extends Component {
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType2', 'CASSETTINA PICCOLA', subscriptionType2),
+                photo: 'subscription02.jpg',
+                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency2', 'al mese', subscriptionFrequency2),
                 feature1: this.renderTextField(isEditMode, 'subscriptionFeature2a', `Adatta per un
                 consumo mensile di 2/3 persone`, subscriptionFeature2a),
                 feature2: this.renderTextField(isEditMode, 'subscriptionFeature2b', `Assortimento:
@@ -69,6 +90,8 @@ export default class SubscriptionsList extends Component {
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType3', 'CASSETTINA PICCOLA', subscriptionType3),
+                photo: 'subscription03.jpg',
+                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency3', 'al mese', subscriptionFrequency3),
                 feature1: this.renderTextField(isEditMode, 'subscriptionFeature3a', `Adatta per un
                 consumo mensile di 4/5 persone`, subscriptionFeature3a),
                 feature2: this.renderTextField(isEditMode, 'subscriptionFeature3b', `Assortimento:
@@ -92,8 +115,6 @@ export default class SubscriptionsList extends Component {
     render () {
         const {subscriptionsTitle} = this.props.siteConfig.subscriptions;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
-        const subscriptionInfo = this.props.siteConfig;
-        console.log(subscriptionInfo.bgColor);
         return (
             <Form model={'businessSite.siteConfig.subscriptions'}>
                 <Row>
@@ -102,18 +123,20 @@ export default class SubscriptionsList extends Component {
                             <h2 style={styles.subscriptionsTitle}>
                                 {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
                             </h2>
-                            <Row>
+                            <div style={styles.subscription}>
                                 {this.getSubscription().map((subscriptionInfo, index) =>
                                     <Subscription
                                         key={index}
+                                        type={subscriptionInfo.type}
                                         bgColor={Color(subscriptionInfo.bgColor).alpha(0.3 * (2 + index)).rgb().string()}
+                                        photoName={subscriptionInfo.photo}
+                                        frequency={subscriptionInfo.frequency}
                                         feature1={subscriptionInfo.feature1}
                                         feature2={subscriptionInfo.feature2}
                                         price={subscriptionInfo.price}
-                                        type={subscriptionInfo.type}
                                     />
                                 )}
-                            </Row>
+                            </div>
                         </div>
                     </Col>
                 </Row>
@@ -121,3 +144,5 @@ export default class SubscriptionsList extends Component {
         );
     }
 }
+
+export default Radium(SubscriptionsList);
