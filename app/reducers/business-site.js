@@ -44,7 +44,7 @@ export const initialSubscriptionsInfo = {
     subscriptionsTitle: 'SCEGLI LA TUA SOTTOSCRIZIONE',
 
     subscriptionType1: 'CASSETTINA PICCOLA',
-    subscriptionFeature1a: 'Adatta per un consumo mensile di una persona, adatta per un consumo mensile di una persona',
+    subscriptionFeature1a: 'Adatta per un consumo mensile di una persona',
     subscriptionFeature1b: 'Assortimento: verdura mista (frutta a richiesta)',
     subscriptionPrice1: '€ 35',
     subscriptionFrequency1: 'al mese',
