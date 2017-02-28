@@ -56,7 +56,7 @@ class Footer extends Component {
                         </Col>
                         <Col xs={12}  sm={6}>
                             <p style={{float: 'right'}}>
-                                {'Privacy Policy | Termini e Condizioni | Developed with: Wallabusiness'}
+                                {'Privacy Policy | Termini e Condizioni | Developed with: Entova'}
                             </p>
                         </Col>
                     </Row>

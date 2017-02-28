@@ -62,7 +62,7 @@ class SignUp extends Component {
                 icon: 'phone_grey',
                 title: 'MOBILE FRIENLY',
                 text:
-                    `Tutti i Template Wallabusiness sono usufruibili
+                    `Tutti i Template Entova sono usufruibili
                     da smartphone e tablet.`
             },
             {

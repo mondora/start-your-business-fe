@@ -42,7 +42,7 @@ class DomainInput extends Component {
     render () {
         return (
             <div style={styles.inputWrp}>
-                {this.props.customDomain ? 'http://' : 'www.wallabusiness.it/'}
+                {this.props.customDomain ? 'http://' : 'www.entova.it/'}
                 <FormControl
                     type={'text'}
                     value={this.state.domainName}
