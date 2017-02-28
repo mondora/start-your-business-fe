@@ -17,7 +17,8 @@ const styles = {
         marginBottom: 40
     },
     bottomContainer: {
-        backgroundColor: colors.lightGrey
+        backgroundColor: colors.lightGrey,
+        padding: '60px 0 40px 0'
     },
     bottomPageWrp: {
         maxWidth: '1200px',

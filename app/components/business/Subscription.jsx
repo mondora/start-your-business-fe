@@ -78,6 +78,8 @@ const styles = {
         width: '100%'
     },
     subscriptionButton: {
+        fontSize: '1.2em',
+        padding: '8px 20px',
         backgroundColor: colors.white,
         border: 0,
         margin: '0 auto 20px auto'
@@ -95,13 +97,12 @@ class Subscription extends Component {
         type: PropTypes.string
     };
 
-    //
-
     render () {
         const path = `../_assets/images/template_01/${this.props.photoName}`;
+        const mainColor = this.props.bgColor;
         return (
-            <div style={{...styles.subscriptionContainer, ...{borderColor: this.props.bgColor}}}>
-                <div style={{...styles.subscriptionType, ...{backgroundColor: this.props.bgColor}}}>
+            <div style={{...styles.subscriptionContainer, ...{borderColor: mainColor}}}>
+                <div style={{...styles.subscriptionType, ...{backgroundColor: mainColor}}}>
                     {this.props.type}
                 </div>
                 <div style={styles.subscriptionFeaturesWrp}>
@@ -112,20 +113,20 @@ class Subscription extends Component {
                         <p>
                             <Glyphicon
                                 glyph='glyphicon glyphicon-ok-circle'
-                                style={{...styles.subscriptionIcon, ...{color: this.props.bgColor}}}
+                                style={{...styles.subscriptionIcon, ...{color: mainColor}}}
                             />
                             {this.props.feature1}
                         </p>
                         <p>
                             <Glyphicon
                                 glyph='glyphicon glyphicon-ok-circle'
-                                style={{...styles.subscriptionIcon, ...{color: this.props.bgColor}}}
+                                style={{...styles.subscriptionIcon, ...{color: mainColor}}}
                             />
                             {this.props.feature2}
                         </p>
                     </div>
                 </div>
-                <div style={{...styles.subscriptionBottom, ...{backgroundColor: this.props.bgColor}}}>
+                <div style={{...styles.subscriptionBottom, ...{backgroundColor: mainColor}}}>
                     <p>
                         <span style={styles.subscriptionPrice}>
                             {this.props.price}
@@ -134,7 +135,7 @@ class Subscription extends Component {
                             {this.props.frequency}
                         </span>
                     </p>
-                    <Button style={{...styles.subscriptionButton, ...{color: this.props.bgColor}}}>
+                    <Button style={{...styles.subscriptionButton, ...{color: mainColor}}}>
                         {'ORDINA ORA !'}
                     </Button>
                 </div>

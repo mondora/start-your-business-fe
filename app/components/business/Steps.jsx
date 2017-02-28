@@ -22,7 +22,7 @@ const styles = (siteColors) => ({
         width: 70,
         height: 70,
         textAlign: 'center',
-        fontSize: '4em',
+        fontSize: '3.8em',
         fontWeight: '700',
         lineHeight: '70px',
         borderRadius: '100%',
@@ -30,7 +30,7 @@ const styles = (siteColors) => ({
         backgroundColor: colors.white
     },
     stepTitle: {
-        fontSize: '2.5em',
+        fontSize: 'calc(22px + 1vw)',
         fontWeight: '700',
         padding: '20px 0px',
         margin: 0,

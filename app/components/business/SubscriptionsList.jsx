@@ -15,10 +15,10 @@ const styles = {
     subscriptionsWrp: {
         color: colors.white,
         textAlign: 'center',
-        margin: '80px 0'
+        margin: '80px 0 20px 0'
     },
     subscriptionsTitle: {
-        fontSize: '2.5em',
+        fontSize: 'calc(22px + 1vw)',
         fontWeight: '700',
         color: colors.darkGrey,
         marginBottom: 20

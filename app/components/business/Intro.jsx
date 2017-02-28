@@ -1,3 +1,4 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Col, Row, Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
@@ -13,7 +14,7 @@ const styles = (siteColors) => ({
         margin: '60px 0'
     },
     introTitle: {
-        fontSize: '2.5em',
+        fontSize: 'calc(22px + 1vw)',
         fontWeight: '700',
         color: colors.darkGrey
     },
@@ -21,13 +22,21 @@ const styles = (siteColors) => ({
         fontSize: '1.3em',
         color: colors.darkGrey
     },
+    buttonWrp: {
+        ':hover': {
+            opacity: '.7'
+        }
+    },
     button: {
+        fontSize: '1.2em',
+        padding: '8px 20px',
+        backgroundColor: colors.white,
         color: siteColors.mainColor,
         borderColor: siteColors.mainColor
     }
 });
 
-export default class Steps extends Component {
+class Steps extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
@@ -53,7 +62,9 @@ export default class Steps extends Component {
             <Form model={'businessSite.siteConfig.intro'}>
                 <Row>
                     <Col xs={12} style={style.introWrp}>
-                        <h2 style={style.introTitle}>{this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}</h2>
+                        <h2 style={style.introTitle}>
+                            {this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}
+                        </h2>
                         <p style={style.introText}>
                             {this.renderTextField(isEditMode, 'introText', `Scegliamo i prodotti migliori e te li consegnamo a
                             casa nella formula più adatta alle tue esigenze!`, introText)}
@@ -67,3 +78,5 @@ export default class Steps extends Component {
         );
     }
 }
+
+export default Radium(Steps);

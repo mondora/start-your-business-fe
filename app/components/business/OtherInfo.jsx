@@ -1,3 +1,4 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Col, Row, Image, Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
@@ -11,24 +12,43 @@ const styles = (siteColors) => ({
     boxWrp: {
         borderRadius: 10,
         backgroundColor: colors.white,
-        color: colors.grey,
         textAlign: 'center',
-        margin: '50px 0'
+        marginBottom: 20,
+        padding: 20
     },
     boxImage: {
         width: 160,
-        height: 160
+        height: 160,
+        textAlign: 'center'
+    },
+    textWrp: {
+        height: '160px',
+        display: 'flex',
+        textAlign: 'left',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        '@media screen and (max-width: 991px)': {
+            textAlign: 'center',
+            height: 'auto',
+            padding: '20px 0'
+        }
     },
     boxText: {
+        fontSize: '1.1em',
+        color: colors.darkGrey
 
     },
     boxButton: {
+        fontSize: '1.2em',
+        padding: '8px 20px',
+        backgroundColor: colors.white,
         color: siteColors.mainColor,
         borderColor: siteColors.mainColor
     }
 });
 
-export default class OtherInfo extends Component {
+class OtherInfo extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
@@ -47,39 +67,57 @@ export default class OtherInfo extends Component {
         ) : readNode;
     }
 
-    render () {
+    getInfoBox () {
         const {textBox1, textBox2, buttonBox1, buttonBox2} = this.props.siteConfig.info;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
+        return [
+            {
+                photo: 'infobox1.jpg',
+                text: this.renderTextField(isEditMode, 'textBox1', `Scopri altro riguardo
+                ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi`, textBox1),
+                button: this.renderTextField(isEditMode, 'buttonBox1', 'INIZIA ORA!', buttonBox1)
+            },
+            {
+                photo: 'infobox2.jpg',
+                text: this.renderTextField(isEditMode, 'textBox2', `Hai delle domande riguardo
+                al tuo ordine o desideri sospendere le tue consegne?`, textBox2),
+                button: this.renderTextField(isEditMode, 'buttonBox2', 'SCRIVICI UN EMAIL', buttonBox2)
+            }
+        ];
+    }
+
+    render () {
         const style = styles(this.props.siteConfig.colors);
         return (
             <Form model={'businessSite.siteConfig.info'}>
                 <Row>
-                    <Col xs={12} sm={6}>
-                        <div style={style.boxWrp}>
-                            <Image src='./_assets/images/template_01/infobox1.jpg' style={style.boxImage} circle={true} />
-                            <p style={style.boxText}>
-                                {this.renderTextField(isEditMode, 'textBox1', `Scopri altro riguardo
-                                ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi`, textBox1)}
-                            </p>
-                            <Button style={style.button}>
-                                {this.renderTextField(isEditMode, 'buttonBox1', 'INIZIA ORA!', buttonBox1)}
-                            </Button>
-                        </div>
-                    </Col>
-                    <Col xs={12} sm={6}>
-                        <div style={style.boxWrp}>
-                            <Image src='./_assets/images/template_01/infobox2.jpg' style={style.boxImage} circle={true} />
-                            <p style={style.boxText}>
-                                {this.renderTextField(isEditMode, 'textBox2', `Hai delle domande riguardo
-                                al tuo ordine o desideri sospendere le tue consegne?`, textBox2)}
-                            </p>
-                            <Button style={style.button}>
-                                {this.renderTextField(isEditMode, 'buttonBox2', 'EMAIL', buttonBox2)}
-                            </Button>
-                        </div>
-                    </Col>
+                    {this.getInfoBox().map((infoBox, index) =>
+                        <Col key={index} xs={12} sm={6}>
+                            <div style={style.boxWrp}>
+                                <Row>
+                                    <Col xs={12} md={5}>
+                                        <Image src={`./_assets/images/template_01/${infoBox.photo}`} style={style.boxImage} circle={true} />
+                                    </Col>
+                                    <Col xs={12} md={7}>
+                                        <div style={style.textWrp}>
+                                            <div>
+                                                <p style={style.boxText}>
+                                                    {infoBox.text}
+                                                </p>
+                                                <Button style={style.boxButton}>
+                                                    {infoBox.button}
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Col>
+                    )}
                 </Row>
             </Form>
         );
     }
 }
+
+export default Radium(OtherInfo);
