@@ -16,7 +16,7 @@ const styles = {
         color: colors.lightGrey,
         fontSize: 14,
         '@media screen and (max-width: 991px)': {
-            marginBottom: 20,
+            marginBottom: 20
         }
     },
     footerColTitle: {
@@ -51,7 +51,7 @@ const styles = {
         height: 'auto',
         width: '50%',
         '@media screen and (max-width: 991px)': {
-            maxWidth: '130px',
+            maxWidth: '130px'
         }
     },
     bottomFooterPayment: {
@@ -96,6 +96,14 @@ class Footer extends Component {
         ) : readNode;
     }
 
+    renderLink (buildSiteMode, path, children, style) {
+        return (
+            <a href={buildSiteMode ? null : path} style={style}>
+                {children}
+            </a>
+        );
+    }
+
     renderBottomFooter (isEditMode) {
         return (
             <div style={styles.bottomFooterWrp}>
@@ -118,7 +126,8 @@ class Footer extends Component {
 
     render () {
         const {companyName, line1, line2, line3, line4} = this.props.footerInfo;
-        const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
+        const {buildSiteMode} = this.props;
+        const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         return (
             <div style={styles.footerWrp}>
                 <Form model={'businessSite.siteConfig.footer'}>
@@ -143,9 +152,12 @@ class Footer extends Component {
                                         {'CONTATTI'}
                                     </span>
                                     <br />
-                                    <a href='mailto:info@maildisupporto.it' style={{color: colors.lightGrey}}>
-                                        {this.renderTextField(isEditMode, 'line3', 'Email: info@maildisupporto.it', line3)}
-                                    </a>
+                                    {this.renderLink(
+                                        buildSiteMode,
+                                        'mailto:info@maildisupporto.it',
+                                        this.renderTextField(isEditMode, 'line3', 'Email: info@maildisupporto.it', line3),
+                                        {color: colors.lightGrey}
+                                    )}
                                     <br />
                                     {this.renderTextField(isEditMode, 'line4', 'Tel: 012-3456789', line4)}
                                 </div>
@@ -156,13 +168,9 @@ class Footer extends Component {
                                         {'INFO'}
                                     </span>
                                     <br />
-                                    <a href='#' style={{color: colors.lightGrey}}>
-                                        {'Privacy Policy'}
-                                    </a>
+                                    {this.renderLink(buildSiteMode, '#', 'Privacy Policy', {color: colors.lightGrey})}
                                     <br />
-                                    <a href='#' style={{color: colors.lightGrey}}>
-                                        {'Termini e Condizioni'}
-                                    </a>
+                                    {this.renderLink(buildSiteMode, '#', 'Termini e Condizioni', {color: colors.lightGrey})}
                                 </div>
                             </Col>
                             <Col xs={12} sm={6} md={3}>
@@ -170,13 +178,18 @@ class Footer extends Component {
                                     <span style={styles.footerColTitle}>
                                         {'Developed With'}
                                     </span>
-                                    <a href='#' style={styles.logoFooterButton}>
-                                        <img src='../_assets/images/common/logo.png' style={styles.imgResponsive} />
-                                        <Glyphicon
-                                            glyph='glyphicon glyphicon-chevron-right'
-                                            style={{fontSize: 18}}
-                                        />
-                                    </a>
+                                    {this.renderLink(
+                                        buildSiteMode,
+                                        '#',
+                                        (<div>
+                                            <img src='../_assets/images/common/logo.png' style={styles.imgResponsive} />
+                                            <Glyphicon
+                                                glyph='glyphicon glyphicon-chevron-right'
+                                                style={{fontSize: 18}}
+                                            />
+                                        </div>),
+                                        styles.logoFooterButton
+                                    )}
                                 </div>
                             </Col>
                         </Row>

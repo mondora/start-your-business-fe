@@ -68,8 +68,7 @@ export const initialOtherInfo = {
     buttonBox1: 'PER SAPERNE DI PIÙ',
     textBox2: `Hai delle domande riguardo al tuo ordine o desideri
                 sospendere le tue consegne?`,
-    buttonBox2: 'SCRIVICI UN EMAIL',
-
+    buttonBox2: 'SCRIVICI UN EMAIL'
 };
 
 const defaultState = {

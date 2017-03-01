@@ -26,7 +26,7 @@ const styles = {
         fontSize: '1.4em',
         fontWeight: '700',
         borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
+        borderTopRightRadius: 8
     },
     subscriptionImage: {
         display: 'block',
@@ -44,7 +44,7 @@ const styles = {
         justifyContent: 'space-between',
         height: '100%',
         fontSize: 14,
-        color: colors.darkGrey,
+        color: colors.darkGrey
     },
     subscriptionFeatures: {
         display: 'flex',

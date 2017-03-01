@@ -1,4 +1,3 @@
-
 import Color from 'color';
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
