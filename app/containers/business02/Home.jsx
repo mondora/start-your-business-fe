@@ -5,9 +5,9 @@ import {connect} from 'react-redux';
 import * as colors from 'lib/colors';
 
 import Teaser from 'components/business01/Teaser';
-import Intro from 'components/business01/Intro';
-import Steps from 'components/business01/Steps';
-import SubscriptionsList from 'components/business01/SubscriptionsList';
+// import Intro from 'components/business01/Intro';
+// import Steps from 'components/business01/Steps';
+// import SubscriptionsList from 'components/business01/SubscriptionsList';
 import OtherInfo from 'components/business01/OtherInfo';
 
 const styles = {
@@ -44,23 +44,6 @@ class Home extends Component {
                         buildSiteMode={editMode}
                         images={this.props.businessSiteState.siteConfig.teaserImages}
                     />
-                    <div className='container-fluid' style={styles.pageContainer}>
-                        <Intro
-                            buildSiteMode={editMode}
-                            form={this.props.businessSiteIntroForm}
-                            siteConfig={siteConfig}
-                        />
-                        <Steps
-                            buildSiteMode={editMode}
-                            form={this.props.businessSiteStepsForm}
-                            siteConfig={siteConfig}
-                        />
-                        <SubscriptionsList
-                            buildSiteMode={editMode}
-                            form={this.props.businessSiteSubscriptionsForm}
-                            siteConfig={siteConfig}
-                        />
-                    </div>
                 </div>
                 <div style={styles.bottomContainer}>
                     <div className='container-fluid' style={styles.bottomPageWrp}>
@@ -75,7 +58,23 @@ class Home extends Component {
         );
     }
 }
-
+// <div className='container-fluid'>
+//     <Intro
+//         buildSiteMode={editMode}
+//         form={this.props.businessSiteIntroForm}
+//         siteConfig={siteConfig}
+//     />
+//     <Steps
+//         buildSiteMode={editMode}
+//         form={this.props.businessSiteStepsForm}
+//         siteConfig={siteConfig}
+//     />
+//     <SubscriptionsList
+//         buildSiteMode={editMode}
+//         form={this.props.businessSiteSubscriptionsForm}
+//         siteConfig={siteConfig}
+//     />
+// </div>
 const mapStateToProps = (state) => {
     return {
         businessSiteIntroForm: state.businessSiteIntroForm,

@@ -13,8 +13,10 @@ import Root from 'containers/Root';
 import SignUp from 'containers/SignUp';
 import SubscriptionResult from 'containers/SubscriptionResult';
 
-import BusinessHome from 'containers/business01/Home';
-import BusinessRoot from 'containers/business01/Root';
+import BusinessHome01 from 'containers/business01/Home';
+import BusinessRoot01 from 'containers/business01/Root';
+import BusinessHome02 from 'containers/business02/Home';
+import BusinessRoot02 from 'containers/business02/Root';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -31,8 +33,12 @@ export default (
 
         <Route name='creditCardResult' path='/credit-card-result' component={CreditCardResult} />
 
-        <Route name='businessRoot' component={BusinessRoot}>
-            <Route name='businessHome' path='/:businessName' component={BusinessHome} />
+        <Route name='BusinessRoot01' component={BusinessRoot01}>
+            <Route name='BusinessHome01' path='/:businessName' component={BusinessHome01} />
+        </Route>
+
+        <Route name='BusinessRoot02' component={BusinessRoot02}>
+            <Route name='BusinessHome02' path='/:businessName' component={BusinessHome02} />
         </Route>
     </Router>
 );

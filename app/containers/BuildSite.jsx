@@ -89,11 +89,6 @@ class BuildSite extends Component {
                     </BusinessRoot01>
                 );
             case 2:
-                return (
-                    <BusinessRoot02>
-                        <BusinessHome02 />
-                    </BusinessRoot02>
-                );
             default:
                 return (
                     <BusinessRoot02>
