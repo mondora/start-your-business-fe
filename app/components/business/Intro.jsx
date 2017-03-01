@@ -36,7 +36,7 @@ const styles = (siteColors) => ({
     }
 });
 
-class Steps extends Component {
+class Intro extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
@@ -62,13 +62,18 @@ class Steps extends Component {
             <Form model={'businessSite.siteConfig.intro'}>
                 <Row>
                     <Col xs={12} style={style.introWrp}>
-                        <h2 style={style.introTitle}>
-                            {this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}
-                        </h2>
-                        <p style={style.introText}>
-                            {this.renderTextField(isEditMode, 'introText', `Scegliamo i prodotti migliori e te li consegnamo a
-                            casa nella formula più adatta alle tue esigenze!`, introText)}
-                        </p>
+                        {this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', (
+                            <h2 style={style.introTitle}>
+                                {introTitle}
+                            </h2>
+                        ))}
+                        {this.renderTextField(isEditMode, 'introText',
+                            `Scegliamo i prodotti migliori e te li consegnamo a
+                            casa nella formula più adatta alle tue esigenze!`, (
+                                <p style={style.introText}>
+                                    {introText}
+                                </p>
+                            ))}
                         <Button style={style.button}>
                             {'INIZIA ORA!'}
                         </Button>
@@ -79,4 +84,4 @@ class Steps extends Component {
     }
 }
 
-export default Radium(Steps);
+export default Radium(Intro);

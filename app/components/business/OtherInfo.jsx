@@ -55,6 +55,13 @@ class OtherInfo extends Component {
         siteConfig: PropTypes.object.isRequired
     };
 
+    getTextReadNode (style, text) {
+        return (
+            <p style={style.boxText}>
+                {text}
+            </p>
+        );
+    }
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
         return isEditMode ? (
@@ -67,20 +74,20 @@ class OtherInfo extends Component {
         ) : readNode;
     }
 
-    getInfoBox () {
+    getInfoBox (style) {
         const {textBox1, textBox2, buttonBox1, buttonBox2} = this.props.siteConfig.info;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return [
             {
                 photo: 'infobox1.jpg',
                 text: this.renderTextField(isEditMode, 'textBox1', `Scopri altro riguardo
-                ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi`, textBox1),
+                ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi`, this.getTextReadNode(style, textBox1)),
                 button: this.renderTextField(isEditMode, 'buttonBox1', 'INIZIA ORA!', buttonBox1)
             },
             {
                 photo: 'infobox2.jpg',
                 text: this.renderTextField(isEditMode, 'textBox2', `Hai delle domande riguardo
-                al tuo ordine o desideri sospendere le tue consegne?`, textBox2),
+                al tuo ordine o desideri sospendere le tue consegne?`, this.getTextReadNode(style, textBox2)),
                 button: this.renderTextField(isEditMode, 'buttonBox2', 'SCRIVICI UN EMAIL', buttonBox2)
             }
         ];
@@ -91,7 +98,7 @@ class OtherInfo extends Component {
         return (
             <Form model={'businessSite.siteConfig.info'}>
                 <Row>
-                    {this.getInfoBox().map((infoBox, index) =>
+                    {this.getInfoBox(style).map((infoBox, index) =>
                         <Col key={index} xs={12} sm={6}>
                             <div style={style.boxWrp}>
                                 <Row>
@@ -101,9 +108,7 @@ class OtherInfo extends Component {
                                     <Col xs={12} md={7}>
                                         <div style={style.textWrp}>
                                             <div>
-                                                <p style={style.boxText}>
-                                                    {infoBox.text}
-                                                </p>
+                                                {infoBox.text}
                                                 <Button style={style.boxButton}>
                                                     {infoBox.button}
                                                 </Button>

@@ -119,9 +119,11 @@ class SubscriptionsList extends Component {
                 <Row>
                     <Col xs={12}>
                         <div style={styles.subscriptionsWrp}>
-                            <h2 style={styles.subscriptionsTitle}>
-                                {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
-                            </h2>
+                            {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', (
+                                <h2 style={styles.subscriptionsTitle}>
+                                    {subscriptionsTitle}
+                                </h2>
+                            ))}
                             <div style={styles.subscription}>
                                 {this.getSubscription().map((subscriptionInfo, index) =>
                                     <Subscription

@@ -2,9 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import {TwitterPicker, SwatchesPicker} from 'react-color';
 import {connect} from 'react-redux';
 import {actions, Form} from 'react-redux-form';
-import reactCSS from 'reactcss';
-
-import * as colors from 'lib/colors';
 
 class WrappedSwatchesPicker extends Component {
     static propTypes = {

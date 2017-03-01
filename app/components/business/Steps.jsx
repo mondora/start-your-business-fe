@@ -45,27 +45,43 @@ export default class Steps extends Component {
         siteConfig: PropTypes.object.isRequired
     };
 
+    getTextReadNode (text) {
+        return (
+            <p style={{fontSize: '1.2em'}}>
+                {text}
+            </p>
+        );
+    }
+    
+    getTitleReadNode (title) {
+        return (
+            <h4 style={{fontSize: '1.6em', fontWeight: '700'}}>
+                {title}
+            </h4>    
+        );
+    }
+    
     getStep () {
         const {titleStep1, titleStep2, titleStep3, textStep1, textStep2, textStep3} = this.props.siteConfig.steps;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return [
             {
                 number: '1',
-                title: this.renderTextField(isEditMode, 'titleStep1', 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI', titleStep1),
+                title: this.renderTextField(isEditMode, 'titleStep1', 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI', this.getTitleReadNode(titleStep1)),
                 text: this.renderTextField(isEditMode, 'textStep1', `Abbiamo pensato a tutti, ma se desideri
-                personalizzare il tuo ordine, chiama al 012-3456789`, textStep1)
+                personalizzare il tuo ordine, chiama al 012-3456789`, this.getTextReadNode(textStep1))
             },
             {
                 number: '2',
-                title: this.renderTextField(isEditMode, 'titleStep2', 'RISPARMI E NON DOVRAI PENSARE A NULLA', titleStep2),
+                title: this.renderTextField(isEditMode, 'titleStep2', 'RISPARMI E NON DOVRAI PENSARE A NULLA', this.getTitleReadNode(titleStep2)),
                 text: this.renderTextField(isEditMode, 'textStep2', `Ogni mese ti arriverà una cassettina con
-                frutta e verdura biologica di stagione`, textStep2)
+                frutta e verdura biologica di stagione`, this.getTextReadNode(textStep2))
             },
             {
                 number: '3',
-                title: this.renderTextField(isEditMode, 'titleStep3', 'POTRAI DISISCRIVERTI QUANDO VUOI', titleStep3),
+                title: this.renderTextField(isEditMode, 'titleStep3', 'POTRAI DISISCRIVERTI QUANDO VUOI', this.getTitleReadNode(titleStep3)),
                 text: this.renderTextField(isEditMode, 'textStep3', `Se non sei soddisfatto del servizio, puoi decidere di
-                non ricevere più le nostre cassettine`, textStep3)
+                non ricevere più le nostre cassettine`, this.getTextReadNode(textStep3))
             }
         ];
     }
@@ -90,9 +106,11 @@ export default class Steps extends Component {
                 <Row>
                     <Col xs={12}>
                         <div style={style.stepsWrp}>
-                            <h2 style={style.stepTitle}>
-                                {this.renderTextField(isEditMode, 'stepsTitle', 'COME FUNZIONA', stepsTitle)}
-                            </h2>
+                            {this.renderTextField(isEditMode, 'stepsTitle', 'COME FUNZIONA', (
+                                <h2 style={style.stepTitle}>
+                                    {stepsTitle}
+                                </h2>
+                            ))}
                             <Row>
                                 {this.getStep().map((stepInfo, index) =>
                                     <Col key={index} xs={12} sm={4}>
@@ -100,12 +118,8 @@ export default class Steps extends Component {
                                             <div style={style.stepNumber}>
                                                 {stepInfo.number}
                                             </div>
-                                            <h4 style={{fontSize: '1.6em', fontWeight: '700'}}>
-                                                {stepInfo.title}
-                                            </h4>
-                                            <p style={{fontSize: '1.2em'}}>
-                                                {stepInfo.text}
-                                            </p>
+                                            {stepInfo.title}
+                                            {stepInfo.text}
                                         </div>
                                     </Col>
                                 )}
