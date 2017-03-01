@@ -33,12 +33,12 @@ export default (
 
         <Route name='creditCardResult' path='/credit-card-result' component={CreditCardResult} />
 
-        <Route name='BusinessRoot01' component={BusinessRoot01}>
-            <Route name='BusinessHome01' path='/:businessName' component={BusinessHome01} />
-        </Route>
-
         <Route name='BusinessRoot02' component={BusinessRoot02}>
             <Route name='BusinessHome02' path='/:businessName' component={BusinessHome02} />
+        </Route>
+
+        <Route name='BusinessRoot01' component={BusinessRoot01}>
+            <Route name='BusinessHome01' path='/:businessName' component={BusinessHome01} />
         </Route>
     </Router>
 );

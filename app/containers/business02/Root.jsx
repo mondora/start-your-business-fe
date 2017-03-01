@@ -37,7 +37,7 @@ class Root extends Component {
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
         return (
-            <div style={{fontFamily: 'Roboto'}}>
+            <div style={{fontFamily: 'Lato'}}>
                 <Header
                     buildSiteMode={editMode}
                     form={this.props.businessSiteHeaderForm}

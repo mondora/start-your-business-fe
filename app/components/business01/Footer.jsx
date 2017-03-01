@@ -140,7 +140,7 @@ class Footer extends Component {
             <div style={styles.footerContainer}>
                 <Form model={'businessSite.siteConfig.footer'}>
                     <div className='container-fluid' style={styles.maxContentWidth}>
-                        <Row style={{padding: '20px 0', color: colors.primaryColorLighter}}>
+                        <Row style={{padding: '20px 0', color: colors.lightGrey}}>
                             <Col xs={12} sm={6} md={3}>
                                 <div style={styles.footerCol}>
                                     {this.renderTextField(isEditMode, 'companyName', 'Nome Azienda',

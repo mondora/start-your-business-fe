@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import * as colors from 'lib/colors';
 
-import Teaser from 'components/business01/Teaser';
+import Teaser from 'components/business02/Teaser';
 // import Intro from 'components/business01/Intro';
 // import Steps from 'components/business01/Steps';
 // import SubscriptionsList from 'components/business01/SubscriptionsList';
@@ -39,12 +39,10 @@ class Home extends Component {
         const {editMode, siteConfig} = this.props.businessSiteState;
         return (
             <div>
-                <div>
-                    <Teaser
-                        buildSiteMode={editMode}
-                        images={this.props.businessSiteState.siteConfig.teaserImages}
-                    />
-                </div>
+                <Teaser
+                    buildSiteMode={editMode}
+                    images={this.props.businessSiteState.siteConfig.teaserImages}
+                />
                 <div style={styles.bottomContainer}>
                     <div className='container-fluid' style={styles.bottomPageWrp}>
                         <OtherInfo

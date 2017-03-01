@@ -10,59 +10,69 @@ import FormInput from 'components/FormInput';
 import Icon from 'components/Icon';
 
 const styles = (siteColors) => ({
-    maxContentWidth: {
-        maxWidth: '1200px'
-    },
     headerContainer: {
-        padding: '10px 0',
-        backgroundColor: siteColors.mainColor,
-        color: colors.white,
-        '@media screen and (max-width: 767px)': {
-            textAlign: 'center',
-            padding: 0
-        }
+        position: 'relative',
+        backgroundColor: colors.white
     },
-    headerTopIconsWrp: {
+    headerTopLine: {
+        width: '100%',
+        height: 5,
+        backgroundColor: siteColors.mainColor
+    },
+    leftWrp: {
         display: 'flex',
+        minHeight: 80,
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'flex-start',
-        '@media screen and (max-width: 767px)': {
-            padding: '8px 0'
+        alignItems: 'center',
+        '@media screen and (min-width: 991px) and (max-width: 1100px)': {
+            flexDirection: 'column',
+            justifyContent: 'center'
+        },
+        '@media screen and (min-width: 767px) and (max-width: 991px)': {
+            minHeight: 'auto',
+            padding: '15px 0',
+            flexDirection: 'row',
+            justifyContent: 'flex-start'
+        },
+        '@media screen and (min-width: 500px) and (max-width: 767px)': {
+            minHeight: 'auto',
+            padding: '5px 0',
+            alignItems: 'center',
+            justifyContent: 'center'
         },
         '@media screen and (max-width: 500px)': {
             display: 'none'
         }
     },
     headerTopIcons: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
         marginRight: 20,
-        '@media screen and (max-width: 500px)': {
-            marginRight: 0
+        color: siteColors.mainColor
+    },
+    rightWrp: {
+        display: 'flex',
+        minHeight: 80,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        '@media screen and (min-width: 767px) and (max-width: 991px)': {
+            minHeight: 'auto',
+            padding: '10px 0'
+        },
+        '@media screen and (max-width: 767px)': {
+            minHeight: 'auto',
+            padding: '5px 0',
+            alignItems: 'center',
+            justifyContent: 'center'
         }
     },
-    topIcon: {
-        float: 'left',
-        color: siteColors.mainColor,
+    socialIcon: {
         width: 30,
         height: 30,
-        lineHeight: '32px',
-        fontSize: 18,
-        textAlign: 'center',
-        backgroundColor: colors.white,
-        borderRadius: 30,
-        marginRight: 8,
-        '@media screen and (max-width: 767px)': {
-            fontSize: 12,
-            lineHeight: '22px',
-            width: 20,
-            height: 20
-        }
+        marginRight: 5
     },
     linkColorHeader: {
-        color: colors.white
+        color: colors.darkGrey
     },
     accountLinksWrp: {
         display: 'flex',
@@ -72,13 +82,8 @@ const styles = (siteColors) => ({
         border: 0,
         height: 30,
         '@media screen and (max-width: 767px)': {
-            padding: '10px 0',
-            height: 'auto',
-            borderTop: `1px solid ${colors.white}`
         },
         '@media screen and (max-width: 500px)': {
-            justifyContent: 'center',
-            borderTop: 0
         }
     },
     accountLink: {
@@ -86,34 +91,26 @@ const styles = (siteColors) => ({
         padding: '0 10px'
     },
     headerLogoWrp: {
+        width: '100%',
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        margin: '20px 0',
-        '@media screen and (max-width: 767px)': {
-            flexDirection: 'column',
-            justifyContent: 'center',
-        }
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    headerLogoBg: {
+        position: 'absolute',
+        top: 0,
+        padding: 20,
+        backgroundColor: colors.white,
+        zIndex: 10000,
+        margin: '0 auto'
     },
     headerLogo: {
         display: 'block',
         height: 'auto',
         width: '100%',
-        maxWidth: 400,
-        maxHeight: 150
+        maxWidth: 250
     },
-    socialIconWrp: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    socialIcon: {
-        width: 40,
-        height: 40,
-        marginLeft: 5
-    }
+
 });
 
 class Header extends Component {
@@ -148,67 +145,73 @@ class Header extends Component {
         return (
             <div>
                 <div style={style.headerContainer}>
-                    <div className='container-fluid' style={style.maxContentWidth}>
+                    <div style={style.headerTopLine} />
+                    <div className='container-fluid'>
                         <Row>
                             <Form model={'businessSite.siteConfig.header'}>
-                                <Col xs={12} sm={8}>
-                                    <div style={style.headerTopIconsWrp}>
+                                <Col xs={12} sm={6} md={4} lg={5}>
+                                    <div style={style.leftWrp}>
                                         <div style={style.headerTopIcons}>
-                                            <div style={style.topIcon}>
-                                                <Glyphicon
-                                                    glyph='glyphicon glyphicon-phone'
-                                                />
-                                            </div>
+                                            <Glyphicon
+                                                glyph='glyphicon glyphicon-phone'
+                                                style={{marginRight: 5}}
+                                            />
                                             <a href='#' style={style.linkColorHeader}>
                                                 {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
                                             </a>
                                         </div>
                                         <div style={style.headerTopIcons}>
-                                            <div style={style.topIcon}>
-                                                <Glyphicon
-                                                    glyph='glyphicon glyphicon-envelope'
-                                                />
-                                            </div>
+                                            <Glyphicon
+                                                glyph='glyphicon glyphicon-envelope'
+                                                style={{marginRight: 5}}
+                                            />
                                             <a href='mailto:info@emaildisupporto.it' style={style.linkColorHeader}>
                                                 {this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress)}
                                             </a>
                                         </div>
                                     </div>
                                 </Col>
-                                <Col xs={12} sm={4}>
-                                    <div style={style.accountLinksWrp}>
-                                        <div>{'|'}</div>
-                                        <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
-                                            {'LOGIN'}
+                                <Col
+                                    xs={12}
+                                    sm={6}
+                                    md={4}
+                                    lg={5}
+                                    mdPush={4}
+                                    lgPush={2}
+                                >
+                                    <div style={style.rightWrp}>
+                                        <Icon
+                                            onClick={() => {}}
+                                            iconName={'/templates/ico_twitter_02'}
+                                            iconStyle={style.socialIcon}
+                                        />
+                                        <Icon
+                                            onClick={() => {}}
+                                            iconName={'/templates/ico_facebook_02'}
+                                            iconStyle={style.socialIcon}
+                                        />
+                                        <div style={style.accountLinksWrp}>
+                                            <div>{'|'}</div>
+                                            <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
+                                                {'LOGIN'}
+                                            </div>
+                                            <div>{'|'}</div>
+                                            <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
+                                                {'REGISTRATI'}
+                                            </div>
+                                            <div>{'|'}</div>
                                         </div>
-                                        <div>{'|'}</div>
-                                        <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
-                                            {'REGISTRATI'}
+                                    </div>
+                                </Col>
+                                <Col xs={12} md={4} lg={2} mdPull={4} lgPull={5}>
+                                    <div style={style.headerLogoWrp}>
+                                        <div style={style.headerLogoBg}>
+                                            <img src='./_assets/images/template_02/logo_example.jpg' style={style.headerLogo} />
                                         </div>
-                                        <div>{'|'}</div>
                                     </div>
                                 </Col>
                             </Form>
                         </Row>
-                    </div>
-                </div>
-                <div className='container-fluid' style={style.maxContentWidth}>
-                    <div style={style.headerLogoWrp}>
-                        <div>
-                            <img src='./_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
-                        </div>
-                        <div style={style.socialIconWrp}>
-                            <Icon
-                                onClick={() => {}}
-                                iconName={'/templates/ico_twitter_01'}
-                                iconStyle={style.socialIcon}
-                            />
-                            <Icon
-                                onClick={() => {}}
-                                iconName={'/templates/ico_facebook_01'}
-                                iconStyle={style.socialIcon}
-                            />
-                        </div>
                     </div>
                 </div>
             </div>
