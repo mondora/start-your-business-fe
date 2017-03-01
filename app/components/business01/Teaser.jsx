@@ -11,6 +11,24 @@ const styles = {
     teaserWrp: {
         maxWidth: '1200px',
         height: 'auto'
+    },
+    backgroundImg: {
+        backgroundImage: 'url(\'./_assets/images/template_01/carousel01.jpg\')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+    },
+    backgroundWidget: {
+        backgroundColor: colors.blackOpacity,
+        textAlign: 'center',
+        padding: '60px 30px'
+    },
+    widgetText: {
+        fontSize: 30,
+        fontWeight: '700',
+        lineHeight: '30px',
+        marginBottom: 40,
+        color: colors.white
     }
 };
 
@@ -22,16 +40,30 @@ export default class Teaser extends Component {
 
     renderUploadForm () {
         return (
-            <div style={{backgroundColor: colors.grey}}>
-                <p style={{fontSize: 18, marginTop: 20}}>
-                    {'PUOI SCEGLIERE FINO A TRE IMMAGINI PER IL TEASER'}
-                    <br />
-                    {'ATTENZIONE! ALMENO UNA È OBBLIGATORIA'}
-                </p>
-                <ImageUploader />
-                <ImageUploader />
-                <ImageUploader />
-                <SaveButton />
+            <div style={styles.backgroundImg}>
+                <div style={styles.backgroundWidget}>
+                    <p style={styles.widgetText}>
+                        {'PUOI SCEGLIERE FINO A TRE IMMAGINI PER IL TEASER'}
+                        <br />
+                        {'ATTENZIONE! ALMENO UNA È OBBLIGATORIA'}
+                    </p>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <ImageUploader />
+                        <br />
+                        <ImageUploader />
+                        <br />
+                        <ImageUploader />
+                        <br />
+                        <SaveButton />
+                    </div>
+                </div>
             </div>
         );
     }

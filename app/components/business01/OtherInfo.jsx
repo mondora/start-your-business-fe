@@ -94,7 +94,7 @@ class OtherInfo extends Component {
             <FormTextarea
                 field={this.props.form[fieldName]}
                 inputType='text'
-                model={`businessSite.siteConfig.intro.${fieldName}`}
+                model={`businessSite.siteConfig.info.${fieldName}`}
                 placeholder={placeholder}
                 textareaStyle={{
                     textAlign: 'center',

@@ -66,20 +66,17 @@ export default class Steps extends Component {
             {
                 number: '1',
                 title: this.renderTextField(isEditMode, 'titleStep1', 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI', titleStep1),
-                text: this.renderTextareaField(isEditMode, 'textStep1', `Abbiamo pensato a tutti, ma se desideri
-                personalizzare il tuo ordine, chiama al 012-3456789`, textStep1)
+                text: this.renderTextareaField(isEditMode, 'textStep1', 'Abbiamo pensato a tutti, ma se desideri personalizzare il tuo ordine, chiama al 012-3456789', textStep1)
             },
             {
                 number: '2',
                 title: this.renderTextField(isEditMode, 'titleStep2', 'RISPARMI E NON DOVRAI PENSARE A NULLA', titleStep2),
-                text: this.renderTextareaField(isEditMode, 'textStep2', `Ogni mese ti arriverà una cassettina con
-                frutta e verdura biologica di stagione`, textStep2)
+                text: this.renderTextareaField(isEditMode, 'textStep2', 'Ogni mese ti arriverà una cassettina con frutta e verdura biologica di stagione', textStep2)
             },
             {
                 number: '3',
                 title: this.renderTextField(isEditMode, 'titleStep3', 'POTRAI DISISCRIVERTI QUANDO VUOI', titleStep3),
-                text: this.renderTextareaField(isEditMode, 'textStep3', `Se non sei soddisfatto del servizio, puoi decidere di
-                non ricevere più le nostre cassettine`, textStep3)
+                text: this.renderTextareaField(isEditMode, 'textStep3', 'Se non sei soddisfatto del servizio, puoi decidere di non ricevere più le nostre cassettine', textStep3)
             }
         ];
     }
@@ -105,7 +102,7 @@ export default class Steps extends Component {
             <FormTextarea
                 field={this.props.form[fieldName]}
                 inputType='text'
-                model={`businessSite.siteConfig.intro.${fieldName}`}
+                model={`businessSite.siteConfig.steps.${fieldName}`}
                 placeholder={placeholder}
                 textareaStyle={{
                     textAlign: 'center',

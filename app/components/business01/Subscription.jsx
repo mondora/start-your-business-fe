@@ -64,7 +64,7 @@ const styles = {
     subscriptionBottom: {
         borderBottomLeftRadius: 8,
         borderBottomRightRadius: 8,
-        padding: '20px 0'
+        padding: '20px 10px'
     },
     subscriptionPrice: {
         display: 'block',
@@ -76,7 +76,9 @@ const styles = {
     subscriptionFrequency: {
         display: 'block',
         fontSize: '1.5em',
-        width: '100%'
+        lineHeight: '.9em',
+        width: '100%',
+        marginBottom: '15px'
     },
     subscriptionButton: {
         fontSize: '1.2em',
