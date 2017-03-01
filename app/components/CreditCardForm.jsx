@@ -17,6 +17,7 @@ class CreditCardForm extends Component {
     componentWillReceiveProps (nextProps) {
         const {paymentPageParams} = nextProps;
         if (paymentPageParams && this.shouldComponentUpdate(nextProps)) {
+            paymentPageParams.locale = 'it_IT';
             paymentPageParams.style = 'inline';
             paymentPageParams.submitEnabled = false;
             Z.render(paymentPageParams, {}, this.handleZuoraResponse.bind(this));
@@ -31,7 +32,7 @@ class CreditCardForm extends Component {
         console.log('Response from call of credit card form:');
         console.log(response);
         if (!response.success) {
-            let callbackUrl = '/payment-result?';
+            let callbackUrl = '/credit-card-result?';
             for (let id in response) {
                 callbackUrl += `${id}=${encodeURIComponent(response[id])}&`;
             }

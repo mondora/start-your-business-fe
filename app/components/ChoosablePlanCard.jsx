@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react';
 import {Col} from 'react-bootstrap';
 
 import * as colors from 'lib/colors';
-import {allowOwnDomain, getDefaultPricing, isActive} from 'lib/zuora-products-utils';
+import {allowOwnDomain, getDefaultPricing, getPlanFrequency, isActive} from 'lib/zuora-products-utils';
 
 import Icon from 'components/Icon';
 import DomainInput from 'components/DomainInput';
@@ -61,7 +61,7 @@ const styles = {
             marginLeft: 5,
             fontSize: 14,
             lineHeight: '14px',
-            fontWeight: '300',
+            fontWeight: '300'
         }
     },
     price: {
@@ -116,6 +116,7 @@ class ChoosablePlanCard extends Component {
         backgroundColor: colors.white
     };
 
+    //TODO manage correctly activePlan and isSelected when more than one active plan
     renderCheckCircle (activePlan) {
         if (!activePlan) {
             return (
@@ -173,10 +174,10 @@ class ChoosablePlanCard extends Component {
                             <span style={styles.name}>{productPlan.name}</span>
                         </div>
                         <div style={styles.price}>
-                            {pricing.currency}{pricing.price}
+                            {pricing.currencySymbol ? pricing.currencySymbol : pricing.currency}{pricing.price}
                             <br />
                             <span style={styles.frequency}>
-                                {`(${productPlan.Frequency__c})`}
+                                {`(${getPlanFrequency(productPlan)})`}
                             </span>
                         </div>
                     </div>
