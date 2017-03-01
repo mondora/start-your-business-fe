@@ -13,12 +13,12 @@ const styles = {
         backgroundColor: colors.backgroundError,
         color: colors.errorText
     },
-    input: {
+    textarea: {
         width: '100%',
         borderRadius: 4,
         border: `1px solid ${colors.lightGrey}`,
-        backgroundColor: colors.white,
         padding: '8px',
+        resize: 'vertical',
         fontWeight: '300'
     },
     label: {
@@ -27,17 +27,16 @@ const styles = {
     }
 };
 
-export default class FormInput extends Component {
+export default class FormTextarea extends Component {
 
     static propTypes = {
         error: PropTypes.func,
         field: PropTypes.object.isRequired,
-        inputStyle: PropTypes.object,
-        inputType: PropTypes.string.isRequired,
         label: PropTypes.string,
         model: PropTypes.string.isRequired,
         placeholder: PropTypes.string,
         style: PropTypes.object,
+        textareaStyle: PropTypes.object,
         validator: PropTypes.func
     };
 
@@ -48,7 +47,7 @@ export default class FormInput extends Component {
     }
 
     render () {
-        const {error, field, model, inputType, placeholder, validator} = this.props;
+        const {error, field, model, placeholder, validator} = this.props;
         return (
             <label style={this.props.style}>
                 {this.renderLabel()}
@@ -59,10 +58,9 @@ export default class FormInput extends Component {
                     }}
                     validateOn='blur'
                 >
-                    <input
-                        type={inputType}
-                        placeholder={placeholder}
-                        style={{...styles.input, ...this.props.inputStyle}}
+                    <textarea
+                        value={placeholder}
+                        style={{...styles.textarea, ...this.props.textareaStyle}}
                     />
                     {
                         field.touched && !field.valid &&

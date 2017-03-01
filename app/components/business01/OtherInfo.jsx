@@ -7,14 +7,29 @@ import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import FormInput from 'components/FormInput';
+import FormTextarea from 'components/FormTextarea';
 
 const styles = (siteColors) => ({
+    boxContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        flexFlow: 'no-wrap',
+        justifyContent: 'space-between',
+        '@media screen and (max-width: 767px)': {
+            flexDirection: 'column',
+        }
+    },
     boxWrp: {
+        width: '48%',
         borderRadius: 10,
         backgroundColor: colors.white,
         textAlign: 'center',
         marginBottom: 20,
-        padding: 20
+        padding: 20,
+        '@media screen and (max-width: 767px)': {
+            width: '100%'
+        }
     },
     boxImage: {
         width: 160,
@@ -22,7 +37,7 @@ const styles = (siteColors) => ({
         textAlign: 'center'
     },
     textWrp: {
-        height: '160px',
+        minHeight: '160px',
         display: 'flex',
         textAlign: 'left',
         flexDirection: 'column',
@@ -67,19 +82,35 @@ class OtherInfo extends Component {
         ) : readNode;
     }
 
+    renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
+        return isEditMode ? (
+            <FormTextarea
+                field={this.props.form[fieldName]}
+                inputType='text'
+                model={`businessSite.siteConfig.intro.${fieldName}`}
+                placeholder={placeholder}
+                textareaStyle={{
+                    textAlign: 'center',
+                    color: colors.grey
+                }}
+                style={{margin: 0, width:'100%', maxHeight: '30px'}}
+            />
+        ) : readNode;
+    }
+
     getInfoBox () {
         const {textBox1, textBox2, buttonBox1, buttonBox2} = this.props.siteConfig.info;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return [
             {
                 photo: 'infobox1.jpg',
-                text: this.renderTextField(isEditMode, 'textBox1', `Scopri altro riguardo
+                text: this.renderTextareaField(isEditMode, 'textBox1', `Scopri altro riguardo
                 ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi`, textBox1),
                 button: this.renderTextField(isEditMode, 'buttonBox1', 'INIZIA ORA!', buttonBox1)
             },
             {
                 photo: 'infobox2.jpg',
-                text: this.renderTextField(isEditMode, 'textBox2', `Hai delle domande riguardo
+                text: this.renderTextareaField(isEditMode, 'textBox2', `Hai delle domande riguardo
                 al tuo ordine o desideri sospendere le tue consegne?`, textBox2),
                 button: this.renderTextField(isEditMode, 'buttonBox2', 'SCRIVICI UN EMAIL', buttonBox2)
             }
@@ -90,31 +121,29 @@ class OtherInfo extends Component {
         const style = styles(this.props.siteConfig.colors);
         return (
             <Form model={'businessSite.siteConfig.info'}>
-                <Row>
+                <div style={style.boxContainer}>
                     {this.getInfoBox().map((infoBox, index) =>
-                        <Col key={index} xs={12} sm={6}>
-                            <div style={style.boxWrp}>
-                                <Row>
-                                    <Col xs={12} md={5}>
-                                        <Image src={`./_assets/images/template_01/${infoBox.photo}`} style={style.boxImage} circle={true} />
-                                    </Col>
-                                    <Col xs={12} md={7}>
-                                        <div style={style.textWrp}>
-                                            <div>
-                                                <p style={style.boxText}>
-                                                    {infoBox.text}
-                                                </p>
-                                                <Button style={style.boxButton}>
-                                                    {infoBox.button}
-                                                </Button>
-                                            </div>
+                        <div key={index} style={style.boxWrp}>
+                            <Row>
+                                <Col xs={12} md={5}>
+                                    <Image src={`./_assets/images/template_01/${infoBox.photo}`} style={style.boxImage} circle={true} />
+                                </Col>
+                                <Col xs={12} md={7}>
+                                    <div style={style.textWrp}>
+                                        <div>
+                                            <p style={style.boxText}>
+                                                {infoBox.text}
+                                            </p>
+                                            <Button style={style.boxButton}>
+                                                {infoBox.button}
+                                            </Button>
                                         </div>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </Col>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
                     )}
-                </Row>
+                </div>
             </Form>
         );
     }

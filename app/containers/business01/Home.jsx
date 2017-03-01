@@ -4,14 +4,14 @@ import {connect} from 'react-redux';
 
 import * as colors from 'lib/colors';
 
-import Teaser from 'components/business/Teaser';
-import Intro from 'components/business/Intro';
-import Steps from 'components/business/Steps';
-import SubscriptionsList from 'components/business/SubscriptionsList';
-import OtherInfo from 'components/business/OtherInfo';
+import Teaser from 'components/business01/Teaser';
+import Intro from 'components/business01/Intro';
+import Steps from 'components/business01/Steps';
+import SubscriptionsList from 'components/business01/SubscriptionsList';
+import OtherInfo from 'components/business01/OtherInfo';
 
 const styles = {
-    pageWrp: {
+    pageContainer: {
         maxWidth: '1200px',
         height: 'auto',
         marginBottom: 40
@@ -44,7 +44,7 @@ class Home extends Component {
                         buildSiteMode={editMode}
                         images={this.props.businessSiteState.siteConfig.teaserImages}
                     />
-                    <div className='container-fluid' style={styles.pageWrp}>
+                    <div className='container-fluid' style={styles.pageContainer}>
                         <Intro
                             buildSiteMode={editMode}
                             form={this.props.businessSiteIntroForm}
@@ -78,11 +78,11 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        businessSiteIntroForm: state.businessSiteIntroForm,
+        businessSiteOtherInfoForm: state.businessSiteOtherInfoForm,
         businessSiteState: state.businessSite,
-        businessSiteStepsForm: state.businessSite,
-        businessSiteIntroForm: state.businessSite,
-        businessSiteSubscriptionsForm: state.businessSite,
-        businessSiteOtherInfoForm: state.businessSite
+        businessSiteStepsForm: state.businessSiteStepsForm,
+        businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm,
     };
 };
 

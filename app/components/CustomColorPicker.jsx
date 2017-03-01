@@ -46,7 +46,7 @@ const styles = (color) => reactCSS({
     default: {
         color: {
             width: '100%',
-            height: '100px',
+            height: '50px',
             borderRadius: '2px',
             background: color
         },

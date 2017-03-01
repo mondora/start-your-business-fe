@@ -17,8 +17,8 @@ import ChooseTemplateWidget from 'components/ChooseTemplateWidget';
 import Icon from 'components/Icon';
 import PageTeaser from 'components/PageTeaser';
 
-import BusinessHome from 'containers/business/Home';
-import BusinessRoot from 'containers/business/Root';
+import BusinessHome from 'containers/business01/Home';
+import BusinessRoot from 'containers/business01/Root';
 
 const styles = {
     buttonWrp: {

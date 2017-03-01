@@ -63,11 +63,12 @@ const styles = {
     },
     subscriptionBottom: {
         borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8
+        borderBottomRightRadius: 8,
+        padding: '20px 0'
     },
     subscriptionPrice: {
         display: 'block',
-        height: '60px',
+        lineHeight: '1em',
         fontSize: '3.5em',
         fontWeight: '700',
         width: '100%'
@@ -81,8 +82,7 @@ const styles = {
         fontSize: '1.2em',
         padding: '8px 20px',
         backgroundColor: colors.white,
-        border: 0,
-        margin: '0 auto 20px auto'
+        border: 0
     }
 };
 
@@ -110,14 +110,14 @@ class Subscription extends Component {
                         <img src={path} style={styles.subscriptionImage} />
                     </div>
                     <div style={styles.subscriptionFeatures}>
-                        <p>
+                        <p style={{width: '100%'}}>
                             <Glyphicon
                                 glyph='glyphicon glyphicon-ok-circle'
                                 style={{...styles.subscriptionIcon, ...{color: mainColor}}}
                             />
                             {this.props.feature1}
                         </p>
-                        <p>
+                        <p style={{width: '100%'}}>
                             <Glyphicon
                                 glyph='glyphicon glyphicon-ok-circle'
                                 style={{...styles.subscriptionIcon, ...{color: mainColor}}}

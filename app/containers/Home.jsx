@@ -90,20 +90,20 @@ class Home extends Component {
                     border: 0
                 }}
             >
-                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                    <Glyphicon
-                        glyph='glyphicon glyphicon-info-sign'
-                        style={{
-                            display: 'block',
-                            float: 'left',
-                            color: colors.white,
-                            fontSize: 38,
-                            marginRight: 8
-                        }}
-                    />
-                    <span>
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
+                    <div style={{width: 50, marginRight: 8}}>
+                        <Glyphicon
+                            glyph='glyphicon glyphicon-info-sign'
+                            style={{
+                                display: 'block',
+                                color: colors.white,
+                                fontSize: 'calc(28px + .7vw)'
+                            }}
+                        />
+                    </div>
+                    <div>
                         <strong>{'LA SOTTOSCRIZIONE PROFESSIONAL SARÁ DISPONIBILE DA AUTUNNO 2017'}</strong>
-                    </span>
+                    </div>
                 </div>
             </Alert>
         );

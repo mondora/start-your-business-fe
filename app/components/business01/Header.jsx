@@ -10,26 +10,31 @@ import FormInput from 'components/FormInput';
 import Icon from 'components/Icon';
 
 const styles = (siteColors) => ({
-    headerWrp: {
-        minHeight: 50,
+    maxContentWidth: {
+        maxWidth: '1200px'
+    },
+    headerContainer: {
+        padding: '10px 0',
         backgroundColor: siteColors.mainColor,
         color: colors.white,
-        lineHeight: '50px',
         '@media screen and (max-width: 767px)': {
-            lineHeight: '30px',
-            textAlign: 'center'
+            textAlign: 'center',
+            padding: 0
         }
     },
-    headerIconsWrp: {
+    headerTopIconsWrp: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        '@media screen and (max-width: 767px)': {
+            padding: '8px 0'
+        },
         '@media screen and (max-width: 500px)': {
             display: 'none'
         }
     },
-    headerIcons: {
+    headerTopIcons: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -38,7 +43,7 @@ const styles = (siteColors) => ({
             marginRight: 0
         }
     },
-    icon: {
+    topIcon: {
         float: 'left',
         color: siteColors.mainColor,
         width: 30,
@@ -56,14 +61,19 @@ const styles = (siteColors) => ({
             height: 20
         }
     },
+    linkColorHeader: {
+        color: colors.white
+    },
     accountLinksWrp: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
         border: 0,
+        height: 30,
         '@media screen and (max-width: 767px)': {
-            padding: '8px 0',
+            padding: '10px 0',
+            height: 'auto',
             borderTop: `1px solid ${colors.white}`
         },
         '@media screen and (max-width: 500px)': {
@@ -75,7 +85,7 @@ const styles = (siteColors) => ({
         cursor: 'pointer',
         padding: '0 10px'
     },
-    logoWrp: {
+    headerLogoWrp: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -86,7 +96,7 @@ const styles = (siteColors) => ({
             justifyContent: 'center',
         }
     },
-    imgResponsive: {
+    headerLogo: {
         display: 'block',
         height: 'auto',
         width: '100%',
@@ -119,6 +129,13 @@ class Header extends Component {
                 inputType='text'
                 model={`businessSite.siteConfig.header.${fieldName}`}
                 placeholder={placeholder}
+                inputStyle={{
+                    color: colors.grey,
+                    padding: '2px 4px',
+                    marginRight: '25px',
+                    fontSize: '13px'
+                }}
+                style={{margin: 0}}
             />
         ) : readNode;
     }
@@ -129,29 +146,29 @@ class Header extends Component {
         const style = styles(this.props.siteConfig.colors);
         return (
             <div>
-                <div style={style.headerWrp}>
-                    <div className='container-fluid' style={{maxWidth: '1200px'}}>
+                <div style={style.headerContainer}>
+                    <div className='container-fluid' style={style.maxContentWidth}>
                         <Row>
                             <Form model={'businessSite.siteConfig.header'}>
                                 <Col xs={12} sm={8}>
-                                    <div style={style.headerIconsWrp}>
-                                        <div style={style.headerIcons}>
-                                            <div style={style.icon}>
+                                    <div style={style.headerTopIconsWrp}>
+                                        <div style={style.headerTopIcons}>
+                                            <div style={style.topIcon}>
                                                 <Glyphicon
                                                     glyph='glyphicon glyphicon-phone'
                                                 />
                                             </div>
-                                            <a href='#' style={{color: colors.white}}>
+                                            <a href='#' style={style.linkColorHeader}>
                                                 {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
                                             </a>
                                         </div>
-                                        <div style={style.headerIcons}>
-                                            <div style={style.icon}>
+                                        <div style={style.headerTopIcons}>
+                                            <div style={style.topIcon}>
                                                 <Glyphicon
                                                     glyph='glyphicon glyphicon-envelope'
                                                 />
                                             </div>
-                                            <a href='mailto:info@emaildisupporto.it' style={{color: colors.white}}>
+                                            <a href='mailto:info@emaildisupporto.it' style={style.linkColorHeader}>
                                                 {this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress)}
                                             </a>
                                         </div>
@@ -174,10 +191,10 @@ class Header extends Component {
                         </Row>
                     </div>
                 </div>
-                <div className='container-fluid' style={{maxWidth: '1200px'}}>
-                    <div style={style.logoWrp}>
+                <div className='container-fluid' style={style.maxContentWidth}>
+                    <div style={style.headerLogoWrp}>
                         <div>
-                            <img src='./_assets/images/template_01/logo_example.jpg' style={style.imgResponsive} />
+                            <img src='./_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
                         </div>
                         <div style={style.socialIconWrp}>
                             <Icon

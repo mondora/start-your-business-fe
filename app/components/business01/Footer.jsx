@@ -3,13 +3,16 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import FormInput from 'components/FormInput';
-
 import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
+import FormInput from 'components/FormInput';
+
 const styles = {
-    footerWrp: {
+    maxContentWidth: {
+        maxWidth: '1200px'
+    },
+    footerContainer: {
         backgroundColor: colors.templateFooterBg
     },
     footerCol: {
@@ -92,6 +95,11 @@ class Footer extends Component {
                 inputType='text'
                 model={`businessSite.siteConfig.footer.${fieldName}`}
                 placeholder={placeholder}
+                inputStyle={{
+                    color: colors.darkGrey,
+                    fontWeight: '300'
+                }}
+                style={{margin: 0, width: '100vw'}}
             />
         ) : readNode;
     }
@@ -99,7 +107,7 @@ class Footer extends Component {
     renderBottomFooter (isEditMode) {
         return (
             <div style={styles.bottomFooterWrp}>
-                <div className='container-fluid' style={{maxWidth: '1200px'}}>
+                <div className='container-fluid' style={styles.maxContentWidth}>
                     <div style={styles.bottomFooter}>
                         {this.renderTextField(isEditMode, 'bottom', '© 2017 Nome Azienda - PIVA: 0123456789',
                             <span style={styles.bottomLegal}>{this.props.footerInfo.bottom}</span>
@@ -120,9 +128,9 @@ class Footer extends Component {
         const {companyName, line1, line2, line3, line4} = this.props.footerInfo;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return (
-            <div style={styles.footerWrp}>
+            <div style={styles.footerContainer}>
                 <Form model={'businessSite.siteConfig.footer'}>
-                    <div className='container-fluid' style={{maxWidth: '1200px'}}>
+                    <div className='container-fluid' style={styles.maxContentWidth}>
                         <Row style={{padding: '20px 0', color: colors.primaryColorLighter}}>
                             <Col xs={12} sm={6} md={3}>
                                 <div style={styles.footerCol}>

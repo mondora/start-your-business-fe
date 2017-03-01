@@ -7,6 +7,7 @@ import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import FormInput from 'components/FormInput';
+import FormTextarea from 'components/FormTextarea';
 
 const styles = (siteColors) => ({
     introWrp: {
@@ -22,11 +23,6 @@ const styles = (siteColors) => ({
         fontSize: '1.3em',
         color: colors.darkGrey
     },
-    buttonWrp: {
-        ':hover': {
-            opacity: '.7'
-        }
-    },
     button: {
         fontSize: '1.2em',
         padding: '8px 20px',
@@ -36,7 +32,7 @@ const styles = (siteColors) => ({
     }
 });
 
-class Steps extends Component {
+class Intro extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
@@ -50,6 +46,27 @@ class Steps extends Component {
                 inputType='text'
                 model={`businessSite.siteConfig.intro.${fieldName}`}
                 placeholder={placeholder}
+                inputStyle={{
+                    textAlign: 'center',
+                    color: colors.darkGrey
+                }}
+                style={{margin: 0, width: '100vw'}}
+            />
+        ) : readNode;
+    }
+
+    renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
+        return isEditMode ? (
+            <FormTextarea
+                field={this.props.form[fieldName]}
+                inputType='text'
+                model={`businessSite.siteConfig.intro.${fieldName}`}
+                placeholder={placeholder}
+                textareaStyle={{
+                    textAlign: 'center',
+                    color: colors.darkGrey
+                }}
+                style={{margin: 0, width:'100%'}}
             />
         ) : readNode;
     }
@@ -66,8 +83,7 @@ class Steps extends Component {
                             {this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}
                         </h2>
                         <p style={style.introText}>
-                            {this.renderTextField(isEditMode, 'introText', `Scegliamo i prodotti migliori e te li consegnamo a
-                            casa nella formula più adatta alle tue esigenze!`, introText)}
+                            {this.renderTextareaField(isEditMode, 'introText', 'Scegliamo i prodotti migliori e te li consegnamo a casa nella formula più adatta alle tue esigenze!', introText)}
                         </p>
                         <Button style={style.button}>
                             {'INIZIA ORA!'}
@@ -79,4 +95,4 @@ class Steps extends Component {
     }
 }
 
-export default Radium(Steps);
+export default Radium(Intro);
