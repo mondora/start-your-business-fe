@@ -3,7 +3,7 @@ import {Col} from 'react-bootstrap';
 import {Glyphicon} from 'react-bootstrap';
 
 import * as colors from 'lib/colors';
-import {getDefaultPricing, isActive} from 'lib/zuora-products-utils';
+import {getDefaultPricing, getPlanFeatures, getPlanFrequency, isActive} from 'lib/zuora-products-utils';
 
 import SignUpButton from 'components/SignUpButton';
 import HorizontalLine from 'components/HorizontalLine';
@@ -39,7 +39,8 @@ const styles = {
     },
     bottom: {
         height: 200,
-        padding: 10
+        padding: 10,
+        textAlign: 'left'
     },
     confirmButtonContainer: {
         padding: '20px 0'
@@ -58,7 +59,7 @@ export default class ProductPlanCard extends Component {
         backgroundColor: colors.white
     };
 
-    renderPlanStatus () {
+    renderInactivePlan () {
         return (
             <div
                 style={{
@@ -79,8 +80,7 @@ export default class ProductPlanCard extends Component {
 
     render () {
         const {backgroundColor, onConfirm, productPlan} = this.props;
-        //TODO ask to PO for features to put on Zuora
-        const features = [];
+        const features = getPlanFeatures(productPlan);
         const pricing = getDefaultPricing(productPlan);
         return (
             <Col xs={12} sm={6} style={{paddingTop: '4vw', paddingBottom: '4vw'}}>
@@ -92,16 +92,16 @@ export default class ProductPlanCard extends Component {
                             ...{backgroundColor: backgroundColor}
                         }}
                     >
-                        {!isActive(productPlan) ? this.renderPlanStatus() : null}
+                        {!isActive(productPlan) ? this.renderInactivePlan() : null}
                         <div style={styles.name}>
                             {productPlan.name}
                         </div>
                         <HorizontalLine color={colors.white} width={50} />
                         <div style={styles.price}>
-                            {pricing.currency}{pricing.price}
+                            {pricing.currencySymbol ? pricing.currencySymbol : pricing.currency}{pricing.price}
                         </div>
                         <div style={styles.frequency}>
-                            {`(${productPlan.Frequency__c})`}
+                            {`(${getPlanFrequency(productPlan)})`}
                         </div>
                     </div>
                     <div style={styles.bottom}>

@@ -26,7 +26,7 @@ const styles = {
         fontSize: '1.4em',
         fontWeight: '700',
         borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
+        borderTopRightRadius: 8
     },
     subscriptionImage: {
         display: 'block',
@@ -44,7 +44,7 @@ const styles = {
         justifyContent: 'space-between',
         height: '100%',
         fontSize: 14,
-        color: colors.darkGrey,
+        color: colors.darkGrey
     },
     subscriptionFeatures: {
         display: 'flex',
@@ -89,12 +89,12 @@ const styles = {
 class Subscription extends Component {
     static propTypes = {
         bgColor: PropTypes.string,
-        feature1: PropTypes.string,
-        feature2: PropTypes.string,
-        frequency: PropTypes.string,
+        feature1: PropTypes.node,
+        feature2: PropTypes.node,
+        frequency: PropTypes.node,
         photoName: PropTypes.string,
-        price: PropTypes.string,
-        type: PropTypes.string
+        price: PropTypes.node,
+        type: PropTypes.node
     };
 
     render () {
@@ -127,14 +127,12 @@ class Subscription extends Component {
                     </div>
                 </div>
                 <div style={{...styles.subscriptionBottom, ...{backgroundColor: mainColor}}}>
-                    <p>
-                        <span style={styles.subscriptionPrice}>
-                            {this.props.price}
-                        </span>
-                        <span style={styles.subscriptionFrequency}>
-                            {this.props.frequency}
-                        </span>
-                    </p>
+                    <span style={styles.subscriptionPrice}>
+                        {this.props.price}
+                    </span>
+                    <span style={styles.subscriptionFrequency}>
+                        {this.props.frequency}
+                    </span>
                     <Button style={{...styles.subscriptionButton, ...{color: mainColor}}}>
                         {'ORDINA ORA !'}
                     </Button>

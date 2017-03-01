@@ -70,6 +70,13 @@ class OtherInfo extends Component {
         siteConfig: PropTypes.object.isRequired
     };
 
+    getTextReadNode (style, text) {
+        return (
+            <p style={style.boxText}>
+                {text}
+            </p>
+        );
+    }
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
         return isEditMode ? (

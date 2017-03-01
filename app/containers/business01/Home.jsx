@@ -23,7 +23,7 @@ const styles = {
     bottomPageWrp: {
         maxWidth: '1200px',
         height: 'auto'
-    },
+    }
 };
 
 class Home extends Component {
@@ -82,7 +82,7 @@ const mapStateToProps = (state) => {
         businessSiteOtherInfoForm: state.businessSiteOtherInfoForm,
         businessSiteState: state.businessSite,
         businessSiteStepsForm: state.businessSiteStepsForm,
-        businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm,
+        businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm
     };
 };
 

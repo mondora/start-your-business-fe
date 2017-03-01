@@ -43,6 +43,22 @@ export default class Steps extends Component {
         siteConfig: PropTypes.object.isRequired
     };
 
+    getTextReadNode (text) {
+        return (
+            <p style={{fontSize: '1.2em'}}>
+                {text}
+            </p>
+        );
+    }
+
+    getTitleReadNode (title) {
+        return (
+            <h4 style={{fontSize: '1.6em', fontWeight: '700'}}>
+                {title}
+            </h4>
+        );
+    }
+
     getStep () {
         const {titleStep1, titleStep2, titleStep3, textStep1, textStep2, textStep3} = this.props.siteConfig.steps;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
@@ -127,6 +143,8 @@ export default class Steps extends Component {
                                             <p style={{fontSize: '1.2em'}}>
                                                 {stepInfo.text}
                                             </p>
+                                            {stepInfo.title}
+                                            {stepInfo.text}
                                         </div>
                                     </Col>
                                 )}
