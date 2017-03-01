@@ -17,8 +17,10 @@ import ChooseTemplateWidget from 'components/ChooseTemplateWidget';
 import Icon from 'components/Icon';
 import PageTeaser from 'components/PageTeaser';
 
-import BusinessHome from 'containers/business01/Home';
-import BusinessRoot from 'containers/business01/Root';
+import BusinessHome01 from 'containers/business01/Home';
+import BusinessRoot01 from 'containers/business01/Root';
+import BusinessHome02 from 'containers/business02/Home';
+import BusinessRoot02 from 'containers/business02/Root';
 
 const styles = {
     buttonWrp: {
@@ -47,6 +49,18 @@ class BuildSite extends Component {
         this.props.setEditMode(editModes.VIEW);
     }
 
+    renderSaveButton () {
+        return (
+            <div style={styles.buttonWrp}>
+                <Button
+                    backgroundColor={colors.darkGrey}
+                    onClick={() => browserHistory.push('/choose-plan')}
+                    text={'SALVA E PROSEGUI >'}
+                />
+            </div>
+        );
+    }
+
     renderSaveBar () {
         return (
             <Row style={{marginBottom: 25}}>
@@ -60,24 +74,34 @@ class BuildSite extends Component {
                     </Alert>
                 </Col>
                 <Col xs={12} sm={4}>
-                    <div style={styles.buttonWrp}>
-                        <Button
-                            backgroundColor={colors.darkGrey}
-                            onClick={() => browserHistory.push('/choose-plan')}
-                            text={'SALVA E PROSEGUI >'}
-                        />
-                    </div>
+                    {this.renderSaveButton()}
                 </Col>
             </Row>
         );
     }
 
     renderBusinessSite () {
-        return (
-            <BusinessRoot>
-                <BusinessHome />
-            </BusinessRoot>
-        );
+        switch (this.props.businessSite.siteConfig.templateId) {
+            case 1:
+                return (
+                    <BusinessRoot01>
+                        <BusinessHome01 />
+                    </BusinessRoot01>
+                );
+            case 2:
+                return (
+                    <BusinessRoot02>
+                        <BusinessHome02 />
+                    </BusinessRoot02>
+                );
+            default:
+                return (
+                    <BusinessRoot02>
+                        <BusinessHome02 />
+                    </BusinessRoot02>
+                );
+        }
+
     }
 
     render () {
@@ -125,6 +149,11 @@ class BuildSite extends Component {
                             <div style={{width:'calc(100% - 65px)', float: 'right', border: `2px solid ${colors.lightGrey}`, overflow: 'hidden'}}>
                                 {this.renderBusinessSite()}
                             </div>
+                        </Col>
+                    </Row>
+                    <Row style={{marginBottom: 100}}>
+                        <Col xs={12}>
+                            {this.renderSaveButton()}
                         </Col>
                     </Row>
                 </div>
