@@ -85,6 +85,10 @@ class OtherInfo extends Component {
                 inputType='text'
                 model={`businessSite.siteConfig.info.${fieldName}`}
                 placeholder={placeholder}
+                inputStyle={{
+                    textAlign: 'center'
+                }}
+                style={{margin: 0}}
             />
         ) : readNode;
     }
@@ -97,10 +101,10 @@ class OtherInfo extends Component {
                 model={`businessSite.siteConfig.info.${fieldName}`}
                 placeholder={placeholder}
                 textareaStyle={{
-                    textAlign: 'center',
-                    color: colors.grey
+                    color: colors.grey,
+                    minHeight: '100px'
                 }}
-                style={{margin: 0, width:'100%', maxHeight: '30px'}}
+                style={{margin: 0, width:'100%'}}
             />
         ) : readNode;
     }
@@ -111,14 +115,12 @@ class OtherInfo extends Component {
         return [
             {
                 photo: 'infobox1.jpg',
-                text: this.renderTextareaField(isEditMode, 'textBox1', `Scopri altro riguardo
-                ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi`, textBox1),
+                text: this.renderTextareaField(isEditMode, 'textBox1', 'Scopri altro riguardo ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi', textBox1),
                 button: this.renderTextField(isEditMode, 'buttonBox1', 'INIZIA ORA!', buttonBox1)
             },
             {
                 photo: 'infobox2.jpg',
-                text: this.renderTextareaField(isEditMode, 'textBox2', `Hai delle domande riguardo
-                al tuo ordine o desideri sospendere le tue consegne?`, textBox2),
+                text: this.renderTextareaField(isEditMode, 'textBox2', 'Hai delle domande riguardo al tuo ordine o desideri sospendere le tue consegne?', textBox2),
                 button: this.renderTextField(isEditMode, 'buttonBox2', 'SCRIVICI UN EMAIL', buttonBox2)
             }
         ];

@@ -70,10 +70,8 @@ class SubscriptionsList extends Component {
                 type: this.renderTextField(isEditMode, 'subscriptionType1', 'CASSETTINA PICCOLA', subscriptionType1),
                 photo: 'subscription01.jpg',
                 frequency: this.renderTextField(isEditMode, 'subscriptionFrequency1', 'al mese', subscriptionFrequency1),
-                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature1a', `Adatta per un
-                consumo mensile di una persona`, subscriptionFeature1a),
-                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature1b', `Assortimento:
-                verdura mista (frutta a richiesta)`, subscriptionFeature1b),
+                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature1a', 'Adatta per un consumo mensile di una persona', subscriptionFeature1a),
+                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature1b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature1b),
                 price: this.renderTextField(isEditMode, 'subscriptionPrice1', '€ 35', subscriptionPrice1)
             },
             {
@@ -81,10 +79,8 @@ class SubscriptionsList extends Component {
                 type: this.renderTextField(isEditMode, 'subscriptionType2', 'CASSETTINA PICCOLA', subscriptionType2),
                 photo: 'subscription02.jpg',
                 frequency: this.renderTextField(isEditMode, 'subscriptionFrequency2', 'al mese', subscriptionFrequency2),
-                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature2a', `Adatta per un
-                consumo mensile di 2/3 persone`, subscriptionFeature2a),
-                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature2b', `Assortimento:
-                verdura mista (frutta a richiesta)`, subscriptionFeature2b),
+                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature2a', 'Adatta per un consumo mensile di 2/3 persone', subscriptionFeature2a),
+                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature2b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature2b),
                 price: this.renderTextField(isEditMode, 'subscriptionPrice2', '€ 45', subscriptionPrice2)
             },
             {
@@ -92,10 +88,8 @@ class SubscriptionsList extends Component {
                 type: this.renderTextField(isEditMode, 'subscriptionType3', 'CASSETTINA PICCOLA', subscriptionType3),
                 photo: 'subscription03.jpg',
                 frequency: this.renderTextField(isEditMode, 'subscriptionFrequency3', 'al mese', subscriptionFrequency3),
-                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature3a', `Adatta per un
-                consumo mensile di 4/5 persone`, subscriptionFeature3a),
-                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature3b', `Assortimento:
-                verdura mista (frutta a richiesta)`, subscriptionFeature3b),
+                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature3a', 'Adatta per un consumo mensile di 4/5 persone', subscriptionFeature3a),
+                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature3b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature3b),
                 price: this.renderTextField(isEditMode, 'subscriptionPrice3', '€ 55', subscriptionPrice3)
             }
         ];
