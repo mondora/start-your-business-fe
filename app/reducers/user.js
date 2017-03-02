@@ -13,7 +13,7 @@ export const initialSignupState = {
     familyName: '',
     givenName: '',
     password: '',
-    privacyCheck: false 
+    privacyCheck: false
 };
 
 export const initialLoginState = {
