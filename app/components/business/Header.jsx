@@ -38,24 +38,25 @@ export default class Header extends Component {
             {margin: 0}
         );
     }
-    
-    renderSocialIcons (socialIconStyle) {
+
+    renderSocialIcons (socialIconStyle, socialIconWrpStyle) {
+        const {siteConfig} = this.props;
         return (
-            <div>
+            <div style={socialIconWrpStyle}>
                 <Icon
                     onClick={() => {}}
-                    iconName={'/templates/ico_twitter_01'}
+                    iconName={`/templates/ico_twitter_0${siteConfig.templateId}`}
                     iconStyle={socialIconStyle}
                 />
                 <Icon
                     onClick={() => {}}
-                    iconName={'/templates/ico_facebook_01'}
+                    iconName={`/templates/ico_facebook_0${siteConfig.templateId}`}
                     iconStyle={socialIconStyle}
                 />
             </div>
         );
     }
-    
+
     renderAccountSection (specStyle) {
         return (
             <div
@@ -73,18 +74,18 @@ export default class Header extends Component {
                     {'REGISTRATI'}
                 </div>
                 <div>{'|'}</div>
-            </div>    
+            </div>
         );
     }
-    
+
     renderPhoneNumber (phoneNumber, isEditMode, linkStyle) {
         return (
             <a href='#' style={linkStyle}>
                 {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
-            </a>  
+            </a>
         );
     }
-    
+
     renderEmail (emailAddress, isEditMode, linkStyle) {
         return (
             <a href='mailto:info@emaildisupporto.it' style={linkStyle}>

@@ -1,6 +1,5 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
-
 import Intro from 'components/business/01/Intro';
 import OtherInfo from 'components/business/OtherInfo';
 import Teaser from 'components/business/01/Teaser';
@@ -19,15 +18,15 @@ class Home extends Component {
 
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
-        const styles = this.props;
+        const {styles} = this.props;
         return (
             <div>
-                <div>
+                <div style={styles.pageContainer}>
                     <Teaser
                         buildSiteMode={editMode}
                         images={siteConfig.teaserImages}
                     />
-                    <div className='container-fluid' style={styles.pageContainer}>
+                    <div className='container-fluid' style={styles.pageWrp}>
                         <Intro
                             buildSiteMode={editMode}
                             form={this.props.businessSiteIntroForm}
@@ -45,7 +44,7 @@ class Home extends Component {
                         />
                     </div>
                 </div>
-                <div style={styles.bottomContainer}>
+                <div style={styles.bottomPageContainer}>
                     <div className='container-fluid' style={styles.bottomPageWrp}>
                         <OtherInfo
                             buildSiteMode={editMode}

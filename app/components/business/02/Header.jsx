@@ -65,6 +65,12 @@ const styles = (siteColors) => ({
             justifyContent: 'center'
         }
     },
+    socialIconWrp: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     socialIcon: {
         width: 30,
         height: 30,
@@ -90,7 +96,7 @@ const styles = (siteColors) => ({
         top: 0,
         padding: 20,
         backgroundColor: colors.white,
-        zIndex: 10000,
+        zIndex: 2,
         margin: '0 auto'
     },
     headerLogo: {
@@ -134,7 +140,7 @@ class Header extends BusinessHeader {
                                 </Col>
                                 <Col xs={12} sm={6} md={4} lg={5} mdPush={4} lgPush={2}>
                                     <div style={style.rightWrp}>
-                                        {this.renderSocialIcons(style.socialIcon)}
+                                        {this.renderSocialIcons(style.socialIcon, style.socialIconWrp)}
                                         {this.renderAccountSection(style.accountLinksWrp)}
                                     </div>
                                 </Col>

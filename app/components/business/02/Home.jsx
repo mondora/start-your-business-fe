@@ -23,7 +23,7 @@ class Home extends Component {
                     buildSiteMode={editMode}
                     images={siteConfig.teaserImages}
                 />
-                <div style={styles.bottomContainer}>
+                <div style={styles.bottomPageContainer}>
                     <div className='container-fluid' style={styles.bottomPageWrp}>
                         <OtherInfo
                             buildSiteMode={editMode}

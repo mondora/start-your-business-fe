@@ -145,9 +145,7 @@ class Header extends BusinessHeader {
                         <div>
                             <img src='./_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
                         </div>
-                        <div style={style.socialIconWrp}>
-                            {this.renderSocialIcons(style.socialIcon)}
-                        </div>
+                        {this.renderSocialIcons(style.socialIcon, style.socialIconWrp)}
                     </div>
                 </div>
             </div>

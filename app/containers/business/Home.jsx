@@ -10,11 +10,14 @@ import * as colors from 'lib/colors';
 
 const styles = {
     pageContainer: {
+        backgroundColor: colors.white
+    },
+    pageWrp: {
         maxWidth: '1200px',
         height: 'auto',
         marginBottom: 40
     },
-    bottomContainer: {
+    bottomPageContainer: {
         backgroundColor: colors.lightGrey,
         padding: '60px 0 40px 0'
     },
