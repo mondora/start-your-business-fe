@@ -5,6 +5,21 @@ import Icon from 'components/Icon';
 
 import * as colors from 'lib/colors';
 
+const commonStyle = {
+    accountLink: {
+        cursor: 'pointer',
+        padding: '0 10px'
+    },
+    accountLinksWrp: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        border: 0,
+        height: 30
+    }
+};
+
 export default class Header extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
@@ -12,23 +27,6 @@ export default class Header extends Component {
         siteConfig: PropTypes.object.isRequired
     };
 
-    getCommonStyle () {
-        return {
-            accountLink: {
-                cursor: 'pointer',
-                padding: '0 10px'
-            },
-            accountLinksWrp: {
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                border: 0,
-                height: 30
-            }
-        };
-    }
-    
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
         return isEditMode ? (
             <FormInput
@@ -65,7 +63,6 @@ export default class Header extends Component {
     }
     
     renderAccountSection (specStyle) {
-        const commonStyle = this.getCommonStyle();
         return (
             <div
                 style={{
