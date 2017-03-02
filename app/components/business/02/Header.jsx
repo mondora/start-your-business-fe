@@ -48,6 +48,11 @@ const styles = (siteColors) => ({
         marginRight: 20,
         color: siteColors.mainColor
     },
+    headerTopIcon: {
+        marginRight: 5,
+        fontSize: 18,
+        verticalAlign: 'middle'
+    },
     rightWrp: {
         display: 'flex',
         minHeight: 80,
@@ -77,7 +82,7 @@ const styles = (siteColors) => ({
         marginRight: 5
     },
     linkColorHeader: {
-        color: colors.darkGrey
+        color: colors.templateGreyText
     },
     accountLinksWrp: {
         '@media screen and (max-width: 767px)': {
@@ -124,15 +129,15 @@ class Header extends BusinessHeader {
                                     <div style={style.leftWrp}>
                                         <div style={style.headerTopIcons}>
                                             <Glyphicon
-                                                glyph='glyphicon glyphicon-phone'
-                                                style={{marginRight: 5}}
+                                                glyph='glyphicon glyphicon-earphone'
+                                                style={styles.headerTopIcon}
                                             />
                                             {this.renderPhoneNumber(phoneNumber, isEditMode, style.linkColorHeader)}
                                         </div>
                                         <div style={style.headerTopIcons}>
                                             <Glyphicon
                                                 glyph='glyphicon glyphicon-envelope'
-                                                style={{marginRight: 5}}
+                                                style={styles.headerTopIcon}
                                             />
                                             {this.renderEmail(emailAddress, isEditMode, style.linkColorHeader)}
                                         </div>
