@@ -5,9 +5,9 @@ import Radium from 'radium';
 
 import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
 
-import Header1 from 'components/business01/Header';
-import Header2 from 'components/business02/Header';
-import Footer from 'components/business01/Footer';
+import Header1 from 'components/business/01/Header';
+import Header2 from 'components/business/02/Header';
+import Footer from 'components/business/01/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 

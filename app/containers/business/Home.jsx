@@ -2,8 +2,8 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import Home1 from 'components/business01/Home';
-import Home2 from 'components/business02/Home';
+import Home1 from 'components/business/01/Home';
+import Home2 from 'components/business/02/Home';
 
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';

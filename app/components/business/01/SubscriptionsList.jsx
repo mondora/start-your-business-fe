@@ -9,7 +9,7 @@ import * as colors from 'lib/colors';
 
 import FormInput from 'components/FormInput';
 import FormTextarea from   'components/FormTextarea';
-import Subscription from 'components/business01/Subscription';
+import Subscription from 'components/business/01/Subscription';
 
 const styles = {
     subscriptionsWrp: {
