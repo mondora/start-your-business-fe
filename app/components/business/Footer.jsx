@@ -32,9 +32,11 @@ const commonStyle = {
         }
     },
     footerColTitle: {
+        display: 'block',
         fontSize: 18,
         textTransform: 'uppercase',
-        color: colors.white
+        color: colors.white,
+        marginBottom: 5
     },
     footerContainer: {
         backgroundColor: colors.templateFooterBg
@@ -68,7 +70,7 @@ export default class Footer extends Component {
     getCommonStyle () {
         return commonStyle;
     }
-    
+
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
         return getTextField (
             isEditMode,
@@ -80,7 +82,7 @@ export default class Footer extends Component {
             {margin: 0, width: '100vw'}
         );
     }
-    
+
     renderPaymentImages () {
         return (
             <div style={commonStyle.footerPayment}>
@@ -91,35 +93,33 @@ export default class Footer extends Component {
             </div>
         );
     }
-    
+
     renderLegalInfo (isEditMode) {
         return this.renderTextField(isEditMode, 'bottom', '© 2017 Nome Azienda - PIVA: 0123456789',
             <span style={commonStyle.bottomLegal}>{this.props.footerInfo.bottom}</span>
         );
     }
-    
+
     renderCompanyAddress (isEditMode) {
         const {companyName, line1, line2} = this.props.footerInfo;
         return (
             <div>
-                {this.renderTextField(isEditMode, 'companyName', 'Nome Azienda',
+                {this.renderTextField(isEditMode, 'companyName', 'NOME AZIENDA',
                     <span style={commonStyle.footerColTitle}>
                         {companyName}
                     </span>
                 )}
-                <br />
                 {this.renderTextField(isEditMode, 'line1', 'Via Giosuè Carducci, 10', line1)}
                 <br />
                 {this.renderTextField(isEditMode, 'line2', '20100 Milano (MI)', line2)}
-            </div>    
+            </div>
         );
     }
-    
+
     renderCompanyContact (isEditMode, buildSiteMode) {
         const {line3, line4} = this.props.footerInfo;
         return (
             <div>
-                <br />
                 {getLink(
                     buildSiteMode,
                     'mailto:info@maildisupporto.it',

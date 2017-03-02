@@ -26,12 +26,11 @@ const styles = {
 };
 
 class Footer extends BusinessFooter {
-
     renderBottomFooter (isEditMode, buildSiteMode, commonStyle) {
         return (
             <div style={commonStyle.bottomFooterWrp}>
                 <div className='container-fluid'>
-                    <div 
+                    <div
                         style={{
                             ...commonStyle.bottomFooter,
                             ...styles.bottomFooter
@@ -42,6 +41,7 @@ class Footer extends BusinessFooter {
                         </div>
                         <div>
                             {getLink(buildSiteMode, '#', 'Privacy Policy', {color: colors.lightGrey})}
+                            {' / '}
                             {getLink(buildSiteMode, '#', 'Termini e Condizioni', {color: colors.lightGrey})}
                         </div>
                     </div>

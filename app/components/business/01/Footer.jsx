@@ -30,7 +30,6 @@ const styles = {
 };
 
 class Footer extends BusinessFooter {
-
     renderBottomFooter (isEditMode, commonStyle) {
         return (
             <div style={commonStyle.bottomFooterWrp}>
@@ -71,7 +70,6 @@ class Footer extends BusinessFooter {
                                     <span style={commonStyle.footerColTitle}>
                                         {'INFO'}
                                     </span>
-                                    <br />
                                     {getLink(buildSiteMode, '#', 'Privacy Policy', {color: colors.lightGrey})}
                                     <br />
                                     {getLink(buildSiteMode, '#', 'Termini e Condizioni', {color: colors.lightGrey})}
