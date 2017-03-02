@@ -1,13 +1,12 @@
 import Radium from 'radium';
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
 import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import FormInput from 'components/FormInput';
-import Icon from 'components/Icon';
+import BusinessHeader from 'components/business/Header';
 
 const styles = (siteColors) => ({
     maxContentWidth: {
@@ -65,12 +64,6 @@ const styles = (siteColors) => ({
         color: colors.white
     },
     accountLinksWrp: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        border: 0,
-        height: 30,
         '@media screen and (max-width: 767px)': {
             padding: '10px 0',
             height: 'auto',
@@ -80,10 +73,6 @@ const styles = (siteColors) => ({
             justifyContent: 'center',
             borderTop: 0
         }
-    },
-    accountLink: {
-        cursor: 'pointer',
-        padding: '0 10px'
     },
     headerLogoWrp: {
         display: 'flex',
@@ -116,30 +105,7 @@ const styles = (siteColors) => ({
     }
 });
 
-class Header extends Component {
-    static propTypes = {
-        buildSiteMode: PropTypes.number,
-        form: PropTypes.object,
-        siteConfig: PropTypes.object.isRequired
-    };
-
-    renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.header.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    color: colors.grey,
-                    padding: '2px 4px',
-                    marginRight: '25px',
-                    fontSize: '13px'
-                }}
-                style={{margin: 0}}
-            />
-        ) : readNode;
-    }
+class Header extends BusinessHeader {
 
     render () {
         const {emailAddress, phoneNumber} = this.props.siteConfig.header;
@@ -155,38 +121,20 @@ class Header extends Component {
                                     <div style={style.headerTopIconsWrp}>
                                         <div style={style.headerTopIcons}>
                                             <div style={style.topIcon}>
-                                                <Glyphicon
-                                                    glyph='glyphicon glyphicon-phone'
-                                                />
+                                                <Glyphicon glyph='glyphicon glyphicon-phone' />
                                             </div>
-                                            <a href='#' style={style.linkColorHeader}>
-                                                {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
-                                            </a>
+                                            {this.renderPhoneNumber(phoneNumber, isEditMode, style.linkColorHeader)}
                                         </div>
                                         <div style={style.headerTopIcons}>
                                             <div style={style.topIcon}>
-                                                <Glyphicon
-                                                    glyph='glyphicon glyphicon-envelope'
-                                                />
+                                                <Glyphicon glyph='glyphicon glyphicon-envelope' />
                                             </div>
-                                            <a href='mailto:info@emaildisupporto.it' style={style.linkColorHeader}>
-                                                {this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress)}
-                                            </a>
+                                            {this.renderEmail(emailAddress, isEditMode, style.linkColorHeader)}
                                         </div>
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={4}>
-                                    <div style={style.accountLinksWrp}>
-                                        <div>{'|'}</div>
-                                        <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
-                                            {'LOGIN'}
-                                        </div>
-                                        <div>{'|'}</div>
-                                        <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
-                                            {'REGISTRATI'}
-                                        </div>
-                                        <div>{'|'}</div>
-                                    </div>
+                                    {this.renderAccountSection(style.accountLinksWrp)}
                                 </Col>
                             </Form>
                         </Row>
@@ -198,16 +146,7 @@ class Header extends Component {
                             <img src='./_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
                         </div>
                         <div style={style.socialIconWrp}>
-                            <Icon
-                                onClick={() => {}}
-                                iconName={'/templates/ico_twitter_01'}
-                                iconStyle={style.socialIcon}
-                            />
-                            <Icon
-                                onClick={() => {}}
-                                iconName={'/templates/ico_facebook_01'}
-                                iconStyle={style.socialIcon}
-                            />
+                            {this.renderSocialIcons(style.socialIcon)}
                         </div>
                     </div>
                 </div>

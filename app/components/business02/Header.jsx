@@ -1,13 +1,12 @@
 import Radium from 'radium';
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
 import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import FormInput from 'components/FormInput';
-import Icon from 'components/Icon';
+import BusinessHeader from 'components/business/Header';
 
 const styles = (siteColors) => ({
     headerContainer: {
@@ -75,20 +74,10 @@ const styles = (siteColors) => ({
         color: colors.darkGrey
     },
     accountLinksWrp: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        border: 0,
-        height: 30,
         '@media screen and (max-width: 767px)': {
         },
         '@media screen and (max-width: 500px)': {
         }
-    },
-    accountLink: {
-        cursor: 'pointer',
-        padding: '0 10px'
     },
     headerLogoWrp: {
         width: '100%',
@@ -112,30 +101,7 @@ const styles = (siteColors) => ({
     }
 });
 
-class Header extends Component {
-    static propTypes = {
-        buildSiteMode: PropTypes.number,
-        form: PropTypes.object,
-        siteConfig: PropTypes.object.isRequired
-    };
-
-    renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.header.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    color: colors.grey,
-                    padding: '2px 4px',
-                    marginRight: '25px',
-                    fontSize: '13px'
-                }}
-                style={{margin: 0}}
-            />
-        ) : readNode;
-    }
+class Header extends BusinessHeader {
 
     render () {
         const {emailAddress, phoneNumber} = this.props.siteConfig.header;
@@ -155,51 +121,21 @@ class Header extends Component {
                                                 glyph='glyphicon glyphicon-phone'
                                                 style={{marginRight: 5}}
                                             />
-                                            <a href='#' style={style.linkColorHeader}>
-                                                {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
-                                            </a>
+                                            {this.renderPhoneNumber(phoneNumber, isEditMode, style.linkColorHeader)}
                                         </div>
                                         <div style={style.headerTopIcons}>
                                             <Glyphicon
                                                 glyph='glyphicon glyphicon-envelope'
                                                 style={{marginRight: 5}}
                                             />
-                                            <a href='mailto:info@emaildisupporto.it' style={style.linkColorHeader}>
-                                                {this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress)}
-                                            </a>
+                                            {this.renderEmail(emailAddress, isEditMode, style.linkColorHeader)}
                                         </div>
                                     </div>
                                 </Col>
-                                <Col
-                                    xs={12}
-                                    sm={6}
-                                    md={4}
-                                    lg={5}
-                                    mdPush={4}
-                                    lgPush={2}
-                                >
+                                <Col xs={12} sm={6} md={4} lg={5} mdPush={4} lgPush={2}>
                                     <div style={style.rightWrp}>
-                                        <Icon
-                                            onClick={() => {}}
-                                            iconName={'/templates/ico_twitter_02'}
-                                            iconStyle={style.socialIcon}
-                                        />
-                                        <Icon
-                                            onClick={() => {}}
-                                            iconName={'/templates/ico_facebook_02'}
-                                            iconStyle={style.socialIcon}
-                                        />
-                                        <div style={style.accountLinksWrp}>
-                                            <div>{'|'}</div>
-                                            <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
-                                                {'LOGIN'}
-                                            </div>
-                                            <div>{'|'}</div>
-                                            <div style={style.accountLink} onClick={() => this.setState({showLoginModal: true})}>
-                                                {'REGISTRATI'}
-                                            </div>
-                                            <div>{'|'}</div>
-                                        </div>
+                                        {this.renderSocialIcons(style.socialIcon)}
+                                        {this.renderAccountSection(style.accountLinksWrp)}
                                     </div>
                                 </Col>
                                 <Col xs={12} md={4} lg={2} mdPull={4} lgPull={5}>

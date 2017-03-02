@@ -5,12 +5,18 @@ import Radium from 'radium';
 
 import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
 
-import Header from 'components/business01/Header';
+import Header1 from 'components/business01/Header';
+import Header2 from 'components/business02/Header';
 import Footer from 'components/business01/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
 import {templatesIds} from 'lib/business-site-utils';
+
+const components = {
+    header1: Header1,
+    header2: Header2
+};
 
 class Root extends Component {
     static propTypes = {
@@ -48,6 +54,7 @@ class Root extends Component {
     
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
+        const Header = components[`header${siteConfig.templateId}`];
         return (
             <div style={{fontFamily: this.getFontFamily(siteConfig)}}>
                 <Header
