@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 
-import FormInput from 'components/FormInput';
 import Icon from 'components/Icon';
 
+import {getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 const commonStyle = {
@@ -28,21 +28,15 @@ export default class Header extends Component {
     };
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.header.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    color: colors.grey,
-                    padding: '2px 4px',
-                    marginRight: '25px',
-                    fontSize: '13px'
-                }}
-                style={{margin: 0}}
-            />
-        ) : readNode;
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.header.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.grey, padding: '2px 4px', marginRight: '25px', fontSize: '13px'},
+            {margin: 0}
+        );
     }
     
     renderSocialIcons (socialIconStyle) {

@@ -2,11 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
-
-import FormInput from 'components/FormInput';
-import FormTextarea from 'components/FormTextarea';
 
 const styles = (siteColors) => ({
     stepsContainer: {
@@ -82,37 +79,27 @@ export default class Steps extends Component {
     }
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.steps.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    textAlign: 'center',
-                    color: colors.grey
-                }}
-                style={{margin: 0, width: '100%'}}
-            />
-        ) : readNode;
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.steps.${fieldName}`,
+            placeholder,
+            readNode,
+            {textAlign: 'center', color: colors.grey},
+            {margin: 0, width: '100%'}
+        );
     }
 
     renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormTextarea
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.steps.${fieldName}`}
-                placeholder={placeholder}
-                textareaStyle={{
-                    textAlign: 'center',
-                    color: colors.grey,
-                    fontSize: '14px',
-                    minHeight: 120
-                }}
-                style={{margin: 0, width:'100%'}}
-            />
-        ) : readNode;
+        return getTextAreaField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.steps.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.grey, textAlign: 'center', fontSize: '14px', minHeight: 120},
+            {margin: 0, width:'100%'}
+        );
     }
 
     render () {

@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import FormInput from 'components/FormInput';
-
+import {getLink, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 const commonStyle = {
@@ -70,28 +69,16 @@ export default class Footer extends Component {
         return commonStyle;
     }
     
-    renderLink (buildSiteMode, path, children, style) {
-        return (
-            <a href={buildSiteMode ? null : path} style={style}>
-                {children}
-            </a>
-        );
-    }
-    
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.footer.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    color: colors.darkGrey,
-                    fontWeight: '300'
-                }}
-                style={{margin: 0, width: '100vw'}}
-            />
-        ) : readNode;
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.footer.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.darkGrey, fontWeight: '300'},
+            {margin: 0, width: '100vw'}
+        );
     }
     
     renderPaymentImages () {
@@ -133,7 +120,7 @@ export default class Footer extends Component {
         return (
             <div>
                 <br />
-                {this.renderLink(
+                {getLink(
                     buildSiteMode,
                     'mailto:info@maildisupporto.it',
                     this.renderTextField(isEditMode, 'line3', 'Email: info@maildisupporto.it', line3),

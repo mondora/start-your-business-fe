@@ -3,11 +3,8 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row, Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
-
-import FormInput from 'components/FormInput';
-import FormTextarea from 'components/FormTextarea';
 
 const styles = (siteColors) => ({
     introWrp: {
@@ -40,35 +37,27 @@ class Intro extends Component {
     };
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.intro.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    textAlign: 'center',
-                    color: colors.darkGrey
-                }}
-                style={{margin: 0, width: '100vw'}}
-            />
-        ) : readNode;
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.intro.${fieldName}`,
+            placeholder,
+            readNode,
+            {textAlign: 'center', color: colors.darkGrey},
+            {margin: 0, width: '100vw'}
+        );
     }
 
     renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormTextarea
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.intro.${fieldName}`}
-                placeholder={placeholder}
-                textareaStyle={{
-                    textAlign: 'center',
-                    color: colors.darkGrey
-                }}
-                style={{margin: 0, width:'100%'}}
-            />
-        ) : readNode;
+        return getTextAreaField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.intro.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.darkGrey, textAlign: 'center'},
+            {margin: 0, width:'100%'}
+        );
     }
 
     render () {

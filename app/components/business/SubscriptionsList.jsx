@@ -4,11 +4,9 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import FormInput from 'components/FormInput';
-import FormTextarea from   'components/FormTextarea';
 import Subscription from 'components/business/Subscription';
 
 const styles = {
@@ -95,35 +93,27 @@ class SubscriptionsList extends Component {
     }
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.subscriptions.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    textAlign: 'center',
-                    color: colors.grey
-                }}
-                style={{margin: 0, width: '100vw'}}
-            />
-        ) : readNode;
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.subscriptions.${fieldName}`,
+            placeholder,
+            readNode,
+            {textAlign: 'center', color: colors.grey},
+            {margin: 0, width: '100vw'}
+        );
     }
 
     renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormTextarea
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.intro.${fieldName}`}
-                placeholder={placeholder}
-                textareaStyle={{
-                    textAlign: 'center',
-                    color: colors.grey
-                }}
-                style={{margin: 0, width:'100%', maxHeight: '30px'}}
-            />
-        ) : readNode;
+        return getTextAreaField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.subscriptions.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.grey, textAlign: 'center'},
+            {margin: 0, width:'100%', maxHeight: '30px'}
+        );
     }
 
     render () {

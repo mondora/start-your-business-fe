@@ -3,7 +3,7 @@ import React from 'react';
 import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes, getLink} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import BusinessFooter from 'components/business/Footer';
@@ -72,9 +72,9 @@ class Footer extends BusinessFooter {
                                         {'INFO'}
                                     </span>
                                     <br />
-                                    {this.renderLink(buildSiteMode, '#', 'Privacy Policy', {color: colors.lightGrey})}
+                                    {getLink(buildSiteMode, '#', 'Privacy Policy', {color: colors.lightGrey})}
                                     <br />
-                                    {this.renderLink(buildSiteMode, '#', 'Termini e Condizioni', {color: colors.lightGrey})}
+                                    {getLink(buildSiteMode, '#', 'Termini e Condizioni', {color: colors.lightGrey})}
                                 </div>
                             </Col>
                             <Col xs={12} sm={6} md={3}>
@@ -82,7 +82,7 @@ class Footer extends BusinessFooter {
                                     <span style={commonStyle.footerColTitle}>
                                         {'Developed With'}
                                     </span>
-                                    {this.renderLink(
+                                    {getLink(
                                         buildSiteMode,
                                         '#',
                                         (<div>

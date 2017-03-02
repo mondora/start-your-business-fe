@@ -3,11 +3,9 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row, Image, Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import FormInput from 'components/FormInput';
-import FormTextarea from 'components/FormTextarea';
 import ImageUploader from 'components/ImageUploader';
 import SaveButton from 'components/BuildSiteSaveButton';
 
@@ -81,34 +79,27 @@ class OtherInfo extends Component {
     }
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormInput
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.info.${fieldName}`}
-                placeholder={placeholder}
-                inputStyle={{
-                    textAlign: 'center'
-                }}
-                style={{margin: 0}}
-            />
-        ) : readNode;
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.info.${fieldName}`,
+            placeholder,
+            readNode,
+            {textAlign: 'center'},
+            {margin: 0}
+        );
     }
 
     renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
-        return isEditMode ? (
-            <FormTextarea
-                field={this.props.form[fieldName]}
-                inputType='text'
-                model={`businessSite.siteConfig.info.${fieldName}`}
-                placeholder={placeholder}
-                textareaStyle={{
-                    color: colors.grey,
-                    minHeight: '100px'
-                }}
-                style={{margin: 0, width:'100%'}}
-            />
-        ) : readNode;
+        return getTextAreaField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.info.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.grey, minHeight: '100px'},
+            {margin: 0, width:'100%'}
+        );
     }
 
     getInfoBox () {
