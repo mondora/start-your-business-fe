@@ -34,7 +34,7 @@ export default class Header extends Component {
             `businessSite.siteConfig.header.${fieldName}`,
             placeholder,
             readNode,
-            {color: colors.grey, padding: '2px 4px', marginRight: '25px', fontSize: '13px'},
+            {color: colors.templateGreyText, padding: '2px 4px', marginRight: '25px', fontSize: '13px'},
             {margin: 0}
         );
     }

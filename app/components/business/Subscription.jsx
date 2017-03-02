@@ -47,7 +47,7 @@ const styles = {
         justifyContent: 'space-between',
         height: '100%',
         fontSize: 14,
-        color: colors.darkGrey
+        color: colors.templateGreyText
     },
     subscriptionFeatures: {
         display: 'flex',

@@ -51,7 +51,7 @@ const styles = (siteColors) => ({
     },
     boxText: {
         fontSize: '1.1em',
-        color: colors.darkGrey
+        color: colors.templateGreyText
 
     },
     boxButton: {
@@ -97,7 +97,7 @@ class OtherInfo extends Component {
             `businessSite.siteConfig.info.${fieldName}`,
             placeholder,
             readNode,
-            {color: colors.grey, minHeight: '100px'},
+            {color: colors.templateGreyText, minHeight: '100px'},
             {margin: 0, width:'100%'}
         );
     }
