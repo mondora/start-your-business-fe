@@ -10,15 +10,16 @@ import BusinessIntro from 'components/business/Intro';
 const styles = (siteColors) => ({
     introTitleStyle: {
         fontSize: 'calc(22px + 1vw)',
-        fontWeight: '700',
-        color: colors.templateGreyText
+        fontWeight: '300',
+        color: siteColors.mainColor
     },
     buttonStyle: {
         fontSize: '1.2em',
         padding: '8px 20px',
-        backgroundColor: colors.white,
-        color: siteColors.mainColor,
-        borderColor: siteColors.mainColor
+        backgroundColor: siteColors.mainColor,
+        color: colors.white,
+        border: 0,
+        borderRadius: 0
     }
 });
 
