@@ -4,8 +4,8 @@ import React, {Component, PropTypes} from 'react';
 import Teaser from 'components/business/02/Teaser';
 // import Intro from 'components/business/01/Intro';
 // import Steps from 'components/business/01/Steps';
-// import SubscriptionsList from 'components/business/01/SubscriptionsList';
-import OtherInfo from 'components/business/01/OtherInfo';
+// import SubscriptionsList from 'components/business/SubscriptionsList';
+import OtherInfo from 'components/business/OtherInfo';
 
 class Home extends Component {
     static propTypes = {

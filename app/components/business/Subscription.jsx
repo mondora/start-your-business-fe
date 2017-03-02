@@ -2,6 +2,9 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Button, Glyphicon} from 'react-bootstrap';
 
+import ImageUploader from 'components/ImageUploader';
+import SaveButton from 'components/BuildSiteSaveButton';
+
 import * as colors from 'lib/colors';
 
 const styles = {
@@ -94,10 +97,34 @@ class Subscription extends Component {
         feature1: PropTypes.node,
         feature2: PropTypes.node,
         frequency: PropTypes.node,
+        imageUploadMode: PropTypes.bool,
         photoName: PropTypes.string,
         price: PropTypes.node,
         type: PropTypes.node
     };
+
+    renderImage (path) {
+        return this.props.imageUploadMode ? (
+            <div>
+                <p>
+                    {'AGGIUNGI FOTO DELLA TUA SOTTOSCRIZIONE'}
+                </p>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <ImageUploader />
+                    <SaveButton />
+                </div>
+            </div>
+        ) : (
+            <img src={path} style={styles.subscriptionImage} />
+        );
+    }
 
     render () {
         const path = `../_assets/images/template_01/${this.props.photoName}`;
@@ -108,9 +135,7 @@ class Subscription extends Component {
                     {this.props.type}
                 </div>
                 <div style={styles.subscriptionFeaturesWrp}>
-                    <div>
-                        <img src={path} style={styles.subscriptionImage} />
-                    </div>
+                    {this.renderImage(path)}
                     <div style={styles.subscriptionFeatures}>
                         <p style={{width: '100%'}}>
                             <Glyphicon

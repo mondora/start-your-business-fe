@@ -8,6 +8,8 @@ import * as colors from 'lib/colors';
 
 import FormInput from 'components/FormInput';
 import FormTextarea from 'components/FormTextarea';
+import ImageUploader from 'components/ImageUploader';
+import SaveButton from 'components/BuildSiteSaveButton';
 
 const styles = (siteColors) => ({
     boxContainer: {
@@ -17,7 +19,7 @@ const styles = (siteColors) => ({
         flexFlow: 'no-wrap',
         justifyContent: 'space-between',
         '@media screen and (max-width: 767px)': {
-            flexDirection: 'column',
+            flexDirection: 'column'
         }
     },
     boxWrp: {
@@ -126,6 +128,29 @@ class OtherInfo extends Component {
         ];
     }
 
+    renderImage (imgName, style) {
+        return this.props.buildSiteMode === editModes.UPLOAD_IMAGES ? (
+            <div>
+                <p>
+                    {'AGGIUNGI IMMAGINE'}
+                </p>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <ImageUploader />
+                    <SaveButton />
+                </div>
+            </div>
+        ) : (
+            <Image src={`./_assets/images/template_01/${imgName}`} style={style.boxImage} circle={true} />
+        );
+    }
+
     render () {
         const style = styles(this.props.siteConfig.colors);
         return (
@@ -135,7 +160,7 @@ class OtherInfo extends Component {
                         <div key={index} style={style.boxWrp}>
                             <Row>
                                 <Col xs={12} md={5}>
-                                    <Image src={`./_assets/images/template_01/${infoBox.photo}`} style={style.boxImage} circle={true} />
+                                    {this.renderImage(infoBox.photo, style)}
                                 </Col>
                                 <Col xs={12} md={7}>
                                     <div style={style.textWrp}>

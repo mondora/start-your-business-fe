@@ -2,10 +2,10 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 
 import Intro from 'components/business/01/Intro';
-import OtherInfo from 'components/business/01/OtherInfo';
+import OtherInfo from 'components/business/OtherInfo';
 import Teaser from 'components/business/01/Teaser';
 import Steps from 'components/business/01/Steps';
-import SubscriptionsList from 'components/business/01/SubscriptionsList';
+import SubscriptionsList from 'components/business/SubscriptionsList';
 
 class Home extends Component {
     static propTypes = {

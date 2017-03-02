@@ -9,7 +9,7 @@ import * as colors from 'lib/colors';
 
 import FormInput from 'components/FormInput';
 import FormTextarea from   'components/FormTextarea';
-import Subscription from 'components/business/01/Subscription';
+import Subscription from 'components/business/Subscription';
 
 const styles = {
     subscriptionsWrp: {
@@ -44,7 +44,7 @@ class SubscriptionsList extends Component {
         siteConfig: PropTypes.object.isRequired
     };
 
-    getSubscription () {
+    getSubscription (isEditMode) {
         const siteColors = this.props.siteConfig.colors;
         const {
             subscriptionType1,
@@ -63,7 +63,6 @@ class SubscriptionsList extends Component {
             subscriptionFrequency2,
             subscriptionFrequency3
         } = this.props.siteConfig.subscriptions;
-        const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return [
             {
                 bgColor: siteColors.mainColor,
@@ -139,16 +138,17 @@ class SubscriptionsList extends Component {
                                 {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
                             </h2>
                             <div style={styles.subscription}>
-                                {this.getSubscription().map((subscriptionInfo, index) =>
+                                {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
                                     <Subscription
                                         key={index}
-                                        type={subscriptionInfo.type}
                                         bgColor={Color(subscriptionInfo.bgColor).alpha(0.3 * (2 + index)).rgb().string()}
-                                        photoName={subscriptionInfo.photo}
                                         frequency={subscriptionInfo.frequency}
                                         feature1={subscriptionInfo.feature1}
                                         feature2={subscriptionInfo.feature2}
+                                        imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
+                                        photoName={subscriptionInfo.photo}
                                         price={subscriptionInfo.price}
+                                        type={subscriptionInfo.type}
                                     />
                                 )}
                             </div>
