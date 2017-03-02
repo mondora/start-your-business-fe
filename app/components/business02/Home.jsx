@@ -1,8 +1,5 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-
-import * as colors from 'lib/colors';
 
 import Teaser from 'components/business02/Teaser';
 // import Intro from 'components/business01/Intro';
@@ -10,38 +7,21 @@ import Teaser from 'components/business02/Teaser';
 // import SubscriptionsList from 'components/business01/SubscriptionsList';
 import OtherInfo from 'components/business01/OtherInfo';
 
-const styles = {
-    pageContainer: {
-        maxWidth: '1200px',
-        height: 'auto',
-        marginBottom: 40
-    },
-    bottomContainer: {
-        backgroundColor: colors.lightGrey,
-        padding: '60px 0 40px 0'
-    },
-    bottomPageWrp: {
-        maxWidth: '1200px',
-        height: 'auto'
-    }
-};
-
 class Home extends Component {
     static propTypes = {
-        businessSiteIntroForm: PropTypes.object,
-        businessSiteOtherInfoForm: PropTypes.object,
-        businessSiteState: PropTypes.object,
-        businessSiteStepsForm: PropTypes.object,
-        businessSiteSubscriptionsForm: PropTypes.object
+        businessSiteOtherInfoForm: PropTypes.object.isRequired,
+        businessSiteState: PropTypes.object.isRequired,
+        styles: PropTypes.object.isRequired
     };
 
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
+        const styles = this.props;
         return (
             <div>
                 <Teaser
                     buildSiteMode={editMode}
-                    images={this.props.businessSiteState.siteConfig.teaserImages}
+                    images={siteConfig.teaserImages}
                 />
                 <div style={styles.bottomContainer}>
                     <div className='container-fluid' style={styles.bottomPageWrp}>
@@ -73,20 +53,5 @@ class Home extends Component {
 //         siteConfig={siteConfig}
 //     />
 // </div>
-const mapStateToProps = (state) => {
-    return {
-        businessSiteIntroForm: state.businessSiteIntroForm,
-        businessSiteOtherInfoForm: state.businessSiteOtherInfoForm,
-        businessSiteState: state.businessSite,
-        businessSiteStepsForm: state.businessSiteStepsForm,
-        businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm
-    };
-};
 
-const mapDispatchToProps = () => {
-    return {
-    };
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(Home));
+export default (Radium(Home));

@@ -109,8 +109,7 @@ const styles = (siteColors) => ({
         height: 'auto',
         width: '100%',
         maxWidth: 250
-    },
-
+    }
 });
 
 class Header extends Component {

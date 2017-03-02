@@ -17,10 +17,8 @@ import ChooseTemplateWidget from 'components/ChooseTemplateWidget';
 import Icon from 'components/Icon';
 import PageTeaser from 'components/PageTeaser';
 
-import BusinessHome01 from 'containers/business01/Home';
-import BusinessRoot01 from 'containers/business01/Root';
-import BusinessHome02 from 'containers/business02/Home';
-import BusinessRoot02 from 'containers/business02/Root';
+import BusinessHome from 'containers/business/Home';
+import BusinessRoot from 'containers/business/Root';
 
 const styles = {
     buttonWrp: {
@@ -80,24 +78,6 @@ class BuildSite extends Component {
         );
     }
 
-    renderBusinessSite () {
-        switch (this.props.businessSite.siteConfig.templateId) {
-            case 1:
-                return (
-                    <BusinessRoot01>
-                        <BusinessHome01 />
-                    </BusinessRoot01>
-                );
-            case 2:
-            default:
-                return (
-                    <BusinessRoot02>
-                        <BusinessHome02 />
-                    </BusinessRoot02>
-                );
-        }
-    }
-
     render () {
         return (
             <div>
@@ -141,7 +121,9 @@ class BuildSite extends Component {
                                 />
                             </div>
                             <div style={{width:'calc(100% - 65px)', float: 'right', border: `2px solid ${colors.lightGrey}`, overflow: 'hidden'}}>
-                                {this.renderBusinessSite()}
+                                <BusinessRoot>
+                                    <BusinessHome />
+                                </BusinessRoot>
                             </div>
                         </Col>
                     </Row>

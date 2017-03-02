@@ -88,7 +88,7 @@ const defaultState = {
         teaserImages: [{
             id: null
         }],
-        templateId: templatesIds.TEMPLATE_2
+        templateId: templatesIds.TEMPLATE_1
     }
 };
 

@@ -5,10 +5,12 @@ import Radium from 'radium';
 
 import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
 
-import Header from 'components/business02/Header';
-import Footer from 'components/business02/Footer';
+import Header from 'components/business01/Header';
+import Footer from 'components/business01/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
+
+import {templatesIds} from 'lib/business-site-utils';
 
 class Root extends Component {
     static propTypes = {
@@ -34,10 +36,20 @@ class Root extends Component {
         }
     }
 
+    getFontFamily ({templateId}) {
+        switch (templateId) {
+            case templatesIds.TEMPLATE_2:
+                return 'Lato';
+            case templatesIds.TEMPLATE_1: 
+            default:
+                return 'Roboto';
+        }
+    }
+    
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
         return (
-            <div style={{fontFamily: 'Lato'}}>
+            <div style={{fontFamily: this.getFontFamily(siteConfig)}}>
                 <Header
                     buildSiteMode={editMode}
                     form={this.props.businessSiteHeaderForm}

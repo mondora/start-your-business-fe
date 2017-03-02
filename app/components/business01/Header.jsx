@@ -93,7 +93,7 @@ const styles = (siteColors) => ({
         margin: '20px 0',
         '@media screen and (max-width: 767px)': {
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'center'
         }
     },
     headerLogo: {
