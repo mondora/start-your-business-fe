@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Col, Row} from 'react-bootstrap';
+import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
 import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
@@ -7,29 +7,14 @@ import * as colors from 'lib/colors';
 
 const styles = (siteColors) => ({
     stepsContainer: {
-        borderRadius: 10,
-        backgroundColor: siteColors.mainColor,
-        color: colors.white,
+        borderTop: `1px solid ${siteColors.mainColor}`,
+        padding: '30px 0',
         textAlign: 'center'
     },
-    stepNumber: {
+    stepIconWrp: {
         display: 'inline-block',
-        width: 70,
-        height: 70,
-        textAlign: 'center',
-        fontSize: '3.8em',
-        fontWeight: '700',
-        lineHeight: '70px',
-        borderRadius: '100%',
-        color: siteColors.mainColor,
-        backgroundColor: colors.white
-    },
-    stepTitle: {
-        fontSize: 'calc(22px + 1vw)',
-        fontWeight: '700',
-        padding: '20px',
-        margin: 0,
-        borderBottom: `1px solid ${colors.white}`
+        fontSize: 50,
+        color: siteColors.mainColor
     }
 });
 
@@ -61,17 +46,17 @@ export default class Steps extends Component {
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return [
             {
-                number: '1',
+                icon: 'glyphicon glyphicon-th-list',
                 title: this.renderTextField(isEditMode, 'titleStep1', 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI', titleStep1),
                 text: this.renderTextareaField(isEditMode, 'textStep1', 'Abbiamo pensato a tutti, ma se desideri personalizzare il tuo ordine, chiama al 012-3456789', textStep1)
             },
             {
-                number: '2',
+                icon: 'glyphicon glyphicon-calendar',
                 title: this.renderTextField(isEditMode, 'titleStep2', 'RISPARMI E NON DOVRAI PENSARE A NULLA', titleStep2),
                 text: this.renderTextareaField(isEditMode, 'textStep2', 'Ogni mese ti arriverà una cassettina con frutta e verdura biologica di stagione', textStep2)
             },
             {
-                number: '3',
+                icon: 'glyphicon glyphicon-lock',
                 title: this.renderTextField(isEditMode, 'titleStep3', 'POTRAI DISISCRIVERTI QUANDO VUOI', titleStep3),
                 text: this.renderTextareaField(isEditMode, 'textStep3', 'Se non sei soddisfatto del servizio, puoi decidere di non ricevere più le nostre cassettine', textStep3)
             }
@@ -85,7 +70,7 @@ export default class Steps extends Component {
             `businessSite.siteConfig.steps.${fieldName}`,
             placeholder,
             readNode,
-            {textAlign: 'center', color: colors.grey},
+            {textAlign: 'center', color: colors.templateGreyText},
             {margin: 0, width: '100%'}
         );
     }
@@ -97,43 +82,38 @@ export default class Steps extends Component {
             `businessSite.siteConfig.steps.${fieldName}`,
             placeholder,
             readNode,
-            {color: colors.grey, textAlign: 'center', fontSize: '14px', minHeight: 120},
+            {color: colors.templateGreyText, textAlign: 'center', fontSize: '14px', minHeight: 120},
             {margin: 0, width:'100%'}
         );
     }
 
     render () {
-        const {stepsTitle} = this.props.siteConfig.steps;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (
             <Form model={'businessSite.siteConfig.steps'}>
-                <Row>
-                    <Col xs={12}>
-                        <div style={style.stepsContainer}>
-                            <h2 style={style.stepTitle}>
-                                {this.renderTextField(isEditMode, 'stepsTitle', 'COME FUNZIONA', stepsTitle)}
-                            </h2>
-                            <Row>
-                                {this.getStep().map((stepInfo, index) =>
-                                    <Col key={index} xs={12} sm={4}>
-                                        <div style={{margin: isEditMode ? '30px 10px' : '30px 20px'}}>
-                                            <div style={style.stepNumber}>
-                                                {stepInfo.number}
-                                            </div>
-                                            <h4 style={{fontSize: isEditMode ? '15px' : '1.6em', fontWeight: '700'}}>
-                                                {stepInfo.title}
-                                            </h4>
-                                            <p style={{fontSize: '1.2em'}}>
-                                                {stepInfo.text}
-                                            </p>
-                                        </div>
-                                    </Col>
-                                )}
-                            </Row>
-                        </div>
-                    </Col>
-                </Row>
+                <div style={style.stepsContainer}>
+                    <Row>
+                        {this.getStep().map((stepInfo, index) =>
+                            <Col key={index} xs={12} sm={4}>
+                                <div style={{margin: isEditMode ? '30px 10px' : '30px 20px', textAlign: 'center'}}>
+                                    <div style={style.stepIconWrp}>
+                                        <Glyphicon
+                                            glyph={stepInfo.icon}
+                                            style={{marginRight: 5}}
+                                        />
+                                    </div>
+                                    <h4 style={{fontSize: isEditMode ? '15px' : '1.6em', fontWeight: '700'}}>
+                                        {stepInfo.title}
+                                    </h4>
+                                    <p style={{fontSize: '1.2em'}}>
+                                        {stepInfo.text}
+                                    </p>
+                                </div>
+                            </Col>
+                        )}
+                    </Row>
+                </div>
             </Form>
         );
     }
