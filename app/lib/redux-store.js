@@ -10,6 +10,7 @@ const storageConfig ={
         'billing',
         'businessSite',
         'payment',
+        'products',
         'spinner',
         'user'
     ],

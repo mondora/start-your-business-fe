@@ -1,9 +1,9 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
+import {Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {Form} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
-import {Row, Col} from 'react-bootstrap';
 
 import {getPaymentParams} from 'actions/payment';
 import {choosePlan, getSYBProductPlans} from 'actions/products';
@@ -12,8 +12,8 @@ import BillingInformationForm from 'components/BillingInformationForm';
 import Button from 'components/CustomButton';
 import CreditCardForm from 'components/CreditCardForm';
 import FormInputCheckbox from 'components/FormInputCheckbox';
-import ProductPlanCardList from 'components/ProductPlanCardList';
 import PageTeaser from 'components/PageTeaser';
+import ProductPlanCardList from 'components/ProductPlanCardList';
 
 import * as colors from 'lib/colors';
 import {isCheckedValidator} from 'lib/form-utils';
