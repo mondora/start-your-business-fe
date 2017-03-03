@@ -4,7 +4,6 @@ import React, {Component, PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 
 class CreditCardForm extends Component {
-
     static propTypes = {
         getPaymentParams: PropTypes.func.isRequired,
         paymentPageParams: PropTypes.object

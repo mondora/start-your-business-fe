@@ -2,7 +2,7 @@ import {subscriptionStatus} from 'lib/subscription-utils';
 
 const defaultState = {
     pageParams: null,
-    subscriptionSuccess: subscriptionStatus.IN_PROGRESS
+    subscriptionStatus: subscriptionStatus.IN_PROGRESS
 };
 
 const payment = (state = defaultState, action) => {
@@ -15,12 +15,12 @@ const payment = (state = defaultState, action) => {
         case 'SUBSCRIBE_NEW_CUSTOMER_FAIL':
             return {
                 ...state,
-                subscriptionSuccess: subscriptionStatus.SUCCESS
+                subscriptionStatus: subscriptionStatus.FAIL
             };
         case 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS':
             return {
                 ...state,
-                subscriptionSuccess: subscriptionStatus.FAIL
+                subscriptionStatus: subscriptionStatus.SUCCESS
             };
         default:
             return state;

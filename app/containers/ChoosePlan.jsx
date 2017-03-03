@@ -1,9 +1,9 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
+import {Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {Form} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
-import {Row, Col} from 'react-bootstrap';
 
 import {getPaymentParams} from 'actions/payment';
 import {choosePlan, getSYBProductPlans} from 'actions/products';
@@ -12,8 +12,8 @@ import BillingInformationForm from 'components/BillingInformationForm';
 import Button from 'components/CustomButton';
 import CreditCardForm from 'components/CreditCardForm';
 import FormInputCheckbox from 'components/FormInputCheckbox';
-import ProductPlanCardList from 'components/ProductPlanCardList';
 import PageTeaser from 'components/PageTeaser';
+import ProductPlanCardList from 'components/ProductPlanCardList';
 
 import * as colors from 'lib/colors';
 import {isCheckedValidator} from 'lib/form-utils';
@@ -28,7 +28,7 @@ const styles = {
         fontSize: 'calc(30px + 1vw)',
         lineHeight: 'calc(30px + 1vw)',
         '@media screen and (min-width: 991px)': {
-            width: '80%',
+            width: '80%'
         }
     },
     section: {
@@ -39,7 +39,7 @@ const styles = {
     },
     sectionTitle: {
         fontWeight: '700',
-        fontSize: '1.3em',
+        fontSize: '1.3em'
     }
 };
 
@@ -76,6 +76,7 @@ class ChoosePlan extends Component {
                                         {'1. Scelta del piano (al momento il piano professional non è attivo):'}
                                     </p>
                                     <ProductPlanCardList
+                                        billingInformationForm={this.props.billingInformationForm}
                                         chooseMode={true}
                                         choosePlan={this.props.choosePlan}
                                         chosenPlanId={chosenPlanId}

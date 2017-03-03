@@ -2,6 +2,10 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+import {bindActionCreators} from 'redux';
+import {getStoredState} from 'redux-persist';
+
+import {subscribeNewCustomer} from 'actions/payment';
 
 import * as colors from 'lib/colors';
 import {subscriptionStatus} from 'lib/subscription-utils';
@@ -28,9 +32,30 @@ const styles = {
 class SubscriptionResult extends Component {
     static propTypes = {
         location: PropTypes.object.isRequired,
-        payment: PropTypes.object.isRequired
+        payment: PropTypes.object.isRequired,
+        subscribeNewCustomer: PropTypes.func.isRequired
     };
 
+    constructor (props) {
+        super(props);
+        const {query} = props.location;
+        console.log(query);
+        const creditCardSuccess = this.isCreditCardSuccess(query);
+        if (creditCardSuccess) {
+            //need to get data from stored state because of navigation from iframe
+            getStoredState({whitelist: ['billing', 'products'], keyPrefix: 'syb:'}, (err, state) => {
+                props.subscribeNewCustomer(
+                    state.products.chosenPlanId, 
+                    state.billing, 
+                    query.refId);
+            });
+        }
+    }
+
+    isCreditCardSuccess (query) {
+        return query.creditCardSuccess === 'true';
+    }
+    
     renderContent (title, message, button) {
         return (
             <div>
@@ -91,8 +116,8 @@ class SubscriptionResult extends Component {
     }
 
     render () {
-        if (this.props.location.query.creditCardSuccess === 'true') {
-            switch (this.props.payment.subscriptionSuccess) {
+        if (this.isCreditCardSuccess(this.props.location.query)) {
+            switch (this.props.payment.subscriptionStatus) {
                 case subscriptionStatus.IN_PROGRESS:
                     return this.renderSubscriptionInProgress();
                 case subscriptionStatus.SUCCESS:
@@ -112,8 +137,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = () => {
-    return {};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        subscribeNewCustomer: bindActionCreators(subscribeNewCustomer, dispatch)
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Radium(SubscriptionResult));

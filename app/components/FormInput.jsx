@@ -30,6 +30,7 @@ const styles = {
 export default class FormInput extends Component {
 
     static propTypes = {
+        disabled: PropTypes.bool,
         error: PropTypes.func,
         field: PropTypes.object.isRequired,
         inputStyle: PropTypes.object,
@@ -48,15 +49,16 @@ export default class FormInput extends Component {
     }
 
     render () {
-        const {error, field, model, inputType, placeholder, validator} = this.props;
+        const {disabled, error, field, model, inputType, placeholder, validator} = this.props;
         return (
             <label style={this.props.style}>
                 {this.renderLabel()}
                 <Field
-                    model={model}
+                    disabled={disabled}
                     errors={{
                         invalid: val => validator ? validator(val) : false
                     }}
+                    model={model}
                     validateOn='blur'
                 >
                     <input

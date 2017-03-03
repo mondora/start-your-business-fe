@@ -13,6 +13,7 @@ const cardColors = [
 
 export default class ProductPlanCardList extends Component {
     static propTypes = {
+        billingInformationForm: PropTypes.object,
         chooseMode: PropTypes.bool,
         choosePlan: PropTypes.func,
         chosenPlanId: PropTypes.string,
@@ -28,16 +29,17 @@ export default class ProductPlanCardList extends Component {
         return this.props.productPlans.map((productPlan, index) => {
             return this.props.chooseMode ? (
                 <ChoosablePlanCard
-                    key={productPlan.id}
                     backgroundColor={cardColors[index]}
+                    billingInformationForm={this.props.billingInformationForm}
                     isSelected={this.props.chosenPlanId === productPlan.id}
+                    key={productPlan.id}
                     onSelect={() => this.props.choosePlan(productPlan.id)}
                     productPlan={productPlan}
                 />
             ) : (
                 <ProductPlanCard
-                    key={productPlan.id}
                     backgroundColor={cardColors[index]}
+                    key={productPlan.id}
                     onConfirm={() => console.log('confirm')}
                     productPlan={productPlan}
                 />

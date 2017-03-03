@@ -13,13 +13,23 @@ export function requiredEmailValidator (val) {
 }
 
 export function requiredPasswordValidator (val) {
-    //TODO
-    /***
+    /*** TODO
         Minimum length 8
         Require numbers
         Require special character
         Require uppercase letters
         Require lowercase letters
      ***/
+    return genericRequiredValidator(val);
+}
+
+export function businessNameValidator (val) {
+    //TODO check for already existing business name
+    return genericRequiredValidator(val) ||
+        (val.indexOf('.') >= 0 && 'Il nome non può contenere un punto');
+}
+
+export function domainNameValidator (val) {
+    //TODO check for domain availability
     return genericRequiredValidator(val);
 }
