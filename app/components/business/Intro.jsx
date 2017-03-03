@@ -29,7 +29,7 @@ export default class Intro extends Component {
             `businessSite.siteConfig.intro.${fieldName}`,
             placeholder,
             readNode,
-            {textAlign: 'center', color: colors.darkGrey},
+            {textAlign: 'center', color: colors.templateGreyText},
             {margin: 0, width: '100vw'}
         );
     }
@@ -41,7 +41,7 @@ export default class Intro extends Component {
             `businessSite.siteConfig.intro.${fieldName}`,
             placeholder,
             readNode,
-            {color: colors.darkGrey, textAlign: 'center'},
+            {color: colors.templateGreyText, textAlign: 'center'},
             {margin: 0, width:'100%'}
         );
     }

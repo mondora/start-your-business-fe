@@ -14,8 +14,10 @@ const styles = {
     },
     pageWrp: {
         maxWidth: '1200px',
-        height: 'auto',
-        marginBottom: 40
+        height: 'auto'
+    },
+    subscriptionContainer: {
+        backgroundColor: colors.lightGrey
     },
     bottomPageContainer: {
         backgroundColor: colors.lightGrey,
@@ -41,8 +43,11 @@ class Home extends Component {
             case templatesIds.TEMPLATE_2:
                 return (
                     <Home2
+                        businessSiteIntroForm={this.props.businessSiteIntroForm}
                         businessSiteOtherInfoForm={this.props.businessSiteOtherInfoForm}
                         businessSiteState={this.props.businessSiteState}
+                        businessSiteStepsForm={this.props.businessSiteStepsForm}
+                        businessSiteSubscriptionsForm={this.props.businessSiteSubscriptionsForm}
                         styles={styles}
                     />
                 );

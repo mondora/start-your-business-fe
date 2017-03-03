@@ -1,10 +1,11 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
+
 import Intro from 'components/business/01/Intro';
 import OtherInfo from 'components/business/OtherInfo';
-import Teaser from 'components/business/01/Teaser';
 import Steps from 'components/business/01/Steps';
 import SubscriptionsList from 'components/business/SubscriptionsList';
+import Teaser from 'components/business/01/Teaser';
 
 class Home extends Component {
     static propTypes = {
@@ -17,7 +18,16 @@ class Home extends Component {
     };
 
     render () {
-        const {editMode, siteConfig} = this.props.businessSiteState;
+        const {
+            businessSiteIntroForm,
+            businessSiteStepsForm,
+            businessSiteSubscriptionsForm,
+            businessSiteOtherInfoForm,
+            businessSiteState: {
+                editMode,
+                siteConfig
+            }
+        } = this.props;
         const {styles} = this.props;
         return (
             <div>
@@ -29,17 +39,17 @@ class Home extends Component {
                     <div className='container-fluid' style={styles.pageWrp}>
                         <Intro
                             buildSiteMode={editMode}
-                            form={this.props.businessSiteIntroForm}
+                            form={businessSiteIntroForm}
                             siteConfig={siteConfig}
                         />
                         <Steps
                             buildSiteMode={editMode}
-                            form={this.props.businessSiteStepsForm}
+                            form={businessSiteStepsForm}
                             siteConfig={siteConfig}
                         />
                         <SubscriptionsList
                             buildSiteMode={editMode}
-                            form={this.props.businessSiteSubscriptionsForm}
+                            form={businessSiteSubscriptionsForm}
                             siteConfig={siteConfig}
                         />
                     </div>
@@ -48,7 +58,7 @@ class Home extends Component {
                     <div className='container-fluid' style={styles.bottomPageWrp}>
                         <OtherInfo
                             buildSiteMode={editMode}
-                            form={this.props.businessSiteOtherInfoForm}
+                            form={businessSiteOtherInfoForm}
                             siteConfig={siteConfig}
                         />
                     </div>
