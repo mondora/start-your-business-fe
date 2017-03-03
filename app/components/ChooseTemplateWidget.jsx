@@ -1,3 +1,4 @@
+import Radium from 'radium';
 import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
 
@@ -6,7 +7,18 @@ import {editModes, templates} from 'lib/business-site-utils';
 import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
 import TemplateCard from 'components/TemplateCard';
 
-export default class ChooseTemplateWidget extends Component {
+const styles = {
+    templateWidgetWrp: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        '@media screen and (max-width: 767px)': {
+            flexDirection: 'column'
+        }
+    }
+};
+
+class ChooseTemplateWidget extends Component {
     static propTypes = {
         editMode: PropTypes.number,
         selectTemplate: PropTypes.func.isRequired,
@@ -39,8 +51,12 @@ export default class ChooseTemplateWidget extends Component {
                 showOverlay={this.props.editMode === editModes.CHOOSE_TEMPLATE}
                 title='SCEGLI UN TEMPLATE'
             >
-                {this.renderTemplates()}
+                <div style={styles.templateWidgetWrp}>
+                    {this.renderTemplates()}
+                </div>
             </OverlayTriggerIcon>
         );
     }
 }
+
+export default Radium(ChooseTemplateWidget);

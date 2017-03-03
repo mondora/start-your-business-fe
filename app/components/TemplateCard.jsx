@@ -7,18 +7,20 @@ import * as colors from 'lib/colors';
 import Icon from 'components/Icon';
 
 const styles = {
+    buttonWrpStyle: {
+        width: '48%',
+        margin: '30px 20px 10px 0px',
+        '@media screen and (max-width: 767px)': {
+            width: '100%',
+        }
+    },
     buttonStyle: {
         outline: 0,
         outlineStyle: 'none',
         outlineWidth: 0,
         backgroundColor: colors.transparent,
         border: 0,
-        padding: 0,
-        margin: '30px auto 10px auto',
-        ':active': {
-            boxShadow: '0px',
-            webkitBoxShadow: '0px'
-        }
+        padding: 0
     },
     subTitle: {
         fontSize: 18,
@@ -66,29 +68,29 @@ class TemplateCard extends Component {
     render () {
         const {id, image, label} = this.props.template;
         return (
-            <Button onClick={() => this.props.onSelect(id)} style={styles.buttonStyle}>
-                <div style={{width: '100%'}}>
-                    <div style={styles.subTitle}>
-                        {this.props.selectedTemplate === id ? this.renderIconCkecked() : this.renderIconUnckecked()}
+            <div style={styles.buttonWrpStyle}>
+                <Button onClick={() => this.props.onSelect(id)} style={styles.buttonStyle}>
+                    <div>
+                        <div style={styles.subTitle}>
+                            {this.props.selectedTemplate === id ? this.renderIconCkecked() : this.renderIconUnckecked()}
+                        </div>
+                        <p style={styles.subTitle}>{label}</p>
                     </div>
-                    <p style={styles.subTitle}>{label}</p>
-                </div>
-                <img
-                    src={image}
-                    style={{
-                        display: 'block',
-                        height: 'auto',
-                        maxWidth: '85%',
-                        opacity: this.props.selectedTemplate === id ? '1' : '.5',
-                        border: this.props.selectedTemplate === id
-                        ? `6px solid ${colors.darkGrey}`
-                        : `6px solid ${colors.white}`,
-                        '@media screen and (max-width: 767px)': {
-                            maxWidth: '100%'
-                        }
-                    }}
-                />
-            </Button>
+                    <div style={{clear: 'both'}} />
+                    <img
+                        src={image}
+                        style={{
+                            display: 'block',
+                            height: 'auto',
+                            maxWidth: '90%',
+                            opacity: this.props.selectedTemplate === id ? '1' : '.5',
+                            border: this.props.selectedTemplate === id
+                            ? `6px solid ${colors.darkGrey}`
+                            : `6px solid ${colors.white}`
+                        }}
+                    />
+                </Button>
+            </div>
         );
     }
 }

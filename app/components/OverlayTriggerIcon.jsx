@@ -92,7 +92,6 @@ class OverlayTriggerIcon extends Component {
             <Overlay
                 container={this}
                 id={name}
-                placement='right'
                 show={this.props.showOverlay}
                 target={() => ReactDOM.findDOMNode(this.refs[name])}
             >
