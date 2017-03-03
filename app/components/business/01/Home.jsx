@@ -4,7 +4,7 @@ import Intro from 'components/business/01/Intro';
 import OtherInfo from 'components/business/OtherInfo';
 import Teaser from 'components/business/01/Teaser';
 import Steps from 'components/business/01/Steps';
-import SubscriptionsList from 'components/business/SubscriptionsList';
+// import SubscriptionsList from 'components/business/SubscriptionsList';
 
 class Home extends Component {
     static propTypes = {
@@ -19,6 +19,11 @@ class Home extends Component {
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
         const {styles} = this.props;
+        // <SubscriptionsList
+        //     buildSiteMode={editMode}
+        //     form={this.props.businessSiteSubscriptionsForm}
+        //     siteConfig={siteConfig}
+        // />
         return (
             <div>
                 <div style={styles.pageContainer}>
@@ -35,11 +40,6 @@ class Home extends Component {
                         <Steps
                             buildSiteMode={editMode}
                             form={this.props.businessSiteStepsForm}
-                            siteConfig={siteConfig}
-                        />
-                        <SubscriptionsList
-                            buildSiteMode={editMode}
-                            form={this.props.businessSiteSubscriptionsForm}
                             siteConfig={siteConfig}
                         />
                     </div>
