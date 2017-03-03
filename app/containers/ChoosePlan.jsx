@@ -28,7 +28,7 @@ const styles = {
         fontSize: 'calc(30px + 1vw)',
         lineHeight: 'calc(30px + 1vw)',
         '@media screen and (min-width: 991px)': {
-            width: '80%',
+            width: '80%'
         }
     },
     section: {
@@ -39,7 +39,7 @@ const styles = {
     },
     sectionTitle: {
         fontWeight: '700',
-        fontSize: '1.3em',
+        fontSize: '1.3em'
     }
 };
 
@@ -76,6 +76,7 @@ class ChoosePlan extends Component {
                                         {'1. Scelta del piano (al momento il piano professional non è attivo):'}
                                     </p>
                                     <ProductPlanCardList
+                                        billingInformationForm={this.props.billingInformationForm}
                                         chooseMode={true}
                                         choosePlan={this.props.choosePlan}
                                         chosenPlanId={chosenPlanId}

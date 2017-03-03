@@ -1,8 +1,10 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
-import {FormControl} from 'react-bootstrap';
+
+import FormInput from 'components/FormInput';
 
 import * as colors from 'lib/colors';
+import {businessNameValidator, domainNameValidator} from 'lib/form-utils';
 
 const styles = {
     inputWrp: {
@@ -19,34 +21,34 @@ const styles = {
             flexDirection: 'column',
             padding: 5,
             alignItems: 'flex-start'
-        },
+        }
     }
 };
 
 class DomainInput extends Component {
     static propTypes = {
-        customDomain: PropTypes.bool
+        customDomain: PropTypes.bool,
+        disabled: PropTypes.bool,
+        form: PropTypes.object.isRequired
     };
 
-    constructor (props) {
-        super(props);
-        this.state = {
-            domainName: ''
-        };
-    }
-
-    handleDomainNameChange (e) {
-        this.setState({domainName: e.target.value});
+    getValidator (disabled, customDomain) {
+        //TODO provide right validators
+        return disabled ? null : (customDomain ? domainNameValidator : businessNameValidator);
     }
 
     render () {
+        const {businessName, domainName} = this.props.form.site;
+        const {customDomain, disabled} = this.props;
         return (
             <div style={styles.inputWrp}>
-                {this.props.customDomain ? 'http://' : 'www.entova.it/'}
-                <FormControl
-                    type={'text'}
-                    value={this.state.domainName}
-                    onChange={this.handleDomainNameChange.bind(this)}
+                {customDomain ? 'http://' : 'www.entova.it/'}
+                <FormInput
+                    disabled={disabled}
+                    field={customDomain ? domainName : businessName}
+                    inputType='text'
+                    model={`billing.site.${customDomain ? 'domainName' : 'businessName'}`}
+                    validator={this.getValidator(disabled, customDomain)}
                 />
             </div>
         );
