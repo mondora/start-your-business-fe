@@ -145,7 +145,7 @@ class Header extends BusinessHeader {
                                 </Col>
                                 <Col xs={12} sm={6} md={4} lg={5} mdPush={4} lgPush={2}>
                                     <div style={style.rightWrp}>
-                                        {this.renderSocialIcons(style.socialIcon, style.socialIconWrp)}
+                                        {this.renderSocialIcons(...style.socialIcon, ...style.socialIconWrp)}
                                         {this.renderAccountSection(style.accountLinksWrp)}
                                     </div>
                                 </Col>

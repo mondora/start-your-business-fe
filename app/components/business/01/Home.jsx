@@ -2,7 +2,7 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 
 import Intro from 'components/business/01/Intro';
-import OtherInfo from 'components/business/OtherInfo';
+import OtherInfo from 'components/business/01/OtherInfo';
 import Steps from 'components/business/01/Steps';
 import SubscriptionsList from 'components/business/SubscriptionsList';
 import Teaser from 'components/business/01/Teaser';
@@ -54,7 +54,7 @@ class Home extends Component {
                         />
                     </div>
                 </div>
-                <div style={styles.bottomPageContainer}>
+                <div style={styles.bottomPageContainer1}>
                     <div className='container-fluid' style={styles.bottomPageWrp}>
                         <OtherInfo
                             buildSiteMode={editMode}

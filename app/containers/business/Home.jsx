@@ -19,9 +19,20 @@ const styles = {
     subscriptionContainer: {
         backgroundColor: colors.lightGrey
     },
-    bottomPageContainer: {
+    bottomPageContainer1: {
         backgroundColor: colors.lightGrey,
         padding: '60px 0 40px 0'
+    },
+    bottomPageContainer2: {
+        position: 'relative',
+        backgroundImage: 'url(\'./_assets/images/template_02/carousel01.jpg\')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top'
+    },
+    bottomPageBlackOpacity: {
+        padding: '100px 0 60px 0',
+        backgroundColor: colors.blackOpacity
     },
     bottomPageWrp: {
         maxWidth: '1200px',

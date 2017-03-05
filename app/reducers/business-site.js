@@ -63,6 +63,8 @@ export const initialSubscriptionsInfo = {
 };
 
 export const initialOtherInfo = {
+    textBox: `Sappiamo che amerai i nostri prodotti, se però necessiti di una
+                formula personalizzata o se vuoi comunicarci qualcosa non esitare a scriverci!`,
     textBox1: `Scopri altro riguardo ai nostri prodotti, sul nostro sito
                 troverai tutte le informazioni che cercavi`,
     buttonBox1: 'PER SAPERNE DI PIÙ',
