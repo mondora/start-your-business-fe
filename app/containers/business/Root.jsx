@@ -64,6 +64,9 @@ class Root extends Component {
                 <Header
                     buildSiteMode={editMode}
                     form={this.props.businessSiteHeaderForm}
+                    login={this.props.login}
+                    loginForm={this.props.loginForm}
+                    loginState={this.props.user.login}
                     siteConfig={siteConfig}
                 />
 

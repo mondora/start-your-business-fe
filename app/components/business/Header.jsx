@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import Icon from 'components/Icon';
+import LoginModal from 'components/LoginModal';
 
 import {getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
@@ -23,10 +24,21 @@ const commonStyle = {
 export default class Header extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
-        form: PropTypes.object,
+        form: PropTypes.object.isRequired,
+        login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object.isRequired,
+        loginState: PropTypes.object.isRequired,
         siteConfig: PropTypes.object.isRequired
     };
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            showLoginModal: false,
+            showSignupModal: false
+        };
+    }
+    
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
         return getTextField (
             isEditMode,
@@ -41,6 +53,7 @@ export default class Header extends Component {
 
     renderSocialIcons (socialIconStyle, socialIconWrpStyle) {
         const {siteConfig} = this.props;
+        //TODO active link & change link
         return (
             <div style={socialIconWrpStyle}>
                 <Icon
@@ -57,7 +70,10 @@ export default class Header extends Component {
         );
     }
 
-    renderAccountSection (specStyle) {
+    renderAccountSection (specStyle, inactive) {
+        //TODO signup modal
+        const onClickLogin = inactive ? null : () => this.setState({showLoginModal: true});
+        const onClickSignup = inactive ? null : () => this.setState({showSignupModal: true});
         return (
             <div
                 style={{
@@ -66,14 +82,22 @@ export default class Header extends Component {
                 }}
             >
                 <div>{'|'}</div>
-                <div style={commonStyle.accountLink} onClick={() => console.log('login')}>
+                <div style={commonStyle.accountLink} onClick={onClickLogin}>
                     {'LOGIN'}
                 </div>
                 <div>{'|'}</div>
-                <div style={commonStyle.accountLink} onClick={() => console.log('signup')}>
+                <div style={commonStyle.accountLink} onClick={onClickSignup}>
                     {'REGISTRATI'}
                 </div>
                 <div>{'|'}</div>
+                <LoginModal
+                    backgroundColor={this.props.siteConfig.colors.mainColor}
+                    form={this.props.loginForm}
+                    login={this.props.login}
+                    loginState={this.props.loginState}
+                    onClose={() => this.setState({showLoginModal: false})}
+                    show={this.state.showLoginModal}
+                />
             </div>
         );
     }

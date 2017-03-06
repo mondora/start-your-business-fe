@@ -116,7 +116,8 @@ class Header extends BusinessHeader {
 
     render () {
         const {emailAddress, phoneNumber} = this.props.siteConfig.header;
-        const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
+        const {buildSiteMode} = this.props;
+        const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (
             <div>
@@ -146,7 +147,7 @@ class Header extends BusinessHeader {
                                 <Col xs={12} sm={6} md={4} lg={5} mdPush={4} lgPush={2}>
                                     <div style={style.rightWrp}>
                                         {this.renderSocialIcons(...style.socialIcon, ...style.socialIconWrp)}
-                                        {this.renderAccountSection(style.accountLinksWrp)}
+                                        {this.renderAccountSection(style.accountLinksWrp, buildSiteMode)}
                                     </div>
                                 </Col>
                                 <Col xs={12} md={4} lg={2} mdPull={4} lgPull={5}>

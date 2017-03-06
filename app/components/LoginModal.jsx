@@ -13,6 +13,7 @@ import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 
 export default class LoginModal extends Component {
     static propTypes = {
+        backgroundColor: PropTypes.string,
         form: PropTypes.object.isRequired,
         login: PropTypes.func.isRequired,
         loginState: PropTypes.object.isRequired,
@@ -28,7 +29,7 @@ export default class LoginModal extends Component {
         this.props.onClose();
     }
 
-    renderLoginForm () {
+    renderLoginForm (backgroundColor, form, loginState) {
         return (
             <Form
                 model={'user.login'}
@@ -36,7 +37,7 @@ export default class LoginModal extends Component {
             >
                 <div style={{maxWidth: 400, margin: '10px auto 20px auto'}}>
                     <FormInput
-                        field={this.props.form.email}
+                        field={form.email}
                         inputType='email'
                         model='user.login.email'
                         placeholder='Email'
@@ -45,7 +46,7 @@ export default class LoginModal extends Component {
                     />
                     <br />
                     <FormInput
-                        field={this.props.form.password}
+                        field={form.password}
                         inputType='password'
                         model='user.login.password'
                         placeholder='Password'
@@ -54,13 +55,13 @@ export default class LoginModal extends Component {
                     />
 
                     <FormErrorMessage
-                        message={this.props.loginState.errorMessage}
+                        message={loginState.errorMessage}
                     />
                 </div>
 
                 <div style={{textAlign: 'center', width: '100%'}}>
                     <Button
-                        backgroundColor={darkGrey}
+                        backgroundColor={backgroundColor ? backgroundColor : darkGrey}
                         text={'LOGIN >'}
                         type='submit'
                     />
@@ -82,19 +83,20 @@ export default class LoginModal extends Component {
     }
 
     render () {
+        const {backgroundColor, form, loginState, show} = this.props;
         return (
             <div>
-                <Modal show={this.props.show} onHide={this.closeModal.bind(this)}>
+                <Modal show={show} onHide={this.closeModal.bind(this)}>
                     <Modal.Header closeButton={true} style={{border: 0}}>
                         <Modal.Title style={{textAlign: 'center'}}>
                             <b style={{fontSize: 25}}>{'LOGIN'}</b>
                             <br />
                             <b>{'accedi al tuo account'}</b>
-                            <HorizontalLine color={primaryColor} width={60} />
+                            <HorizontalLine color={backgroundColor ? backgroundColor : primaryColor} width={60} />
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {this.renderLoginForm()}
+                        {this.renderLoginForm(backgroundColor, form, loginState)}
                     </Modal.Body>
                     <Modal.Footer style={{textAlign: 'center'}}>
                         <p style={{fontWeight: 'bold'}}>

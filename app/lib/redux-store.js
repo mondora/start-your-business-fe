@@ -5,14 +5,14 @@ import thunk from 'redux-thunk';
 
 import reducers from 'reducers/index';
 
-const storageConfig ={
+const storageConfig = {
     whitelist: [
         'billing',
-        'businessSite',
+        // 'businessSite', should not be persisted
         'payment',
         'products',
-        'spinner',
-        'user'
+        'spinner'
+        // 'user' should not be persisted
     ],
     keyPrefix: 'syb:'
 };
