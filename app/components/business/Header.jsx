@@ -4,7 +4,7 @@ import Icon from 'components/Icon';
 import LoginModal from 'components/LoginModal';
 import SignUpModal from 'components/business/SignUpModal';
 
-import {getTextField} from 'lib/business-site-utils';
+import {getLink, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 const commonStyle = {
@@ -74,10 +74,10 @@ export default class Header extends Component {
         );
     }
 
-    renderAccountSection (specStyle, inactive) {
+    renderAccountSection (specStyle) {
         //TODO signup modal
-        const onClickLogin = inactive ? null : () => this.setState({showLoginModal: true});
-        const onClickSignUp = inactive ? null : () => this.setState({showSignUpModal: true});
+        const onClickLogin = this.props.buildSiteMode ? null : () => this.setState({showLoginModal: true});
+        const onClickSignUp = this.props.buildSiteMode ? null : () => this.setState({showSignUpModal: true});
         return (
             <div
                 style={{
@@ -115,18 +115,22 @@ export default class Header extends Component {
     }
 
     renderPhoneNumber (phoneNumber, isEditMode, linkStyle) {
-        return (
-            <a href='#' style={linkStyle}>
-                {this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber)}
-            </a>
+        //TODO define the link path
+        return getLink(
+            this.props.buildSiteMode,
+            '#',
+            this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber),
+            linkStyle
         );
     }
 
     renderEmail (emailAddress, isEditMode, linkStyle) {
-        return (
-            <a href='mailto:info@emaildisupporto.it' style={linkStyle}>
-                {this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress)}
-            </a>
+        //TODO verify email address
+        return getLink(
+            this.props.buildSiteMode,
+            'mailto:info@emaildisupporto.it',
+            this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress),
+            linkStyle
         );
     }
 }

@@ -109,8 +109,7 @@ class Header extends BusinessHeader {
 
     render () {
         const {emailAddress, phoneNumber} = this.props.siteConfig.header;
-        const {buildSiteMode} = this.props;
-        const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
+        const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (
             <div>
@@ -135,7 +134,7 @@ class Header extends BusinessHeader {
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={4}>
-                                    {this.renderAccountSection(style.accountLinksWrp, buildSiteMode)}
+                                    {this.renderAccountSection(style.accountLinksWrp)}
                                 </Col>
                             </Form>
                         </Row>
