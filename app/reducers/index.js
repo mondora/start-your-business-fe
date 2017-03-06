@@ -11,6 +11,7 @@ import businessSite, {
     initialSubscriptionsInfo,
     initialOtherInfo
 } from './business-site';
+import draftTemplates from './draftTemplates';
 import payment from './payment';
 import products from './products';
 import spinner from './spinner';
@@ -28,6 +29,7 @@ const reducers = combineReducers({
     businessSiteStepsForm: formReducer('businessSite.siteConfig.steps', initialStepsInfo),
     businessSiteSubscriptionsForm: formReducer('businessSite.siteConfig.subscriptions', initialSubscriptionsInfo),
     businessSiteOtherInfoForm: formReducer('businessSite.siteConfig.info', initialOtherInfo),
+    draftTemplates,
     payment,
     products,
     spinner,
