@@ -42,6 +42,15 @@ const styles = {
         padding: 10,
         textAlign: 'left'
     },
+    featuresWrp: {
+        display: ' flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        padding: '5px 0',
+        fontSize: '1.2em',
+        color: colors.darkGrey
+    },
     confirmButtonContainer: {
         padding: '20px 0'
     }
@@ -106,7 +115,10 @@ export default class ProductPlanCard extends Component {
                     </div>
                     <div style={styles.bottom}>
                         {features.map((f, i) => (
-                            <div key={i}>
+                            <div
+                                key={i}
+                                style={styles.featuresWrp}
+                            >
                                 <Glyphicon
                                     glyph='glyphicon glyphicon-ok-circle'
                                     style={{
@@ -115,7 +127,9 @@ export default class ProductPlanCard extends Component {
                                         paddingRight: 10
                                     }}
                                 />
-                                {f}
+                                <span style={{lineHeight: '20px', paddingTop: '4px'}}>
+                                    {f}
+                                </span>
                             </div>
                         ))}
                     </div>

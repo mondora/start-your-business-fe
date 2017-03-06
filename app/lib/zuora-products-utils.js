@@ -1,7 +1,7 @@
 import R from 'ramda';
 
 const currencies = {
-    'EUR': '€'
+    'EUR': '€ '
 };
 
 const frequencies = {
