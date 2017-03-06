@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import Icon from 'components/Icon';
 import LoginModal from 'components/LoginModal';
+import SignUpModal from 'components/business/SignUpModal';
 
 import {getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
@@ -28,6 +29,9 @@ export default class Header extends Component {
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object.isRequired,
         loginState: PropTypes.object.isRequired,
+        signUpForm: PropTypes.object.isRequired,
+        signUpState: PropTypes.object.isRequired,
+        signUpUser: PropTypes.func.isRequired,
         siteConfig: PropTypes.object.isRequired
     };
 
@@ -35,7 +39,7 @@ export default class Header extends Component {
         super(props);
         this.state = {
             showLoginModal: false,
-            showSignupModal: false
+            showSignUpModal: false
         };
     }
     
@@ -73,7 +77,7 @@ export default class Header extends Component {
     renderAccountSection (specStyle, inactive) {
         //TODO signup modal
         const onClickLogin = inactive ? null : () => this.setState({showLoginModal: true});
-        const onClickSignup = inactive ? null : () => this.setState({showSignupModal: true});
+        const onClickSignUp = inactive ? null : () => this.setState({showSignUpModal: true});
         return (
             <div
                 style={{
@@ -86,7 +90,7 @@ export default class Header extends Component {
                     {'LOGIN'}
                 </div>
                 <div>{'|'}</div>
-                <div style={commonStyle.accountLink} onClick={onClickSignup}>
+                <div style={commonStyle.accountLink} onClick={onClickSignUp}>
                     {'REGISTRATI'}
                 </div>
                 <div>{'|'}</div>
@@ -97,6 +101,14 @@ export default class Header extends Component {
                     loginState={this.props.loginState}
                     onClose={() => this.setState({showLoginModal: false})}
                     show={this.state.showLoginModal}
+                />
+                <SignUpModal
+                    backgroundColor={this.props.siteConfig.colors.mainColor}
+                    form={this.props.signUpForm}
+                    onClose={() => this.setState({showSignUpModal: false})}
+                    show={this.state.showSignUpModal}
+                    signUpUser={this.props.signUpUser}
+                    signupState={this.props.signUpState}
                 />
             </div>
         );

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
-import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
+import {confirmSignUp, login, sendNewConfirmationCode, signUpUser} from 'actions/user';
 
 import Footer1 from 'components/business/01/Footer';
 import Footer2 from 'components/business/02/Footer';
@@ -33,6 +33,8 @@ class Root extends Component {
         params: PropTypes.object,
         sendNewConfirmationCode: PropTypes.func.isRequired,
         signUpConfirmationForm: PropTypes.object,
+        signUpForm: PropTypes.object,
+        signUpUser: PropTypes.func.isRequired,
         spinner: PropTypes.object,
         user: PropTypes.object
     };
@@ -67,6 +69,9 @@ class Root extends Component {
                     login={this.props.login}
                     loginForm={this.props.loginForm}
                     loginState={this.props.user.login}
+                    signUpForm={this.props.signUpForm}
+                    signUpUser={this.props.signUpUser}
+                    signUpState={this.props.user.signup}
                     siteConfig={siteConfig}
                 />
 
@@ -103,6 +108,7 @@ const mapStateToProps = (state) => {
         businessSiteState: state.businessSite,
         loginForm: state.userLoginForm,
         signUpConfirmationForm: state.userSignupConfirmationForm,
+        signUpForm: state.userSignupForm,
         spinner: state.spinner,
         user: state.user
     };
@@ -112,7 +118,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         confirmSignUp: bindActionCreators(confirmSignUp, dispatch),
         login: bindActionCreators(login, dispatch),
-        sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch)
+        sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch),
+        signUpUser: bindActionCreators(signUpUser, dispatch)
     };
 };
 

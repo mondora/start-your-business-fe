@@ -10,7 +10,7 @@ import FormInputCheckbox from 'components/FormInputCheckbox';
 
 import {genericRequiredValidator, isCheckedValidator, requiredEmailValidator, requiredPasswordValidator} from 'lib/form-utils';
 
-const styles = {
+const styles = (backgroundColor) => ({
     blockWrp: {
         width: '100%',
         marginBottom: '20px'
@@ -25,7 +25,7 @@ const styles = {
         color: colors.errorText
     },
     formWrp: {
-        backgroundColor: colors.primaryColorLighter,
+        backgroundColor: backgroundColor ? null : colors.primaryColorLighter,
         borderRadius: '5px',
         padding: '20px',
         marginBottom: '30px'
@@ -35,7 +35,7 @@ const styles = {
         fontSize: '1em',
         fontWeight: '300'
     }
-};
+});
 
 const passwordsMatch = ({password, confirmPassword}) => {
     return password === confirmPassword;
@@ -43,6 +43,7 @@ const passwordsMatch = ({password, confirmPassword}) => {
 
 export default class SignUpForm extends Component {
     static propTypes = {
+        backgroundColor: PropTypes.string,
         form: PropTypes.object.isRequired,
         signUpUser: PropTypes.func.isRequired,
         signupState: PropTypes.object.isRequired
@@ -64,15 +65,15 @@ export default class SignUpForm extends Component {
 
     render () {
         const {$form, confirmPassword} = this.props.form;
+        const {backgroundColor} = this.props;
+        const style = styles(backgroundColor);
         return (
             <Form
                 model={'user.signup'}
                 onSubmit={this.signUpUser.bind(this)}
                 validateOn='submit'
-                validators={{
-                    '': {passwordsMatch}
-                }}
-                style={styles.formWrp}
+                validators={{'': {passwordsMatch}}}
+                style={style.formWrp}
             >
                 <FormInput
                     field={this.props.form.givenName}
@@ -81,7 +82,7 @@ export default class SignUpForm extends Component {
                     model='user.signup.givenName'
                     placeholder='Nome'
                     validator={genericRequiredValidator}
-                    style={styles.blockWrp}
+                    style={style.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.familyName}
@@ -90,7 +91,7 @@ export default class SignUpForm extends Component {
                     model='user.signup.familyName'
                     placeholder='Cognome'
                     validator={genericRequiredValidator}
-                    style={styles.blockWrp}
+                    style={style.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.email}
@@ -99,7 +100,7 @@ export default class SignUpForm extends Component {
                     model='user.signup.email'
                     placeholder='youremail@email.it'
                     validator={requiredEmailValidator}
-                    style={styles.blockWrp}
+                    style={style.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.password}
@@ -108,11 +109,11 @@ export default class SignUpForm extends Component {
                     model='user.signup.password'
                     placeholder='••••••••••••'
                     validator={requiredPasswordValidator}
-                    style={styles.blockWrp}
+                    style={style.blockWrp}
                 />
                 <FormInput
                     error={() => confirmPassword.touched && !$form.valid && $form.submitFailed && $form.errors.passwordsMatch &&
-                        <strong style={styles.errorsWrp}>
+                        <strong style={style.errorsWrp}>
                             {'La password di conferma non coincide'}
                         </strong>
                     }
@@ -121,13 +122,13 @@ export default class SignUpForm extends Component {
                     label='Ripeti password: *'
                     model='user.signup.confirmPassword'
                     placeholder='••••••••••••'
-                    style={styles.blockWrp}
+                    style={style.blockWrp}
                 />
                 <FormInputCheckbox
                     field={this.props.form.privacyCheck}
                     model='user.signup.privacyCheck'
                     text={
-                        <span style={{...styles.text, ...{cursor: 'pointer'}}}>
+                        <span style={{...style.text, ...{cursor: 'pointer'}}}>
                             {`  Acconsento e dichiaro di aver letto i termini
                             e condizioni del servizio e l’informativa sulla `}
                             <a
@@ -143,17 +144,17 @@ export default class SignUpForm extends Component {
                 />
 
                 <label>
-                    <span style={styles.text}>{'( * Campi obbligatori)'}</span>
+                    <span style={style.text}>{'( * Campi obbligatori)'}</span>
                 </label>
 
                 <FormErrorMessage
                     message={this.props.signupState.errorMessage}
                 />
 
-                <label style={styles.blockWrp}>
+                <label style={style.blockWrp}>
                     <div style={{float: 'right', textAlign: 'right'}}>
                         <Button
-                            backgroundColor={colors.darkGrey}
+                            backgroundColor={backgroundColor ? backgroundColor : colors.darkGrey}
                             text='REGISTRATI >'
                             type='submit'
                         />
