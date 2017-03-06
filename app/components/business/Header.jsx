@@ -55,21 +55,34 @@ export default class Header extends Component {
         );
     }
 
-    renderSocialIcons (socialIconStyle, socialIconWrpStyle) {
-        const {siteConfig} = this.props;
-        //TODO active link & change link
+    renderSocialIcons (isEditMode, socialIconStyle, socialIconWrpStyle) {
+        const {buildSiteMode, siteConfig} = this.props;
         return (
             <div style={socialIconWrpStyle}>
-                <Icon
-                    onClick={() => {}}
-                    iconName={`/templates/ico_twitter_0${siteConfig.templateId}`}
-                    iconStyle={socialIconStyle}
-                />
-                <Icon
-                    onClick={() => {}}
-                    iconName={`/templates/ico_facebook_0${siteConfig.templateId}`}
-                    iconStyle={socialIconStyle}
-                />
+                {this.renderTextField(isEditMode, 'twitterAccount', '@twitter_account',
+                    siteConfig.header.twitterAccount ? getLink(
+                        buildSiteMode,
+                        `https://twitter.com/${siteConfig.header.twitterAccount}`,
+                        <Icon
+                            iconName={`/templates/ico_twitter_0${siteConfig.templateId}`}
+                            iconStyle={socialIconStyle}
+                        />,
+                        null,
+                        '_blank'
+                    ) : null
+                )}
+                {this.renderTextField(isEditMode, 'facebookPage', 'pagina facebook',
+                    siteConfig.header.facebookPage ? getLink(
+                        buildSiteMode,
+                        `https://www.facebook.com/${siteConfig.header.facebookPage}`,
+                        <Icon
+                            iconName={`/templates/ico_facebook_0${siteConfig.templateId}`}
+                            iconStyle={socialIconStyle}
+                        />,
+                        null,
+                        '_blank'
+                    ) : null
+                )}
             </div>
         );
     }

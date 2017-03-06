@@ -61,9 +61,9 @@ export function getTextAreaField (isEditMode, field, model, placeholder, readNod
     ) : readNode;
 }
 
-export function getLink (buildSiteMode, path, children, style) {
+export function getLink (buildSiteMode, path, children, style, target) {
     return (
-        <a href={buildSiteMode ? null : path} style={style}>
+        <a href={buildSiteMode ? null : path} style={style} target={target}>
             {children}
         </a>
     );
