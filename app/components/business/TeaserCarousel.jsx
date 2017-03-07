@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Carousel} from 'react-bootstrap';
+import {Carousel, Glyphicon} from 'react-bootstrap';
 
 import ImageUploader from 'components/ImageUploader';
 import SaveButton from 'components/BuildSiteSaveButton';
@@ -28,13 +28,23 @@ const commonStyles = (templateId) => ({
     }
 });
 
-export default class Teaser extends Component {
+export default class TeaserCarousel extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
-        images: PropTypes.array.isRequired
+        images: PropTypes.array.isRequired,
+        imgStyle: PropTypes.object,
+        next: PropTypes.node,
+        prev: PropTypes.node,
+        templateId: PropTypes.number.isRequired,
     };
 
-    renderUploadForm (templateId) {
+    static defaultProps = {
+        prev: <Glyphicon glyph='chevron-left' />,
+        next: <Glyphicon glyph='chevron-right' />
+    }
+
+    renderUploadForm () {
+        const {templateId} = this.props;
         return (
             <div style={commonStyles(templateId).backgroundImg}>
                 <div style={commonStyles(templateId).backgroundWidget}>
@@ -64,9 +74,10 @@ export default class Teaser extends Component {
         );
     }
 
-    renderCarousel (templateId, imgStyle) {
+    renderCarousel () {
+        const {templateId, imgStyle} = this.props;
         return (
-            <Carousel>
+            <Carousel nextIcon={this.props.next} prevIcon={this.props.prev}>
                 {this.props.images.map(img =>
                     <Carousel.Item
                         key={img.id}
@@ -78,13 +89,15 @@ export default class Teaser extends Component {
         );
     }
 
-    renderContent (templateId, imgStyle) {
-        switch (this.props.buildSiteMode) {
+    render () {
+        const {buildSiteMode} = this.props;
+        switch (buildSiteMode) {
             case editModes.UPLOAD_IMAGES:
-                return this.renderUploadForm(templateId);
+                return this.renderUploadForm();
             case editModes.EDIT_TEXTS: //TODO
             default:
-                return this.renderCarousel(templateId, imgStyle);
+                return this.renderCarousel();
         }
     }
+
 }
