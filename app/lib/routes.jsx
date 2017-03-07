@@ -13,6 +13,7 @@ import Privacy from 'containers/Privacy';
 import Root from 'containers/Root';
 import SignUp from 'containers/SignUp';
 import SubscriptionResult from 'containers/SubscriptionResult';
+import UserAccount from 'containers/UserAccount';
 
 import BusinessHome from 'containers/business/Home';
 import BusinessRoot from 'containers/business/Root';
@@ -29,6 +30,7 @@ export default (
                 <Route name='choosePlan' path='/choose-plan' component={ChoosePlan} private={true} />
                 <Route name='privacy' path='/privacy' component={Privacy} />
                 <Route name='subscriptionResult' path='/subscription-result' component={SubscriptionResult} private={true} />
+                <Route name='account' path='/account' component={UserAccount} private={true} />
             </Route>
 
             <Route name='creditCardResult' path='/credit-card-result' component={CreditCardResult} />
