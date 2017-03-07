@@ -17,6 +17,7 @@ import UserAccount from 'containers/UserAccount';
 
 import BusinessHome from 'containers/business/Home';
 import BusinessRoot from 'containers/business/Root';
+import BusinessUserInfo from 'containers/business/UserInfo';
 
 // const history = syncHistoryWithStore(browserHistory, store);
 
@@ -37,6 +38,7 @@ export default (
 
             <Route name='businessRoot' component={BusinessRoot}>
                 <Route name='businessHome' path='/:businessName' component={BusinessHome} />
+                <Route name='businessUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} />
             </Route>
         </Router>
     </Provider>

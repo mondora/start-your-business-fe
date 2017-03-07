@@ -65,7 +65,7 @@ class TemplateSection extends Component {
                         </Col>
                         <Col xs={12} sm={4} smPull={4}>
                             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                <img src='./_assets/images/home/iPhone.png' style={styles.imgResponsive} />
+                                <img src='/_assets/images/home/iPhone.png' style={styles.imgResponsive} />
                             </div>
                         </Col>
                     </Row>

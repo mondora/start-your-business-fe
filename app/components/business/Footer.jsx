@@ -86,10 +86,10 @@ export default class Footer extends Component {
     renderPaymentImages () {
         return (
             <div style={commonStyle.footerPayment}>
-                <img src='../_assets/images/template_01/payment01.png' style={commonStyle.imgPayment} />
-                <img src='../_assets/images/template_01/payment02.png' style={commonStyle.imgPayment} />
-                <img src='../_assets/images/template_01/payment03.png' style={commonStyle.imgPayment} />
-                <img src='../_assets/images/template_01/payment04.png' style={commonStyle.imgPayment} />
+                <img src='/_assets/images/template_01/payment01.png' style={commonStyle.imgPayment} />
+                <img src='/_assets/images/template_01/payment02.png' style={commonStyle.imgPayment} />
+                <img src='/_assets/images/template_01/payment03.png' style={commonStyle.imgPayment} />
+                <img src='/_assets/images/template_01/payment04.png' style={commonStyle.imgPayment} />
             </div>
         );
     }

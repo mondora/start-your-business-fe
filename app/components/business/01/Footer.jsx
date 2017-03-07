@@ -84,7 +84,7 @@ class Footer extends BusinessFooter {
                                         buildSiteMode,
                                         '#',
                                         (<div>
-                                            <img src='../_assets/images/common/logo.png' style={styles.imgResponsive} />
+                                            <img src='/_assets/images/common/logo.png' style={styles.imgResponsive} />
                                             <Glyphicon
                                                 glyph='glyphicon glyphicon-chevron-right'
                                                 style={{fontSize: 18}}

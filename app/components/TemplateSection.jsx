@@ -11,7 +11,7 @@ const styles = {
     templateWrp: {
         position: 'relative',
         padding: '8% 0 12% 0',
-        backgroundImage: 'url(\'./_assets/images/home/bg_template.jpg\')',
+        backgroundImage: 'url(\'/_assets/images/home/bg_template.jpg\')',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center top',
@@ -78,10 +78,10 @@ class TemplateSection extends Component {
             <div className='container' style={styles.templateRow}>
                 <Row>
                     <Col xs={12} sm={6}>
-                        <img src='../_assets/images/home/template1.png' style={styles.templateImage} />
+                        <img src='/_assets/images/home/template1.png' style={styles.templateImage} />
                     </Col>
                     <Col xs={12} sm={6}>
-                        <img src='../_assets/images/home/template2.png' style={styles.templateImage} />
+                        <img src='/_assets/images/home/template2.png' style={styles.templateImage} />
                     </Col>
                 </Row>
             </div>

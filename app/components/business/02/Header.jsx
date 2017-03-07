@@ -152,7 +152,7 @@ class Header extends BusinessHeader {
                                 <Col xs={12} md={4} lg={2} mdPull={4} lgPull={5}>
                                     <div style={style.headerLogoWrp}>
                                         <div style={style.headerLogoBg}>
-                                            <img src='./_assets/images/template_02/logo_example.jpg' style={style.headerLogo} />
+                                            <img src='/_assets/images/template_02/logo_example.jpg' style={style.headerLogo} />
                                         </div>
                                     </div>
                                 </Col>

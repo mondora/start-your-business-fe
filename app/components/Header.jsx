@@ -93,7 +93,7 @@ class Header extends Component {
                         <div style={styles.headerLogo}>
                             <img
                                 onClick={() => browserHistory.push('/')}
-                                src='../_assets/images/common/logo.png'
+                                src='/_assets/images/common/logo.png'
                                 style={{
                                     cursor: 'pointer',
                                     maxHeight: 80

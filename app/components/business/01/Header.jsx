@@ -143,7 +143,7 @@ class Header extends BusinessHeader {
                 <div className='container-fluid' style={style.maxContentWidth}>
                     <div style={style.headerLogoWrp}>
                         <div>
-                            <img src='./_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
+                            <img src='/_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
                         </div>
                         {this.renderSocialIcons(isEditMode, style.socialIcon, style.socialIconWrp)}
                     </div>

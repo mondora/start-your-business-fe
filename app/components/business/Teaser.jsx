@@ -9,7 +9,7 @@ import * as colors from 'lib/colors';
 
 const commonStyles = (templateId) => ({
     backgroundImg: {
-        backgroundImage: `url(\'./_assets/images/template_0${templateId}/carousel01.jpg\')`,
+        backgroundImage: `url(\'/_assets/images/template_0${templateId}/carousel01.jpg\')`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center top'
@@ -71,7 +71,7 @@ export default class Teaser extends Component {
                     <Carousel.Item
                         key={img.id}
                     >
-                        <img src={img.id ? getS3ImagePath(img.id) : `./_assets/images/template_0${templateId}/carousel01.jpg`} style={imgStyle} />
+                        <img src={img.id ? getS3ImagePath(img.id) : `/_assets/images/template_0${templateId}/carousel01.jpg`} style={imgStyle} />
                     </Carousel.Item>
                 )}
             </Carousel>

@@ -21,12 +21,12 @@ export const templatesIds = {
 export const templates = [
     {
         id: templatesIds.TEMPLATE_1,
-        image: './_assets/images/home/template1.jpg',
+        image: '/_assets/images/home/template1.jpg',
         label: 'template 1'
     },
     {
         id: templatesIds.TEMPLATE_2,
-        image: './_assets/images/home/template2.jpg',
+        image: '/_assets/images/home/template2.jpg',
         label: 'template 2'
     }
 ];

@@ -65,7 +65,7 @@ export default class OtherInfo extends Component {
                 </div>
             </div>
         ) : (
-            <Image src={`./_assets/images/template_01/${imgName}`} style={style.boxImage} circle={true} />
+            <Image src={`/_assets/images/template_01/${imgName}`} style={style.boxImage} circle={true} />
         );
     }
 }

@@ -18,7 +18,7 @@ import ProductPlanCardList from 'components/ProductPlanCardList';
 
 const styles = {
     teaserWrp: {
-        backgroundImage: 'url(\'./_assets/images/common/bg_teaser.jpg\')',
+        backgroundImage: 'url(\'/_assets/images/common/bg_teaser.jpg\')',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center top',
