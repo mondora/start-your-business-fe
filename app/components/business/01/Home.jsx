@@ -1,7 +1,7 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 
-import Intro from 'components/business/01/Intro';
+import Intro from 'components/business/Intro';
 import OtherInfo from 'components/business/01/OtherInfo';
 import Steps from 'components/business/01/Steps';
 import SubscriptionsList from 'components/business/SubscriptionsList';
@@ -9,13 +9,26 @@ import TeaserCarousel from 'components/business/TeaserCarousel';
 
 import {Col, Row} from 'react-bootstrap';
 import {templatesIds} from 'lib/business-site-utils';
+import * as colors from 'lib/colors';
 
-const styles = {
+const styles = (siteColors) => ({
     teaserWrp: {
         maxWidth: '1200px',
         height: 'auto'
+    },
+    introTitleStyle: {
+        fontSize: 'calc(22px + 1vw)',
+        fontWeight: '700',
+        color: colors.templateGreyText
+    },
+    buttonStyle: {
+        fontSize: '1.2em',
+        padding: '8px 20px',
+        backgroundColor: colors.white,
+        color: siteColors.mainColor,
+        borderColor: siteColors.mainColor
     }
-};
+});
 
 class Home extends Component {
     static propTypes = {
@@ -28,8 +41,9 @@ class Home extends Component {
     };
 
     renderTeaser (editMode, siteConfig) {
+        const homeStyles = styles(siteConfig.colors);
         return (
-            <div className='container-fluid' style={styles.teaserWrp}>
+            <div className='container-fluid' style={homeStyles.teaserWrp}>
                 <Row>
                     <Col xs={12}>
                         <TeaserCarousel
@@ -57,14 +71,17 @@ class Home extends Component {
                 siteConfig
             }
         } = this.props;
+        const homeStyles = styles(siteConfig.colors);
         return (
             <div>
                 <div style={this.props.styles.pageContainer}>
                     {this.renderTeaser(editMode, siteConfig)}
                     <div className='container-fluid' style={this.props.styles.pageWrp}>
                         <Intro
+                            buttonStyle={homeStyles.buttonStyle}
                             buildSiteMode={editMode}
                             form={businessSiteIntroForm}
+                            introTitleStyle={homeStyles.introTitleStyle}
                             siteConfig={siteConfig}
                         />
                         <Steps

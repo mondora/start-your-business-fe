@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
-import {Button} from 'react-bootstrap';
+import {Col, Row, Button} from 'react-bootstrap';
+import {Form} from 'react-redux-form';
 
-import {getTextAreaField, getTextField} from 'lib/business-site-utils';
+import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-const commonStyle = {
+const commonStyles = {
     introWrp: {
         textAlign: 'center',
         margin: '60px 0'
@@ -18,7 +19,9 @@ const commonStyle = {
 export default class Intro extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
+        buttonStyle: PropTypes.object,
         form: PropTypes.object,
+        introTitleStyle: PropTypes.object,
         siteConfig: PropTypes.object.isRequired
     };
 
@@ -46,21 +49,26 @@ export default class Intro extends Component {
         );
     }
 
-    renderContentIntro (specStyle, isEditMode, introTitle, introText) {
+    render () {
+        const {introTitle, introText} = this.props.siteConfig.intro;
+        const {buildSiteMode, introTitleStyle, buttonStyle} = this.props;
+        const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         return (
-            <div
-                style={commonStyle.introWrp}
-            >
-                <h2 style={specStyle.introTitleStyle}>
-                    {this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}
-                </h2>
-                <p style={commonStyle.introTextStyle}>
-                    {this.renderTextareaField(isEditMode, 'introText', 'Scegliamo i prodotti migliori e te li consegnamo a casa nella formula più adatta alle tue esigenze!', introText)}
-                </p>
-                <Button style={specStyle.buttonStyle}>
-                    {'INIZIA ORA!'}
-                </Button>
-            </div>
+            <Form model={'businessSite.siteConfig.intro'}>
+                <Row>
+                    <Col xs={12} style={commonStyles.introWrp}>
+                        <h2 style={introTitleStyle}>
+                            {this.renderTextField(isEditMode, 'introTitle', 'CASSETTINE BIOLOGICHE', introTitle)}
+                        </h2>
+                        <p style={commonStyles.introTextStyle}>
+                            {this.renderTextareaField(isEditMode, 'introText', 'Scegliamo i prodotti migliori e te li consegnamo a casa nella formula più adatta alle tue esigenze!', introText)}
+                        </p>
+                        <Button style={buttonStyle}>
+                            {'INIZIA ORA!'}
+                        </Button>
+                    </Col>
+                </Row>
+            </Form>
         );
     }
 }

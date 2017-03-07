@@ -1,23 +1,37 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 
-import Intro from 'components/business/02/Intro';
+import Intro from 'components/business/Intro';
 import OtherInfo from 'components/business/02/OtherInfo';
 import Steps from 'components/business/02/Steps';
 import SubscriptionsList from 'components/business/SubscriptionsList';
 import TeaserCarousel from 'components/business/TeaserCarousel';
 
 import {templatesIds} from 'lib/business-site-utils';
+import * as colors from 'lib/colors';
 
-const styles = {
+const styles = (siteColors) => ({
     teaserWrp: {
         height: 'auto'
     },
     image: {
         width: '100%',
         height: 'auto'
+    },
+    introTitleStyle: {
+        fontSize: 'calc(22px + 1vw)',
+        fontWeight: '300',
+        color: siteColors.mainColor
+    },
+    buttonStyle: {
+        fontSize: '1.2em',
+        padding: '8px 20px',
+        backgroundColor: siteColors.mainColor,
+        color: colors.white,
+        border: 0,
+        borderRadius: 0
     }
-};
+});
 
 class Home extends Component {
     static propTypes = {
@@ -40,20 +54,23 @@ class Home extends Component {
                 siteConfig
             }
         } = this.props;
+        const homeStyles = styles(siteConfig.colors);
         return (
             <div>
-                <div style={styles.teaserWrp}>
+                <div style={homeStyles.teaserWrp}>
                     <TeaserCarousel
                         buildSiteMode={editMode}
                         images={siteConfig.teaserImages}
-                        imgStyle={styles.image}
+                        imgStyle={homeStyles.image}
                         templateId={templatesIds.TEMPLATE_2}
                     />
                 </div>
                 <div className='container-fluid'>
                     <Intro
+                        buttonStyle={homeStyles.buttonStyle}
                         buildSiteMode={editMode}
                         form={businessSiteIntroForm}
+                        introTitleStyle={homeStyles.introTitleStyle}
                         siteConfig={siteConfig}
                     />
                     <Steps
