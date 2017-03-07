@@ -1,51 +1,44 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
+import {Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-import {templatesIds} from 'lib/business-site-utils';
+import BillingInformationForm from 'components/BillingInformationForm';
+
 import * as colors from 'lib/colors';
 
 const styles = {
-    pageContainer: {
-        backgroundColor: colors.white
+    formBox: {
+        backgroundColor: colors.backgroundLightGrey,
+        padding: 20,
+        marginBottom: 40
     },
-    pageWrp: {
-        maxWidth: '1200px',
-        height: 'auto'
-    },
-    subscriptionContainer: {
-        backgroundColor: colors.lightGrey
-    },
-    bottomPageContainer1: {
-        backgroundColor: colors.lightGrey,
-        padding: '60px 0 40px 0'
-    },
-    bottomPageContainer2: {
-        position: 'relative',
-        backgroundImage: 'url(\'/_assets/images/template_02/carousel01.jpg\')',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top'
-    },
-    bottomPageBlackOpacity: {
-        padding: '100px 0 60px 0',
-        backgroundColor: colors.blackOpacity
-    },
-    bottomPageWrp: {
-        maxWidth: '1200px',
-        height: 'auto'
+    boxTitle: {
+        fontWeight: '700',
+        fontSize: '1.3em'
     }
 };
 
 class UserInfo extends Component {
     static propTypes = {
-        businessSiteState: PropTypes.object
+        billingInformationForm: PropTypes.object.isRequired,
+        businessSiteState: PropTypes.object.isRequired
     };
 
     render () {
         return (
-            <div>
+            <div className='container'>
                 {'INSERISCI I TUOI DATI'}
+                <Row>
+                    <Col xs={12} style={styles.formBox}>
+                        <p style={styles.boxTitle}>
+                            {'1. Dati di spedizione:'}
+                        </p>
+                        <BillingInformationForm
+                            form={this.props.billingInformationForm}
+                        />
+                    </Col>
+                </Row>
             </div>
         );
     }
@@ -53,6 +46,7 @@ class UserInfo extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        billingInformationForm: state.billingInformationForm,
         businessSiteState: state.businessSite
     };
 };

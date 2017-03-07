@@ -38,7 +38,7 @@ export default (
 
             <Route name='businessRoot' component={BusinessRoot}>
                 <Route name='businessHome' path='/:businessName' component={BusinessHome} />
-                <Route name='businessUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} />
+                <Route name='businessUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} private={true} />
             </Route>
         </Router>
     </Provider>

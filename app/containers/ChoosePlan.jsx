@@ -94,6 +94,7 @@ class ChoosePlan extends Component {
                                     </p>
                                     <BillingInformationForm
                                         form={this.props.billingInformationForm}
+                                        showCompanyFields={true}
                                     />
                                 </div>
                             </Col>
