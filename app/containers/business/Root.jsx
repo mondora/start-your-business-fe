@@ -58,12 +58,12 @@ class Root extends Component {
         switch (templateId) {
             case templatesIds.TEMPLATE_2:
                 return 'Lato';
-            case templatesIds.TEMPLATE_1: 
+            case templatesIds.TEMPLATE_1:
             default:
                 return 'Roboto';
         }
     }
-    
+
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
         const Header = components[`header${siteConfig.templateId}`];

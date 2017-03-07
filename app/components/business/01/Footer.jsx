@@ -83,14 +83,13 @@ class Footer extends BusinessFooter {
                                     {getLink(
                                         buildSiteMode,
                                         '#',
-                                        (<div>
+                                        (<div style={styles.logoFooterButton}>
                                             <img src='/_assets/images/common/logo.png' style={styles.imgResponsive} />
                                             <Glyphicon
                                                 glyph='glyphicon glyphicon-chevron-right'
                                                 style={{fontSize: 18}}
                                             />
-                                        </div>),
-                                        styles.logoFooterButton
+                                        </div>)
                                     )}
                                 </div>
                             </Col>

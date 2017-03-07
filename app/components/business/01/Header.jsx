@@ -1,12 +1,13 @@
 import Radium from 'radium';
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {getLink, editModes, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import BusinessHeader from 'components/business/Header';
+import AccountSection from 'components/business/AccountSection';
+import SocialIcons from 'components/business/SocialIcons';
 
 const styles = (siteColors) => ({
     maxContentWidth: {
@@ -63,7 +64,7 @@ const styles = (siteColors) => ({
     linkColorHeader: {
         color: colors.white
     },
-    accountLinksWrp: {
+    accountWrp: {
         '@media screen and (max-width: 767px)': {
             padding: '10px 0',
             height: 'auto',
@@ -105,10 +106,45 @@ const styles = (siteColors) => ({
     }
 });
 
-class Header extends BusinessHeader {
+class Header extends Component {
+    static propTypes = {
+        buildSiteMode: PropTypes.number,
+        form: PropTypes.object.isRequired,
+        login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object.isRequired,
+        loginState: PropTypes.object.isRequired,
+        signUpForm: PropTypes.object.isRequired,
+        signUpState: PropTypes.object.isRequired,
+        signUpUser: PropTypes.func.isRequired,
+        siteConfig: PropTypes.object.isRequired
+    };
+
+    renderTextField (isEditMode, fieldName, placeholder, readNode) {
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.header.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.templateGreyText, padding: '2px 4px', marginRight: '25px', fontSize: '13px'},
+            {margin: 0}
+        );
+    }
+
 
     render () {
         const {emailAddress, phoneNumber} = this.props.siteConfig.header;
+        const {
+            buildSiteMode,
+            form,
+            siteConfig,
+            loginForm,
+            login,
+            loginState,
+            signUpForm,
+            signUpUser,
+            signUpState
+        } = this.props;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (
@@ -123,18 +159,38 @@ class Header extends BusinessHeader {
                                             <div style={style.topIcon}>
                                                 <Glyphicon glyph='glyphicon glyphicon-phone' />
                                             </div>
-                                            {this.renderPhoneNumber(phoneNumber, isEditMode, style.linkColorHeader)}
+                                            {getLink(
+                                                this.props.buildSiteMode,
+                                                'tel:+390123456789',
+                                                this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber),
+                                                style.linkColorHeader
+                                            )}
                                         </div>
                                         <div style={style.headerTopIcons}>
                                             <div style={style.topIcon}>
                                                 <Glyphicon glyph='glyphicon glyphicon-envelope' />
                                             </div>
-                                            {this.renderEmail(emailAddress, isEditMode, style.linkColorHeader)}
+                                            {getLink(
+                                                buildSiteMode,
+                                                'mailto:info@emaildisupporto.it',
+                                                this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress),
+                                                style.linkColorHeader
+                                            )}
                                         </div>
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={4}>
-                                    {this.renderAccountSection(style.accountLinksWrp)}
+                                    <AccountSection
+                                        accountWrpStyle={style.accountWrp}
+                                        buildSiteMode={buildSiteMode}
+                                        login={login}
+                                        loginForm={loginForm}
+                                        loginState={loginState}
+                                        signUpForm={signUpForm}
+                                        signUpState={signUpState}
+                                        signUpUser={signUpUser}
+                                        siteConfig={siteConfig}
+                                    />
                                 </Col>
                             </Form>
                         </Row>
@@ -145,7 +201,13 @@ class Header extends BusinessHeader {
                         <div>
                             <img src='/_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
                         </div>
-                        {this.renderSocialIcons(isEditMode, style.socialIcon, style.socialIconWrp)}
+                        <SocialIcons
+                            buildSiteMode={buildSiteMode}
+                            form={form}
+                            iconWrpStyle={style.socialIconWrp}
+                            iconStyle={style.socialIcon}
+                            siteConfig={siteConfig}
+                        />
                     </div>
                 </div>
             </div>
