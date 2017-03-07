@@ -78,7 +78,7 @@ class Footer extends BusinessFooter {
                                         buildSiteMode,
                                         '#',
                                         (<div>
-                                            <img src='../_assets/images/common/logo.png' style={styles.imgResponsive} />
+                                            <img src='/_assets/images/common/logo.png' style={styles.imgResponsive} />
                                         </div>)
                                     )}
                                 </div>

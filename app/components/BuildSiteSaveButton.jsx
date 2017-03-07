@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import Button from 'components/CustomButton';
 
@@ -13,12 +13,20 @@ const styles = {
 };
 
 export default class BuildSiteSaveButton extends Component {
+    static propTypes = {
+        onClick: PropTypes.func
+    };
+
+    static defaultProps = {
+        onClick: () => console.log('save')
+    }
+
     render () {
         return (
             <div style={styles.TooltipButtonWrp}>
                 <Button
                     backgroundColor={colors.white}
-                    onClick={() => console.log('save')}
+                    onClick={this.props.onClick}
                     text='SALVA'
                     height={42}
                     textColor={colors.primaryColor}

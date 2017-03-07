@@ -1,12 +1,13 @@
 import Radium from 'radium';
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {getLink, editModes, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import BusinessHeader from 'components/business/Header';
+import AccountSection from 'components/business/AccountSection';
+import SocialIcons from 'components/business/SocialIcons';
 
 const styles = (siteColors) => ({
     headerContainer: {
@@ -24,6 +25,7 @@ const styles = (siteColors) => ({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        flexWrap: 'nowrap',
         '@media screen and (min-width: 991px) and (max-width: 1100px)': {
             flexDirection: 'column',
             justifyContent: 'center'
@@ -45,12 +47,21 @@ const styles = (siteColors) => ({
         }
     },
     headerTopIcons: {
+        display: 'flex',
+        flexDirection: 'row',
         marginRight: 20,
-        color: siteColors.mainColor
+        fontSize: 'calc(8px + .5vw)',
+        color: siteColors.mainColor,
+        '@media screen and (max-width: 767px)': {
+            fontSize: '15px'
+        },
+        '@media screen and (max-width: 991px)': {
+            fontSize: '13px'
+        }
     },
-    headerTopIcon: {
+    topIcon: {
         marginRight: 5,
-        fontSize: 18,
+        fontSize: 16,
         verticalAlign: 'middle'
     },
     rightWrp: {
@@ -84,10 +95,16 @@ const styles = (siteColors) => ({
     linkColorHeader: {
         color: colors.templateGreyText
     },
-    accountLinksWrp: {
+    accountWrp: {
+        color: colors.templateGreyText,
         '@media screen and (max-width: 767px)': {
+            padding: '10px 0',
+            height: 'auto',
+            borderTop: `1px solid ${colors.white}`
         },
         '@media screen and (max-width: 500px)': {
+            justifyContent: 'center',
+            borderTop: 0
         }
     },
     headerLogoWrp: {
@@ -102,7 +119,10 @@ const styles = (siteColors) => ({
         padding: 20,
         backgroundColor: colors.white,
         zIndex: 2,
-        margin: '0 auto'
+        margin: '0 auto',
+        '@media screen and (max-width: 500px)': {
+            position: 'relative'
+        }
     },
     headerLogo: {
         display: 'block',
@@ -112,10 +132,44 @@ const styles = (siteColors) => ({
     }
 });
 
-class Header extends BusinessHeader {
+class Header extends Component {
+    static propTypes = {
+        buildSiteMode: PropTypes.number,
+        form: PropTypes.object.isRequired,
+        login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object.isRequired,
+        loginState: PropTypes.object.isRequired,
+        signUpForm: PropTypes.object.isRequired,
+        signUpState: PropTypes.object.isRequired,
+        signUpUser: PropTypes.func.isRequired,
+        siteConfig: PropTypes.object.isRequired
+    };
+
+    renderTextField (isEditMode, fieldName, placeholder, readNode) {
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `businessSite.siteConfig.header.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.templateGreyText, padding: '2px 4px', marginRight: '25px', fontSize: '13px'},
+            {margin: 0}
+        );
+    }
 
     render () {
         const {emailAddress, phoneNumber} = this.props.siteConfig.header;
+        const {
+            buildSiteMode,
+            form,
+            siteConfig,
+            loginForm,
+            login,
+            loginState,
+            signUpForm,
+            signUpUser,
+            signUpState
+        } = this.props;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (
@@ -128,31 +182,59 @@ class Header extends BusinessHeader {
                                 <Col xs={12} sm={6} md={4} lg={5}>
                                     <div style={style.leftWrp}>
                                         <div style={style.headerTopIcons}>
-                                            <Glyphicon
-                                                glyph='glyphicon glyphicon-earphone'
-                                                style={styles.headerTopIcon}
-                                            />
-                                            {this.renderPhoneNumber(phoneNumber, isEditMode, style.linkColorHeader)}
+                                            <div style={style.topIcon}>
+                                                <Glyphicon
+                                                    glyph='glyphicon glyphicon-earphone'
+                                                />
+                                            </div>
+                                            {getLink(
+                                                buildSiteMode,
+                                                'tel:+390123456789',
+                                                this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber),
+                                                style.linkColorHeader
+                                            )}
                                         </div>
                                         <div style={style.headerTopIcons}>
-                                            <Glyphicon
-                                                glyph='glyphicon glyphicon-envelope'
-                                                style={styles.headerTopIcon}
-                                            />
-                                            {this.renderEmail(emailAddress, isEditMode, style.linkColorHeader)}
+                                            <div style={style.topIcon}>
+                                                <Glyphicon
+                                                    glyph='glyphicon glyphicon-envelope'
+                                                />
+                                            </div>
+                                            {getLink(
+                                                buildSiteMode,
+                                                'mailto:info@emaildisupporto.it',
+                                                this.renderTextField(isEditMode, 'emailAddress', 'info@emaildisupporto.it', emailAddress),
+                                                style.linkColorHeader
+                                            )}
                                         </div>
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={6} md={4} lg={5} mdPush={4} lgPush={2}>
                                     <div style={style.rightWrp}>
-                                        {this.renderSocialIcons(...style.socialIcon, ...style.socialIconWrp)}
-                                        {this.renderAccountSection(style.accountLinksWrp)}
+                                        <SocialIcons
+                                            buildSiteMode={buildSiteMode}
+                                            form={form}
+                                            socialIconWrpStyle={style.socialIconWrp}
+                                            socialIconStyle={style.socialIcon}
+                                            siteConfig={siteConfig}
+                                        />
+                                        <AccountSection
+                                            accountWrpStyle={style.accountWrp}
+                                            buildSiteMode={buildSiteMode}
+                                            login={login}
+                                            loginForm={loginForm}
+                                            loginState={loginState}
+                                            signUpForm={signUpForm}
+                                            signUpState={signUpState}
+                                            signUpUser={signUpUser}
+                                            siteConfig={siteConfig}
+                                        />
                                     </div>
                                 </Col>
                                 <Col xs={12} md={4} lg={2} mdPull={4} lgPull={5}>
                                     <div style={style.headerLogoWrp}>
                                         <div style={style.headerLogoBg}>
-                                            <img src='./_assets/images/template_02/logo_example.jpg' style={style.headerLogo} />
+                                            <img src='/_assets/images/template_02/logo_example.jpg' style={style.headerLogo} />
                                         </div>
                                     </div>
                                 </Col>

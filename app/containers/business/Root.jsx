@@ -12,6 +12,7 @@ import Header2 from 'components/business/02/Header';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
+import {userHasAccess} from 'lib/auth-utils';
 import {templatesIds} from 'lib/business-site-utils';
 
 const components = {
@@ -31,6 +32,7 @@ class Root extends Component {
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
         params: PropTypes.object,
+        routes: PropTypes.array.isRequired,
         sendNewConfirmationCode: PropTypes.func.isRequired,
         signUpConfirmationForm: PropTypes.object,
         signUpForm: PropTypes.object,
@@ -47,16 +49,21 @@ class Root extends Component {
         }
     }
 
+    componentWillUpdate (nextProps) {
+        //TODO decide what to do when user cannot access to a page
+        console.log(userHasAccess(nextProps.user, nextProps.routes));
+    }
+
     getFontFamily ({templateId}) {
         switch (templateId) {
             case templatesIds.TEMPLATE_2:
                 return 'Lato';
-            case templatesIds.TEMPLATE_1: 
+            case templatesIds.TEMPLATE_1:
             default:
                 return 'Roboto';
         }
     }
-    
+
     render () {
         const {editMode, siteConfig} = this.props.businessSiteState;
         const Header = components[`header${siteConfig.templateId}`];

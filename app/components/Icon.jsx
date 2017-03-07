@@ -9,7 +9,7 @@ class Icon extends Component {
     };
 
     render () {
-        const path = `../_assets/icons/${this.props.iconName}.svg`;
+        const path = `/_assets/icons/${this.props.iconName}.svg`;
         const {iconStyle, onClick} = this.props;
         return (
             <div

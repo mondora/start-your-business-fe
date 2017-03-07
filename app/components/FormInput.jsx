@@ -62,6 +62,7 @@ export default class FormInput extends Component {
                     validateOn='blur'
                 >
                     <input
+                        disabled={disabled}
                         type={inputType}
                         placeholder={placeholder}
                         style={{...styles.input, ...this.props.inputStyle}}

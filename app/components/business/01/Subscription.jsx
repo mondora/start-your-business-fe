@@ -90,7 +90,7 @@ class Subscription extends BusinessSubscription {
     };
 
     render () {
-        const path = `../_assets/images/template_01/${this.props.photoName}`;
+        const path = `/_assets/images/template_01/${this.props.photoName}`;
         const mainColor = this.props.bgColor;
         return (
             <div style={{...styles.subscriptionContainer, ...{borderColor: mainColor}}}>

@@ -8,11 +8,12 @@ import {bindActionCreators} from 'redux';
 import {getPaymentParams} from 'actions/payment';
 import {choosePlan, getSYBProductPlans} from 'actions/products';
 
-import BillingInformationForm from 'components/BillingInformationForm';
 import Button from 'components/CustomButton';
+import CompanyInfoForm from 'components/CompanyInfoForm';
 import CreditCardForm from 'components/CreditCardForm';
 import FormInputCheckbox from 'components/FormInputCheckbox';
 import PageTeaser from 'components/PageTeaser';
+import PersonalInfoForm from 'components/PersonalInfoForm';
 import ProductPlanCardList from 'components/ProductPlanCardList';
 
 import * as colors from 'lib/colors';
@@ -92,9 +93,8 @@ class ChoosePlan extends Component {
                                     <p style={styles.sectionTitle}>
                                         {'2. Dati di fatturazione:'}
                                     </p>
-                                    <BillingInformationForm
-                                        form={this.props.billingInformationForm}
-                                    />
+                                    <CompanyInfoForm form={this.props.billingInformationForm} />
+                                    <PersonalInfoForm form={this.props.billingInformationForm} />
                                 </div>
                             </Col>
                         </Row>

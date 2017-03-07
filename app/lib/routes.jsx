@@ -13,9 +13,12 @@ import Privacy from 'containers/Privacy';
 import Root from 'containers/Root';
 import SignUp from 'containers/SignUp';
 import SubscriptionResult from 'containers/SubscriptionResult';
+import UserAccount from 'containers/UserAccount';
 
 import BusinessHome from 'containers/business/Home';
+import BusinessPaymentInfo from 'containers/business/PaymentInfo';
 import BusinessRoot from 'containers/business/Root';
+import BusinessUserInfo from 'containers/business/UserInfo';
 
 // const history = syncHistoryWithStore(browserHistory, store);
 
@@ -29,12 +32,15 @@ export default (
                 <Route name='choosePlan' path='/choose-plan' component={ChoosePlan} private={true} />
                 <Route name='privacy' path='/privacy' component={Privacy} />
                 <Route name='subscriptionResult' path='/subscription-result' component={SubscriptionResult} private={true} />
+                <Route name='account' path='/account' component={UserAccount} private={true} />
             </Route>
 
             <Route name='creditCardResult' path='/credit-card-result' component={CreditCardResult} />
 
             <Route name='businessRoot' component={BusinessRoot}>
                 <Route name='businessHome' path='/:businessName' component={BusinessHome} />
+                <Route name='businessUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} private={true} />
+                <Route name='businessPaymentInfo' path='/:businessName/payment-info' component={BusinessPaymentInfo} private={true} />
             </Route>
         </Router>
     </Provider>

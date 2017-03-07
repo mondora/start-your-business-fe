@@ -25,7 +25,7 @@ const styles = {
     },
     bottomPageContainer2: {
         position: 'relative',
-        backgroundImage: 'url(\'./_assets/images/template_02/carousel01.jpg\')',
+        backgroundImage: 'url(\'/_assets/images/template_02/carousel01.jpg\')',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center top'

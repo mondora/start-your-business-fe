@@ -18,7 +18,9 @@ export const initialFooterInfo = {
 
 export const initialHeaderInfo = {
     emailAddress: 'info@emaildisupporto.it',
-    phoneNumber: '+39 012 3456789'
+    facebookPage: 'pagina facebook',
+    phoneNumber: '+39 012 3456789',
+    twitterAccount: '@twitter_account'
 };
 
 export const initialIntroInfo = {
