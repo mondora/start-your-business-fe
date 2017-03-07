@@ -16,6 +16,7 @@ import SubscriptionResult from 'containers/SubscriptionResult';
 import UserAccount from 'containers/UserAccount';
 
 import BusinessHome from 'containers/business/Home';
+import BusinessPaymentInfo from 'containers/business/PaymentInfo';
 import BusinessRoot from 'containers/business/Root';
 import BusinessUserInfo from 'containers/business/UserInfo';
 
@@ -39,6 +40,7 @@ export default (
             <Route name='businessRoot' component={BusinessRoot}>
                 <Route name='businessHome' path='/:businessName' component={BusinessHome} />
                 <Route name='businessUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} private={true} />
+                <Route name='businessPaymentInfo' path='/:businessName/payment-info' component={BusinessPaymentInfo} private={true} />
             </Route>
         </Router>
     </Provider>
