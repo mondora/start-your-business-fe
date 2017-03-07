@@ -16,40 +16,10 @@ const styles = {
     }
 };
 
-export default class BillingInformationForm extends Component {
+export default class PersonalInfoForm extends Component {
     static propTypes = {
-        form: PropTypes.object.isRequired,
-        showCompanyFields: PropTypes.bool
+        form: PropTypes.object.isRequired
     };
-
-    renderCompanyFields () {
-        return this.props.showCompanyFields ? (
-            <div>
-                <Col xs={12} sm={6}>
-                    <label style={styles.label}>{'Azienda *'}</label>
-                    <FormInput
-                        field={this.props.form.company}
-                        inputType='text'
-                        model='billing.company'
-                        placeholder='Azienda'
-                        validator={genericRequiredValidator}
-                        style={styles.input}
-                    />
-                </Col>
-                <Col xs={12} sm={6}>
-                    <label style={styles.label}>{'P.IVA *'}</label>
-                    <FormInput
-                        field={this.props.form.pIVA}
-                        inputType='text'
-                        model='billing.pIVA'
-                        placeholder='P.IVA'
-                        validator={genericRequiredValidator}
-                        style={styles.input}
-                    />
-                </Col>
-            </div>
-        ) : null;
-    }
 
     render () {
         return (
@@ -76,7 +46,6 @@ export default class BillingInformationForm extends Component {
                         style={styles.input}
                     />
                 </Col>
-                {this.renderCompanyFields()}
                 <Col xs={12} sm={6}>
                     <label style={styles.label}>{'Email *'}</label>
                     <FormInput

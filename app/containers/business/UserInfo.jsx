@@ -3,7 +3,8 @@ import React, {Component, PropTypes} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-import BillingInformationForm from 'components/BillingInformationForm';
+import CompanyInfoForm from 'components/CompanyInfoForm';
+import PersonalInfoForm from 'components/PersonalInfoForm';
 
 import * as colors from 'lib/colors';
 
@@ -34,9 +35,15 @@ class UserInfo extends Component {
                         <p style={styles.boxTitle}>
                             {'1. Dati di spedizione:'}
                         </p>
-                        <BillingInformationForm
-                            form={this.props.billingInformationForm}
-                        />
+                        <PersonalInfoForm form={this.props.billingInformationForm} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} style={styles.formBox}>
+                        <p style={styles.boxTitle}>
+                            {'2. Dati di fatturazione:'}
+                        </p>
+                        <CompanyInfoForm form={this.props.billingInformationForm} />
                     </Col>
                 </Row>
             </div>
