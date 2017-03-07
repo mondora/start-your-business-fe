@@ -4,9 +4,11 @@ import {Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
 import CompanyInfoForm from 'components/CompanyInfoForm';
+import FormInputCheckbox from 'components/FormInputCheckbox';
 import PersonalInfoForm from 'components/PersonalInfoForm';
 
 import * as colors from 'lib/colors';
+import {isCheckedValidator} from 'lib/form-utils';
 
 const styles = {
     formBox: {
@@ -26,7 +28,16 @@ class UserInfo extends Component {
         businessSiteState: PropTypes.object.isRequired
     };
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            showAlternativeInfoForm: false
+        };
+    }
+
     render () {
+        //TODO put right link for terms & privacy
+        //TODO manage correctly store data
         return (
             <div className='container'>
                 {'INSERISCI I TUOI DATI'}
@@ -44,6 +55,41 @@ class UserInfo extends Component {
                             {'2. Dati di fatturazione:'}
                         </p>
                         <CompanyInfoForm form={this.props.billingInformationForm} />
+                        <input
+                            type='checkbox'
+                            onChange={() => this.setState({showAlternativeInfoForm: !this.state.showAlternativeInfoForm})}
+                        />
+                        {'Indirizzo diverso da quello di spedizione?'}
+                        {this.state.showAlternativeInfoForm ? <PersonalInfoForm form={this.props.billingInformationForm} /> : null}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} style={{padding: 0}}>
+                        <FormInputCheckbox
+                            field={this.props.billingInformationForm.termsCheck}
+                            model='billing.termsCheck'
+                            text={
+                                <span style={{cursor: 'pointer'}}>
+                                    {'  Acconsento e dichiaro di aver letto i '}
+                                    <a
+                                        href='/privacy'
+                                        style={{color: colors.darkGrey, textDecoration: 'underline'}}
+                                        target='_blank'
+                                    >
+                                        {'termini e condizioni'}
+                                    </a>
+                                    {' del servizio e l’informativa sulla '}
+                                    <a
+                                        href='/privacy'
+                                        style={{color: colors.darkGrey, textDecoration: 'underline'}}
+                                        target='_blank'
+                                    >
+                                        {'Privacy'}
+                                    </a> {' *'}
+                                </span>
+                            }
+                            validator={isCheckedValidator}
+                        />
                     </Col>
                 </Row>
             </div>
