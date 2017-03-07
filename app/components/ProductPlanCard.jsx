@@ -1,3 +1,4 @@
+import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Col} from 'react-bootstrap';
 import {Glyphicon} from 'react-bootstrap';
@@ -23,13 +24,13 @@ const styles = {
     },
     price: {
         color: colors.white,
-        fontSize: 'calc(35px + .5vw)',
-        fontWeight: 800
+        fontWeight: 800,
+        lineHeight: '60px'
     },
     frequency: {
         color: colors.white,
-        fontSize: 'calc(14px + .5vw)',
-        fontWeight: 800
+        fontSize: '1.6em',
+        fontWeight: 400
     },
     top: {
         borderRadius: '10px 10px 0 0',
@@ -40,7 +41,11 @@ const styles = {
     bottom: {
         height: 200,
         padding: 10,
-        textAlign: 'left'
+        textAlign: 'left',
+        '@media screen and (max-width: 767px)': {
+            minHeight:150,
+            height: 'auto'
+        }
     },
     featuresWrp: {
         display: ' flex',
@@ -56,7 +61,7 @@ const styles = {
     }
 };
 
-export default class ProductPlanCard extends Component {
+class ProductPlanCard extends Component {
 
     static propTypes = {
         backgroundColor: PropTypes.string,
@@ -107,7 +112,8 @@ export default class ProductPlanCard extends Component {
                         </div>
                         <HorizontalLine color={colors.white} width={50} />
                         <div style={styles.price}>
-                            {pricing.currencySymbol ? pricing.currencySymbol : pricing.currency}{pricing.price}
+                            <span style={{fontWeight: 400, fontSize: '3em'}}>{pricing.currencySymbol ? pricing.currencySymbol : pricing.currency}</span>
+                            <span style={{fontSize: '4.5em'}}>{pricing.price}</span>
                         </div>
                         <div style={styles.frequency}>
                             {`(${getPlanFrequency(productPlan)})`}
@@ -145,3 +151,5 @@ export default class ProductPlanCard extends Component {
         );
     }
 }
+
+export default Radium(ProductPlanCard);
