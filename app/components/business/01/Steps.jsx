@@ -5,6 +5,8 @@ import {Form} from 'react-redux-form';
 import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
+import StepInfo from 'components/business/StepInfo';
+
 const styles = (siteColors) => ({
     stepsContainer: {
         borderRadius: 10,
@@ -12,7 +14,14 @@ const styles = (siteColors) => ({
         color: colors.white,
         textAlign: 'center'
     },
-    stepNumber: {
+    stepTitle: {
+        fontSize: 'calc(22px + 1vw)',
+        fontWeight: '700',
+        padding: '20px',
+        margin: 0,
+        borderBottom: `1px solid ${colors.white}`
+    },
+    stepNumberWrp: {
         display: 'inline-block',
         width: 70,
         height: 70,
@@ -23,17 +32,10 @@ const styles = (siteColors) => ({
         borderRadius: '100%',
         color: siteColors.mainColor,
         backgroundColor: colors.white
-    },
-    stepTitle: {
-        fontSize: 'calc(22px + 1vw)',
-        fontWeight: '700',
-        padding: '20px',
-        margin: 0,
-        borderBottom: `1px solid ${colors.white}`
     }
 });
 
-export default class Steps extends Component {
+export default class Step extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
@@ -117,17 +119,13 @@ export default class Steps extends Component {
                             <Row>
                                 {this.getStep().map((stepInfo, index) =>
                                     <Col key={index} xs={12} sm={4}>
-                                        <div style={{margin: isEditMode ? '30px 10px' : '30px 20px'}}>
-                                            <div style={style.stepNumber}>
-                                                {stepInfo.number}
-                                            </div>
-                                            <h4 style={{fontSize: isEditMode ? '15px' : '1.6em', fontWeight: '700'}}>
-                                                {stepInfo.title}
-                                            </h4>
-                                            <p style={{fontSize: '1.2em'}}>
-                                                {stepInfo.text}
-                                            </p>
-                                        </div>
+                                        <StepInfo
+                                            buildSiteMode={this.props.buildSiteMode}
+                                            stepTitle={stepInfo.title}
+                                            stepText={stepInfo.text}
+                                            stepNumber={stepInfo.number}
+                                            stepSymbolStyle={style.stepNumberWrp}
+                                        />
                                     </Col>
                                 )}
                             </Row>

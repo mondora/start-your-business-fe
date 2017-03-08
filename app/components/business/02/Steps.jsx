@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
-import {Col, Row, Glyphicon} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
 import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
+
+import StepInfo from 'components/business/StepInfo';
 
 const styles = (siteColors) => ({
     stepsContainer: {
@@ -88,7 +90,6 @@ export default class Steps extends Component {
     }
 
     render () {
-        const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (
             <Form model={'businessSite.siteConfig.steps'}>
@@ -96,20 +97,13 @@ export default class Steps extends Component {
                     <Row>
                         {this.getStep().map((stepInfo, index) =>
                             <Col key={index} xs={12} sm={4}>
-                                <div style={{margin: isEditMode ? '30px 10px' : '30px 20px', textAlign: 'center'}}>
-                                    <div style={style.stepIconWrp}>
-                                        <Glyphicon
-                                            glyph={stepInfo.icon}
-                                            style={{marginRight: 5}}
-                                        />
-                                    </div>
-                                    <h4 style={{fontSize: isEditMode ? '15px' : '1.6em', fontWeight: '700'}}>
-                                        {stepInfo.title}
-                                    </h4>
-                                    <p style={{fontSize: '1.2em'}}>
-                                        {stepInfo.text}
-                                    </p>
-                                </div>
+                                <StepInfo
+                                    buildSiteMode={this.props.buildSiteMode}
+                                    stepTitle={stepInfo.title}
+                                    stepText={stepInfo.text}
+                                    stepIcon={stepInfo.icon}
+                                    stepSymbolStyle={style.stepIconWrp}
+                                />
                             </Col>
                         )}
                     </Row>
