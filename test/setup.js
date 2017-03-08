@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 const jsdom = require('jsdom').jsdom;
 
 // Setup fake DOM

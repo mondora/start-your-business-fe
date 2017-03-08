@@ -1,18 +1,27 @@
-import {AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
-import {Config, CognitoIdentityCredentials} from 'aws-sdk';
+import {
+    AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool
+} from 'amazon-cognito-identity-js';
+import AWS, {CognitoIdentityCredentials} from 'aws-sdk';
 import {map} from 'ramda';
 
-import {AWS_COGNITO, AWS_REGION} from 'lib/config';
+import {AWS_ACCESS_KEY, AWS_COGNITO, AWS_REGION, AWS_SECRET_KEY} from 'lib/config';
 
-Config.region = AWS_REGION;
-Config.credentials = new CognitoIdentityCredentials({
+AWS.config.apiVersions = {
+    cognitoidentityserviceprovider: '2016-04-18'
+};
+AWS.config.region = AWS_REGION;
+AWS.config.credentials = new CognitoIdentityCredentials({
     IdentityPoolId: AWS_COGNITO.identityPoolId
 });
+AWS.config.accessKeyId = AWS_ACCESS_KEY;
+AWS.config.secretAccessKey = AWS_SECRET_KEY;
 
 const userPool = new CognitoUserPool({
     ClientId: AWS_COGNITO.clientId,
     UserPoolId: AWS_COGNITO.userPoolId
 });
+
+const cisp = new AWS.CognitoIdentityServiceProvider();
 
 function getCognitoUser (username) {
     const userData = {
@@ -34,7 +43,7 @@ export function authenticateUser (username, password, callback) {
             console.log(`Cogito authorizer token: ${result.getIdToken().getJwtToken()}`);
             let login = {};
             login[`cognito-idp.${AWS_REGION}.amazonaws.com/${AWS_COGNITO.userPoolId}`] = result.getIdToken().getJwtToken();
-            Config.credentials = new CognitoIdentityCredentials({
+            AWS.config.credentials = new CognitoIdentityCredentials({
                 IdentityPoolId : AWS_COGNITO.identityPoolId,
                 Logins : login
             });
@@ -53,6 +62,23 @@ export function confirmRegistration (username, confirmationCode, callback) {
     cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
         if (err) {
             console.error(err);
+            callback({error: err});
+            return;
+        }
+        console.log(`call result: ${result}`);
+        callback({success: true});
+    });
+}
+
+export function createUserPool (businessName, callback) {
+    const params = {
+        PoolName: businessName
+    };
+    //TODO see why this give the error: TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.
+    cisp.createUserPool(params, (err, result) => {
+        if (err) {
+            console.error(err);
+            console.error(result);
             callback({error: err});
             return;
         }
@@ -89,4 +115,3 @@ export function signUp (email, password, attributes, callback) {
         callback({success: true});
     });
 }
-

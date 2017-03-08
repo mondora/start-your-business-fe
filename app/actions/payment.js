@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+import {createUserPool} from 'lib/aws-cognito-utils';
 import {API_ENDPOINT} from 'lib/config';
 
 export const getPaymentParams = () => {
@@ -24,11 +26,33 @@ export const subscribeNewCustomer = (chosenPlanId, billingInfo, paymentMethodId)
             subscriptionPlanId: chosenPlanId,
             paymentMethodId: paymentMethodId
         })
-        .then(() => dispatch({
-            type: 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS'
-        }))
+        .then(() => {
+            //TODO manage own domain name when available instead of businessName
+            createAWSCognitoUserPool(dispatch, billingInfo.site.businessName);
+            dispatch({
+                type: 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS'
+            });
+        })
         .catch(() => dispatch({
             type: 'SUBSCRIBE_NEW_CUSTOMER_FAIL'
         }));
     };
+};
+
+const createAWSCognitoUserPool = (dispatch, businessName) => {
+    dispatch({
+        type: 'CREATE_USER_POOL_START'
+    });
+    createUserPool(businessName, result => {
+        if (result.success) {
+            dispatch({
+                type: 'CREATE_USER_POOL_START_SUCCESS'
+            });
+        } else {
+            dispatch({
+                type: 'CREATE_USER_POOL_START_FAIL',
+                error: result.error
+            });
+        }    
+    });
 };

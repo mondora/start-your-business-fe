@@ -112,8 +112,12 @@ class ProductPlanCard extends Component {
                         </div>
                         <HorizontalLine color={colors.white} width={50} />
                         <div style={styles.price}>
-                            <span style={{fontWeight: 400, fontSize: '3em'}}>{pricing.currencySymbol ? pricing.currencySymbol : pricing.currency}</span>
-                            <span style={{fontSize: '4.5em'}}>{pricing.price}</span>
+                            <span style={{fontWeight: 400, fontSize: '3em'}}>
+                                {pricing.currencySymbol ? pricing.currencySymbol : pricing.currency}
+                            </span>
+                            <span style={{fontSize: '4.5em'}}>
+                                {pricing.price}
+                            </span>
                         </div>
                         <div style={styles.frequency}>
                             {`(${getPlanFrequency(productPlan)})`}

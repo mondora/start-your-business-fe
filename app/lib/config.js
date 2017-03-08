@@ -7,3 +7,5 @@ export const AWS_COGNITO = {
     userPoolId: window.APP_CONFIG.AWS_COGNITO_USER_POOL_ID
 };
 export const AWS_REGION = window.APP_CONFIG.AWS_REGION;
+export const AWS_ACCESS_KEY = window.APP_CONFIG.AWS_ACCESS_KEY;
+export const AWS_SECRET_KEY = window.APP_CONFIG.AWS_SECRET_KEY;

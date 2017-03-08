@@ -1,6 +1,6 @@
 import chai, {expect} from 'chai';
 import {shallow, mount} from 'enzyme';
-// import {Glyphicon} from 'react-bootstrap';
+import {Glyphicon} from 'react-bootstrap';
 import React from 'react';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -18,6 +18,9 @@ const productPlan = {
     effectiveStartDate: '2017-02-01',
     effectiveEndDate: '2020-01-30',
     allowOwnDomain__c: 'No',
+    feature1__c: 'feat 1',
+    feature2__c: 'feat 2',
+    feature3__c: 'feat 3',
     PromotionCode__c: null,
     OperatingSystem__c: null,
     Region__c: 'EU',
@@ -52,7 +55,6 @@ describe('ProductPlanCard', () => {
     describe('for prop', () => {
 
         describe('name', () => {
-
             it('renders provided plan name in the card', () => {
                 expect(
                     shallow(
@@ -63,21 +65,17 @@ describe('ProductPlanCard', () => {
                     ).html()
                 ).to.contains('this is a name');
             });
-
         });
 
         describe('price', () => {
-
             it('renders provided plan price in the card', () => {
                 expect(
                     shallow(<ProductPlanCard productPlan={productPlan} onConfirm={sinon.spy()} />).html()
                 ).to.contains(30);
             });
-
         });
 
         describe('topBackgroundColor', () => {
-
             it('applies #ffffff color as default', () => {
                 expect(
                     shallow(<ProductPlanCard productPlan={productPlan} onConfirm={sinon.spy()} />)
@@ -93,67 +91,34 @@ describe('ProductPlanCard', () => {
                         .prop('style')
                 ).to.include({backgroundColor: '#F1F1F1'});
             });
-
         });
 
-        //TODO uncomment when Zuora structure for features is defined
-        // describe('features', () => {
-        //
-        //     const features = ['feat 1', 'feat 2', 'feat 3'];
-        //
-        //     it('renders a glyphicon-ok-circle icon for each feature', () => {
-        //         expect(
-        //             shallow(<ProductPlanCard features={features} onConfirm={sinon.spy()} />)
-        //                 .find(Glyphicon)
-        //                 .findWhere(n => n.prop('glyph') === 'glyphicon glyphicon-ok-circle')
-        //         ).to.have.length(3);
-        //     });
-        //
-        //     it('renders provided text for each feature', () => {
-        //         const element = shallow(
-        //             <ProductPlanCard features={features} onConfirm={sinon.spy()} />
-        //         ).html();
-        //         expect(element).to.contains('feat 1');
-        //         expect(element).to.contains('feat 2');
-        //         expect(element).to.contains('feat 3');
-        //     });
-        //
-        // });
-        //
-        // describe('features', () => {
-        //
-        //     const features = ['feat 1', 'feat 2', 'feat 3'];
-        //
-        //     it('renders a glyphicon-ok-circle icon for each feature', () => {
-        //         expect(
-        //             shallow(
-        //                 <ProductPlanCard features={features} onConfirm={sinon.spy()} />
-        //             )
-        //                 .find(Glyphicon)
-        //                 .findWhere(n => n.prop('glyph') === 'glyphicon glyphicon-ok-circle')
-        //         ).to.have.length(3);
-        //     });
-        //
-        //     it('renders provided text for each feature', () => {
-        //         const element = shallow(
-        //             <ProductPlanCard features={features} onConfirm={sinon.spy()} />
-        //         ).html();
-        //         expect(element).to.contains('feat 1');
-        //         expect(element).to.contains('feat 2');
-        //         expect(element).to.contains('feat 3');
-        //     });
-        //
-        // });
+        describe('features', () => {
+            it('renders a glyphicon-ok-circle icon for each feature', () => {
+                expect(
+                    shallow(<ProductPlanCard productPlan={productPlan} onConfirm={sinon.spy()} />)
+                        .find(Glyphicon)
+                        .findWhere(n => n.prop('glyph') === 'glyphicon glyphicon-ok-circle')
+                ).to.have.length(3);
+            });
+
+            it('renders provided text for each feature', () => {
+                const element = shallow(
+                    <ProductPlanCard productPlan={productPlan} onConfirm={sinon.spy()} />
+                ).html();
+                expect(element).to.contains('feat 1');
+                expect(element).to.contains('feat 2');
+                expect(element).to.contains('feat 3');
+            });
+        });
 
         describe('onConfirm', () => {
-
             it('calls onConfirm prop clicking on the button', () => {
                 const onConfirm = sinon.spy();
                 const element = mount(<ProductPlanCard productPlan={productPlan} onConfirm={onConfirm} />);
                 element.find(Button).simulate('click');
                 expect(onConfirm).to.have.callCount(1);
             });
-
         });
 
     });
