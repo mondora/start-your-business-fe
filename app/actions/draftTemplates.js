@@ -1,4 +1,4 @@
-import axios from '../lib/axios';
+import axios from 'lib/axios';
 import {fetch as fetchFn} from 'lib/fetch';
 
 export const FETCH_DRAFT_TEMPLATE_START = 'FETCH_DRAFT_TEMPLATE_START';

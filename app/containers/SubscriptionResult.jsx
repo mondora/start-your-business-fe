@@ -39,7 +39,6 @@ class SubscriptionResult extends Component {
     constructor (props) {
         super(props);
         const {query} = props.location;
-        console.log(query);
         const creditCardSuccess = this.isCreditCardSuccess(query);
         if (creditCardSuccess) {
             //need to get data from stored state because of navigation from iframe

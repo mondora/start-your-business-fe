@@ -32,7 +32,7 @@ class Root extends Component {
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
         params: PropTypes.object,
-        routes: PropTypes.array.isRequired,
+        routes: PropTypes.array,
         sendNewConfirmationCode: PropTypes.func.isRequired,
         signUpConfirmationForm: PropTypes.object,
         signUpForm: PropTypes.object,
@@ -50,8 +50,10 @@ class Root extends Component {
     }
 
     componentWillUpdate (nextProps) {
-        //TODO decide what to do when user cannot access to a page
-        console.log(userHasAccess(nextProps.user, nextProps.routes));
+        if (nextProps.routes) {
+            //TODO decide what to do when user cannot access to a page
+            console.log(userHasAccess(nextProps.user, nextProps.routes));
+        }
     }
 
     getFontFamily ({templateId}) {

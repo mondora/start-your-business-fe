@@ -2,7 +2,7 @@ import {
     FETCH_DRAFT_TEMPLATES_START,
     FETCH_DRAFT_TEMPLATES_SUCCESS,
     FETCH_DRAFT_TEMPLATES_ERROR
-} from 'actions/draftTemplares';
+} from 'actions/draftTemplates';
 
 const initialState = {
     elements: [],
@@ -10,7 +10,7 @@ const initialState = {
     fetchError: null
 };
 
-export default function draftTemplares (state = initialState, action) {
+export default function draftTemplates (state = initialState, action) {
     const {type, payload} = action;
     switch (type) {
         case FETCH_DRAFT_TEMPLATES_START:
