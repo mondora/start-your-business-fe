@@ -1,19 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Glyphicon} from 'react-bootstrap';
 
-import ImageUploader from 'components/ImageUploader';
-import SaveButton from 'components/BuildSiteSaveButton';
-
 const commonStyle = {
-    subscriptionImage: {
-        display: 'block',
-        height: 'auto',
-        maxWidth: '100%',
-        margin: '0 auto',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center'
-    },
     subscriptionFeatures: {
         display: 'flex',
         textAlign: 'left',
@@ -31,42 +19,14 @@ const commonStyle = {
     }
 };
 
-export default class Subscription extends Component {
+export default class SubscriptionFeatures extends Component {
     static propTypes = {
         bgColor: PropTypes.string,
         feature1: PropTypes.node,
         feature2: PropTypes.node,
-        frequency: PropTypes.node,
-        imageUploadMode: PropTypes.bool,
-        photoName: PropTypes.string,
-        price: PropTypes.node,
-        type: PropTypes.node
     };
 
-    renderImage (path) {
-        return this.props.imageUploadMode ? (
-            <div>
-                <p>
-                    {'AGGIUNGI FOTO DELLA TUA SOTTOSCRIZIONE'}
-                </p>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    <ImageUploader />
-                    <SaveButton />
-                </div>
-            </div>
-        ) : (
-            <img src={path} style={commonStyle.subscriptionImage} />
-        );
-    }
-
-    renderSubscriptionFeatures () {
+    render () {
         const mainColor = this.props.bgColor;
         return (
             <div style={commonStyle.subscriptionFeatures}>

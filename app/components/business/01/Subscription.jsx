@@ -1,9 +1,9 @@
 import Radium from 'radium';
-import React, {PropTypes} from 'react';
+import React, {PropTypes, Component} from 'react';
 import {Button} from 'react-bootstrap';
 
-import BusinessSubscription from 'components/business/Subscription';
-
+import SubscriptionFeatures from 'components/business/SubscriptionFeatures';
+import SubscriptionImage from 'components/business/SubscriptionImage';
 import * as colors from 'lib/colors';
 
 const styles = {
@@ -80,10 +80,13 @@ const styles = {
     }
 };
 
-class Subscription extends BusinessSubscription {
+class Subscription extends Component {
     static propTypes = {
         bgColor: PropTypes.string,
+        feature1: PropTypes.node,
+        feature2: PropTypes.node,
         frequency: PropTypes.node,
+        imageUploadMode: PropTypes.bool,
         photoName: PropTypes.string,
         price: PropTypes.node,
         type: PropTypes.node
@@ -98,8 +101,15 @@ class Subscription extends BusinessSubscription {
                     {this.props.type}
                 </div>
                 <div style={styles.subscriptionFeaturesWrp}>
-                    {this.renderImage(path)}
-                    {this.renderSubscriptionFeatures()}
+                    <SubscriptionImage
+                        imageUploadMode={this.props.imageUploadMode}
+                        path={path}
+                    />
+                    <SubscriptionFeatures
+                        bgColor={this.props.bgColor}
+                        feature1={this.props.feature1}
+                        feature2={this.props.feature2}
+                    />
                 </div>
                 <div style={{...styles.subscriptionBottom, ...{backgroundColor: mainColor}}}>
                     <span style={styles.subscriptionPrice}>
