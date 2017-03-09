@@ -14,6 +14,7 @@ import businessSite, {
 import draftTemplates from './draftTemplates';
 import payment from './payment';
 import products from './products';
+import service from './service';
 import spinner from './spinner';
 import user, {initialConfirmationState, initialLoginState, initialSignupState} from './user';
 
@@ -32,6 +33,7 @@ const reducers = combineReducers({
     draftTemplates,
     payment,
     products,
+    service,
     spinner,
     user,
     userLoginForm: formReducer('user.login', initialLoginState),

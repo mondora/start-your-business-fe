@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
+import {setRenderingSite} from 'actions/service';
 import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
 
 import Header from 'components/Header';
@@ -16,14 +17,21 @@ class Root extends Component {
     static propTypes = {
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
+        location: PropTypes.object.isRequired,
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
         routes: PropTypes.array.isRequired,
         sendNewConfirmationCode: PropTypes.func.isRequired,
+        setRenderingSite: PropTypes.func.isRequired,
         signUpConfirmationForm: PropTypes.object,
         spinner: PropTypes.object,
         user: PropTypes.object
     };
+
+    constructor (props) {
+        super(props);
+        props.setRenderingSite(null);
+    }
 
     componentWillUpdate (nextProps) {
         //TODO decide what to do when user cannot access to a page
@@ -67,7 +75,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         confirmSignUp: bindActionCreators(confirmSignUp, dispatch),
         login: bindActionCreators(login, dispatch),
-        sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch)
+        sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch),
+        setRenderingSite: bindActionCreators(setRenderingSite, dispatch)
     };
 };
 

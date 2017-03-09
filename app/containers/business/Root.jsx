@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
+import {setRenderingSite} from 'actions/service';
 import {confirmSignUp, login, sendNewConfirmationCode, signUpUser} from 'actions/user';
 
 import Footer1 from 'components/business/01/Footer';
@@ -34,6 +35,7 @@ class Root extends Component {
         params: PropTypes.object,
         routes: PropTypes.array,
         sendNewConfirmationCode: PropTypes.func.isRequired,
+        setRenderingSite: PropTypes.func.isRequired,
         signUpConfirmationForm: PropTypes.object,
         signUpForm: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
@@ -45,7 +47,8 @@ class Root extends Component {
         super(props);
         if (!props.businessSiteState.editMode) {
             //TODO check for businessName and render business site or redirect
-            console.log(this.props.params.businessName);
+            console.log(props.params.businessName);
+            props.setRenderingSite(props.params.businessName);
         }
     }
 
@@ -129,6 +132,7 @@ const mapDispatchToProps = (dispatch) => {
         confirmSignUp: bindActionCreators(confirmSignUp, dispatch),
         login: bindActionCreators(login, dispatch),
         sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch),
+        setRenderingSite: bindActionCreators(setRenderingSite, dispatch),
         signUpUser: bindActionCreators(signUpUser, dispatch)
     };
 };

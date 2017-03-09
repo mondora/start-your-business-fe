@@ -6,13 +6,13 @@ import {map} from 'ramda';
 
 import {AWS_ACCESS_KEY, AWS_COGNITO, AWS_REGION, AWS_SECRET_KEY} from 'lib/config';
 
-AWS.config.apiVersions = {
-    cognitoidentityserviceprovider: '2016-04-18'
-};
 AWS.config.region = AWS_REGION;
 AWS.config.credentials = new CognitoIdentityCredentials({
     IdentityPoolId: AWS_COGNITO.identityPoolId
 });
+//TODO understand why required in two places 
+AWS.config.credentials.accessKeyId = AWS_ACCESS_KEY;
+AWS.config.credentials.secretAccessKey = AWS_SECRET_KEY;
 AWS.config.accessKeyId = AWS_ACCESS_KEY;
 AWS.config.secretAccessKey = AWS_SECRET_KEY;
 
@@ -83,7 +83,6 @@ export function createUserPool (businessName, callback) {
     const params = {
         PoolName: businessName
     };
-    //TODO see why this give the error: TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.
     cisp.createUserPool(params, (err, result) => {
         if (err) {
             console.error(err);

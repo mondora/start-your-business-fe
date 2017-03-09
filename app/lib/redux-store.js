@@ -11,6 +11,7 @@ const storageConfig = {
         // 'businessSite', should not be persisted
         'payment',
         'products',
+        'service',
         'spinner'
         // 'user' should not be persisted
     ],
