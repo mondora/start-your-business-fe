@@ -9,3 +9,7 @@ install:
 script:
   - npm run lint
   - npm run test
+
+notifications:
+  email:
+    - entova@mondora.com
