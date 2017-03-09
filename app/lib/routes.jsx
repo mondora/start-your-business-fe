@@ -42,6 +42,8 @@ export default (
                 <Route name='businessUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} private={true} />
                 <Route name='businessPaymentInfo' path='/:businessName/payment-info' component={BusinessPaymentInfo} private={true} />
             </Route>
+            
+            <Route name='businessCreditCardResult' path='/:businessName/credit-card-result' component={CreditCardResult} />
         </Router>
     </Provider>
 );

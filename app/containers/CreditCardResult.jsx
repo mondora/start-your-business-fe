@@ -8,9 +8,14 @@ export default class CreditCardResult extends Component {
 
     constructor (props) {
         super(props);
-        const {query} = props.location;
+        const {pathname, query} = props.location;
         const creditCardSuccess = this.isCreditCardSuccess(query);
-        window.top.location.href = `/subscription-result?creditCardSuccess=${creditCardSuccess}&refId=${query.refId}`;
+        const basePath = this.getBasePath(pathname);
+        window.top.location.href = `${basePath}/subscription-result?creditCardSuccess=${creditCardSuccess}&refId=${query.refId}`;
+    }
+
+    getBasePath (pathname) {
+        return pathname.replace('/credit-card-result', '');
     }
 
     isCreditCardSuccess (queryString) {
