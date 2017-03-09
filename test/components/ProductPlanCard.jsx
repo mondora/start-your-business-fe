@@ -6,7 +6,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import Button from 'components/CustomButton';
-import ProductPlanCard from 'components/ProductPlanCard';
+import ProductPlanCardModule from 'components/ProductPlanCard';
 
 chai.use(sinonChai);
 
@@ -51,6 +51,8 @@ const productPlan = {
 };
 
 describe('ProductPlanCard', () => {
+
+    const ProductPlanCard = ProductPlanCardModule.__GetDependency__('ProductPlanCard');
 
     describe('for prop', () => {
 
