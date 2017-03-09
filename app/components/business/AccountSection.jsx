@@ -68,7 +68,7 @@ class AccountSection extends Component {
                     onClose={() => this.setState({showSignUpModal: false})}
                     show={this.state.showSignUpModal}
                     signUpUser={signUpUser}
-                    signupState={signUpState}
+                    signUpState={signUpState}
                 />
             </div>
         );

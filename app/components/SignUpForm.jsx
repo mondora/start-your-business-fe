@@ -46,8 +46,8 @@ export default class SignUpForm extends Component {
         backgroundColor: PropTypes.string,
         businessUserPool: PropTypes.object,
         form: PropTypes.object.isRequired,
-        signUpUser: PropTypes.func.isRequired,
-        signupState: PropTypes.object.isRequired
+        signUpState: PropTypes.object.isRequired,
+        signUpUser: PropTypes.func.isRequired
     };
 
     signUpUser ({email, password, familyName, givenName}) {
@@ -149,7 +149,7 @@ export default class SignUpForm extends Component {
                 </label>
 
                 <FormErrorMessage
-                    message={this.props.signupState.errorMessage}
+                    message={this.props.signUpState.errorMessage}
                 />
 
                 <label style={style.blockWrp}>

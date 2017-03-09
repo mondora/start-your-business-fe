@@ -10,8 +10,8 @@ export default class SignUpModal extends Component {
         form: PropTypes.object.isRequired,
         onClose: PropTypes.func,
         show: PropTypes.bool,
-        signUpUser: PropTypes.func.isRequired,
-        signupState: PropTypes.object.isRequired
+        signUpState: PropTypes.object.isRequired,
+        signUpUser: PropTypes.func.isRequired
     };
 
     closeModal () {
@@ -33,7 +33,7 @@ export default class SignUpModal extends Component {
                             businessUserPool={this.props.businessUserPool}
                             form={this.props.form}
                             signUpUser={this.props.signUpUser}
-                            signupState={this.props.signupState}
+                            signUpState={this.props.signUpState}
                         />
                     </Modal.Body>
                 </Modal>
