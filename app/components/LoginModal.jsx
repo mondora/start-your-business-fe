@@ -14,6 +14,7 @@ import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 export default class LoginModal extends Component {
     static propTypes = {
         backgroundColor: PropTypes.string,
+        businessUserPool: PropTypes.object,
         form: PropTypes.object.isRequired,
         login: PropTypes.func.isRequired,
         loginState: PropTypes.object.isRequired,
@@ -22,7 +23,7 @@ export default class LoginModal extends Component {
     };
 
     login ({email, password}) {
-        this.props.login(email, password);
+        this.props.login(email, password, this.props.businessUserPool);
     }
 
     closeModal () {

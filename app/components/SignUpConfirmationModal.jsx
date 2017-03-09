@@ -22,6 +22,7 @@ const styles = {
 
 export default class SignUpConfirmationModal extends Component {
     static propTypes = {
+        businessUserPool: PropTypes.object,
         confirmSignUp: PropTypes.func.isRequired,
         form: PropTypes.object.isRequired,
         sendNewCode: PropTypes.func.isRequired,
@@ -31,8 +32,8 @@ export default class SignUpConfirmationModal extends Component {
     };
 
     confirmRegistration ({code}) {
-        const {confirmSignUp, username} = this.props;
-        confirmSignUp(username, code);
+        const {businessUserPool, confirmSignUp, username} = this.props;
+        confirmSignUp(username, code, businessUserPool);
     }
 
     renderSignUpConfirmationForm () {
@@ -67,7 +68,7 @@ export default class SignUpConfirmationModal extends Component {
     }
 
     render () {
-        const {sendNewCode, signupConfirmed, username} = this.props;
+        const {businessUserPool, sendNewCode, signupConfirmed, username} = this.props;
         return (
             <Modal show={!signupConfirmed}>
                 <Modal.Header>
@@ -82,7 +83,7 @@ export default class SignUpConfirmationModal extends Component {
                     {this.renderSignUpConfirmationForm()}
                 </Modal.Body>
                 <Modal.Footer>
-                    <label style={styles.newCode} onClick={() => sendNewCode(username)}>
+                    <label style={styles.newCode} onClick={() => sendNewCode(username, businessUserPool)}>
                         {'INVIA UN NUOVO CODICE'}
                     </label>
                 </Modal.Footer>

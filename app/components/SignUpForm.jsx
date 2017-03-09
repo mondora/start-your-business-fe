@@ -44,6 +44,7 @@ const passwordsMatch = ({password, confirmPassword}) => {
 export default class SignUpForm extends Component {
     static propTypes = {
         backgroundColor: PropTypes.string,
+        businessUserPool: PropTypes.object,
         form: PropTypes.object.isRequired,
         signUpUser: PropTypes.func.isRequired,
         signupState: PropTypes.object.isRequired
@@ -60,7 +61,7 @@ export default class SignUpForm extends Component {
             name: 'given_name',
             value: givenName
         }];
-        this.props.signUpUser(email, password, attributes);
+        this.props.signUpUser(email, password, attributes, this.props.businessUserPool);
     }
 
     render () {

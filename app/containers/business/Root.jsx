@@ -89,6 +89,7 @@ class Root extends Component {
                 {
                     !editMode ?
                         <SignUpConfirmationModal
+                            businessUserPool={siteConfig.userPool}
                             confirmSignUp={this.props.confirmSignUp}
                             form={this.props.signUpConfirmationForm}
                             sendNewCode={this.props.sendNewConfirmationCode}

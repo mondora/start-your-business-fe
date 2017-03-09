@@ -54,6 +54,7 @@ class AccountSection extends Component {
             <div>
                 <LoginModal
                     backgroundColor={siteConfig.colors.mainColor}
+                    businessUserPool={siteConfig.userPool}
                     form={loginForm}
                     login={login}
                     loginState={loginState}
@@ -62,6 +63,7 @@ class AccountSection extends Component {
                 />
                 <SignUpModal
                     backgroundColor={siteConfig.colors.mainColor}
+                    businessUserPool={siteConfig.userPool}
                     form={signUpForm}
                     onClose={() => this.setState({showSignUpModal: false})}
                     show={this.state.showSignUpModal}

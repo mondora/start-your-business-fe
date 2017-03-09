@@ -6,6 +6,7 @@ import SignUpForm from 'components/SignUpForm';
 export default class SignUpModal extends Component {
     static propTypes = {
         backgroundColor: PropTypes.string,
+        businessUserPool: PropTypes.object,
         form: PropTypes.object.isRequired,
         onClose: PropTypes.func,
         show: PropTypes.bool,
@@ -29,6 +30,7 @@ export default class SignUpModal extends Component {
                     <Modal.Body>
                         <SignUpForm
                             backgroundColor={this.props.backgroundColor}
+                            businessUserPool={this.props.businessUserPool}
                             form={this.props.form}
                             signUpUser={this.props.signUpUser}
                             signupState={this.props.signupState}

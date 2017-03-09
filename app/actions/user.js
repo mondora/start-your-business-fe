@@ -1,7 +1,7 @@
 import {browserHistory} from 'react-router';
 import {authenticateUser, confirmRegistration, resendConfirmationCode, signUp} from 'lib/aws-cognito-utils';
 
-export const confirmSignUp = (username, confirmationCode) => {
+export const confirmSignUp = (username, confirmationCode, userPoolConfig) => {
     return dispatch => {
         dispatch({
             type: 'SIGNUP_CONFIRMATION_START'
@@ -12,11 +12,11 @@ export const confirmSignUp = (username, confirmationCode) => {
             {},
             {},
             () => browserHistory.push('/build-site')
-        ));
+        ), userPoolConfig);
     };
 };
 
-export const login = (username, password) => {
+export const login = (username, password, userPoolConfig) => {
     return dispatch => {
         dispatch({
             type: 'LOGIN_START'
@@ -27,25 +27,25 @@ export const login = (username, password) => {
             {username: username},
             {username: username},
             () => browserHistory.push('/build-site')
-        ));
+        ), userPoolConfig);
     };
 };
 
-export const sendNewConfirmationCode = username => {
+export const sendNewConfirmationCode = (username, userPoolConfig) => {
     return dispatch => {
         dispatch({
             type: 'SENDING_NEW_CONFIRMATION_CODE'
         });
-        resendConfirmationCode(username);
+        resendConfirmationCode(username, userPoolConfig);
     };
 };
 
-export const signUpUser = (email, password, attributes) => {
+export const signUpUser = (email, password, attributes, userPoolConfig) => {
     return dispatch => {
         dispatch({
             type: 'SIGNUP_START'
         });
-        signUp(email, password, attributes, getDefaultCognitoCallback(dispatch, 'SIGNUP', {username: email}));
+        signUp(email, password, attributes, getDefaultCognitoCallback(dispatch, 'SIGNUP', {username: email}), userPoolConfig);
     };
 };
 
