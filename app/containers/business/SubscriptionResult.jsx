@@ -3,12 +3,10 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {subscribeNewSupplier} from 'actions/payment';
+import {subscribeNewCustomer} from 'actions/payment';
 
 import * as colors from 'lib/colors';
 
-import Button from 'components/CustomButton';
-import PageTeaser from 'components/PageTeaser';
 import SubscriptionResultLoader from 'components/SubscriptionResultLoader';
 
 const styles = {
@@ -31,26 +29,16 @@ class SubscriptionResult extends Component {
     static propTypes = {
         location: PropTypes.object.isRequired,
         payment: PropTypes.object.isRequired,
-        subscribeNewSupplier: PropTypes.func.isRequired
+        subscribeNewCustomer: PropTypes.func.isRequired
     };
-    
-    renderContent (title, message, button) {
+
+    renderContent (title, message) {
         return (
             <div>
-                <PageTeaser
-                    pageTitle={title}
-                />
                 <div className='container' style={styles.rowStyle}>
                     <h2 style={styles.title}>
                         {message}
                     </h2>
-                    {button ?
-                        <Button
-                            backgroundColor={colors.darkGrey}
-                            onClick={button.onClick}
-                            text={button.text}
-                        /> : null
-                    }
                 </div>
             </div>
         );
@@ -62,7 +50,7 @@ class SubscriptionResult extends Component {
                 location={this.props.location}
                 payment={this.props.payment}
                 renderContent={this.renderContent}
-                subscribeNewCustomer={this.props.subscribeNewSupplier}
+                subscribeNewCustomer={this.props.subscribeNewCustomer}
             />
         );
     }
@@ -76,7 +64,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        subscribeNewSupplier: bindActionCreators(subscribeNewSupplier, dispatch)
+        subscribeNewCustomer: bindActionCreators(subscribeNewCustomer, dispatch)
     };
 };
 

@@ -18,25 +18,39 @@ export const getPaymentParams = () => {
 
 export const subscribeNewCustomer = (chosenPlanId, billingInfo, paymentMethodId) => {
     return dispatch => {
-        dispatch({
-            type: 'SUBSCRIBE_NEW_CUSTOMER_START'
-        });
-        axios.post(`https://${API_ENDPOINT}/subscribe-new-customer`, {
-            billingInfo: billingInfo,
-            subscriptionPlanId: chosenPlanId,
-            paymentMethodId: paymentMethodId
-        })
-        .then(() => {
+        callSubscribe(dispatch, chosenPlanId, billingInfo, paymentMethodId);
+    };
+};
+
+export const subscribeNewSupplier = (chosenPlanId, billingInfo, paymentMethodId) => {
+    return dispatch => {
+        callSubscribe(dispatch, chosenPlanId, billingInfo, paymentMethodId, () => {
             //TODO manage own domain name when available instead of businessName
             createAWSCognitoUserPool(dispatch, billingInfo.site.businessName);
-            dispatch({
-                type: 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS'
-            });
-        })
-        .catch(() => dispatch({
-            type: 'SUBSCRIBE_NEW_CUSTOMER_FAIL'
-        }));
+        });
     };
+};
+
+const callSubscribe = (dispatch, chosenPlanId, billingInfo, paymentMethodId, successCallback) => {
+    dispatch({
+        type: 'SUBSCRIBE_NEW_CUSTOMER_START'
+    });
+    axios.post(`https://${API_ENDPOINT}/subscribe-new-customer`, {
+        billingInfo: billingInfo,
+        subscriptionPlanId: chosenPlanId,
+        paymentMethodId: paymentMethodId
+    })
+    .then(() => {
+        if (successCallback) {
+            successCallback();
+        }
+        dispatch({
+            type: 'SUBSCRIBE_NEW_CUSTOMER_SUCCESS'
+        });
+    })
+    .catch(() => dispatch({
+        type: 'SUBSCRIBE_NEW_CUSTOMER_FAIL'
+    }));
 };
 
 const createAWSCognitoUserPool = (dispatch, businessName) => {
