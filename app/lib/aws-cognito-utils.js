@@ -68,41 +68,53 @@ export function authenticateUser (username, password, callback, userPoolConfig) 
 
 export function confirmRegistration (username, confirmationCode, callback, userPoolConfig) {
     const cognitoUser = getCognitoUser(username, userPoolConfig);
-    cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
+    cognitoUser.confirmRegistration(confirmationCode, true, (err) => {
         if (err) {
             console.error(err);
             callback({error: err});
             return;
         }
-        console.log(`call result: ${result}`);
         callback({success: true});
     });
 }
 
 export function createUserPool (businessName, callback) {
-    const params = {
+    cisp.createUserPool({
         PoolName: businessName
-    };
-    cisp.createUserPool(params, (err, result) => {
+    }, (err, result) => {
         if (err) {
             console.error(err);
-            console.error(result);
             callback({error: err});
             return;
         }
-        console.log(`call result: ${result}`);
-        callback({success: true});
+        const userPoolId = result.UserPool.Id;
+        cisp.createUserPoolClient({
+            ClientName: 'StartYourBusiness',
+            UserPoolId: userPoolId
+        }, (err, result) => {
+            if (err) {
+                console.error(err);
+                callback({error: err});
+                return;
+            }
+            callback({
+                success: true,
+                userPoolConfig: {
+                    clientId: result.UserPoolClient.ClientId,
+                    userPoolId: userPoolId
+                }
+            });
+        });
     });
 }
 
 export function resendConfirmationCode (username, userPoolConfig) {
     const cognitoUser = getCognitoUser(username, userPoolConfig);
-    cognitoUser.resendConfirmationCode((err, result) => {
+    cognitoUser.resendConfirmationCode((err) => {
         if (err) {
             console.error(err);
             return;
         }
-        console.log(`call result: ${result}`);
     });
 }
 
@@ -112,14 +124,12 @@ export function signUp (email, password, attributes, callback, userPoolConfig) {
         Value: attr.value
     }), attributes);
     const userPool = userPoolConfig ? getUserPool(userPoolConfig) : sybUserPool;
-    userPool.signUp(email, password, attributeList, null, (err, result) => {
+    userPool.signUp(email, password, attributeList, null, (err) => {
         if (err) {
             console.error(err);
             callback({error: err});
             return;
         }
-        console.log(`user name is ${result.user.getUsername()}!`);
-        console.log(`call result: ${result}`);
         callback({success: true});
     });
 }

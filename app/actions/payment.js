@@ -47,7 +47,8 @@ const createAWSCognitoUserPool = (dispatch, businessName) => {
         if (result.success) {
             //TODO take the result (user pool configuration) and persist it with siteConfig
             dispatch({
-                type: 'CREATE_USER_POOL_START_SUCCESS'
+                type: 'CREATE_USER_POOL_START_SUCCESS',
+                userPoolConfig: result.userPoolConfig
             });
         } else {
             dispatch({
