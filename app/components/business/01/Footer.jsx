@@ -7,6 +7,8 @@ import {editModes, getLink, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import FooterPayment from 'components/business/FooterPayment';
+import PrivacyModal from 'components/business/PrivacyModal';
+import ConditionsModal from 'components/business/ConditionsModal';
 
 const styles = {
     maxContentWidth: {
@@ -80,6 +82,14 @@ class Footer extends Component {
         form: PropTypes.object
     };
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            showPrivacyModal: false,
+            showConditionsModal: false
+        };
+    }
+
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
         return getTextField (
             isEditMode,
@@ -87,8 +97,23 @@ class Footer extends Component {
             `businessSite.siteConfig.footer.${fieldName}`,
             placeholder,
             readNode,
-            {color: colors.darkGrey, fontWeight: '300'},
+            {color: colors.templateGreyText, fontWeight: '300'},
             {margin: 0, width: '100vw'}
+        );
+    }
+
+    renderModals () {
+        return (
+            <div>
+                <ConditionsModal
+                    onClose={() => this.setState({showConditionsModal: false})}
+                    show={this.state.showConditionsModal}
+                />
+                <PrivacyModal
+                    onClose={() => this.setState({showPrivacyModal: false})}
+                    show={this.state.showPrivacyModal}
+                />
+            </div>
         );
     }
 
@@ -113,6 +138,8 @@ class Footer extends Component {
         const {companyName, line1, line2, line3, line4} = this.props.footerInfo;
         const {buildSiteMode} = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
+        const openPrivacyModal = this.props.buildSiteMode ? null : () => this.setState({showPrivacyModal: true});
+        const openConditionsModal = this.props.buildSiteMode ? null : () => this.setState({showConditionsModal: true});
         return (
             <div style={styles.footerContainer}>
                 <Form model={'businessSite.siteConfig.footer'}>
@@ -150,9 +177,8 @@ class Footer extends Component {
                                     <span style={styles.footerColTitle}>
                                         {'INFO'}
                                     </span>
-                                    {getLink(buildSiteMode, '#', 'Privacy Policy', {color: colors.lightGrey})}
-                                    <br />
-                                    {getLink(buildSiteMode, '#', 'Termini e Condizioni', {color: colors.lightGrey})}
+                                    <div style={{cursor: 'pointer'}} onClick={openPrivacyModal}>{'Privacy Policy'}</div>
+                                    <div style={{cursor: 'pointer'}} onClick={openConditionsModal}>{'Termini e Condizioni'}</div>
                                 </div>
                             </Col>
                             <Col xs={12} sm={6} md={3}>
@@ -176,6 +202,7 @@ class Footer extends Component {
                         </Row>
                     </div>
                     {this.renderBottomFooter()}
+                    {this.renderModals()}
                 </Form>
             </div>
         );
