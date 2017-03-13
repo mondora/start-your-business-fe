@@ -1,4 +1,3 @@
-import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 
 import Intro from 'components/business/Intro';
@@ -30,13 +29,17 @@ const styles = (siteColors) => ({
     }
 });
 
-class Home extends Component {
+export default class Home extends Component {
     static propTypes = {
         businessSiteIntroForm: PropTypes.object.isRequired,
         businessSiteOtherInfoForm: PropTypes.object.isRequired,
         businessSiteState: PropTypes.object.isRequired,
         businessSiteStepsForm: PropTypes.object.isRequired,
         businessSiteSubscriptionsForm: PropTypes.object.isRequired,
+        signUpForm: PropTypes.object,
+        signUpState: PropTypes.object,
+        signUpUser: PropTypes.func.isRequired,
+        spinner: PropTypes.object,
         styles: PropTypes.object.isRequired
     };
 
@@ -66,6 +69,9 @@ class Home extends Component {
             businessSiteStepsForm,
             businessSiteSubscriptionsForm,
             businessSiteOtherInfoForm,
+            signUpForm,
+            signUpState,
+            signUpUser,
             businessSiteState: {
                 editMode,
                 siteConfig
@@ -82,6 +88,9 @@ class Home extends Component {
                             buildSiteMode={editMode}
                             form={businessSiteIntroForm}
                             introTitleStyle={homeStyles.introTitleStyle}
+                            signUpForm={signUpForm}
+                            signUpState={signUpState}
+                            signUpUser={signUpUser}
                             siteConfig={siteConfig}
                         />
                         <Steps
@@ -109,5 +118,3 @@ class Home extends Component {
         );
     }
 }
-
-export default (Radium(Home));

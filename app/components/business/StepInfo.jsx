@@ -12,8 +12,6 @@ export default class StepInfo extends Component {
         stepTitle: PropTypes.string.isRequired,
     };
 
-    
-
     render () {
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return (

@@ -32,8 +32,8 @@ const styles = {
 class SignUp extends Component {
     static propTypes = {
         renderingSite: PropTypes.string,
+        signUpForm: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
-        signupForm: PropTypes.object,
         user: PropTypes.object
     };
 
@@ -89,9 +89,9 @@ class SignUp extends Component {
                     <Row>
                         <Col xs={12} md={6} mdPush={6}>
                             <SignUpForm
-                                form={this.props.signupForm}
+                                form={this.props.signUpForm}
                                 signUpUser={this.props.signUpUser}
-                                signupState={userSite.signup}
+                                signUpState={userSite.signup}
                             />
                         </Col>
                         <Col xs={12} md={6} mdPull={6} style={{padding: '10px 25px'}}>
@@ -129,8 +129,8 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        signUpForm: state.userSignupForm,
         renderingSite: state.service.renderingSite,
-        signupForm: state.userSignupForm,
         user: state.user
     };
 };

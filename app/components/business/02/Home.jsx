@@ -1,4 +1,3 @@
-import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 
 import Intro from 'components/business/Intro';
@@ -7,6 +6,7 @@ import Steps from 'components/business/02/Steps';
 import SubscriptionsList from 'components/business/SubscriptionsList';
 import TeaserCarousel from 'components/business/TeaserCarousel';
 
+import {signup, signUpUser} from 'actions/user';
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
@@ -33,14 +33,18 @@ const styles = (siteColors) => ({
     }
 });
 
-class Home extends Component {
+export default class Home extends Component {
     static propTypes = {
         businessSiteIntroForm: PropTypes.object.isRequired,
         businessSiteOtherInfoForm: PropTypes.object.isRequired,
         businessSiteState: PropTypes.object.isRequired,
         businessSiteStepsForm: PropTypes.object.isRequired,
         businessSiteSubscriptionsForm: PropTypes.object.isRequired,
-        styles: PropTypes.object.isRequired
+        signUpForm: PropTypes.object,
+        signUpUser: PropTypes.func.isRequired,
+        spinner: PropTypes.object,
+        styles: PropTypes.object.isRequired,
+        user: PropTypes.object
     };
 
     render () {
@@ -71,6 +75,9 @@ class Home extends Component {
                         buildSiteMode={editMode}
                         form={businessSiteIntroForm}
                         introTitleStyle={homeStyles.introTitleStyle}
+                        signUpForm={this.props.signUpForm}
+                        signUpUser={signUpUser}
+                        signUpState={signup}
                         siteConfig={siteConfig}
                     />
                     <Steps
@@ -101,5 +108,3 @@ class Home extends Component {
         );
     }
 }
-
-export default (Radium(Home));

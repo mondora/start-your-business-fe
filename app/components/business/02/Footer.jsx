@@ -7,6 +7,8 @@ import {editModes, getLink, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import FooterPayment from 'components/business/FooterPayment';
+import PrivacyModal from 'components/business/PrivacyModal';
+import ConditionsModal from 'components/business/ConditionsModal';
 
 const styles = {
     bottomFooter: {
@@ -67,6 +69,14 @@ class Footer extends Component {
         form: PropTypes.object
     };
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            showPrivacyModal: false,
+            showConditionsModal: false
+        };
+    }
+
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
         return getTextField (
             isEditMode,
@@ -74,14 +84,31 @@ class Footer extends Component {
             `businessSite.siteConfig.footer.${fieldName}`,
             placeholder,
             readNode,
-            {color: colors.darkGrey, fontWeight: '300'},
+            {color: colors.templateGreyText, fontWeight: '300'},
             {margin: 0, width: '100vw'}
+        );
+    }
+
+    renderModals () {
+        return (
+            <div>
+                <ConditionsModal
+                    onClose={() => this.setState({showConditionsModal: false})}
+                    show={this.state.showConditionsModal}
+                />
+                <PrivacyModal
+                    onClose={() => this.setState({showPrivacyModal: false})}
+                    show={this.state.showPrivacyModal}
+                />
+            </div>
         );
     }
 
     renderBottomFooter () {
         const {buildSiteMode} = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
+        const openPrivacyModal = this.props.buildSiteMode ? null : () => this.setState({showPrivacyModal: true});
+        const openConditionsModal = this.props.buildSiteMode ? null : () => this.setState({showConditionsModal: true});
         return (
             <div style={styles.bottomFooterWrp}>
                 <div className='container-fluid'>
@@ -96,13 +123,12 @@ class Footer extends Component {
                                 <span style={styles.bottomLegal}>{this.props.footerInfo.bottom}</span>
                             )}
                         </div>
-                        <div>
-                            {getLink(buildSiteMode, '#', 'Privacy Policy', {color: colors.lightGrey})}
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            <div style={{cursor: 'pointer'}} onClick={openPrivacyModal}>{'Privacy Policy'}</div>
                             {' / '}
-                            {getLink(buildSiteMode, '#', 'Termini e Condizioni', {color: colors.lightGrey})}
+                            <div style={{cursor: 'pointer'}} onClick={openConditionsModal}>{'Termini e Condizioni'}</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         );
@@ -157,6 +183,7 @@ class Footer extends Component {
                         </Row>
                     </div>
                     {this.renderBottomFooter()}
+                    {this.renderModals()}
                 </Form>
             </div>
         );

@@ -1,10 +1,12 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import Home1 from 'components/business/01/Home';
 import Home2 from 'components/business/02/Home';
 
+import {signUpUser} from 'actions/user';
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
@@ -46,7 +48,10 @@ class Home extends Component {
         businessSiteOtherInfoForm: PropTypes.object,
         businessSiteState: PropTypes.object,
         businessSiteStepsForm: PropTypes.object,
-        businessSiteSubscriptionsForm: PropTypes.object
+        businessSiteSubscriptionsForm: PropTypes.object,
+        signUpForm: PropTypes.object,
+        signUpState: PropTypes.object,
+        signUpUser: PropTypes.func.isRequired,
     };
 
     render () {
@@ -59,6 +64,9 @@ class Home extends Component {
                         businessSiteState={this.props.businessSiteState}
                         businessSiteStepsForm={this.props.businessSiteStepsForm}
                         businessSiteSubscriptionsForm={this.props.businessSiteSubscriptionsForm}
+                        signUpForm={this.props.signUpForm}
+                        signUpState={this.props.signUpState}
+                        signUpUser={this.props.signUpUser}
                         styles={styles}
                     />
                 );
@@ -71,6 +79,9 @@ class Home extends Component {
                         businessSiteState={this.props.businessSiteState}
                         businessSiteStepsForm={this.props.businessSiteStepsForm}
                         businessSiteSubscriptionsForm={this.props.businessSiteSubscriptionsForm}
+                        signUpForm={this.props.signUpForm}
+                        signUpState={this.props.signUpState}
+                        signUpUser={this.props.signUpUser}
                         styles={styles}
                     />
                 );
@@ -84,12 +95,15 @@ const mapStateToProps = (state) => {
         businessSiteOtherInfoForm: state.businessSiteOtherInfoForm,
         businessSiteState: state.businessSite,
         businessSiteStepsForm: state.businessSiteStepsForm,
-        businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm
+        businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm,
+        signUpForm: state.userSignupForm,
+        signUpState: state.user.signup
     };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
+        signUpUser: bindActionCreators(signUpUser, dispatch)
     };
 };
 
