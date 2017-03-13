@@ -3,15 +3,14 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
-import {setRenderingSite} from 'actions/service';
-import {confirmSignUp, login, sendNewConfirmationCode} from 'actions/user';
+import {confirmSignUp, login, sendNewConfirmationCode, setRenderingSite} from 'actions/user';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
-import {userHasAccess} from 'lib/auth-utils';
+import {getUserSiteState, userHasAccess} from 'lib/auth-utils';
 
 class Root extends Component {
     static propTypes = {
@@ -35,30 +34,31 @@ class Root extends Component {
 
     componentWillUpdate (nextProps) {
         //TODO decide what to do when user cannot access to a page
-        console.log(userHasAccess(nextProps.user, nextProps.routes));
+        console.log(userHasAccess(getUserSiteState(nextProps.user), nextProps.routes));
     }
 
     render () {
-        return (
+        const userSite = getUserSiteState(this.props.user);
+        return userSite ? (
             <div>
                 <Header
                     login={this.props.login}
                     loginForm={this.props.loginForm}
-                    user={this.props.user}
+                    user={userSite}
                 />
                 {this.props.children}
                 <SignUpConfirmationModal
                     confirmSignUp={this.props.confirmSignUp}
                     form={this.props.signUpConfirmationForm}
                     sendNewCode={this.props.sendNewConfirmationCode}
-                    signupConfirmation={this.props.user.signup.confirmation}
-                    signupConfirmed={this.props.user.isConfirmed}
-                    username={this.props.user.username}
+                    signupConfirmation={userSite.signup.confirmation}
+                    signupConfirmed={userSite.isConfirmed}
+                    username={userSite.username}
                 />
                 <Spinner show={this.props.spinner.active} />
                 <Footer />
             </div>
-        );
+        ) : null;
     }
 }
 

@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
-import {setRenderingSite} from 'actions/service';
-import {confirmSignUp, login, sendNewConfirmationCode, signUpUser} from 'actions/user';
+import {confirmSignUp, login, sendNewConfirmationCode, setRenderingSite, signUpUser} from 'actions/user';
 
 import Footer1 from 'components/business/01/Footer';
 import Footer2 from 'components/business/02/Footer';
@@ -13,7 +12,7 @@ import Header2 from 'components/business/02/Header';
 import SignUpConfirmationModal from 'components/SignUpConfirmationModal';
 import Spinner from 'components/Spinner';
 
-import {userHasAccess} from 'lib/auth-utils';
+import {getUserSiteState, userHasAccess} from 'lib/auth-utils';
 import {templatesIds} from 'lib/business-site-utils';
 
 const components = {
@@ -55,7 +54,7 @@ class Root extends Component {
     componentWillUpdate (nextProps) {
         if (nextProps.routes) {
             //TODO decide what to do when user cannot access to a page
-            console.log(userHasAccess(nextProps.user, nextProps.routes));
+            console.log(userHasAccess(getUserSiteState(nextProps.user), nextProps.routes));
         }
     }
 
@@ -73,17 +72,18 @@ class Root extends Component {
         const {editMode, siteConfig} = this.props.businessSiteState;
         const Header = components[`header${siteConfig.templateId}`];
         const Footer = components[`footer${siteConfig.templateId}`];
-        return (
+        const userSite = getUserSiteState(this.props.user);
+        return userSite ? (
             <div style={{fontFamily: this.getFontFamily(siteConfig)}}>
                 <Header
                     buildSiteMode={editMode}
                     form={this.props.businessSiteHeaderForm}
                     login={this.props.login}
                     loginForm={this.props.loginForm}
-                    loginState={this.props.user.login}
+                    loginState={userSite.login}
                     signUpForm={this.props.signUpForm}
                     signUpUser={this.props.signUpUser}
-                    signUpState={this.props.user.signup}
+                    signUpState={userSite.signup}
                     siteConfig={siteConfig}
                 />
 
@@ -96,9 +96,9 @@ class Root extends Component {
                             confirmSignUp={this.props.confirmSignUp}
                             form={this.props.signUpConfirmationForm}
                             sendNewCode={this.props.sendNewConfirmationCode}
-                            signupConfirmation={this.props.user.signup.confirmation}
-                            signupConfirmed={this.props.user.isConfirmed}
-                            username={this.props.user.username}
+                            signupConfirmation={userSite.signup.confirmation}
+                            signupConfirmed={userSite.isConfirmed}
+                            username={userSite.username}
                         /> : null
                 }
 
@@ -110,7 +110,7 @@ class Root extends Component {
                     form={this.props.businessSiteFooterForm}
                 />
             </div>
-        );
+        ) : null;
     }
 }
 
