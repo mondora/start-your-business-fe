@@ -6,6 +6,7 @@ import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
 import {setEditMode, setTemplate} from 'actions/business-site';
+import {createOrUpdateTemplateDraft, fetch as fetchDraftTemplate} from 'actions/draftTemplates';
 
 import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
@@ -37,14 +38,37 @@ const iconStyle = (active) => ({
 });
 
 class BuildSite extends Component {
+
     static propTypes = {
         businessSite: PropTypes.object.isRequired,
+        createOrUpdateTemplateDraft: PropTypes.func.isRequired,
+        fetchDraftTemplate: PropTypes.func.isRequired,
+        params: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired
     };
 
     componentWillMount () {
-        this.props.setEditMode(editModes.VIEW);
+        const {params: {businessId}, setEditMode, fetchDraftTemplate} = this.props;
+        setEditMode(editModes.VIEW);
+        fetchDraftTemplate(businessId);
+    }
+
+    handleTemplateSaving () {
+        console.log('businessSite', this.props.businessSite);
+        const {
+            createOrUpdateTemplateDraft,
+            businessSite: {siteConfig: {colors: {mainColor}}}
+        } = this.props;
+        console.log(createOrUpdateTemplateDraft);
+        createOrUpdateTemplateDraft('id',
+            'templateId',
+            'logoUrl',
+            mainColor,
+            'imagesUrl',
+            'mobilePhoneNumber',
+            'phoneNumber');
+        // browserHistory.push('/choose-plan');
     }
 
     renderSaveButton () {
@@ -52,7 +76,7 @@ class BuildSite extends Component {
             <div style={styles.buttonWrp}>
                 <Button
                     backgroundColor={colors.darkGrey}
-                    onClick={() => browserHistory.push('/choose-plan')}
+                    onClick={::this.handleTemplateSaving}
                     text={'SALVA E PROSEGUI >'}
                 />
             </div>
@@ -146,6 +170,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        createOrUpdateTemplateDraft: bindActionCreators(createOrUpdateTemplateDraft, dispatch),
+        fetchDraftTemplate: bindActionCreators(fetchDraftTemplate, dispatch),
         setEditMode: bindActionCreators(setEditMode, dispatch),
         setTemplate: bindActionCreators(setTemplate, dispatch)
     };

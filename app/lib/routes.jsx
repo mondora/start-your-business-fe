@@ -29,7 +29,7 @@ export default (
             <Route name='root' component={Root}>
                 <Route name='home' path='/' component={Home} />
                 <Route name='signup' path='/signup' component={SignUp} />
-                <Route name='buildSite' path='/build-site' component={BuildSite} private={true} />
+                <Route name='buildSite' path='/build-site/:businessId' component={BuildSite} private={true} />
                 <Route name='choosePlan' path='/choose-plan' component={ChoosePlan} private={true} />
                 <Route name='privacy' path='/privacy' component={Privacy} />
                 <Route name='subscriptionResult' path='/subscription-result' component={SubscriptionResult} private={true} />

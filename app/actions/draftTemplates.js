@@ -17,7 +17,7 @@ const _fetch = fetchFn(
 
 export const fetch = businessId => _fetch(`/businesses/${businessId}`);
 
-export const createNewDraftTemplate = (
+export const createOrUpdateTemplateDraft = (
     id,
     templateId,
     logoUrl,
@@ -25,25 +25,23 @@ export const createNewDraftTemplate = (
     imagesUrl,
     mobilePhoneNumber,
     phoneNumber
-) => {
-    return dispatch => {
-        dispatch({
-            type: 'CREATE_DRAFT_TEMPLATE_START'
-        });
-        axios.post('/businesses', {
-            id,
-            templateId,
-            logoUrl,
-            color,
-            imagesUrl,
-            mobilePhoneNumber,
-            phoneNumber
-        })
-            .then(() => dispatch({
-                type: 'CREATE_DRAFT_TEMPLATE_SUCCESS'
-            }))
-            .catch(() => dispatch({
-                type: 'CREATE_DRAFT_TEMPLATE_ERROR'
-            }));
-    };
+) => dispatch => {
+    dispatch({
+        type: 'CREATE_DRAFT_TEMPLATE_START'
+    });
+    axios.post('/businesses', {
+        id,
+        templateId,
+        logoUrl,
+        color,
+        imagesUrl,
+        mobilePhoneNumber,
+        phoneNumber
+    })
+        .then(() => dispatch({
+            type: 'CREATE_DRAFT_TEMPLATE_SUCCESS'
+        }))
+        .catch(() => dispatch({
+            type: 'CREATE_DRAFT_TEMPLATE_ERROR'
+        }));
 };
