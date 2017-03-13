@@ -99,6 +99,14 @@ const defaultState = {
 
 const businessSite = (state = defaultState, action) => {
     switch (action.type) {
+        case 'CREATE_USER_POOL_START_SUCCESS':
+            return {
+                ...state,
+                siteConfig: {
+                    ...state.siteConfig,
+                    userPool: action.userPoolConfig
+                }
+            };
         case 'SET_EDIT_MODE':
             return {
                 ...state,

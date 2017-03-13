@@ -5,6 +5,8 @@ import {bindActionCreators} from 'redux';
 import {Col, Row} from 'react-bootstrap';
 
 import {signUpUser} from 'actions/user';
+
+import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
 
 import SignUpForm from 'components/SignUpForm';
@@ -30,6 +32,7 @@ const styles = {
 class SignUp extends Component {
     static propTypes = {
         signUpForm: PropTypes.object,
+        renderingSite: PropTypes.string,
         signUpUser: PropTypes.func.isRequired,
         user: PropTypes.object
     };
@@ -76,6 +79,7 @@ class SignUp extends Component {
     }
 
     render () {
+        const userSite = getUserSiteState(this.props.user, this.props.renderingSite);
         return (
             <div>
                 <PageTeaser
@@ -87,7 +91,11 @@ class SignUp extends Component {
                             <SignUpForm
                                 form={this.props.signUpForm}
                                 signUpUser={this.props.signUpUser}
+<<<<<<< HEAD
                                 signUpState={this.props.user.signup}
+=======
+                                signupState={userSite.signup}
+>>>>>>> a372d7a9e32946836ab9fe5cb0ad4faa2d7a5be0
                             />
                         </Col>
                         <Col xs={12} md={6} mdPull={6} style={{padding: '10px 25px'}}>
@@ -125,7 +133,12 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
+<<<<<<< HEAD
         signUpForm: state.userSignupForm,
+=======
+        renderingSite: state.service.renderingSite,
+        signupForm: state.userSignupForm,
+>>>>>>> a372d7a9e32946836ab9fe5cb0ad4faa2d7a5be0
         user: state.user
     };
 };

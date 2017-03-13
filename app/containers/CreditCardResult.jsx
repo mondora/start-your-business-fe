@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {getStoredState} from 'redux-persist';
 
 //Container is renderized inside Zuora credit card hosted page (iframe)
 export default class CreditCardResult extends Component {
@@ -8,14 +9,12 @@ export default class CreditCardResult extends Component {
 
     constructor (props) {
         super(props);
-        const {pathname, query} = props.location;
+        const {query} = props.location;
         const creditCardSuccess = this.isCreditCardSuccess(query);
-        const basePath = this.getBasePath(pathname);
-        window.top.location.href = `${basePath}/subscription-result?creditCardSuccess=${creditCardSuccess}&refId=${query.refId}`;
-    }
-
-    getBasePath (pathname) {
-        return pathname.replace('/credit-card-result', '');
+        getStoredState({whitelist: ['service'], keyPrefix: 'syb:'}, (err, state) => {
+            const basePath = state.service.renderingSite ? `/${state.service.renderingSite}` : '';
+            window.top.location.href = `${basePath}/subscription-result?creditCardSuccess=${creditCardSuccess}&refId=${query.refId}`;
+        });
     }
 
     isCreditCardSuccess (queryString) {

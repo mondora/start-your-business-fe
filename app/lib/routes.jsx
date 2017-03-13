@@ -18,6 +18,7 @@ import UserAccount from 'containers/UserAccount';
 import BusinessHome from 'containers/business/Home';
 import BusinessPaymentInfo from 'containers/business/PaymentInfo';
 import BusinessRoot from 'containers/business/Root';
+import BusinessSubscriptionResult from 'containers/business/SubscriptionResult';
 import BusinessUserInfo from 'containers/business/UserInfo';
 
 // const history = syncHistoryWithStore(browserHistory, store);
@@ -38,12 +39,11 @@ export default (
             <Route name='creditCardResult' path='/credit-card-result' component={CreditCardResult} />
 
             <Route name='businessRoot' component={BusinessRoot}>
-                <Route name='businessHome' path='/:businessName' component={BusinessHome} />
-                <Route name='businessUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} private={true} />
-                <Route name='businessPaymentInfo' path='/:businessName/payment-info' component={BusinessPaymentInfo} private={true} />
+                <Route name='bHome' path='/:businessName' component={BusinessHome} />
+                <Route name='bUserInfo' path='/:businessName/user-info' component={BusinessUserInfo} private={true} />
+                <Route name='bPaymentInfo' path='/:businessName/payment-info' component={BusinessPaymentInfo} private={true} />
+                <Route name='bSubscriptionResult' path='/:businessName/subscription-result' component={BusinessSubscriptionResult} private={true} />
             </Route>
-            
-            <Route name='businessCreditCardResult' path='/:businessName/credit-card-result' component={CreditCardResult} />
         </Router>
     </Provider>
 );

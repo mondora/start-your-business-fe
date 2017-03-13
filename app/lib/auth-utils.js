@@ -1,6 +1,6 @@
 /**
  * Return true if use can access to the last route of routes array
- * @param user
+ * @param user. User state for the rendering site.
  * @param routes. An array representing this.props.routes. EG:
  * [
  *   {
@@ -14,7 +14,7 @@
 export function userHasAccess (user, routes) {
     const route = getLastRoute(routes);
     return {
-        hasAccess: route.private ? user.isLoggedIn : true
+        hasAccess: route.private ? user && user.isLoggedIn : true
     };
 }
 
@@ -25,4 +25,12 @@ export function userHasAccess (user, routes) {
  */
 function getLastRoute (routes) {
     return Array.isArray(routes) ? routes[routes.length - 1] : {};
+}
+
+export function getUserSiteState (userState) {
+    return userState.renderingSite ? userState[userState.renderingSite] : userState['SYB'];
+}
+
+export function getSiteName (renderingSite) {
+    return renderingSite ? renderingSite : 'SYB';
 }

@@ -40,6 +40,11 @@ export const sendNewConfirmationCode = (username, userPoolConfig) => {
     };
 };
 
+export const setRenderingSite = serviceName => ({
+    type: 'SET_RENDERING_SITE',
+    site: serviceName
+});
+
 export const signUpUser = (email, password, attributes, userPoolConfig) => {
     return dispatch => {
         dispatch({
