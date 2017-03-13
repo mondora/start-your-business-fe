@@ -1,7 +1,7 @@
 import axios from 'axios';
 import browser from 'detect-browser';
 
-import {API_URL} from 'lib/config';
+import {API_URL} from 'config';
 
 const instance = axios.create({
     baseURL: API_URL,

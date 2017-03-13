@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_ENDPOINT} from 'lib/config';
+import {API_ENDPOINT} from 'config';
 
 export const choosePlan = productPlanId => ({
     type: 'CHOOSE_PLAN',

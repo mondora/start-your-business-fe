@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev:builder": "sd-builder dev",
+    "dev:mock-server": "sd-mock-server --watch",
     "dev:test": "npm test -- --watch",
     "dev": "npm-run-all -p dev:*",
     "build": "sd-builder build",

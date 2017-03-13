@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {createUserPool} from 'lib/aws-cognito-utils';
-import {API_ENDPOINT} from 'lib/config';
+import {API_ENDPOINT} from 'config';
 
 export const getPaymentParams = () => {
     return dispatch => {

@@ -4,7 +4,7 @@ import {
 import AWS, {CognitoIdentityCredentials} from 'aws-sdk';
 import {map} from 'ramda';
 
-import {AWS_ACCESS_KEY, AWS_COGNITO, AWS_REGION, AWS_SECRET_KEY} from 'lib/config';
+import {AWS_ACCESS_KEY, AWS_COGNITO, AWS_REGION, AWS_SECRET_KEY} from 'config';
 
 AWS.config.region = AWS_REGION;
 AWS.config.credentials = new CognitoIdentityCredentials({
