@@ -6,7 +6,7 @@ import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
 import {setEditMode, setTemplate} from 'actions/business-site';
-import {createOrUpdateTemplateDraft, fetch as fetchDraftTemplate} from 'actions/draftTemplates';
+import {upsertSiteConfig, fetch as fetchSiteConfig} from 'actions/siteConfig';
 
 import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
@@ -40,34 +40,28 @@ const iconStyle = (active) => ({
 class BuildSite extends Component {
 
     static propTypes = {
-        businessSite: PropTypes.object.isRequired,
-        createOrUpdateTemplateDraft: PropTypes.func.isRequired,
-        fetchDraftTemplate: PropTypes.func.isRequired,
+        editMode: PropTypes.number,
+        fetchSiteConfig: PropTypes.func.isRequired,
         params: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
-        setTemplate: PropTypes.func.isRequired
+        setTemplate: PropTypes.func.isRequired,
+        siteConfig: PropTypes.object,
+        upsertSiteConfig: PropTypes.func.isRequired
     };
 
     componentWillMount () {
-        const {params: {businessId}, setEditMode, fetchDraftTemplate} = this.props;
+        const {params: {businessId}, setEditMode, fetchSiteConfig} = this.props;
         setEditMode(editModes.VIEW);
-        fetchDraftTemplate(businessId);
+        fetchSiteConfig(businessId);
     }
 
     handleTemplateSaving () {
-        console.log('businessSite', this.props.businessSite);
         const {
-            createOrUpdateTemplateDraft,
-            businessSite: {siteConfig: {colors: {mainColor}}}
+            upsertSiteConfig,
+            siteConfig
         } = this.props;
-        console.log(createOrUpdateTemplateDraft);
-        createOrUpdateTemplateDraft('id',
-            'templateId',
-            'logoUrl',
-            mainColor,
-            'imagesUrl',
-            'mobilePhoneNumber',
-            'phoneNumber');
+        console.log('siteConfig', siteConfig);
+        upsertSiteConfig(siteConfig);
         // browserHistory.push('/choose-plan');
     }
 
@@ -103,6 +97,7 @@ class BuildSite extends Component {
     }
 
     render () {
+        const {editMode, siteConfig, setEditMode, setTemplate} = this.props;
         return (
             <div>
                 <PageTeaser
@@ -114,34 +109,34 @@ class BuildSite extends Component {
                         <Col xs={12}>
                             <div style={{width: 65, float: 'left'}}>
                                 <ChooseTemplateWidget
-                                    editMode={this.props.businessSite.editMode}
-                                    selectTemplate={this.props.setTemplate}
-                                    selectedTemplateId={this.props.businessSite.siteConfig.templateId}
-                                    setEditMode={this.props.setEditMode}
+                                    editMode={editMode}
+                                    selectTemplate={setTemplate}
+                                    selectedTemplateId={siteConfig.templateId}
+                                    setEditMode={setEditMode}
                                 />
                                 <ChangeLogoWidget
-                                    editMode={this.props.businessSite.editMode}
-                                    setEditMode={this.props.setEditMode}
+                                    editMode={editMode}
+                                    setEditMode={setEditMode}
                                 />
                                 <ChangeColorWidget
-                                    colors={this.props.businessSite.siteConfig.colors}
-                                    editMode={this.props.businessSite.editMode}
-                                    setEditMode={this.props.setEditMode}
+                                    colors={siteConfig.colors}
+                                    editMode={editMode}
+                                    setEditMode={setEditMode}
                                 />
                                 <Icon
                                     iconName='change_image_white'
-                                    iconStyle={iconStyle(this.props.businessSite.editMode === editModes.UPLOAD_IMAGES)}
-                                    onClick={() => this.props.setEditMode(editModes.UPLOAD_IMAGES)}
+                                    iconStyle={iconStyle(editMode === editModes.UPLOAD_IMAGES)}
+                                    onClick={() => setEditMode(editModes.UPLOAD_IMAGES)}
                                 />
                                 <Icon
                                     iconName='change_text_white'
-                                    iconStyle={iconStyle(this.props.businessSite.editMode === editModes.EDIT_TEXTS)}
-                                    onClick={() => this.props.setEditMode(editModes.EDIT_TEXTS)}
+                                    iconStyle={iconStyle(editMode === editModes.EDIT_TEXTS)}
+                                    onClick={() => setEditMode(editModes.EDIT_TEXTS)}
                                 />
                                 <Icon
                                     iconName='change_payment_white'
-                                    iconStyle={iconStyle(this.props.businessSite.editMode === editModes.CHANGE_PAYMENT)}
-                                    onClick={() => this.props.setEditMode(editModes.CHANGE_PAYMENT)}
+                                    iconStyle={iconStyle(editMode === editModes.CHANGE_PAYMENT)}
+                                    onClick={() => setEditMode(editModes.CHANGE_PAYMENT)}
                                 />
                             </div>
                             <div style={{width:'calc(100% - 65px)', float: 'right', border: `2px solid ${colors.lightGrey}`, overflow: 'hidden'}}>
@@ -164,14 +159,15 @@ class BuildSite extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        businessSite: state.businessSite
+        editMode: state.businessSite.editMode,
+        siteConfig: state.siteConfig.element
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createOrUpdateTemplateDraft: bindActionCreators(createOrUpdateTemplateDraft, dispatch),
-        fetchDraftTemplate: bindActionCreators(fetchDraftTemplate, dispatch),
+        upsertSiteConfig: bindActionCreators(upsertSiteConfig, dispatch),
+        fetchSiteConfig: bindActionCreators(fetchSiteConfig, dispatch),
         setEditMode: bindActionCreators(setEditMode, dispatch),
         setTemplate: bindActionCreators(setTemplate, dispatch)
     };

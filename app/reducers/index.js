@@ -11,9 +11,9 @@ import businessSite, {
     initialSubscriptionsInfo,
     initialOtherInfo
 } from './business-site';
-import draftTemplates from './draftTemplates';
 import payment from './payment';
 import products from './products';
+import siteConfig from './siteConfig';
 import spinner from './spinner';
 import user, {initialConfirmationState, initialLoginState, initialSignupState} from './user';
 
@@ -29,9 +29,9 @@ const reducers = combineReducers({
     businessSiteStepsForm: formReducer('businessSite.siteConfig.steps', initialStepsInfo),
     businessSiteSubscriptionsForm: formReducer('businessSite.siteConfig.subscriptions', initialSubscriptionsInfo),
     businessSiteOtherInfoForm: formReducer('businessSite.siteConfig.info', initialOtherInfo),
-    draftTemplates,
     payment,
     products,
+    siteConfig,
     spinner,
     user,
     userLoginForm: formReducer('user.login', initialLoginState),

@@ -30,15 +30,17 @@ const styles = (siteColors) => ({
 });
 
 export default class Home extends Component {
+
     static propTypes = {
         businessSiteIntroForm: PropTypes.object.isRequired,
         businessSiteOtherInfoForm: PropTypes.object.isRequired,
-        businessSiteState: PropTypes.object.isRequired,
         businessSiteStepsForm: PropTypes.object.isRequired,
         businessSiteSubscriptionsForm: PropTypes.object.isRequired,
+        editMode: PropTypes.number,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
+        siteConfig: PropTypes.object,
         spinner: PropTypes.object,
         styles: PropTypes.object.isRequired
     };
@@ -72,10 +74,8 @@ export default class Home extends Component {
             signUpForm,
             signUpState,
             signUpUser,
-            businessSiteState: {
-                editMode,
-                siteConfig
-            }
+            editMode,
+            siteConfig
         } = this.props;
         const homeStyles = styles(siteConfig.colors);
         return (

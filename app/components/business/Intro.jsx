@@ -42,7 +42,7 @@ export default class Intro extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.intro.${fieldName}`,
+            `siteConfig.intro.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.templateGreyText},
