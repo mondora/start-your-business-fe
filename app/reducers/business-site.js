@@ -88,7 +88,7 @@ const defaultState = {
             id: null
         }],
         info: initialOtherInfo,
-        logoId: null,
+        logo: null,
         teaserImages: [{
             id: null
         }],
@@ -120,6 +120,14 @@ const businessSite = (state = defaultState, action) => {
                     templateId: action.templateId
                 }
             };
+        case 'SET_LOGO_IMAGE':
+            return {
+                ...state,
+                siteConfig: {
+                    ...state.siteConfig,
+                    logo: action.logoImage
+                }
+            }
         default:
             return state;
     }

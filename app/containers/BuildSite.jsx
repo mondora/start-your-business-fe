@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
-import {setEditMode, setTemplate} from 'actions/business-site';
+import {setEditMode, setLogoImage, setTemplate} from 'actions/business-site';
 
 import {editModes} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
@@ -40,6 +40,7 @@ class BuildSite extends Component {
     static propTypes = {
         businessSite: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
+        setLogoImage: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired
     };
 
@@ -98,11 +99,13 @@ class BuildSite extends Component {
                                 <ChangeLogoWidget
                                     editMode={this.props.businessSite.editMode}
                                     setEditMode={this.props.setEditMode}
+                                    setLogoImage={this.props.setLogoImage}
                                 />
                                 <ChangeColorWidget
                                     colors={this.props.businessSite.siteConfig.colors}
                                     editMode={this.props.businessSite.editMode}
                                     setEditMode={this.props.setEditMode}
+                                    setLogoImage={this.props.setLogoImage}
                                 />
                                 <Icon
                                     iconName='change_image_white'
@@ -147,7 +150,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setEditMode: bindActionCreators(setEditMode, dispatch),
-        setTemplate: bindActionCreators(setTemplate, dispatch)
+        setTemplate: bindActionCreators(setTemplate, dispatch),
+        setLogoImage: bindActionCreators(setLogoImage, dispatch)
     };
 };
 

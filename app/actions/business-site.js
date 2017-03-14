@@ -7,3 +7,8 @@ export const setTemplate = templateId => ({
     type: 'SET_TEMPLATE',
     templateId
 });
+
+export const setLogoImage = logoImage => ({
+    type: 'SET_LOGO_IMAGE',
+    logoImage
+})
