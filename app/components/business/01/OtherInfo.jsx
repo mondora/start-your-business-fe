@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 import {Col, Row, Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
 import * as colors from 'lib/colors';
 
 import BusinessOtherInfo from 'components/business/OtherInfo';
@@ -90,7 +90,7 @@ class OtherInfo extends BusinessOtherInfo {
     render () {
         const style = styles(this.props.siteConfig.colors);
         return (
-            <Form model={'businessSite.siteConfig.info'}>
+            <Form model={'siteConfig.element.info'}>
                 <div style={style.boxContainer}>
                     {this.getInfoBox().map((infoBox, index) =>
                         <div key={index} style={style.boxWrp}>

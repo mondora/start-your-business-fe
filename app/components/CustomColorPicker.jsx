@@ -47,14 +47,14 @@ export default class CustomColorPicker extends Component {
     render () {
         const {mainColor} = this.props.colors;
         return (
-            <Form model={'businessSite.siteConfig.colors'}>
+            <Form model={'siteConfig.element.colors'}>
                 <p style={{fontSize: 18, marginTop: 20}}>
                     {'Scegli il colore principale per il tuo sito'}
                 </p>
                 <SwatchesPickerField
                     color={mainColor}
                     height={'100%'}
-                    model='businessSite.siteConfig.colors.mainColor'
+                    model='siteConfig.element.colors.mainColor'
                     triangle={'hide'}
                     width={'100%'}
                 />
@@ -64,7 +64,7 @@ export default class CustomColorPicker extends Component {
                 <TwitterPickerField
                     color={mainColor}
                     colors={[]}
-                    model='businessSite.siteConfig.colors.mainColor'
+                    model='siteConfig.element.colors.mainColor'
                     triangle={'hide'}
                     width={'100%'}
                 />

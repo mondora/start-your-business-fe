@@ -45,15 +45,15 @@ const styles = {
 class Home extends Component {
 
     static propTypes = {
-        businessSiteIntroForm: PropTypes.object,
-        businessSiteOtherInfoForm: PropTypes.object,
-        businessSiteStepsForm: PropTypes.object,
-        businessSiteSubscriptionsForm: PropTypes.object,
         editMode: PropTypes.number,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
-        siteConfig: PropTypes.object
+        siteConfig: PropTypes.object,
+        siteConfigIntroForm: PropTypes.object,
+        siteConfigOtherInfoForm: PropTypes.object,
+        siteConfigStepsForm: PropTypes.object,
+        siteConfigSubscriptionsForm: PropTypes.object
     };
 
     render () {
@@ -79,14 +79,14 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        businessSiteIntroForm: state.businessSiteIntroForm,
-        businessSiteOtherInfoForm: state.businessSiteOtherInfoForm,
-        businessSiteStepsForm: state.businessSiteStepsForm,
-        businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm,
-        editMode: state.businessSite.editMode,
+        editMode: state.ui.editMode,
         signUpForm: state.userSignupForm,
         signUpState: state.user.signup,
-        siteConfig: state.siteConfig.element
+        siteConfig: state.siteConfig.element,
+        siteConfigIntroForm: state.siteConfigIntroForm,
+        siteConfigOtherInfoForm: state.siteConfigOtherInfoForm,
+        siteConfigStepsForm: state.siteConfigStepsForm,
+        siteConfigSubscriptionsForm: state.siteConfigSubscriptionsForm
     };
 };
 

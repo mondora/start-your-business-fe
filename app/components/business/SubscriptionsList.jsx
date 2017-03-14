@@ -4,7 +4,8 @@ import React, {Component, PropTypes} from 'react';
 import {Form} from 'react-redux-form';
 import {connect} from 'react-redux';
 
-import {editModes, getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import Subscription1 from 'components/business/01/Subscription';
@@ -122,7 +123,7 @@ class SubscriptionsList extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.subscriptions.${fieldName}`,
+            `siteConfig.element.subscriptions.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.grey},
@@ -134,7 +135,7 @@ class SubscriptionsList extends Component {
         return getTextAreaField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.subscriptions.${fieldName}`,
+            `siteConfig.element.subscriptions.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.grey, textAlign: 'center'},
@@ -145,7 +146,7 @@ class SubscriptionsList extends Component {
     renderSubscriptionTitle (isEditMode) {
         const {subscriptionsTitle} = this.props.siteConfig.subscriptions;
         const style = styles(this.props.siteConfig.colors);
-        switch (this.props.businessSiteState.siteConfig.templateId) {
+        switch (this.props.siteConfig.templateId) {
             case templatesIds.TEMPLATE_2:
                 return (
                     <h2 style={style.subscriptionsTitle2}>
@@ -164,7 +165,7 @@ class SubscriptionsList extends Component {
 
     renderSubscription (isEditMode) {
         const style = styles(this.props.siteConfig.colors);
-        switch (this.props.businessSiteState.siteConfig.templateId) {
+        switch (this.props.siteConfig.templateId) {
             case templatesIds.TEMPLATE_2:
                 return (
                     <div style={style.subscription2}>
@@ -209,7 +210,7 @@ class SubscriptionsList extends Component {
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         return (
-            <Form model={'businessSite.siteConfig.subscriptions'}>
+            <Form model={'siteConfig.element.subscriptions'}>
                 <div style={style.subscriptionsContainer}>
                     {this.renderSubscriptionTitle(isEditMode)}
                     <div className='container-fluid'>
@@ -224,6 +225,7 @@ class SubscriptionsList extends Component {
 const mapStateToProps = (state) => {
     return {
         businessSiteState: state.businessSite,
+        siteConfig: state.siteConfig.element,
     };
 };
 

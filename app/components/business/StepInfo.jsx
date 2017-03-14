@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Glyphicon} from 'react-bootstrap';
-import {editModes} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
 
 export default class StepInfo extends Component {
     static propTypes = {

@@ -23,12 +23,11 @@ const components = {
 };
 
 class Root extends Component {
+
     static propTypes = {
-        businessSiteFooterForm: PropTypes.object,
-        businessSiteHeaderForm: PropTypes.object,
-        businessSiteState: PropTypes.object,
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
+        editMode: PropTypes.number,
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
         params: PropTypes.object,
@@ -38,16 +37,20 @@ class Root extends Component {
         signUpConfirmationForm: PropTypes.object,
         signUpForm: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
+        siteConfig: PropTypes.object,
+        siteConfigFooterForm: PropTypes.object,
+        siteConfigHeaderForm: PropTypes.object,
+        siteConfigState: PropTypes.object,
         spinner: PropTypes.object,
         user: PropTypes.object
     };
 
     constructor (props) {
         super(props);
-        if (!props.businessSiteState.editMode) {
+        if (!props.siteConfig.editMode) {
             //TODO check for businessName and render business site or redirect
-            console.log(props.params.businessName);
-            props.setRenderingSite(props.params.businessName);
+            console.log('props', props);
+            // props.setRenderingSite(props.params.businessName);
         }
     }
 
@@ -69,7 +72,8 @@ class Root extends Component {
     }
 
     render () {
-        const {editMode, siteConfig} = this.props.businessSiteState;
+        const {editMode, siteConfig} = this.props;
+        console.log('render siteConfig', siteConfig);
         const Header = components[`header${siteConfig.templateId}`];
         const Footer = components[`footer${siteConfig.templateId}`];
         const userSite = getUserSiteState(this.props.user);
@@ -77,7 +81,7 @@ class Root extends Component {
             <div style={{fontFamily: this.getFontFamily(siteConfig)}}>
                 <Header
                     buildSiteMode={editMode}
-                    form={this.props.businessSiteHeaderForm}
+                    form={this.props.siteConfigHeaderForm}
                     login={this.props.login}
                     loginForm={this.props.loginForm}
                     loginState={userSite.login}
@@ -107,7 +111,7 @@ class Root extends Component {
                 <Footer
                     buildSiteMode={editMode}
                     footerInfo={siteConfig.footer}
-                    form={this.props.businessSiteFooterForm}
+                    form={this.props.siteConfigFooterForm}
                 />
             </div>
         ) : null;
@@ -116,12 +120,14 @@ class Root extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        businessSiteFooterForm: state.businessSiteFooterForm,
-        businessSiteHeaderForm: state.businessSiteHeaderForm,
-        businessSiteState: state.businessSite,
+        editMode: state.ui.editMode,
         loginForm: state.userLoginForm,
         signUpConfirmationForm: state.userSignupConfirmationForm,
         signUpForm: state.userSignupForm,
+        siteConfig: state.siteConfig.element,
+        siteConfigFooterForm: state.siteConfigFooterForm,
+        siteConfigHeaderForm: state.siteConfigHeaderForm,
+        siteConfigState: state.siteConfig,
         spinner: state.spinner,
         user: state.user
     };

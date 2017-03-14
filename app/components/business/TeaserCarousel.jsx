@@ -4,7 +4,8 @@ import {Carousel, Glyphicon} from 'react-bootstrap';
 import ImageUploader from 'components/ImageUploader';
 import SaveButton from 'components/BuildSiteSaveButton';
 
-import {editModes, getS3ImagePath} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getS3ImagePath} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 const commonStyles = (templateId) => ({

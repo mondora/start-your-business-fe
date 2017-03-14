@@ -1,7 +1,7 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
 
 import CustomColorPicker from 'components/CustomColorPicker';
 import OverlayTriggerIcon from 'components/OverlayTriggerIcon';

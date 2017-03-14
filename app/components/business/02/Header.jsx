@@ -3,7 +3,8 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row, Glyphicon} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {getLink, editModes, getTextField} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getLink, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import AccountSection from 'components/business/AccountSection';
@@ -149,7 +150,7 @@ class Header extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.header.${fieldName}`,
+            `siteConfig.element.header.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.templateGreyText, padding: '2px 4px', marginRight: '25px', fontSize: '13px'},
@@ -178,7 +179,7 @@ class Header extends Component {
                     <div style={style.headerTopLine} />
                     <div className='container-fluid'>
                         <Row>
-                            <Form model={'businessSite.siteConfig.header'}>
+                            <Form model={'siteConfig.element.header'}>
                                 <Col xs={12} sm={6} md={4} lg={5}>
                                     <div style={style.leftWrp}>
                                         <div style={style.headerTopIcons}>

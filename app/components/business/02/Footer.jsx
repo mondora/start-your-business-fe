@@ -3,7 +3,8 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes, getLink, getTextField} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getLink, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import FooterPayment from 'components/business/FooterPayment';
@@ -81,7 +82,7 @@ class Footer extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.footer.${fieldName}`,
+            `siteConfig.element.footer.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.templateGreyText, fontWeight: '300'},
@@ -140,7 +141,7 @@ class Footer extends Component {
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         return (
             <div style={styles.footerContainer}>
-                <Form model={'businessSite.siteConfig.footer'}>
+                <Form model={'siteConfig.element.footer'}>
                     <div className='container-fluid'>
                         <Row style={{padding: '20px 0', color: colors.lightGrey}}>
                             <Col xs={12} sm={6}>

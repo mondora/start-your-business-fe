@@ -5,6 +5,8 @@ export const FETCH_SITE_CONFIG_START = 'FETCH_SITE_CONFIG_START';
 export const FETCH_SITE_CONFIG_SUCCESS = 'FETCH_SITE_CONFIG_SUCCESS';
 export const FETCH_SITE_CONFIG_ERROR = 'FETCH_SITE_CONFIG_ERROR';
 
+export const SET_TEMPLATE = 'SET_TEMPLATE';
+
 export const UPSERT_SITE_CONFIG_START = 'UPSERT_SITE_CONFIG_START';
 export const UPSERT_SITE_CONFIG_SUCCESS = 'UPSERT_SITE_CONFIG_SUCCESS';
 export const UPSERT_SITE_CONFIG_ERROR = 'UPSERT_SITE_CONFIG_ERROR';
@@ -16,6 +18,11 @@ const _fetch = fetchFn(
 );
 
 export const fetch = businessId => _fetch(`/businesses/${businessId}`);
+
+export const setTemplate = templateId => ({
+    type: 'SET_TEMPLATE',
+    templateId
+});
 
 export const upsertSiteConfig = siteConfig => dispatch => {
     dispatch({

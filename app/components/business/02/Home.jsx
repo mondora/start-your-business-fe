@@ -36,10 +36,10 @@ const styles = (siteColors) => ({
 export default class Home extends Component {
 
     static propTypes = {
-        businessSiteIntroForm: PropTypes.object.isRequired,
-        businessSiteOtherInfoForm: PropTypes.object.isRequired,
-        businessSiteStepsForm: PropTypes.object.isRequired,
-        businessSiteSubscriptionsForm: PropTypes.object.isRequired,
+        siteConfigIntroForm: PropTypes.object.isRequired,
+        siteConfigOtherInfoForm: PropTypes.object.isRequired,
+        siteConfigStepsForm: PropTypes.object.isRequired,
+        siteConfigSubscriptionsForm: PropTypes.object.isRequired,
         editMode: PropTypes.number,
         signUpForm: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
@@ -51,10 +51,10 @@ export default class Home extends Component {
 
     render () {
         const {
-            businessSiteIntroForm,
-            businessSiteStepsForm,
-            businessSiteSubscriptionsForm,
-            businessSiteOtherInfoForm,
+            siteConfigIntroForm,
+            siteConfigStepsForm,
+            siteConfigSubscriptionsForm,
+            siteConfigOtherInfoForm,
             editMode,
             siteConfig
         } = this.props;
@@ -73,7 +73,7 @@ export default class Home extends Component {
                     <Intro
                         buttonStyle={homeStyles.buttonStyle}
                         buildSiteMode={editMode}
-                        form={businessSiteIntroForm}
+                        form={siteConfigIntroForm}
                         introTitleStyle={homeStyles.introTitleStyle}
                         signUpForm={this.props.signUpForm}
                         signUpUser={signUpUser}
@@ -82,14 +82,14 @@ export default class Home extends Component {
                     />
                     <Steps
                         buildSiteMode={editMode}
-                        form={businessSiteStepsForm}
+                        form={siteConfigStepsForm}
                         siteConfig={siteConfig}
                     />
                 </div>
                 <div style={this.props.styles.subscriptionContainer}>
                     <SubscriptionsList
                         buildSiteMode={editMode}
-                        form={businessSiteSubscriptionsForm}
+                        form={siteConfigSubscriptionsForm}
                         siteConfig={siteConfig}
                     />
                 </div>
@@ -98,7 +98,7 @@ export default class Home extends Component {
                         <div className='container-fluid' style={this.props.styles.bottomPageWrp}>
                             <OtherInfo
                                 buildSiteMode={editMode}
-                                form={businessSiteOtherInfoForm}
+                                form={siteConfigOtherInfoForm}
                                 siteConfig={siteConfig}
                             />
                         </div>

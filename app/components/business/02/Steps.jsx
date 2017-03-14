@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import StepInfo from 'components/business/StepInfo';
@@ -69,7 +70,7 @@ export default class Steps extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.steps.${fieldName}`,
+            `siteConfig.element.steps.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.templateGreyText},
@@ -81,7 +82,7 @@ export default class Steps extends Component {
         return getTextAreaField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.steps.${fieldName}`,
+            `siteConfig.element.steps.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.templateGreyText, textAlign: 'center', fontSize: '14px', minHeight: 120},
@@ -92,7 +93,7 @@ export default class Steps extends Component {
     render () {
         const style = styles(this.props.siteConfig.colors);
         return (
-            <Form model={'businessSite.siteConfig.steps'}>
+            <Form model={'siteConfig.element.steps'}>
                 <div style={style.stepsContainer}>
                     <Row>
                         {this.getStep().map((stepInfo, index) =>

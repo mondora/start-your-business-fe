@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Image} from 'react-bootstrap';
 
-import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import ImageUploader from 'components/ImageUploader';
@@ -26,7 +27,7 @@ export default class OtherInfo extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.info.${fieldName}`,
+            `siteConfig.element.info.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center'},
@@ -38,7 +39,7 @@ export default class OtherInfo extends Component {
         return getTextAreaField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.info.${fieldName}`,
+            `siteConfig.element.info.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.templateGreyText, minHeight: '100px'},

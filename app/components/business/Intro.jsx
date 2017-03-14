@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {Col, Row, Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes, getTextAreaField, getTextField} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import SignUpModal from 'components/business/SignUpModal';
@@ -42,7 +43,7 @@ export default class Intro extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `siteConfig.intro.${fieldName}`,
+            `siteConfig.element.element.intro.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.templateGreyText},
@@ -54,7 +55,7 @@ export default class Intro extends Component {
         return getTextAreaField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.intro.${fieldName}`,
+            `siteConfig.element.intro.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.templateGreyText, textAlign: 'center'},
@@ -87,7 +88,7 @@ export default class Intro extends Component {
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         const onClickSignUp = this.props.buildSiteMode ? null : () => this.setState({showSignUpModal: true});
         return (
-            <Form model={'businessSite.siteConfig.intro'}>
+            <Form model={'siteConfig.element.intro'}>
                 <Row>
                     <Col xs={12} style={commonStyles.introWrp}>
                         <h2 style={introTitleStyle}>

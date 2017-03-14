@@ -2,7 +2,8 @@ import Radium from 'radium';
 import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
 
-import {editModes, templates} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {templates} from 'lib/business-site-utils';
 
 import OverlayTriggerIcon from 'components/OverlayTriggerIcon';
 import TemplateCard from 'components/TemplateCard';

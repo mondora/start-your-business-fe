@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 import {Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
 import * as colors from 'lib/colors';
 
 import BusinessOtherInfo from 'components/business/OtherInfo';
@@ -98,7 +98,7 @@ class OtherInfo extends BusinessOtherInfo {
         const {buildSiteMode} = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         return (
-            <Form model={'businessSite.siteConfig.info'}>
+            <Form model={'siteConfig.element.info'}>
                 <div style={style.boxContainer}>
                     <div style={style.imageWrp}>
                         {this.renderImage('infobox1.jpg', style)}

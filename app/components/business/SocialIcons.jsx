@@ -3,7 +3,8 @@ import React, {Component, PropTypes} from 'react';
 import Icon from 'components/Icon';
 
 import * as colors from 'lib/colors';
-import {getLink, editModes, getTextField} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
+import {getLink, getTextField} from 'lib/business-site-utils';
 
 export default class SocialIcons extends Component {
     static propTypes = {
@@ -26,7 +27,7 @@ export default class SocialIcons extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.header.${fieldName}`,
+            `siteConfig.element.header.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.templateGreyText, padding: '2px 4px', marginRight: '25px', fontSize: '13px'},
