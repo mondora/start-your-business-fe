@@ -1,3 +1,5 @@
+import {modeled} from 'react-redux-form';
+
 import {
     FETCH_SITE_CONFIG_START,
     FETCH_SITE_CONFIG_SUCCESS,
@@ -103,7 +105,7 @@ const initialState = {
     fetchError: null
 };
 
-export default function siteConfig (state = initialState, action) {
+function siteConfig (state = initialState, action) {
     const {type, payload} = action;
     switch (type) {
         case FETCH_SITE_CONFIG_START:
@@ -128,3 +130,5 @@ export default function siteConfig (state = initialState, action) {
             return state;
     }
 }
+
+export default modeled(siteConfig, 'siteConfig');

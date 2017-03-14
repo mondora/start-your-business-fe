@@ -1,8 +1,9 @@
 import {formReducer} from 'react-redux-form';
 import {routerReducer} from 'react-router-redux';
 import {combineReducers} from 'redux';
+
 import billingInformation, {initialBillingState} from './billing-information';
-import businessSite, {
+import siteConfig, {
     initialColors,
     initialFooterInfo,
     initialHeaderInfo,
@@ -10,29 +11,29 @@ import businessSite, {
     initialStepsInfo,
     initialSubscriptionsInfo,
     initialOtherInfo
-} from './business-site';
+} from './siteConfig';
 import payment from './payment';
 import products from './products';
-import siteConfig from './siteConfig';
 import spinner from './spinner';
 import user, {initialConfirmationState, initialLoginState, initialSignupState} from './user';
+import ui from './ui';
 
 const reducers = combineReducers({
     routing: routerReducer,
     billing: billingInformation,
     billingInformationForm: formReducer('billing', initialBillingState),
-    businessSite,
-    businessSiteColorsForm: formReducer('businessSite.siteConfig.colors', initialColors),
-    businessSiteFooterForm: formReducer('businessSite.siteConfig.footer', initialFooterInfo),
-    businessSiteHeaderForm: formReducer('businessSite.siteConfig.header', initialHeaderInfo),
-    businessSiteIntroForm: formReducer('businessSite.siteConfig.intro', initialIntroInfo),
-    businessSiteStepsForm: formReducer('businessSite.siteConfig.steps', initialStepsInfo),
-    businessSiteSubscriptionsForm: formReducer('businessSite.siteConfig.subscriptions', initialSubscriptionsInfo),
-    businessSiteOtherInfoForm: formReducer('businessSite.siteConfig.info', initialOtherInfo),
     payment,
     products,
-    siteConfig,
     spinner,
+    siteConfig,
+    siteConfigColorsForm: formReducer('siteConfig.element.colors', initialColors),
+    siteConfigFooterForm: formReducer('siteConfig.element.footer', initialFooterInfo),
+    siteConfigHeaderForm: formReducer('siteConfig.element.header', initialHeaderInfo),
+    siteConfigIntroForm: formReducer('siteConfig.element.intro', initialIntroInfo),
+    siteConfigStepsForm: formReducer('siteConfig.element.steps', initialStepsInfo),
+    siteConfigSubscriptionsForm: formReducer('siteConfig.element.subscriptions', initialSubscriptionsInfo),
+    siteConfigOtherInfoForm: formReducer('siteConfig.element.info', initialOtherInfo),
+    ui,
     user,
     userLoginForm: formReducer('user.login', initialLoginState),
     userSignupForm: formReducer('user.signup', initialSignupState),
