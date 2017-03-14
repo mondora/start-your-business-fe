@@ -30,7 +30,7 @@ export default class ImageUploader extends Component {
                 }, false);
 
                 reader.readAsDataURL(fileInfo);
-            }else{
+            } else {
                 // TODO implementare un errore utente
                 console.log('Image validation failed');
             }
@@ -47,15 +47,6 @@ export default class ImageUploader extends Component {
                 type='file'
                 accept='image/*'
                 onChange={(event) => this.getImage(event, this.props.setLogoImage)}
-                onSubmit={(event) => {
-                    console.log('onSubmit');
-                    console.log(event.data);
-                    console.log(event);
-                }}
-                onEnded={(ev) => {
-                    console.log('ended');
-                    console.log(ev);
-                }}
                 style={styles.inputFile}
             />
         );
