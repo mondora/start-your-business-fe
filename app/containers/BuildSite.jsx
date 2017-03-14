@@ -5,10 +5,10 @@ import {browserHistory} from 'react-router';
 import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
-import {setEditMode, setTemplate} from 'actions/business-site';
-import {upsertSiteConfig, fetch as fetchSiteConfig} from 'actions/siteConfig';
+import {setEditMode} from 'actions/ui';
+import {fetch as fetchSiteConfig, setTemplate, upsertSiteConfig} from 'actions/siteConfig';
 
-import {editModes} from 'lib/business-site-utils';
+import {editModes} from 'constants/editModes';
 import * as colors from 'lib/colors';
 
 import Button from 'components/CustomButton';
@@ -60,9 +60,8 @@ class BuildSite extends Component {
             upsertSiteConfig,
             siteConfig
         } = this.props;
-        console.log('siteConfig', siteConfig);
         upsertSiteConfig(siteConfig);
-        // browserHistory.push('/choose-plan');
+        browserHistory.push('/choose-plan');
     }
 
     renderSaveButton () {
@@ -155,11 +154,12 @@ class BuildSite extends Component {
             </div>
         );
     }
+
 }
 
 const mapStateToProps = (state) => {
     return {
-        editMode: state.businessSite.editMode,
+        editMode: state.ui.editMode,
         siteConfig: state.siteConfig.element
     };
 };
