@@ -81,7 +81,7 @@ const mapStateToProps = (state) => {
     return {
         editMode: state.ui.editMode,
         signUpForm: state.userSignupForm,
-        signUpState: state.user.signup,
+        signUpState: state.user.SYB.signup,
         siteConfig: state.siteConfig.element,
         siteConfigIntroForm: state.siteConfigIntroForm,
         siteConfigOtherInfoForm: state.siteConfigOtherInfoForm,
