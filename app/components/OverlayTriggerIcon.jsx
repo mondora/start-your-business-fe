@@ -103,9 +103,6 @@ class OverlayTriggerIcon extends Component {
                             {'×'}
                         </label>
                         {this.props.children}
-                        <SaveButton
-                            onClick={this.props.onClose}
-                        />
                     </div>
                 </div>
             </Overlay>

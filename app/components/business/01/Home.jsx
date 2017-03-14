@@ -32,15 +32,15 @@ const styles = (siteColors) => ({
 export default class Home extends Component {
 
     static propTypes = {
-        siteConfigIntroForm: PropTypes.object.isRequired,
-        siteConfigOtherInfoForm: PropTypes.object.isRequired,
-        siteConfigStepsForm: PropTypes.object.isRequired,
-        siteConfigSubscriptionsForm: PropTypes.object.isRequired,
         editMode: PropTypes.number,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
+        siteConfigIntroForm: PropTypes.object.isRequired,
+        siteConfigOtherInfoForm: PropTypes.object.isRequired,
+        siteConfigStepsForm: PropTypes.object.isRequired,
+        siteConfigSubscriptionsForm: PropTypes.object.isRequired,
         spinner: PropTypes.object,
         styles: PropTypes.object.isRequired
     };

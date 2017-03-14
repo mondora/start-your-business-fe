@@ -20,6 +20,7 @@ const commonStyles = {
 };
 
 export default class Intro extends Component {
+
     static propTypes = {
         buildSiteMode: PropTypes.number,
         buttonStyle: PropTypes.object,
@@ -43,7 +44,7 @@ export default class Intro extends Component {
         return getTextField (
             isEditMode,
             this.props.form[fieldName],
-            `siteConfig.element.element.intro.${fieldName}`,
+            `siteConfig.element.intro.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.templateGreyText},
@@ -83,8 +84,12 @@ export default class Intro extends Component {
     }
 
     render () {
-        const {introTitle, introText} = this.props.siteConfig.intro;
-        const {buildSiteMode, introTitleStyle, buttonStyle} = this.props;
+        const {
+            buildSiteMode,
+            buttonStyle,
+            introTitleStyle,
+            siteConfig: {intro: {introTitle, introText}}
+        } = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         const onClickSignUp = this.props.buildSiteMode ? null : () => this.setState({showSignUpModal: true});
         return (

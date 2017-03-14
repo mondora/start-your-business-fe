@@ -1,6 +1,7 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {actions} from 'react-redux-form';
 import {browserHistory} from 'react-router';
 import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
@@ -61,7 +62,7 @@ class BuildSite extends Component {
             siteConfig
         } = this.props;
         upsertSiteConfig(siteConfig);
-        browserHistory.push('/choose-plan');
+        // browserHistory.push('/choose-plan');
     }
 
     renderSaveButton () {
@@ -169,7 +170,7 @@ const mapDispatchToProps = (dispatch) => {
         upsertSiteConfig: bindActionCreators(upsertSiteConfig, dispatch),
         fetchSiteConfig: bindActionCreators(fetchSiteConfig, dispatch),
         setEditMode: bindActionCreators(setEditMode, dispatch),
-        setTemplate: bindActionCreators(setTemplate, dispatch)
+        setTemplate: templateId => dispatch(actions.change('siteConfig.element.templateId', templateId))
     };
 };
 

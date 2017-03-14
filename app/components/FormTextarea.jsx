@@ -59,7 +59,7 @@ export default class FormTextarea extends Component {
                     validateOn='blur'
                 >
                     <textarea
-                        value={placeholder}
+                        placeholder={placeholder}
                         style={{...styles.textarea, ...this.props.textareaStyle}}
                     />
                     {
