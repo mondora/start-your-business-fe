@@ -36,6 +36,7 @@ export default class Home extends Component {
 
     static propTypes = {
         editMode: PropTypes.number,
+        productPlans: PropTypes.object,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
@@ -52,6 +53,7 @@ export default class Home extends Component {
     render () {
         const {
             editMode,
+            productPlans,
             signUpForm,
             signUpState,
             signUpUser,
@@ -94,6 +96,7 @@ export default class Home extends Component {
                     <SubscriptionsList
                         buildSiteMode={editMode}
                         form={siteConfigSubscriptionsForm}
+                        productPlans={productPlans}
                         siteConfig={siteConfig}
                     />
                 </div>

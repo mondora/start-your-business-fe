@@ -2,14 +2,20 @@ import Color from 'color';
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Form} from 'react-redux-form';
-import {connect} from 'react-redux';
 
 import {editModes} from 'constants/editModes';
-import {getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
+import {getSelectField, getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
+import {requiredPriceValidator} from 'lib/form-utils';
+import {frequencies, frequenciesOptions} from 'lib/zuora-products-utils';
 
 import Subscription1 from 'components/business/01/Subscription';
 import Subscription2 from 'components/business/02/Subscription';
+
+const components = {
+    subscription1: Subscription1,
+    subscription2: Subscription2
+};
 
 const styles = (siteColors) => ({
     subscriptionsContainer: {
@@ -56,7 +62,7 @@ const styles = (siteColors) => ({
         '@media screen and (max-width: 767px)': {
             width: '100%',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
         }
     }
 });
@@ -64,8 +70,8 @@ const styles = (siteColors) => ({
 class SubscriptionsList extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
-        businessSiteState: PropTypes.object,
         form: PropTypes.object,
+        productPlans: PropTypes.object.isRequired,
         siteConfig: PropTypes.object.isRequired
     };
 
@@ -86,56 +92,60 @@ class SubscriptionsList extends Component {
             subscriptionPrice3,
             subscriptionFrequency1,
             subscriptionFrequency2,
-            subscriptionFrequency3
-        } = this.props.siteConfig.subscriptions;
+            subscriptionFrequency3,
+            subscriptionImage1,
+            subscriptionImage2,
+            subscriptionImage3
+        } = this.props.productPlans.subscriptions;
         return [
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType1', 'CASSETTINA PICCOLA', subscriptionType1),
-                photo: 'subscription01.jpg',
-                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency1', 'al mese', subscriptionFrequency1),
+                image: subscriptionImage1 ? subscriptionImage1 : 'subscription01.jpg',
+                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency1', frequencies[subscriptionFrequency1], frequenciesOptions),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature1a', 'Adatta per un consumo mensile di una persona', subscriptionFeature1a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature1b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature1b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice1', '€ 35', subscriptionPrice1)
+                price: this.renderTextField(isEditMode, 'subscriptionPrice1', '35', `€ ${subscriptionPrice1}`, requiredPriceValidator)
             },
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType2', 'CASSETTINA PICCOLA', subscriptionType2),
-                photo: 'subscription02.jpg',
-                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency2', 'al mese', subscriptionFrequency2),
+                image: subscriptionImage2 ? subscriptionImage2 : 'subscription02.jpg',
+                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency2', frequencies[subscriptionFrequency2], frequenciesOptions),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature2a', 'Adatta per un consumo mensile di 2/3 persone', subscriptionFeature2a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature2b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature2b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice2', '€ 45', subscriptionPrice2)
+                price: this.renderTextField(isEditMode, 'subscriptionPrice2', '45', `€ ${subscriptionPrice2}`, requiredPriceValidator)
             },
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType3', 'CASSETTINA PICCOLA', subscriptionType3),
-                photo: 'subscription03.jpg',
-                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency3', 'al mese', subscriptionFrequency3),
+                image: subscriptionImage3 ? subscriptionImage3 : 'subscription03.jpg',
+                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency3', frequencies[subscriptionFrequency3], frequenciesOptions),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature3a', 'Adatta per un consumo mensile di 4/5 persone', subscriptionFeature3a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature3b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature3b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice3', '€ 55', subscriptionPrice3)
+                price: this.renderTextField(isEditMode, 'subscriptionPrice3', '55', `€ ${subscriptionPrice3}`, requiredPriceValidator)
             }
         ];
     }
 
-    renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return getTextField (
+    renderTextField (isEditMode, fieldName, placeholder, readNode, validator) {
+        return getTextField(
             isEditMode,
             this.props.form[fieldName],
-            `siteConfig.element.subscriptions.${fieldName}`,
+            `ui.productPlans.subscriptions.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.grey},
-            {margin: 0, width: '100vw'}
+            {margin: 0, width: '100vw'},
+            validator
         );
     }
 
     renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
-        return getTextAreaField (
+        return getTextAreaField(
             isEditMode,
             this.props.form[fieldName],
-            `siteConfig.element.subscriptions.${fieldName}`,
+            `ui.productPlans.subscriptions.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.grey, textAlign: 'center'},
@@ -143,78 +153,48 @@ class SubscriptionsList extends Component {
         );
     }
 
-    renderSubscriptionTitle (isEditMode) {
-        const {subscriptionsTitle} = this.props.siteConfig.subscriptions;
-        const style = styles(this.props.siteConfig.colors);
-        switch (this.props.siteConfig.templateId) {
-            case templatesIds.TEMPLATE_2:
-                return (
-                    <h2 style={style.subscriptionsTitle2}>
-                        {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
-                    </h2>
-                );
-            case templatesIds.TEMPLATE_1:
-            default:
-                return (
-                    <h2 style={style.subscriptionsTitle1}>
-                        {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
-                    </h2>
-                );
-        }
+    renderSubscriptionTitle (isEditMode, style, templateId) {
+        const {subscriptionsTitle} = this.props.productPlans.subscriptions;
+        return (
+            <h2 style={style[`subscription${templateId}`]}>
+                {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
+            </h2>
+        );
     }
 
-    renderSubscription (isEditMode) {
-        const style = styles(this.props.siteConfig.colors);
-        switch (this.props.siteConfig.templateId) {
-            case templatesIds.TEMPLATE_2:
-                return (
-                    <div style={style.subscription2}>
-                        {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
-                            <Subscription2
-                                key={index}
-                                bgColor={subscriptionInfo.bgColor}
-                                frequency={subscriptionInfo.frequency}
-                                feature1={subscriptionInfo.feature1}
-                                feature2={subscriptionInfo.feature2}
-                                imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
-                                photoName={subscriptionInfo.photo}
-                                price={subscriptionInfo.price}
-                                type={subscriptionInfo.type}
-                            />
-                        )}
-                    </div>
-                );
-            case templatesIds.TEMPLATE_1:
-            default:
-                return (
-                    <div style={style.subscription1}>
-                        {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
-                            <Subscription1
-                                key={index}
-                                bgColor={Color(subscriptionInfo.bgColor).alpha(0.3 * (2 + index)).rgb().string()}
-                                frequency={subscriptionInfo.frequency}
-                                feature1={subscriptionInfo.feature1}
-                                feature2={subscriptionInfo.feature2}
-                                imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
-                                photoName={subscriptionInfo.photo}
-                                price={subscriptionInfo.price}
-                                type={subscriptionInfo.type}
-                            />
-                        )}
-                    </div>
-                );
-        }
+    renderSubscription (isEditMode, style, templateId) {
+        const Subscription = components[`subscription${templateId}`];
+        const getBgColor = ({bgColor}, index) =>
+            templateId === templatesIds.TEMPLATE_1 ? Color(bgColor).alpha(0.3 * (2 + index)).rgb().string() : bgColor;
+        return (
+            <div style={style[`subscription${templateId}`]}>
+                {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
+                    <Subscription
+                        key={index}
+                        bgColor={getBgColor(subscriptionInfo, index)}
+                        frequency={subscriptionInfo.frequency}
+                        feature1={subscriptionInfo.feature1}
+                        feature2={subscriptionInfo.feature2}
+                        imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
+                        image={subscriptionInfo.image}
+                        price={subscriptionInfo.price}
+                        type={subscriptionInfo.type}
+                    />
+                )}
+            </div>
+        );
     }
 
     render () {
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
+        const {templateId} = this.props.siteConfig;
         return (
-            <Form model={'siteConfig.element.subscriptions'}>
+            <Form model={'ui.productPlans.subscriptions'}>
                 <div style={style.subscriptionsContainer}>
-                    {this.renderSubscriptionTitle(isEditMode)}
+                    {this.renderSubscriptionTitle(isEditMode, style, templateId)}
                     <div className='container-fluid'>
-                        {this.renderSubscription(isEditMode)}
+                        {this.renderSubscription(isEditMode, style, templateId)}
                     </div>
                 </div>
             </Form>
@@ -222,11 +202,4 @@ class SubscriptionsList extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        businessSiteState: state.businessSite,
-        siteConfig: state.siteConfig.element,
-    };
-};
-
-export default connect(mapStateToProps)(Radium(SubscriptionsList));
+export default Radium(SubscriptionsList);

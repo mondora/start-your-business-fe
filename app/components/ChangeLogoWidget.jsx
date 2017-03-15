@@ -20,7 +20,8 @@ export default class ChangeLogoWidget extends Component {
     static propTypes = {
         editMode: PropTypes.number,
         selectedTemplateId: PropTypes.string,
-        setEditMode: PropTypes.func.isRequired
+        setEditMode: PropTypes.func.isRequired,
+        setLogoImage: PropTypes.func.isRequired
     };
 
     setEditMode (editMode) {
@@ -39,7 +40,9 @@ export default class ChangeLogoWidget extends Component {
             >
                 <div>
                     <p style={styles.subTitle}>{'Scegli file dal computer'}</p>
-                    <ImageUploader />
+                    <ImageUploader
+                        setLogoImage={this.props.setLogoImage}
+                    />
                 </div>
             </OverlayTriggerIcon>
         );

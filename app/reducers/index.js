@@ -31,7 +31,7 @@ const reducers = combineReducers({
     siteConfigHeaderForm: formReducer('siteConfig.element.header', initialHeaderInfo),
     siteConfigIntroForm: formReducer('siteConfig.element.intro', initialIntroInfo),
     siteConfigStepsForm: formReducer('siteConfig.element.steps', initialStepsInfo),
-    siteConfigSubscriptionsForm: formReducer('siteConfig.element.subscriptions', initialSubscriptionsInfo),
+    siteConfigSubscriptionsForm: formReducer('ui.productPlans.subscriptions', initialSubscriptionsInfo),
     siteConfigOtherInfoForm: formReducer('siteConfig.element.info', initialOtherInfo),
     ui,
     user,

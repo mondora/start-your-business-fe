@@ -7,8 +7,14 @@ import Home1 from 'components/business/01/Home';
 import Home2 from 'components/business/02/Home';
 
 import {signUpUser} from 'actions/user';
-import {templatesIds} from 'lib/business-site-utils';
+
+import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
+
+const components = {
+    home1: Home1,
+    home2: Home2
+};
 
 const styles = {
     pageContainer: {
@@ -46,6 +52,7 @@ class Home extends Component {
 
     static propTypes = {
         editMode: PropTypes.number,
+        productPlans: PropTypes.object,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
@@ -57,31 +64,23 @@ class Home extends Component {
     };
 
     render () {
-        switch (this.props.siteConfig.templateId) {
-            case templatesIds.TEMPLATE_2:
-                return (
-                    <Home2
-                        {...this.props}
-                        styles={styles}
-                    />
-                );
-            case templatesIds.TEMPLATE_1:
-            default:
-                return (
-                    <Home1
-                        {...this.props}
-                        styles={styles}
-                    />
-                );
-        }
+        const Home = components[`home${this.props.siteConfig.templateId}`];
+        return (
+            <Home
+                {...this.props}
+                styles={styles}
+            />
+        );
     }
 }
 
 const mapStateToProps = (state) => {
+    const userSite = getUserSiteState(state.user);
     return {
         editMode: state.ui.editMode,
+        productPlans: state.ui.productPlans,
         signUpForm: state.userSignupForm,
-        signUpState: state.user.SYB.signup,
+        signUpState: userSite.signup,
         siteConfig: state.siteConfig.element,
         siteConfigIntroForm: state.siteConfigIntroForm,
         siteConfigOtherInfoForm: state.siteConfigOtherInfoForm,

@@ -53,20 +53,23 @@ export const initialSubscriptionsInfo = {
     subscriptionType1: 'CASSETTINA PICCOLA',
     subscriptionFeature1a: 'Adatta per un consumo mensile di una persona',
     subscriptionFeature1b: 'Assortimento: verdura mista (frutta a richiesta)',
-    subscriptionPrice1: '€ 35',
-    subscriptionFrequency1: 'al mese',
+    subscriptionPrice1: '35',
+    subscriptionFrequency1: 'Monthly',
+    subscriptionImage1: null,
 
     subscriptionType2: 'CASSETTINA MEDIA',
     subscriptionFeature2a: 'Adatta per un consumo mensile di 2/3 persone',
     subscriptionFeature2b: 'Assortimento: verdura mista (frutta a richiesta)',
-    subscriptionPrice2: '€ 45',
-    subscriptionFrequency2: 'al mese',
+    subscriptionPrice2: '45',
+    subscriptionFrequency2: 'Monthly',
+    subscriptionImage2: null,
 
     subscriptionType3: 'CASSETTINA GRANDE',
     subscriptionFeature3a: 'Adatta per un consumo mensile di 4/5 persone',
     subscriptionFeature3b: 'Assortimento: verdura mista (frutta a richiesta)',
-    subscriptionPrice3: '€ 55',
-    subscriptionFrequency3: 'al mese'
+    subscriptionPrice3: '55',
+    subscriptionFrequency3: 'Monthly',
+    subscriptionImage3: null
 };
 
 export const initialOtherInfo = {
@@ -86,12 +89,8 @@ const initialSiteConfig = {
     header: initialHeaderInfo,
     intro: initialIntroInfo,
     steps: initialStepsInfo,
-    subscriptions: initialSubscriptionsInfo,
-    subscriptionsImages: [{
-        id: null
-    }],
     info: initialOtherInfo,
-    logoId: null,
+    logo: null,
     teaserImages: [{
         id: null
     }],
@@ -125,6 +124,14 @@ function siteConfig (state = initialState, action) {
                 element: initialSiteConfig,
                 isFetching: false,
                 fetchError: payload
+            };
+        case 'SET_LOGO_IMAGE':
+            return {
+                ...state,
+                siteConfig: {
+                    ...state.siteConfig,
+                    logo: action.logoImage
+                }
             };
         default:
             return state;

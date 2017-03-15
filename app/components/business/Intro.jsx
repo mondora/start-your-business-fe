@@ -65,12 +65,7 @@ export default class Intro extends Component {
     }
 
     renderModal () {
-        const {
-            siteConfig,
-            signUpForm,
-            signUpUser,
-            signUpState
-        } = this.props;
+        const {siteConfig, signUpForm, signUpUser, signUpState} = this.props;
         return (
             <SignUpModal
                 backgroundColor={siteConfig.colors.mainColor}

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FormInput from 'components/FormInput';
+import FormInputSelect from 'components/FormInputSelect';
 import FormTextarea from 'components/FormTextarea';
 
 export const templatesIds = {
@@ -26,7 +27,16 @@ export function getS3ImagePath (imageId) {
     return imageId;
 }
 
-export function getTextField (isEditMode, field, model, placeholder, readNode, inputStyle, style) {
+export function getSelectField (isEditMode, model, readNode, options) {
+    return isEditMode ? (
+        <FormInputSelect
+            model={model}
+            options={options}
+        />
+    ) : readNode;
+}
+
+export function getTextField (isEditMode, field, model, placeholder, readNode, inputStyle, style, validator) {
     return isEditMode ? (
         <FormInput
             field={field}
@@ -35,6 +45,7 @@ export function getTextField (isEditMode, field, model, placeholder, readNode, i
             placeholder={placeholder}
             inputStyle={inputStyle}
             style={style}
+            validator={validator}
         />
     ) : readNode;
 }

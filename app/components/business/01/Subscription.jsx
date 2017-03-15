@@ -86,14 +86,14 @@ class Subscription extends Component {
         feature1: PropTypes.node,
         feature2: PropTypes.node,
         frequency: PropTypes.node,
+        image: PropTypes.any,
         imageUploadMode: PropTypes.bool,
-        photoName: PropTypes.string,
         price: PropTypes.node,
         type: PropTypes.node
     };
 
     render () {
-        const path = `/_assets/images/template_01/${this.props.photoName}`;
+        const path = `/_assets/images/template_01/${this.props.image}`;
         const mainColor = this.props.bgColor;
         return (
             <div style={{...styles.subscriptionContainer, ...{borderColor: mainColor}}}>

@@ -7,7 +7,8 @@ import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
 import {setEditMode} from 'actions/ui';
-import {fetch as fetchSiteConfig, setTemplate, upsertSiteConfig} from 'actions/siteConfig';
+import {fetch as fetchSiteConfig, setLogoImage, setTemplate, upsertSiteConfig} from 'actions/siteConfig';
+import {setEditMode, setTemplate} from 'actions/business-site';
 
 import {editModes} from 'constants/editModes';
 import * as colors from 'lib/colors';
@@ -45,6 +46,7 @@ class BuildSite extends Component {
         fetchSiteConfig: PropTypes.func.isRequired,
         params: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
+        setLogoImage: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
         upsertSiteConfig: PropTypes.func.isRequired
@@ -97,7 +99,7 @@ class BuildSite extends Component {
     }
 
     render () {
-        const {editMode, siteConfig, setEditMode, setTemplate} = this.props;
+        const {editMode, siteConfig, setEditMode, setLogoImage, setTemplate} = this.props;
         return (
             <div>
                 <PageTeaser
@@ -117,11 +119,13 @@ class BuildSite extends Component {
                                 <ChangeLogoWidget
                                     editMode={editMode}
                                     setEditMode={setEditMode}
+                                    setLogoImage={setLogoImage}
                                 />
                                 <ChangeColorWidget
                                     colors={siteConfig.colors}
                                     editMode={editMode}
                                     setEditMode={setEditMode}
+                                    setLogoImage={setLogoImage}
                                 />
                                 <Icon
                                     iconName='change_image_white'
@@ -170,6 +174,7 @@ const mapDispatchToProps = (dispatch) => {
         upsertSiteConfig: bindActionCreators(upsertSiteConfig, dispatch),
         fetchSiteConfig: bindActionCreators(fetchSiteConfig, dispatch),
         setEditMode: bindActionCreators(setEditMode, dispatch),
+        setLogoImage: bindActionCreators(setLogoImage, dispatch),
         setTemplate: templateId => dispatch(actions.change('siteConfig.element.templateId', templateId))
     };
 };

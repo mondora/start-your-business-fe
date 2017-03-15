@@ -23,6 +23,10 @@ export function requiredPasswordValidator (val) {
     return genericRequiredValidator(val);
 }
 
+export function requiredPriceValidator (val) {
+    return genericRequiredValidator(val) || (!validator.isFloat(val, {min: 0}) && 'Il prezzo deve essere un numero maggiore di zero');
+}
+
 export function businessNameValidator (val) {
     //TODO check for already existing business name
     return genericRequiredValidator(val) ||
