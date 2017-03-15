@@ -5,6 +5,7 @@ import {Form} from 'react-redux-form';
 
 import {editModes, getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
+import {requiredPriceValidator} from 'lib/form-utils';
 
 import Subscription1 from 'components/business/01/Subscription';
 import Subscription2 from 'components/business/02/Subscription';
@@ -89,40 +90,43 @@ class SubscriptionsList extends Component {
             subscriptionPrice3,
             subscriptionFrequency1,
             subscriptionFrequency2,
-            subscriptionFrequency3
+            subscriptionFrequency3,
+            subscriptionImage1,
+            subscriptionImage2,
+            subscriptionImage3
         } = this.props.productPlans.subscriptions;
         return [
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType1', 'CASSETTINA PICCOLA', subscriptionType1),
-                photo: 'subscription01.jpg',
+                image: subscriptionImage1 ? subscriptionImage1 : 'subscription01.jpg',
                 frequency: this.renderTextField(isEditMode, 'subscriptionFrequency1', 'al mese', subscriptionFrequency1),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature1a', 'Adatta per un consumo mensile di una persona', subscriptionFeature1a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature1b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature1b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice1', '€ 35', subscriptionPrice1)
+                price: this.renderTextField(isEditMode, 'subscriptionPrice1', '35', `€ ${subscriptionPrice1}`, requiredPriceValidator)
             },
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType2', 'CASSETTINA PICCOLA', subscriptionType2),
-                photo: 'subscription02.jpg',
+                image: subscriptionImage2 ? subscriptionImage2 : 'subscription02.jpg',
                 frequency: this.renderTextField(isEditMode, 'subscriptionFrequency2', 'al mese', subscriptionFrequency2),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature2a', 'Adatta per un consumo mensile di 2/3 persone', subscriptionFeature2a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature2b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature2b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice2', '€ 45', subscriptionPrice2)
+                price: this.renderTextField(isEditMode, 'subscriptionPrice2', '45', `€ ${subscriptionPrice2}`, requiredPriceValidator)
             },
             {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType3', 'CASSETTINA PICCOLA', subscriptionType3),
-                photo: 'subscription03.jpg',
+                image: subscriptionImage3 ? subscriptionImage3 : 'subscription03.jpg',
                 frequency: this.renderTextField(isEditMode, 'subscriptionFrequency3', 'al mese', subscriptionFrequency3),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature3a', 'Adatta per un consumo mensile di 4/5 persone', subscriptionFeature3a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature3b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature3b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice3', '€ 55', subscriptionPrice3)
+                price: this.renderTextField(isEditMode, 'subscriptionPrice3', '55', `€ ${subscriptionPrice3}`, requiredPriceValidator)
             }
         ];
     }
 
-    renderTextField (isEditMode, fieldName, placeholder, readNode) {
+    renderTextField (isEditMode, fieldName, placeholder, readNode, validator) {
         return getTextField(
             isEditMode,
             this.props.form[fieldName],
@@ -130,7 +134,8 @@ class SubscriptionsList extends Component {
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.grey},
-            {margin: 0, width: '100vw'}
+            {margin: 0, width: '100vw'},
+            validator
         );
     }
 
@@ -169,7 +174,7 @@ class SubscriptionsList extends Component {
                         feature1={subscriptionInfo.feature1}
                         feature2={subscriptionInfo.feature2}
                         imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
-                        photoName={subscriptionInfo.photo}
+                        image={subscriptionInfo.image}
                         price={subscriptionInfo.price}
                         type={subscriptionInfo.type}
                     />

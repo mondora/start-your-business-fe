@@ -48,7 +48,7 @@ const styles = {
     },
     subscriptionFrequency: {
         fontSize: '1.5em',
-        lineHeight: '.9em',
+        lineHeight: '.9em'
     },
     subscriptionButtonWrp: {
         width: '100%',
@@ -86,15 +86,15 @@ class Subscription extends Component {
         feature1: PropTypes.node,
         feature2: PropTypes.node,
         frequency: PropTypes.node,
+        image: PropTypes.any,
         imageUploadMode: PropTypes.bool,
-        photoName: PropTypes.string,
         price: PropTypes.node,
-        type: PropTypes.node,
+        type: PropTypes.node
     };
 
     render () {
         const mainColor = this.props.bgColor;
-        const path = `/_assets/images/template_02/${this.props.photoName}`;
+        const path = `/_assets/images/template_02/${this.props.image}`;
         return (
             <div style={styles.subscriptionContainer}>
                 <div style={styles.subscriptionFeaturesWrp}>

@@ -36,7 +36,7 @@ export function getS3ImagePath (imageId) {
     return imageId;
 }
 
-export function getTextField (isEditMode, field, model, placeholder, readNode, inputStyle, style) {
+export function getTextField (isEditMode, field, model, placeholder, readNode, inputStyle, style, validator) {
     return isEditMode ? (
         <FormInput
             field={field}
@@ -45,6 +45,7 @@ export function getTextField (isEditMode, field, model, placeholder, readNode, i
             placeholder={placeholder}
             inputStyle={inputStyle}
             style={style}
+            validator={validator}
         />
     ) : readNode;
 }
