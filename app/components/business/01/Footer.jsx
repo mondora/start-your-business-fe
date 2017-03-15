@@ -119,14 +119,14 @@ class Footer extends Component {
     }
 
     renderBottomFooter () {
-        const {buildSiteMode} = this.props;
+        const {buildSiteMode, footerInfo} = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         return (
             <div style={styles.bottomFooterWrp}>
                 <div className='container-fluid' style={styles.maxContentWidth}>
                     <div style={styles.bottomFooter}>
                         {this.renderTextField(isEditMode, 'bottom', '© 2017 Nome Azienda - PIVA: 0123456789',
-                            <span style={styles.bottomLegal}>{this.props.footerInfo.bottom}</span>
+                            <span style={styles.bottomLegal}>{footerInfo.bottom}</span>
                         )}
                         <FooterPayment />
                     </div>
@@ -136,11 +136,10 @@ class Footer extends Component {
     }
 
     render () {
-        const {companyName, line1, line2, line3, line4} = this.props.footerInfo;
-        const {buildSiteMode} = this.props;
+        const {buildSiteMode, footerInfo: {companyName, line1, line2, line3, line4}} = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
-        const openPrivacyModal = this.props.buildSiteMode ? null : () => this.setState({showPrivacyModal: true});
-        const openConditionsModal = this.props.buildSiteMode ? null : () => this.setState({showConditionsModal: true});
+        const openPrivacyModal = buildSiteMode ? null : () => this.setState({showPrivacyModal: true});
+        const openConditionsModal = buildSiteMode ? null : () => this.setState({showConditionsModal: true});
         return (
             <div style={styles.footerContainer}>
                 <Form model={'siteConfig.element.footer'}>

@@ -6,11 +6,10 @@ import Steps from 'components/business/02/Steps';
 import SubscriptionsList from 'components/business/SubscriptionsList';
 import TeaserCarousel from 'components/business/TeaserCarousel';
 
-import {signup, signUpUser} from 'actions/user';
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-const styles = (siteColors) => ({
+const componentStyles = (siteColors) => ({
     teaserWrp: {
         height: 'auto'
     },
@@ -36,14 +35,15 @@ const styles = (siteColors) => ({
 export default class Home extends Component {
 
     static propTypes = {
+        editMode: PropTypes.number,
+        signUpForm: PropTypes.object,
+        signUpState: PropTypes.object,
+        signUpUser: PropTypes.func.isRequired,
+        siteConfig: PropTypes.object,
         siteConfigIntroForm: PropTypes.object.isRequired,
         siteConfigOtherInfoForm: PropTypes.object.isRequired,
         siteConfigStepsForm: PropTypes.object.isRequired,
         siteConfigSubscriptionsForm: PropTypes.object.isRequired,
-        editMode: PropTypes.number,
-        signUpForm: PropTypes.object,
-        signUpUser: PropTypes.func.isRequired,
-        siteConfig: PropTypes.object,
         spinner: PropTypes.object,
         styles: PropTypes.object.isRequired,
         user: PropTypes.object
@@ -51,14 +51,18 @@ export default class Home extends Component {
 
     render () {
         const {
+            editMode,
+            signUpForm,
+            signUpState,
+            signUpUser,
             siteConfigIntroForm,
             siteConfigStepsForm,
             siteConfigSubscriptionsForm,
             siteConfigOtherInfoForm,
-            editMode,
-            siteConfig
+            siteConfig,
+            styles
         } = this.props;
-        const homeStyles = styles(siteConfig.colors);
+        const homeStyles = componentStyles(siteConfig.colors);
         return (
             <div>
                 <div style={homeStyles.teaserWrp}>
@@ -75,9 +79,9 @@ export default class Home extends Component {
                         buildSiteMode={editMode}
                         form={siteConfigIntroForm}
                         introTitleStyle={homeStyles.introTitleStyle}
-                        signUpForm={this.props.signUpForm}
+                        signUpForm={signUpForm}
                         signUpUser={signUpUser}
-                        signUpState={signup}
+                        signUpState={signUpState}
                         siteConfig={siteConfig}
                     />
                     <Steps
@@ -86,16 +90,16 @@ export default class Home extends Component {
                         siteConfig={siteConfig}
                     />
                 </div>
-                <div style={this.props.styles.subscriptionContainer}>
+                <div style={styles.subscriptionContainer}>
                     <SubscriptionsList
                         buildSiteMode={editMode}
                         form={siteConfigSubscriptionsForm}
                         siteConfig={siteConfig}
                     />
                 </div>
-                <div style={this.props.styles.bottomPageContainer2}>
-                    <div style={this.props.styles.bottomPageBlackOpacity}>
-                        <div className='container-fluid' style={this.props.styles.bottomPageWrp}>
+                <div style={styles.bottomPageContainer2}>
+                    <div style={styles.bottomPageBlackOpacity}>
+                        <div className='container-fluid' style={styles.bottomPageWrp}>
                             <OtherInfo
                                 buildSiteMode={editMode}
                                 form={siteConfigOtherInfoForm}

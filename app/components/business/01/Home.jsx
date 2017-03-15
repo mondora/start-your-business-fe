@@ -10,7 +10,7 @@ import {Col, Row} from 'react-bootstrap';
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-const styles = (siteColors) => ({
+const componentStyles = (siteColors) => ({
     teaserWrp: {
         maxWidth: '1200px',
         height: 'auto'
@@ -46,7 +46,7 @@ export default class Home extends Component {
     };
 
     renderTeaser (editMode, siteConfig) {
-        const homeStyles = styles(siteConfig.colors);
+        const homeStyles = componentStyles(siteConfig.colors);
         return (
             <div className='container-fluid' style={homeStyles.teaserWrp}>
                 <Row>
@@ -67,22 +67,23 @@ export default class Home extends Component {
 
     render () {
         const {
+            editMode,
+            signUpForm,
+            signUpState,
+            signUpUser,
             siteConfigIntroForm,
             siteConfigStepsForm,
             siteConfigSubscriptionsForm,
             siteConfigOtherInfoForm,
-            signUpForm,
-            signUpState,
-            signUpUser,
-            editMode,
-            siteConfig
+            siteConfig,
+            styles
         } = this.props;
-        const homeStyles = styles(siteConfig.colors);
+        const homeStyles = componentStyles(siteConfig.colors);
         return (
             <div>
-                <div style={this.props.styles.pageContainer}>
+                <div style={styles.pageContainer}>
                     {this.renderTeaser(editMode, siteConfig)}
-                    <div className='container-fluid' style={this.props.styles.pageWrp}>
+                    <div className='container-fluid' style={styles.pageWrp}>
                         <Intro
                             buttonStyle={homeStyles.buttonStyle}
                             buildSiteMode={editMode}
@@ -105,8 +106,8 @@ export default class Home extends Component {
                         />
                     </div>
                 </div>
-                <div style={this.props.styles.bottomPageContainer1}>
-                    <div className='container-fluid' style={this.props.styles.bottomPageWrp}>
+                <div style={styles.bottomPageContainer1}>
+                    <div className='container-fluid' style={styles.bottomPageWrp}>
                         <OtherInfo
                             buildSiteMode={editMode}
                             form={siteConfigOtherInfoForm}

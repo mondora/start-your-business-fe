@@ -134,20 +134,20 @@ class Header extends Component {
 
 
     render () {
-        const {emailAddress, phoneNumber} = this.props.siteConfig.header;
         const {
             buildSiteMode,
             form,
-            siteConfig,
             loginForm,
             login,
             loginState,
             signUpForm,
             signUpUser,
-            signUpState
+            signUpState,
+            siteConfig,
+            siteConfig: {header: {emailAddress, phoneNumber}}
         } = this.props;
-        const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
-        const style = styles(this.props.siteConfig.colors);
+        const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
+        const style = styles(siteConfig.colors);
         return (
             <div>
                 <div style={style.headerContainer}>
@@ -161,7 +161,7 @@ class Header extends Component {
                                                 <Glyphicon glyph='glyphicon glyphicon-phone' />
                                             </div>
                                             {getLink(
-                                                this.props.buildSiteMode,
+                                                buildSiteMode,
                                                 'tel:+390123456789',
                                                 this.renderTextField(isEditMode, 'phoneNumber', '+39 012 3456789', phoneNumber),
                                                 style.linkColorHeader
