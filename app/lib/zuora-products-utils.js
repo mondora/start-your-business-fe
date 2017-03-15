@@ -4,10 +4,16 @@ const currencies = {
     'EUR': '€ '
 };
 
-const frequencies = {
+export const frequencies = {
     'Annual': 'annui',
-    'Month': 'mensili'
+    'Monthly': 'mensili',
+    'Quarterly': 'trimestrali'
 };
+
+export const frequenciesOptions = R.map(key => ({
+    value: key,
+    label: frequencies[key]
+}), R.keys(frequencies));
 
 export function getProductPlans (product) {
     return product && product.productRatePlans ? R.compose(

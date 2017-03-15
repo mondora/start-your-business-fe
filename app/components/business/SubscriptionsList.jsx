@@ -3,9 +3,10 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Form} from 'react-redux-form';
 
-import {editModes, getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
+import {editModes, getSelectField, getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 import {requiredPriceValidator} from 'lib/form-utils';
+import {frequencies, frequenciesOptions} from 'lib/zuora-products-utils';
 
 import Subscription1 from 'components/business/01/Subscription';
 import Subscription2 from 'components/business/02/Subscription';
@@ -100,7 +101,7 @@ class SubscriptionsList extends Component {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType1', 'CASSETTINA PICCOLA', subscriptionType1),
                 image: subscriptionImage1 ? subscriptionImage1 : 'subscription01.jpg',
-                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency1', 'al mese', subscriptionFrequency1),
+                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency1', frequencies[subscriptionFrequency1], frequenciesOptions),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature1a', 'Adatta per un consumo mensile di una persona', subscriptionFeature1a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature1b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature1b),
                 price: this.renderTextField(isEditMode, 'subscriptionPrice1', '35', `€ ${subscriptionPrice1}`, requiredPriceValidator)
@@ -109,7 +110,7 @@ class SubscriptionsList extends Component {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType2', 'CASSETTINA PICCOLA', subscriptionType2),
                 image: subscriptionImage2 ? subscriptionImage2 : 'subscription02.jpg',
-                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency2', 'al mese', subscriptionFrequency2),
+                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency2', frequencies[subscriptionFrequency2], frequenciesOptions),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature2a', 'Adatta per un consumo mensile di 2/3 persone', subscriptionFeature2a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature2b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature2b),
                 price: this.renderTextField(isEditMode, 'subscriptionPrice2', '45', `€ ${subscriptionPrice2}`, requiredPriceValidator)
@@ -118,7 +119,7 @@ class SubscriptionsList extends Component {
                 bgColor: siteColors.mainColor,
                 type: this.renderTextField(isEditMode, 'subscriptionType3', 'CASSETTINA PICCOLA', subscriptionType3),
                 image: subscriptionImage3 ? subscriptionImage3 : 'subscription03.jpg',
-                frequency: this.renderTextField(isEditMode, 'subscriptionFrequency3', 'al mese', subscriptionFrequency3),
+                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency3', frequencies[subscriptionFrequency3], frequenciesOptions),
                 feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature3a', 'Adatta per un consumo mensile di 4/5 persone', subscriptionFeature3a),
                 feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature3b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature3b),
                 price: this.renderTextField(isEditMode, 'subscriptionPrice3', '55', `€ ${subscriptionPrice3}`, requiredPriceValidator)
