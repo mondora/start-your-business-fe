@@ -6,7 +6,6 @@ import {Overlay} from 'react-bootstrap';
 import * as colors from 'lib/colors';
 
 import Icon from 'components/Icon';
-import SaveButton from 'components/BuildSiteSaveButton';
 
 const iconStyle = (active) => ({
     display: 'block',

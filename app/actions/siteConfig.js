@@ -19,11 +19,6 @@ const _fetch = fetchFn(
 
 export const fetch = businessId => _fetch(`/businesses/${businessId}`);
 
-export const setTemplate = templateId => ({
-    type: 'SET_TEMPLATE',
-    templateId
-});
-
 export const upsertSiteConfig = siteConfig => dispatch => {
     dispatch({
         type: 'UPSERT_SITE_CONFIG_START'
@@ -36,3 +31,8 @@ export const upsertSiteConfig = siteConfig => dispatch => {
             type: 'UPSERT_SITE_CONFIG_ERROR'
         }));
 };
+
+export const setLogoImage = logoImage => ({
+    type: 'SET_LOGO_IMAGE',
+    logoImage
+});

@@ -2,13 +2,12 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {actions} from 'react-redux-form';
-import {browserHistory} from 'react-router';
+// import {browserHistory} from 'react-router';
 import {Col, Row, Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
 import {setEditMode} from 'actions/ui';
-import {fetch as fetchSiteConfig, setLogoImage, setTemplate, upsertSiteConfig} from 'actions/siteConfig';
-import {setEditMode, setTemplate} from 'actions/business-site';
+import {fetch as fetchSiteConfig, setLogoImage, upsertSiteConfig} from 'actions/siteConfig';
 
 import {editModes} from 'constants/editModes';
 import * as colors from 'lib/colors';
@@ -64,6 +63,7 @@ class BuildSite extends Component {
             siteConfig
         } = this.props;
         upsertSiteConfig(siteConfig);
+        // TODO
         // browserHistory.push('/choose-plan');
     }
 

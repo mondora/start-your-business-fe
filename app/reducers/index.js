@@ -9,14 +9,13 @@ import siteConfig, {
     initialHeaderInfo,
     initialIntroInfo,
     initialStepsInfo,
-    initialSubscriptionsInfo,
     initialOtherInfo
 } from './siteConfig';
 import payment from './payment';
 import products from './products';
 import spinner from './spinner';
 import user, {initialConfirmationState, initialLoginState, initialSignupState} from './user';
-import ui from './ui';
+import ui, {initialSubscriptionsInfo} from './ui';
 
 const reducers = combineReducers({
     routing: routerReducer,
