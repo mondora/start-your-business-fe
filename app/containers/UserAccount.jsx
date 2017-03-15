@@ -6,6 +6,7 @@ import {Col, Row} from 'react-bootstrap';
 import * as colors from 'lib/colors';
 
 import AccountSettingsForm from 'components/AccountSettingsForm';
+import ChangePasswordForm from 'components/ChangePasswordForm';
 import PageTeaser from 'components/PageTeaser';
 
 const styles = {
@@ -24,35 +25,6 @@ class UserAccount extends Component {
         signUpForm: PropTypes.object
     };
 
-    renderPaymentInfo () {
-        return (
-            <Row style={styles.row}>
-                <Col xs={12} style={styles.col}>
-                    {'DETTAGLI PAGAMENTO:'}
-                    {'Metodo scelto:'}
-                    {'Stato:'}
-                    {'In scadenza il:'}
-                </Col>
-            </Row>
-        );
-    }
-
-    renderLastTemplates () {
-        return (
-            <Col xs={12} md={6} style={styles.col}>
-                {'ULTIMI TEMPLATE ONLINE:'}
-            </Col>
-        );
-    }
-
-    renderLastDrafts () {
-        return (
-            <Col xs={12} md={6} style={styles.col}>
-                {'ULTIME BOZZE SALVATE:'}
-            </Col>
-        );
-    }
-
     render () {
         return (
             <div>
@@ -64,16 +36,18 @@ class UserAccount extends Component {
                         <Col xs={12} md={6} style={styles.col}>
                             <AccountSettingsForm form={this.props.signUpForm} />
                         </Col>
-                    </Row>
-                    <Row style={styles.row}>
-                        {this.renderLastTemplates()}
-                        {this.renderLastDrafts()}
+                        <Col xs={12} md={6} style={styles.col}>
+                            <ChangePasswordForm form={this.props.signUpForm} />
+                        </Col>
                     </Row>
                     <Row style={styles.row}>
                         <Col xs={12} md={6} style={styles.col}>
-                            {'STORIA PAGAMENTI:'}
+                            {'FATTURAZIONE E PAGAMENTI:'}
                         </Col>
                         <Col xs={12} md={6} style={styles.col}>
+                            {'MODIFICA METODO DI PAGAMENTO:'}
+                            {'AGGIORNA IL TUO SITO:'}
+                            {'STORIA PAGAMENTI:'}
                             {'STORIA SOTTOSCRIZIONI:'}
                         </Col>
                     </Row>

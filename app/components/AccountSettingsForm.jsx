@@ -3,40 +3,36 @@ import {Form} from 'react-redux-form';
 
 import * as colors from 'lib/colors';
 
-import Button from 'components/CustomButton';
 import FormInput from 'components/FormInput';
+import UserAccountSaveButton from 'components/UserAccountSaveButton';
 
 import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 
-const styles = (backgroundColor) => ({
+const styles = {
     blockWrp: {
         width: '100%',
         marginBottom: '20px'
     },
     formWrp: {
-        backgroundColor: backgroundColor ? null : colors.primaryColorLighter,
+        backgroundColor: colors.primaryColorLighter,
         borderRadius: '5px',
         padding: '20px',
         marginBottom: '30px'
     }
-});
+};
 
 export default class AccountSettingsForm extends Component {
     static propTypes = {
-        backgroundColor: PropTypes.string,
-        businessUserPool: PropTypes.object,
         form: PropTypes.object.isRequired
     };
 
     render () {
-        const {backgroundColor} = this.props;
-        const style = styles(backgroundColor);
         return (
             <Form
                 model={'user.signup'}
-                onSubmit={() => console.log('saving user data')}
+                onSubmit={() => console.log('TODO save user data')}
                 validateOn='submit'
-                style={style.formWrp}
+                style={styles.formWrp}
             >
                 {'IMPOSTAZIONI ACCOUNT:'}
                 {'Sottoscritto il:'}
@@ -47,7 +43,7 @@ export default class AccountSettingsForm extends Component {
                     model='user.signup.givenName'
                     placeholder='Nome'
                     validator={genericRequiredValidator}
-                    style={style.blockWrp}
+                    style={styles.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.familyName}
@@ -56,7 +52,7 @@ export default class AccountSettingsForm extends Component {
                     model='user.signup.familyName'
                     placeholder='Cognome'
                     validator={genericRequiredValidator}
-                    style={style.blockWrp}
+                    style={styles.blockWrp}
                 />
                 <FormInput
                     field={this.props.form.email}
@@ -65,17 +61,11 @@ export default class AccountSettingsForm extends Component {
                     model='user.signup.email'
                     placeholder='youremail@email.it'
                     validator={requiredEmailValidator}
-                    style={style.blockWrp}
+                    style={styles.blockWrp}
                 />
 
-                <label style={style.blockWrp}>
-                    <div style={{float: 'right', textAlign: 'right'}}>
-                        <Button
-                            backgroundColor={backgroundColor ? backgroundColor : colors.darkGrey}
-                            text='SALVA MODIFICHE'
-                            type='submit'
-                        />
-                    </div>
+                <label style={styles.blockWrp}>
+                    <UserAccountSaveButton />
                 </label>
             </Form>
         );
