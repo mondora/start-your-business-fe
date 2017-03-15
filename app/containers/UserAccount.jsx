@@ -1,10 +1,11 @@
 import Radium from 'radium';
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Col, Row} from 'react-bootstrap';
 
 import * as colors from 'lib/colors';
 
+import AccountSettingsForm from 'components/AccountSettingsForm';
 import PageTeaser from 'components/PageTeaser';
 
 const styles = {
@@ -19,19 +20,9 @@ const styles = {
 };
 
 class UserAccount extends Component {
-
-    renderUserInfo () {
-        return (
-            <Row style={styles.row}>
-                <Col xs={12} style={styles.col}>
-                    {'DETTAGLI PERSONALI:'}
-                    {'Nome:'}
-                    {'Email:'}
-                    {'Iscritto dal:'}
-                </Col>
-            </Row>
-        );
-    }
+    static propTypes = {
+        signUpForm: PropTypes.object
+    };
 
     renderPaymentInfo () {
         return (
@@ -69,8 +60,11 @@ class UserAccount extends Component {
                     pageTitle={'IL MIO ACCOUNT'}
                 />
                 <div className='container'>
-                    {this.renderUserInfo()}
-                    {this.renderPaymentInfo()}
+                    <Row style={styles.row}>
+                        <Col xs={12} md={6} style={styles.col}>
+                            <AccountSettingsForm form={this.props.signUpForm} />
+                        </Col>
+                    </Row>
                     <Row style={styles.row}>
                         {this.renderLastTemplates()}
                         {this.renderLastDrafts()}
@@ -89,8 +83,9 @@ class UserAccount extends Component {
     }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
+        signUpForm: state.userSignupForm
     };
 };
 
