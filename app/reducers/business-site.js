@@ -50,18 +50,21 @@ export const initialSubscriptionsInfo = {
     subscriptionFeature1b: 'Assortimento: verdura mista (frutta a richiesta)',
     subscriptionPrice1: '€ 35',
     subscriptionFrequency1: 'al mese',
+    subscriptionImage1: null,
 
     subscriptionType2: 'CASSETTINA MEDIA',
     subscriptionFeature2a: 'Adatta per un consumo mensile di 2/3 persone',
     subscriptionFeature2b: 'Assortimento: verdura mista (frutta a richiesta)',
     subscriptionPrice2: '€ 45',
     subscriptionFrequency2: 'al mese',
+    subscriptionImage2: null,
 
     subscriptionType3: 'CASSETTINA GRANDE',
     subscriptionFeature3a: 'Adatta per un consumo mensile di 4/5 persone',
     subscriptionFeature3b: 'Assortimento: verdura mista (frutta a richiesta)',
     subscriptionPrice3: '€ 55',
-    subscriptionFrequency3: 'al mese'
+    subscriptionFrequency3: 'al mese',
+    subscriptionImage3: null
 };
 
 export const initialOtherInfo = {
@@ -77,16 +80,15 @@ export const initialOtherInfo = {
 
 const defaultState = {
     editMode: null,
+    productPlans: {
+        subscriptions: initialSubscriptionsInfo
+    },
     siteConfig: {
         colors: initialColors,
         footer: initialFooterInfo,
         header: initialHeaderInfo,
         intro: initialIntroInfo,
         steps: initialStepsInfo,
-        subscriptions: initialSubscriptionsInfo,
-        subscriptionsImages: [{
-            id: null
-        }],
         info: initialOtherInfo,
         logo: null,
         teaserImages: [{
@@ -127,7 +129,7 @@ const businessSite = (state = defaultState, action) => {
                     ...state.siteConfig,
                     logo: action.logoImage
                 }
-            }
+            };
         default:
             return state;
     }

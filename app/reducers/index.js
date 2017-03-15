@@ -27,7 +27,7 @@ const reducers = combineReducers({
     businessSiteHeaderForm: formReducer('businessSite.siteConfig.header', initialHeaderInfo),
     businessSiteIntroForm: formReducer('businessSite.siteConfig.intro', initialIntroInfo),
     businessSiteStepsForm: formReducer('businessSite.siteConfig.steps', initialStepsInfo),
-    businessSiteSubscriptionsForm: formReducer('businessSite.siteConfig.subscriptions', initialSubscriptionsInfo),
+    businessSiteSubscriptionsForm: formReducer('businessSite.productPlans.subscriptions', initialSubscriptionsInfo),
     businessSiteOtherInfoForm: formReducer('businessSite.siteConfig.info', initialOtherInfo),
     draftTemplates,
     payment,

@@ -6,7 +6,6 @@ import Steps from 'components/business/02/Steps';
 import SubscriptionsList from 'components/business/SubscriptionsList';
 import TeaserCarousel from 'components/business/TeaserCarousel';
 
-import {signup, signUpUser} from 'actions/user';
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
@@ -41,6 +40,7 @@ export default class Home extends Component {
         businessSiteStepsForm: PropTypes.object.isRequired,
         businessSiteSubscriptionsForm: PropTypes.object.isRequired,
         signUpForm: PropTypes.object,
+        signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
         spinner: PropTypes.object,
         styles: PropTypes.object.isRequired,
@@ -53,8 +53,12 @@ export default class Home extends Component {
             businessSiteStepsForm,
             businessSiteSubscriptionsForm,
             businessSiteOtherInfoForm,
+            signUpForm,
+            signUpState,
+            signUpUser,
             businessSiteState: {
                 editMode,
+                productPlans,
                 siteConfig
             }
         } = this.props;
@@ -75,9 +79,9 @@ export default class Home extends Component {
                         buildSiteMode={editMode}
                         form={businessSiteIntroForm}
                         introTitleStyle={homeStyles.introTitleStyle}
-                        signUpForm={this.props.signUpForm}
+                        signUpForm={signUpForm}
                         signUpUser={signUpUser}
-                        signUpState={signup}
+                        signUpState={signUpState}
                         siteConfig={siteConfig}
                     />
                     <Steps
@@ -90,6 +94,7 @@ export default class Home extends Component {
                     <SubscriptionsList
                         buildSiteMode={editMode}
                         form={businessSiteSubscriptionsForm}
+                        productPlans={productPlans}
                         siteConfig={siteConfig}
                     />
                 </div>

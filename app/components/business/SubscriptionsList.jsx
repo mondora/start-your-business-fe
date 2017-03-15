@@ -2,13 +2,17 @@ import Color from 'color';
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {Form} from 'react-redux-form';
-import {connect} from 'react-redux';
 
 import {editModes, getTextAreaField, getTextField, templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import Subscription1 from 'components/business/01/Subscription';
 import Subscription2 from 'components/business/02/Subscription';
+
+const components = {
+    subscription1: Subscription1,
+    subscription2: Subscription2
+};
 
 const styles = (siteColors) => ({
     subscriptionsContainer: {
@@ -55,7 +59,7 @@ const styles = (siteColors) => ({
         '@media screen and (max-width: 767px)': {
             width: '100%',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
         }
     }
 });
@@ -63,8 +67,8 @@ const styles = (siteColors) => ({
 class SubscriptionsList extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
-        businessSiteState: PropTypes.object,
         form: PropTypes.object,
+        productPlans: PropTypes.object.isRequired,
         siteConfig: PropTypes.object.isRequired
     };
 
@@ -86,7 +90,7 @@ class SubscriptionsList extends Component {
             subscriptionFrequency1,
             subscriptionFrequency2,
             subscriptionFrequency3
-        } = this.props.siteConfig.subscriptions;
+        } = this.props.productPlans.subscriptions;
         return [
             {
                 bgColor: siteColors.mainColor,
@@ -119,10 +123,10 @@ class SubscriptionsList extends Component {
     }
 
     renderTextField (isEditMode, fieldName, placeholder, readNode) {
-        return getTextField (
+        return getTextField(
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.subscriptions.${fieldName}`,
+            `businessSite.productPlans.subscriptions.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.grey},
@@ -131,10 +135,10 @@ class SubscriptionsList extends Component {
     }
 
     renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
-        return getTextAreaField (
+        return getTextAreaField(
             isEditMode,
             this.props.form[fieldName],
-            `businessSite.siteConfig.subscriptions.${fieldName}`,
+            `businessSite.productPlans.subscriptions.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.grey, textAlign: 'center'},
@@ -142,78 +146,48 @@ class SubscriptionsList extends Component {
         );
     }
 
-    renderSubscriptionTitle (isEditMode) {
-        const {subscriptionsTitle} = this.props.siteConfig.subscriptions;
-        const style = styles(this.props.siteConfig.colors);
-        switch (this.props.businessSiteState.siteConfig.templateId) {
-            case templatesIds.TEMPLATE_2:
-                return (
-                    <h2 style={style.subscriptionsTitle2}>
-                        {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
-                    </h2>
-                );
-            case templatesIds.TEMPLATE_1:
-            default:
-                return (
-                    <h2 style={style.subscriptionsTitle1}>
-                        {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
-                    </h2>
-                );
-        }
+    renderSubscriptionTitle (isEditMode, style, templateId) {
+        const {subscriptionsTitle} = this.props.productPlans.subscriptions;
+        return (
+            <h2 style={style[`subscription${templateId}`]}>
+                {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
+            </h2>
+        );
     }
 
-    renderSubscription (isEditMode) {
-        const style = styles(this.props.siteConfig.colors);
-        switch (this.props.businessSiteState.siteConfig.templateId) {
-            case templatesIds.TEMPLATE_2:
-                return (
-                    <div style={style.subscription2}>
-                        {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
-                            <Subscription2
-                                key={index}
-                                bgColor={subscriptionInfo.bgColor}
-                                frequency={subscriptionInfo.frequency}
-                                feature1={subscriptionInfo.feature1}
-                                feature2={subscriptionInfo.feature2}
-                                imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
-                                photoName={subscriptionInfo.photo}
-                                price={subscriptionInfo.price}
-                                type={subscriptionInfo.type}
-                            />
-                        )}
-                    </div>
-                );
-            case templatesIds.TEMPLATE_1:
-            default:
-                return (
-                    <div style={style.subscription1}>
-                        {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
-                            <Subscription1
-                                key={index}
-                                bgColor={Color(subscriptionInfo.bgColor).alpha(0.3 * (2 + index)).rgb().string()}
-                                frequency={subscriptionInfo.frequency}
-                                feature1={subscriptionInfo.feature1}
-                                feature2={subscriptionInfo.feature2}
-                                imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
-                                photoName={subscriptionInfo.photo}
-                                price={subscriptionInfo.price}
-                                type={subscriptionInfo.type}
-                            />
-                        )}
-                    </div>
-                );
-        }
+    renderSubscription (isEditMode, style, templateId) {
+        const Subscription = components[`subscription${templateId}`];
+        const getBgColor = ({bgColor}, index) =>
+            templateId === templatesIds.TEMPLATE_1 ? Color(bgColor).alpha(0.3 * (2 + index)).rgb().string() : bgColor;
+        return (
+            <div style={style[`subscription${templateId}`]}>
+                {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
+                    <Subscription
+                        key={index}
+                        bgColor={getBgColor(subscriptionInfo, index)}
+                        frequency={subscriptionInfo.frequency}
+                        feature1={subscriptionInfo.feature1}
+                        feature2={subscriptionInfo.feature2}
+                        imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
+                        photoName={subscriptionInfo.photo}
+                        price={subscriptionInfo.price}
+                        type={subscriptionInfo.type}
+                    />
+                )}
+            </div>
+        );
     }
 
     render () {
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
+        const {templateId} = this.props.siteConfig;
         return (
-            <Form model={'businessSite.siteConfig.subscriptions'}>
+            <Form model={'businessSite.productPlans.subscriptions'}>
                 <div style={style.subscriptionsContainer}>
-                    {this.renderSubscriptionTitle(isEditMode)}
+                    {this.renderSubscriptionTitle(isEditMode, style, templateId)}
                     <div className='container-fluid'>
-                        {this.renderSubscription(isEditMode)}
+                        {this.renderSubscription(isEditMode, style, templateId)}
                     </div>
                 </div>
             </Form>
@@ -221,10 +195,4 @@ class SubscriptionsList extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        businessSiteState: state.businessSite,
-    };
-};
-
-export default connect(mapStateToProps)(Radium(SubscriptionsList));
+export default Radium(SubscriptionsList);

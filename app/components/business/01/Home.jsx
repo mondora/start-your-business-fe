@@ -74,6 +74,7 @@ export default class Home extends Component {
             signUpUser,
             businessSiteState: {
                 editMode,
+                productPlans,
                 siteConfig
             }
         } = this.props;
@@ -101,6 +102,7 @@ export default class Home extends Component {
                         <SubscriptionsList
                             buildSiteMode={editMode}
                             form={businessSiteSubscriptionsForm}
+                            productPlans={productPlans}
                             siteConfig={siteConfig}
                         />
                     </div>

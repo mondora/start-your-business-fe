@@ -7,8 +7,14 @@ import Home1 from 'components/business/01/Home';
 import Home2 from 'components/business/02/Home';
 
 import {signUpUser} from 'actions/user';
-import {templatesIds} from 'lib/business-site-utils';
+
+import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
+
+const components = {
+    home1: Home1,
+    home2: Home2
+};
 
 const styles = {
     pageContainer: {
@@ -51,45 +57,29 @@ class Home extends Component {
         businessSiteSubscriptionsForm: PropTypes.object,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
-        signUpUser: PropTypes.func.isRequired,
+        signUpUser: PropTypes.func.isRequired
     };
 
     render () {
-        switch (this.props.businessSiteState.siteConfig.templateId) {
-            case templatesIds.TEMPLATE_2:
-                return (
-                    <Home2
-                        businessSiteIntroForm={this.props.businessSiteIntroForm}
-                        businessSiteOtherInfoForm={this.props.businessSiteOtherInfoForm}
-                        businessSiteState={this.props.businessSiteState}
-                        businessSiteStepsForm={this.props.businessSiteStepsForm}
-                        businessSiteSubscriptionsForm={this.props.businessSiteSubscriptionsForm}
-                        signUpForm={this.props.signUpForm}
-                        signUpState={this.props.signUpState}
-                        signUpUser={this.props.signUpUser}
-                        styles={styles}
-                    />
-                );
-            case templatesIds.TEMPLATE_1:
-            default:
-                return (
-                    <Home1
-                        businessSiteIntroForm={this.props.businessSiteIntroForm}
-                        businessSiteOtherInfoForm={this.props.businessSiteOtherInfoForm}
-                        businessSiteState={this.props.businessSiteState}
-                        businessSiteStepsForm={this.props.businessSiteStepsForm}
-                        businessSiteSubscriptionsForm={this.props.businessSiteSubscriptionsForm}
-                        signUpForm={this.props.signUpForm}
-                        signUpState={this.props.signUpState}
-                        signUpUser={this.props.signUpUser}
-                        styles={styles}
-                    />
-                );
-        }
+        const Home = components[`home${this.props.businessSiteState.siteConfig.templateId}`];
+        return (
+            <Home
+                businessSiteIntroForm={this.props.businessSiteIntroForm}
+                businessSiteOtherInfoForm={this.props.businessSiteOtherInfoForm}
+                businessSiteState={this.props.businessSiteState}
+                businessSiteStepsForm={this.props.businessSiteStepsForm}
+                businessSiteSubscriptionsForm={this.props.businessSiteSubscriptionsForm}
+                signUpForm={this.props.signUpForm}
+                signUpState={this.props.signUpState}
+                signUpUser={this.props.signUpUser}
+                styles={styles}
+            />
+        );
     }
 }
 
 const mapStateToProps = (state) => {
+    const userSite = getUserSiteState(state.user);
     return {
         businessSiteIntroForm: state.businessSiteIntroForm,
         businessSiteOtherInfoForm: state.businessSiteOtherInfoForm,
@@ -97,7 +87,7 @@ const mapStateToProps = (state) => {
         businessSiteStepsForm: state.businessSiteStepsForm,
         businessSiteSubscriptionsForm: state.businessSiteSubscriptionsForm,
         signUpForm: state.userSignupForm,
-        signUpState: state.user.signup
+        signUpState: userSite.signup
     };
 };
 
