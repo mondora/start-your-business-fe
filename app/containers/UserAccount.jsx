@@ -2,12 +2,16 @@ import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Col, Row} from 'react-bootstrap';
+import {Form} from 'react-redux-form';
 
 import * as colors from 'lib/colors';
 
 import AccountSettingsForm from 'components/AccountSettingsForm';
 import ChangePasswordForm from 'components/ChangePasswordForm';
+import CompanyInfoForm from 'components/CompanyInfoForm';
 import PageTeaser from 'components/PageTeaser';
+import PersonalInfoForm from 'components/PersonalInfoForm';
+import UserAccountSaveButton from 'components/UserAccountSaveButton';
 
 const styles = {
     col: {
@@ -22,6 +26,7 @@ const styles = {
 
 class UserAccount extends Component {
     static propTypes = {
+        billingInformationForm: PropTypes.object,
         signUpForm: PropTypes.object
     };
 
@@ -43,6 +48,11 @@ class UserAccount extends Component {
                     <Row style={styles.row}>
                         <Col xs={12} md={6} style={styles.col}>
                             {'FATTURAZIONE E PAGAMENTI:'}
+                            <Form model='billing' onSubmit={() => console.log('TODO save billing info')}>
+                                <CompanyInfoForm form={this.props.billingInformationForm} />
+                                <PersonalInfoForm form={this.props.billingInformationForm} />
+                                <UserAccountSaveButton />
+                            </Form>
                         </Col>
                         <Col xs={12} md={6} style={styles.col}>
                             {'MODIFICA METODO DI PAGAMENTO:'}
@@ -59,6 +69,7 @@ class UserAccount extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        billingInformationForm: state.billingInformationForm,
         signUpForm: state.userSignupForm
     };
 };
