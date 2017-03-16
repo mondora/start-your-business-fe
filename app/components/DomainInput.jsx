@@ -42,13 +42,14 @@ class DomainInput extends Component {
         const {customDomain, disabled} = this.props;
         return (
             <div style={styles.inputWrp}>
-                {customDomain ? 'http://' : 'www.entova.it/'}
+                <span>{customDomain ? 'http://' : 'www.entova.it/'}</span>
                 <FormInput
                     disabled={disabled}
                     field={customDomain ? domainName : businessName}
                     inputType='text'
                     model={`billing.site.${customDomain ? 'domainName' : 'businessName'}`}
                     validator={this.getValidator(disabled, customDomain)}
+                    style={{width: '100%', margin: 0}}
                 />
             </div>
         );
