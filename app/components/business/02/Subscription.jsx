@@ -30,10 +30,6 @@ const styles = {
         fontWeight: '700'
     },
     subscriptionFeaturesWrp: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%',
         fontSize: 14,
         color: colors.templateGreyText
     },
@@ -56,13 +52,12 @@ const styles = {
         height: 75,
         border: 0,
         borderRadius: 0,
-        margin: 0,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        margin: 0
     },
     subscriptionTextButton: {
+        float: 'left',
+        lineHeight: '45px',
+        marginLeft: 10,
         color: colors.white,
         fontSize: '1.4em',
         fontWeight: '400'
@@ -72,7 +67,12 @@ const styles = {
         width: 45,
         lineHeight: '45px',
         borderRadius: 50,
-        border: `1px solid ${colors.white}`
+        border: `1px solid ${colors.white}`,
+        '@media screen and (max-width: 767px)': {
+            height: 20,
+            width: 20,
+            display: 'none'
+        }
     },
     subscriptionIcon: {
         color: colors.white,
@@ -121,13 +121,13 @@ class Subscription extends Component {
                     </span>
                 </div>
                 <Button style={{...styles.subscriptionButtonWrp, ...{backgroundColor: mainColor}}}>
-                    <div style={styles.subscriptionTextButton}>{'ORDINA ORA !'}</div>
                     <div style={styles.subscriptionIconWrp}>
                         <Glyphicon
                             glyph='glyphicon glyphicon-chevron-right'
                             style={styles.subscriptionIcon}
                         />
                     </div>
+                    <div style={styles.subscriptionTextButton}>{'ORDINA ORA !'}</div>
                 </Button>
             </div>
         );

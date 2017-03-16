@@ -156,7 +156,7 @@ class SubscriptionsList extends Component {
     renderSubscriptionTitle (isEditMode, style, templateId) {
         const {subscriptionsTitle} = this.props.productPlans.subscriptions;
         return (
-            <h2 style={style[`subscription${templateId}`]}>
+            <h2 style={style[`subscriptionsTitle${templateId}`]}>
                 {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
             </h2>
         );

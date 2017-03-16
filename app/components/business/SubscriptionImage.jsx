@@ -7,7 +7,6 @@ const commonStyle = {
         display: 'block',
         height: 'auto',
         maxWidth: '100%',
-        margin: '0 auto',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center center'
