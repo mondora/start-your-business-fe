@@ -31,22 +31,8 @@ const styles = {
         borderTopRightRadius: 8
     },
     subscriptionFeaturesWrp: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%',
         fontSize: 14,
         color: colors.templateGreyText
-    },
-    subscriptionFeatures: {
-        display: 'flex',
-        textAlign: 'left',
-        padding: '15px 20px',
-        height: '100%',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        fontSize: '1.1em'
     },
     subscriptionIcon: {
         fontSize: 26,

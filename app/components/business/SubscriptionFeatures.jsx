@@ -1,15 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {Glyphicon} from 'react-bootstrap';
 
-const commonStyle = {
+const styles = {
     subscriptionFeatures: {
-        display: 'flex',
         textAlign: 'left',
         padding: '15px 20px',
-        height: '100%',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
         fontSize: '1.1em'
     },
     subscriptionIcon: {
@@ -29,18 +24,18 @@ export default class SubscriptionFeatures extends Component {
     render () {
         const mainColor = this.props.bgColor;
         return (
-            <div style={commonStyle.subscriptionFeatures}>
-                <p style={{width: '100%'}}>
+            <div style={styles.subscriptionFeatures}>
+                <p style={{width: '100%', display: 'flex', flexDirection: 'row'}}>
                     <Glyphicon
                         glyph='glyphicon glyphicon-ok-circle'
-                        style={{...commonStyle.subscriptionIcon, ...{color: mainColor}}}
+                        style={{...styles.subscriptionIcon, ...{color: mainColor}}}
                     />
                     {this.props.feature1}
                 </p>
-                <p style={{width: '100%'}}>
+                <p style={{width: '100%', display: 'flex', flexDirection: 'row'}}>
                     <Glyphicon
                         glyph='glyphicon glyphicon-ok-circle'
-                        style={{...commonStyle.subscriptionIcon, ...{color: mainColor}}}
+                        style={{...styles.subscriptionIcon, ...{color: mainColor}}}
                     />
                     {this.props.feature2}
                 </p>
