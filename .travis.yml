@@ -9,8 +9,15 @@ install:
 script:
   - npm run lint
   - npm run test
+  - npm run config
   - npm run build
   - npm run deploy
+
+deploy:
+  provider: s3
+  bucket: "entova-site"
+  s3_region: eu-west-1
+  local_dir: build
 
 notifications:
   email:

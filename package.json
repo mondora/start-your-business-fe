@@ -14,7 +14,7 @@
     "prestart": "npm run config",
     "start": "node server.js",
     "lint": "eslint app test --ext .jsx --ext .js",
-    "deploy": "serverless deploy && serverless syncToS3"
+    "deploy": "serverless deploy"
   },
   "author": "",
   "license": "ISC",
@@ -67,7 +67,6 @@
     "sd-builder": "^4.0.0",
     "sd-mock-server": "^1.0.4",
     "serverless": "^1.9.0",
-    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"
   }
