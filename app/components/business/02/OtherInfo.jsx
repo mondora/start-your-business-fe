@@ -1,12 +1,13 @@
 import Radium from 'radium';
-import React, {PropTypes} from 'react';
-import {Button} from 'react-bootstrap';
+import React, {PropTypes, Component} from 'react';
+import {Button, Image} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
 import {editModes} from 'constants/editModes';
+import {getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import BusinessOtherInfo from 'components/business/OtherInfo';
+import ImageUploader from 'components/ImageUploader';
 
 const styles = (siteColors) => ({
     boxContainer: {
@@ -86,11 +87,69 @@ const styles = (siteColors) => ({
     }
 });
 
-class OtherInfo extends BusinessOtherInfo {
+class OtherInfo extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
+        form: PropTypes.object,
+        setImagePath: PropTypes.func.isRequired,
         siteConfig: PropTypes.object.isRequired
     };
+
+    getTextReadNode (style, text) {
+        return (
+            <p style={style.boxText}>
+                {text}
+            </p>
+        );
+    }
+
+    renderTextField (isEditMode, fieldName, placeholder, readNode) {
+        return getTextField (
+            isEditMode,
+            this.props.form[fieldName],
+            `siteConfig.element.info.${fieldName}`,
+            placeholder,
+            readNode,
+            {textAlign: 'center'},
+            {margin: 0}
+        );
+    }
+
+    renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
+        return getTextAreaField (
+            isEditMode,
+            this.props.form[fieldName],
+            `siteConfig.element.info.${fieldName}`,
+            placeholder,
+            readNode,
+            {color: colors.templateGreyText, minHeight: '100px'},
+            {margin: 0, width:'100%'}
+        );
+    }
+
+    renderImage (imagePath, style, field) {
+        return this.props.buildSiteMode === editModes.UPLOAD_IMAGES ? (
+            <div>
+                <p>
+                    {'AGGIUNGI IMMAGINE'}
+                </p>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <ImageUploader
+                        setImagePath={(imagePath) => this.props.setImagePath(['element', 'info', field], imagePath)}
+                    />
+                </div>
+            </div>
+        ) : (
+            <Image src={imagePath} style={style.boxImage} circle={true} />
+        );
+    }
 
     render () {
         const {textBox, buttonBox1, buttonBox2, image1} = this.props.siteConfig.info;

@@ -60,23 +60,33 @@ const styles = {
         marginLeft: 10,
         color: colors.white,
         fontSize: '1.4em',
-        fontWeight: '400'
+        fontWeight: '400',
+        '@media screen and (min-width: 991px) and (max-width: 1200px)': {
+            lineHeight: '25px'
+        }
     },
     subscriptionIconWrp: {
+        float: 'left',
         height: 45,
         width: 45,
         lineHeight: '45px',
         borderRadius: 50,
         border: `1px solid ${colors.white}`,
-        '@media screen and (max-width: 767px)': {
-            height: 20,
-            width: 20,
+        '@media screen and (min-width: 767px) and (max-width: 991px)': {
             display: 'none'
+        },
+        '@media screen and (min-width: 991px) and (max-width: 1200px)': {
+            height: 25,
+            width: 25,
+            lineHeight: '25px'
         }
     },
     subscriptionIcon: {
         color: colors.white,
-        fontSize: 16
+        fontSize: 16,
+        '@media screen and (min-width: 767px) and (max-width: 1200px)': {
+            fontSize: 10
+        }
     }
 };
 

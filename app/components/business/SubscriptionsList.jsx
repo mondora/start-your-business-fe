@@ -56,7 +56,7 @@ const styles = (siteColors) => ({
         flexFlow: 'no-wrap',
         justifyContent: 'space-between',
         padding: '0 10%',
-        '@media screen and (min-width: 767px) and (max-width: 1100px)': {
+        '@media screen and (min-width: 767px) and (max-width: 1200px)': {
             padding: 0
         },
         '@media screen and (max-width: 767px)': {

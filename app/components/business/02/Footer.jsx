@@ -126,7 +126,7 @@ class Footer extends Component {
                         </div>
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             <div style={{cursor: 'pointer'}} onClick={openPrivacyModal}>{'Privacy Policy'}</div>
-                            {' / '}
+                            <div style={{width: 20, textAlign: 'center'}}>{' / '}</div>
                             <div style={{cursor: 'pointer'}} onClick={openConditionsModal}>{'Termini e Condizioni'}</div>
                         </div>
                     </div>
@@ -153,6 +153,7 @@ class Footer extends Component {
                                     {this.renderTextField(isEditMode, 'line1', 'Via Giosuè Carducci, 10', line1)}
                                     <br />
                                     {this.renderTextField(isEditMode, 'line2', '20100 Milano (MI)', line2)}
+                                    <br />
                                     {getLink(
                                         buildSiteMode,
                                         'mailto:info@maildisupporto.it',

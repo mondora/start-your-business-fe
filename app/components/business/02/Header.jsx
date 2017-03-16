@@ -110,9 +110,8 @@ const styles = (siteColors) => ({
     },
     headerLogoWrp: {
         width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
+        textAlign: 'center',
+        margin: '0 auto'
     },
     headerLogoBg: {
         position: 'absolute',
@@ -121,14 +120,17 @@ const styles = (siteColors) => ({
         backgroundColor: colors.white,
         zIndex: 2,
         margin: '0 auto',
-        '@media screen and (max-width: 500px)': {
-            position: 'relative'
+        '@media screen and (max-width: 991px)': {
+            position: 'relative',
+            width: '100%'
         }
     },
     headerLogo: {
         display: 'block',
         height: 'auto',
         width: '100%',
+        margin: '0 auto',
+        textAlign: 'center',
         maxWidth: 250
     }
 });
@@ -215,8 +217,8 @@ class Header extends Component {
                                         <SocialIcons
                                             buildSiteMode={buildSiteMode}
                                             form={form}
-                                            socialIconWrpStyle={style.socialIconWrp}
-                                            socialIconStyle={style.socialIcon}
+                                            iconWrpStyle={style.socialIconWrp}
+                                            iconStyle={style.socialIcon}
                                             siteConfig={siteConfig}
                                         />
                                         <AccountSection
