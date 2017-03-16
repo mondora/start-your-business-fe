@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {actions} from 'react-redux-form';
-import {browserHistory} from 'react-router';
 import {Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
@@ -28,17 +27,12 @@ class BuildSite extends Component {
             <SiteEditor
                 instructionMessage={
                     <Alert bsStyle='success'>
-                        <strong>{'Grazie per esserti registrato! '}</strong>
-                        {`Ora potrai scegliere il tuo template. Non disponi
-                        di tutti i testi e immagini? Non ti preoccupare,
-                        potrai modificare e aggiungere testi e immagini
-                        anche in seguito.`}
+                        {'Fai le modifiche al tuo sito e salva per pubblicarle subito.'}
                     </Alert>
                 }
-                pageTitle={'CONFIGURA IL TUO SITO'}
+                pageTitle={'AGGIORNA IL TUO SITO'}
                 saveButton={{
-                    onSave: () => browserHistory.push('/choose-plan'),
-                    text: 'SALVA E PROSEGUI >'
+                    text: 'SALVA E PUBBLICA'
                 }}
                 {...this.props}
             />
