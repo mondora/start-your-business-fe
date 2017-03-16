@@ -5,7 +5,7 @@ node_js:
 
 install:
   - npm install --no-optional
-  - npm install --only=dev
+  - npm install --dev
 
 script:
   - npm run lint
