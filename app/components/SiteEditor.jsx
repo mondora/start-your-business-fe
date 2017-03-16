@@ -41,7 +41,7 @@ class SiteEditor extends Component {
         params: PropTypes.object.isRequired,
         saveButton: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
-        setLogoImage: PropTypes.func.isRequired,
+        setImagePath: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
         upsertSiteConfig: PropTypes.func.isRequired
@@ -91,7 +91,7 @@ class SiteEditor extends Component {
     }
 
     render () {
-        const {editMode, pageTitle, siteConfig, setEditMode, setLogoImage, setTemplate} = this.props;
+        const {editMode, pageTitle, siteConfig, setEditMode, setImagePath, setTemplate} = this.props;
         //TODO put when change plans available
         // <Icon
         //     iconName='change_payment_white'
@@ -117,13 +117,12 @@ class SiteEditor extends Component {
                                 <ChangeLogoWidget
                                     editMode={editMode}
                                     setEditMode={setEditMode}
-                                    setLogoImage={setLogoImage}
+                                    setImagePath={setImagePath}
                                 />
                                 <ChangeColorWidget
                                     colors={siteConfig.colors}
                                     editMode={editMode}
                                     setEditMode={setEditMode}
-                                    setLogoImage={setLogoImage}
                                 />
                                 <Icon
                                     iconName='change_image_white'

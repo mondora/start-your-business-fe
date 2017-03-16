@@ -21,7 +21,7 @@ export default class ChangeLogoWidget extends Component {
         editMode: PropTypes.number,
         selectedTemplateId: PropTypes.string,
         setEditMode: PropTypes.func.isRequired,
-        setLogoImage: PropTypes.func.isRequired
+        setImagePath: PropTypes.func.isRequired
     };
 
     setEditMode (editMode) {
@@ -41,7 +41,7 @@ export default class ChangeLogoWidget extends Component {
                 <div>
                     <p style={styles.subTitle}>{'Scegli file dal computer'}</p>
                     <ImageUploader
-                        setLogoImage={this.props.setLogoImage}
+                        setImagePath={(imagePath) => this.props.setImagePath(['element', 'logo'], imagePath)}
                     />
                 </div>
             </OverlayTriggerIcon>

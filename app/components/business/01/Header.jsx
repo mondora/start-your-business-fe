@@ -144,7 +144,7 @@ class Header extends Component {
             signUpUser,
             signUpState,
             siteConfig,
-            siteConfig: {header: {emailAddress, phoneNumber}}
+            siteConfig: {header: {emailAddress, phoneNumber}, logo}
         } = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(siteConfig.colors);
@@ -200,7 +200,7 @@ class Header extends Component {
                 <div className='container-fluid' style={style.maxContentWidth}>
                     <div style={style.headerLogoWrp}>
                         <div>
-                            <img src='/_assets/images/template_01/logo_example.jpg' style={style.headerLogo} />
+                            <img src={logo ? logo : '/_assets/images/template_01/logo_example.jpg'} style={style.headerLogo} />
                         </div>
                         <SocialIcons
                             buildSiteMode={buildSiteMode}

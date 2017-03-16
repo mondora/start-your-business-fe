@@ -1,3 +1,4 @@
+import R from 'ramda';
 import {modeled} from 'react-redux-form';
 
 import {
@@ -100,14 +101,8 @@ function siteConfig (state = initialState, action) {
                 isFetching: false,
                 fetchError: payload
             };
-        case 'SET_LOGO_IMAGE':
-            return {
-                ...state,
-                siteConfig: {
-                    ...state.siteConfig,
-                    logo: action.logoImage
-                }
-            };
+        case 'SET_IMAGE_PATH':
+            return R.set(R.lensPath(action.field), action.imagePath, state);
         default:
             return state;
     }

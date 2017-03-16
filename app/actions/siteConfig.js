@@ -30,7 +30,8 @@ export const upsertSiteConfig = siteConfig => dispatch => {
         }));
 };
 
-export const setLogoImage = logoImage => ({
-    type: 'SET_LOGO_IMAGE',
-    logoImage
+export const setImagePath = (field, imagePath) => ({
+    type: 'SET_IMAGE_PATH',
+    field,
+    imagePath
 });

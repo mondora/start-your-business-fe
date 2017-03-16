@@ -6,7 +6,7 @@ import {Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
 import {setEditMode} from 'actions/ui';
-import {fetch as fetchSiteConfig, setLogoImage, upsertSiteConfig} from 'actions/siteConfig';
+import {fetch as fetchSiteConfig, setImagePath, upsertSiteConfig} from 'actions/siteConfig';
 
 import SiteEditor from 'components/SiteEditor';
 
@@ -17,7 +17,7 @@ class BuildSite extends Component {
         fetchSiteConfig: PropTypes.func.isRequired,
         params: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
-        setLogoImage: PropTypes.func.isRequired,
+        setImagePath: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
         upsertSiteConfig: PropTypes.func.isRequired
@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
         upsertSiteConfig: bindActionCreators(upsertSiteConfig, dispatch),
         fetchSiteConfig: bindActionCreators(fetchSiteConfig, dispatch),
         setEditMode: bindActionCreators(setEditMode, dispatch),
-        setLogoImage: bindActionCreators(setLogoImage, dispatch),
+        setImagePath: bindActionCreators(setImagePath, dispatch),
         setTemplate: templateId => dispatch(actions.change('siteConfig.element.templateId', templateId))
     };
 };
