@@ -1,3 +1,4 @@
+import R from 'ramda';
 import {modeled} from 'react-redux-form';
 
 import {
@@ -53,9 +54,11 @@ export const initialOtherInfo = {
     textBox1: `Scopri altro riguardo ai nostri prodotti, sul nostro sito
                 troverai tutte le informazioni che cercavi`,
     buttonBox1: 'PER SAPERNE DI PIÙ',
+    image1: null,
     textBox2: `Hai delle domande riguardo al tuo ordine o desideri
                 sospendere le tue consegne?`,
-    buttonBox2: 'SCRIVICI UN EMAIL'
+    buttonBox2: 'SCRIVICI UN EMAIL',
+    image2: null
 };
 
 const initialSiteConfig = {
@@ -66,9 +69,11 @@ const initialSiteConfig = {
     steps: initialStepsInfo,
     info: initialOtherInfo,
     logo: null,
-    teaserImages: [{
-        id: null
-    }],
+    teaserImages: {
+        image1: null,
+        image2: null,
+        image3: null
+    },
     templateId: templatesIds.TEMPLATE_1,
     userPool: null
 };
@@ -100,14 +105,8 @@ function siteConfig (state = initialState, action) {
                 isFetching: false,
                 fetchError: payload
             };
-        case 'SET_LOGO_IMAGE':
-            return {
-                ...state,
-                siteConfig: {
-                    ...state.siteConfig,
-                    logo: action.logoImage
-                }
-            };
+        case 'SET_IMAGE_PATH':
+            return R.set(R.lensPath(action.field), action.imagePath, state);
         default:
             return state;
     }

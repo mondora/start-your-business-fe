@@ -26,7 +26,7 @@ export const initialSubscriptionsInfo = {
 };
 
 const initialState = {
-    editMode: 0,
+    editMode: null,
     productPlans: {
         subscriptions: initialSubscriptionsInfo
     }

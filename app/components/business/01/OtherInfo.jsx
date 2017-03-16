@@ -71,16 +71,18 @@ class OtherInfo extends BusinessOtherInfo {
     };
 
     getInfoBox () {
-        const {textBox1, textBox2, buttonBox1, buttonBox2} = this.props.siteConfig.info;
+        const {textBox1, textBox2, buttonBox1, buttonBox2, image1, image2} = this.props.siteConfig.info;
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         return [
             {
-                photo: 'infobox1.jpg',
+                field: 'image1',
+                imagePath: image1 ? image1 : '/_assets/images/template_01/infobox1.jpg',
                 text: this.renderTextareaField(isEditMode, 'textBox1', 'Scopri altro riguardo ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi', textBox1),
                 button: this.renderTextField(isEditMode, 'buttonBox1', 'PER SAPERNE DI PIÙ', buttonBox1)
             },
             {
-                photo: 'infobox2.jpg',
+                field: 'image2',
+                imagePath: image2 ? image2 : '/_assets/images/template_01/infobox2.jpg',
                 text: this.renderTextareaField(isEditMode, 'textBox2', 'Hai delle domande riguardo al tuo ordine o desideri sospendere le tue consegne?', textBox2),
                 button: this.renderTextField(isEditMode, 'buttonBox2', 'SCRIVICI UN EMAIL', buttonBox2)
             }
@@ -96,7 +98,7 @@ class OtherInfo extends BusinessOtherInfo {
                         <div key={index} style={style.boxWrp}>
                             <Row>
                                 <Col xs={12} md={5}>
-                                    {this.renderImage(infoBox.photo, style)}
+                                    {this.renderImage(infoBox.imagePath, style, infoBox.field)}
                                 </Col>
                                 <Col xs={12} md={7}>
                                     <div style={style.textWrp}>

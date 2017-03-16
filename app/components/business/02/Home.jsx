@@ -37,6 +37,7 @@ export default class Home extends Component {
     static propTypes = {
         editMode: PropTypes.number,
         productPlans: PropTypes.object,
+        setImagePath: PropTypes.func.isRequired,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
@@ -54,6 +55,7 @@ export default class Home extends Component {
         const {
             editMode,
             productPlans,
+            setImagePath,
             signUpForm,
             signUpState,
             signUpUser,
@@ -72,6 +74,7 @@ export default class Home extends Component {
                         buildSiteMode={editMode}
                         images={siteConfig.teaserImages}
                         imgStyle={homeStyles.image}
+                        setImagePath={setImagePath}
                         templateId={templatesIds.TEMPLATE_2}
                     />
                 </div>
@@ -106,6 +109,7 @@ export default class Home extends Component {
                             <OtherInfo
                                 buildSiteMode={editMode}
                                 form={siteConfigOtherInfoForm}
+                                setImagePath={setImagePath}
                                 siteConfig={siteConfig}
                             />
                         </div>

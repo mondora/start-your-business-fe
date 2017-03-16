@@ -31,7 +31,6 @@ const styles = {
 
 class SignUp extends Component {
     static propTypes = {
-        renderingSite: PropTypes.string,
         signUpForm: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
         user: PropTypes.object
@@ -79,7 +78,7 @@ class SignUp extends Component {
     }
 
     render () {
-        const userSite = getUserSiteState(this.props.user, this.props.renderingSite);
+        const userSite = getUserSiteState(this.props.user);
         return (
             <div>
                 <PageTeaser
@@ -130,7 +129,6 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
     return {
         signUpForm: state.userSignupForm,
-        renderingSite: state.service.renderingSite,
         user: state.user
     };
 };
