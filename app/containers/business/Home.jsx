@@ -65,7 +65,6 @@ class Home extends Component {
 
     render () {
         const Home = components[`home${this.props.siteConfig.templateId}`];
-        console.log(this.props.productPlans);
         return (
             <Home
                 {...this.props}
@@ -77,7 +76,6 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     const userSite = getUserSiteState(state.user);
-    console.log(state);
     return {
         editMode: state.ui.editMode,
         productPlans: state.ui.productPlans,

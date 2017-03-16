@@ -100,6 +100,12 @@ class BuildSite extends Component {
 
     render () {
         const {editMode, siteConfig, setEditMode, setLogoImage, setTemplate} = this.props;
+        //TODO put when change plans available
+        // <Icon
+        //     iconName='change_payment_white'
+        //     iconStyle={iconStyle(editMode === editModes.CHANGE_PAYMENT)}
+        //     onClick={() => setEditMode(editModes.CHANGE_PAYMENT)}
+        // />
         return (
             <div>
                 <PageTeaser
@@ -136,11 +142,6 @@ class BuildSite extends Component {
                                     iconName='change_text_white'
                                     iconStyle={iconStyle(editMode === editModes.EDIT_TEXTS)}
                                     onClick={() => setEditMode(editModes.EDIT_TEXTS)}
-                                />
-                                <Icon
-                                    iconName='change_payment_white'
-                                    iconStyle={iconStyle(editMode === editModes.CHANGE_PAYMENT)}
-                                    onClick={() => setEditMode(editModes.CHANGE_PAYMENT)}
                                 />
                             </div>
                             <div style={{width:'calc(100% - 65px)', float: 'right', border: `2px solid ${colors.lightGrey}`, overflow: 'hidden'}}>

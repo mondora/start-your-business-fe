@@ -47,10 +47,10 @@ class Root extends Component {
 
     constructor (props) {
         super(props);
-        if (!props.siteConfig.editMode) {
+        if (!props.editMode) {
             //TODO check for businessName and render business site or redirect
             console.log('props', props);
-            // props.setRenderingSite(props.params.businessName);
+            props.setRenderingSite(props.params.businessName);
         }
     }
 
