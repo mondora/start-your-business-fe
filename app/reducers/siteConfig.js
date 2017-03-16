@@ -69,9 +69,11 @@ const initialSiteConfig = {
     steps: initialStepsInfo,
     info: initialOtherInfo,
     logo: null,
-    teaserImages: [{
-        id: null
-    }],
+    teaserImages: {
+        image1: null,
+        image2: null,
+        image3: null
+    },
     templateId: templatesIds.TEMPLATE_1,
     userPool: null
 };

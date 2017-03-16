@@ -74,6 +74,7 @@ export default class Home extends Component {
                         buildSiteMode={editMode}
                         images={siteConfig.teaserImages}
                         imgStyle={homeStyles.image}
+                        setImagePath={setImagePath}
                         templateId={templatesIds.TEMPLATE_2}
                     />
                 </div>

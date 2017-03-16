@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
 import ImageUploader from 'components/ImageUploader';
-import SaveButton from 'components/BuildSiteSaveButton';
 
 const commonStyle = {
     subscriptionImage: {
@@ -36,7 +35,6 @@ export default class SubscriptionImage extends Component {
                     }}
                 >
                     <ImageUploader />
-                    <SaveButton />
                 </div>
             </div>
         ) : (

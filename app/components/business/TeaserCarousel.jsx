@@ -1,20 +1,14 @@
+import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
 import {Carousel, Glyphicon} from 'react-bootstrap';
 
 import ImageUploader from 'components/ImageUploader';
-import SaveButton from 'components/BuildSiteSaveButton';
 
 import {editModes} from 'constants/editModes';
-import {getS3ImagePath} from 'lib/business-site-utils';
+
 import * as colors from 'lib/colors';
 
-const commonStyles = (templateId) => ({
-    backgroundImg: {
-        backgroundImage: `url(\'/_assets/images/template_0${templateId}/carousel01.jpg\')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top'
-    },
+const commonStyles = {
     backgroundWidget: {
         backgroundColor: colors.blackOpacity,
         textAlign: 'center',
@@ -27,65 +21,74 @@ const commonStyles = (templateId) => ({
         marginBottom: 40,
         color: colors.white
     }
-});
+};
 
 export default class TeaserCarousel extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
-        images: PropTypes.array.isRequired,
+        images: PropTypes.object.isRequired,
         imgStyle: PropTypes.object,
         next: PropTypes.node,
         prev: PropTypes.node,
-        templateId: PropTypes.number.isRequired,
+        setImagePath: PropTypes.func.isRequired,
+        templateId: PropTypes.number.isRequired
     };
 
     static defaultProps = {
         prev: <Glyphicon glyph='chevron-left' />,
         next: <Glyphicon glyph='chevron-right' />
+    };
+
+    getCarouselItems () {
+        const {images, imgStyle, templateId} = this.props;
+        return R.mapObjIndexed((img, key) => {
+            const id = parseInt(key.slice(-1));
+            return id === 1 || img ? (
+                <Carousel.Item key={key}>
+                    <img src={img ? img : `/_assets/images/template_0${templateId}/carousel01.jpg`} style={imgStyle} />
+                </Carousel.Item>
+            ) : null;
+        }, images);
+    }
+
+    getImageUploaders (images, setImagePath) {
+        return R.mapObjIndexed((img, key) =>
+            <ImageUploader
+                key={key}
+                setImagePath={(imagePath) => setImagePath(['element', 'teaserImages', key], imagePath)}
+            />
+        , images);
     }
 
     renderUploadForm () {
-        const {templateId} = this.props;
+        const {images, setImagePath} = this.props;
+        const imageUploaders = this.getImageUploaders(images, setImagePath);
         return (
-            <div style={commonStyles(templateId).backgroundImg}>
-                <div style={commonStyles(templateId).backgroundWidget}>
-                    <p style={commonStyles(templateId).widgetText}>
-                        {'PUOI SCEGLIERE FINO A TRE IMMAGINI PER IL TEASER'}
-                        <br />
-                        {'ATTENZIONE! ALMENO UNA È OBBLIGATORIA'}
-                    </p>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}
-                    >
-                        <ImageUploader />
-                        <br />
-                        <ImageUploader />
-                        <br />
-                        <ImageUploader />
-                        <br />
-                        <SaveButton />
-                    </div>
+            <div style={commonStyles.backgroundWidget}>
+                <p style={commonStyles.widgetText}>
+                    {'PUOI SCEGLIERE FINO A TRE IMMAGINI PER IL TEASER'}
+                    <br />
+                    {'ATTENZIONE! ALMENO UNA È OBBLIGATORIA'}
+                </p>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    {Object.keys(imageUploaders).map(key => imageUploaders[key])}
                 </div>
             </div>
         );
     }
 
     renderCarousel () {
-        const {templateId, imgStyle} = this.props;
+        const carouselItems = this.getCarouselItems();
         return (
             <Carousel nextIcon={this.props.next} prevIcon={this.props.prev}>
-                {this.props.images.map(img =>
-                    <Carousel.Item
-                        key={img.id}
-                    >
-                        <img src={img.id ? getS3ImagePath(img.id) : `/_assets/images/template_0${templateId}/carousel01.jpg`} style={imgStyle} />
-                    </Carousel.Item>
-                )}
+                {Object.keys(carouselItems).map(key => carouselItems[key])}
             </Carousel>
         );
     }
@@ -100,5 +103,4 @@ export default class TeaserCarousel extends Component {
                 return this.renderCarousel();
         }
     }
-
 }

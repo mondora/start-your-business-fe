@@ -56,6 +56,7 @@ export default class Home extends Component {
                         <TeaserCarousel
                             buildSiteMode={editMode}
                             images={siteConfig.teaserImages}
+                            setImagePath={this.props.setImagePath}
                             templateId={templatesIds.TEMPLATE_1}
                         />
                     </Col>

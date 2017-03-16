@@ -22,11 +22,6 @@ export const templates = [
     }
 ];
 
-//TODO decide how persist users's images and retrieve them
-export function getS3ImagePath (imageId) {
-    return imageId;
-}
-
 export function getSelectField (isEditMode, model, readNode, options) {
     return isEditMode ? (
         <FormInputSelect
