@@ -13,7 +13,8 @@
     "test": "NODE_ENV=test NODE_PATH=app mocha --compilers js:babel-register --compilers jsx:babel-register --require test/setup.js --recursive",
     "prestart": "npm run config",
     "start": "node server.js",
-    "lint": "eslint app test --ext .jsx --ext .js"
+    "lint": "eslint app test --ext .jsx --ext .js",
+    "deploy": "serverless deploy && serverless syncToS3"
   },
   "author": "",
   "license": "ISC",
@@ -45,6 +46,7 @@
     "validator": "^6.2.1"
   },
   "devDependencies": {
+    "aws-sdk": "^2.28.0",
     "babel-cli": "^6.22.2",
     "babel-eslint": "^7.1.1",
     "babel-plugin-rewire": "^1.0.0",
@@ -64,6 +66,8 @@
     "redux-devtools": "^3.3.2",
     "sd-builder": "^4.0.0",
     "sd-mock-server": "^1.0.4",
+    "serverless": "^1.9.0",
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"
   }
