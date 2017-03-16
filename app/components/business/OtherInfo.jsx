@@ -6,12 +6,12 @@ import {getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
 import ImageUploader from 'components/ImageUploader';
-import SaveButton from 'components/BuildSiteSaveButton';
 
 export default class OtherInfo extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
+        setImagePath: PropTypes.func.isRequired,
         siteConfig: PropTypes.object.isRequired
     };
 
@@ -47,7 +47,7 @@ export default class OtherInfo extends Component {
         );
     }
 
-    renderImage (imgName, style) {
+    renderImage (imagePath, style, field) {
         return this.props.buildSiteMode === editModes.UPLOAD_IMAGES ? (
             <div>
                 <p>
@@ -61,12 +61,13 @@ export default class OtherInfo extends Component {
                         alignItems: 'center'
                     }}
                 >
-                    <ImageUploader />
-                    <SaveButton />
+                    <ImageUploader
+                        setImagePath={(imagePath) => this.props.setImagePath(['element', 'info', field], imagePath)}
+                    />
                 </div>
             </div>
         ) : (
-            <Image src={`/_assets/images/template_01/${imgName}`} style={style.boxImage} circle={true} />
+            <Image src={imagePath} style={style.boxImage} circle={true} />
         );
     }
 }

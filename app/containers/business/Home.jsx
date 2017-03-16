@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import Home1 from 'components/business/01/Home';
 import Home2 from 'components/business/02/Home';
 
+import {setImagePath} from 'actions/siteConfig';
 import {signUpUser} from 'actions/user';
 
 import {getUserSiteState} from 'lib/auth-utils';
@@ -53,6 +54,7 @@ class Home extends Component {
     static propTypes = {
         editMode: PropTypes.number,
         productPlans: PropTypes.object,
+        setImagePath: PropTypes.func.isRequired,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
@@ -91,6 +93,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setImagePath: bindActionCreators(setImagePath, dispatch),
         signUpUser: bindActionCreators(signUpUser, dispatch)
     };
 };

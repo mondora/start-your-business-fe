@@ -67,10 +67,10 @@ const styles = (siteColors) => ({
         justifyContent: 'space-around',
         margin: '0 20%',
         '@media screen and (min-width: 991px)': {
-            margin: '0 25%',
+            margin: '0 25%'
         },
         '@media screen and (min-width: 767px) and (max-width: 991px)': {
-            margin: '0 10%',
+            margin: '0 10%'
         },
         '@media screen and (max-width: 767px)': {
             flexDirection: 'column'
@@ -93,7 +93,8 @@ class OtherInfo extends BusinessOtherInfo {
     };
 
     render () {
-        const {textBox, buttonBox1, buttonBox2} = this.props.siteConfig.info;
+        const {textBox, buttonBox1, buttonBox2, image1} = this.props.siteConfig.info;
+        const imagePath = image1 ? image1 : '/_assets/images/template_02/infobox.jpg';
         const style = styles(this.props.siteConfig.colors);
         const {buildSiteMode} = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
@@ -101,7 +102,7 @@ class OtherInfo extends BusinessOtherInfo {
             <Form model={'siteConfig.element.info'}>
                 <div style={style.boxContainer}>
                     <div style={style.imageWrp}>
-                        {this.renderImage('infobox1.jpg', style)}
+                        {this.renderImage(imagePath, style, 'image1')}
                     </div>
                     <div className='container-fluid'>
                         <div style={style.textWrp}>

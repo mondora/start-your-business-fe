@@ -54,9 +54,11 @@ export const initialOtherInfo = {
     textBox1: `Scopri altro riguardo ai nostri prodotti, sul nostro sito
                 troverai tutte le informazioni che cercavi`,
     buttonBox1: 'PER SAPERNE DI PIÙ',
+    image1: null,
     textBox2: `Hai delle domande riguardo al tuo ordine o desideri
                 sospendere le tue consegne?`,
-    buttonBox2: 'SCRIVICI UN EMAIL'
+    buttonBox2: 'SCRIVICI UN EMAIL',
+    image2: null
 };
 
 const initialSiteConfig = {
