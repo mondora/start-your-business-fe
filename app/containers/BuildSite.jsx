@@ -56,11 +56,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        upsertSiteConfig: bindActionCreators(upsertSiteConfig, dispatch),
         fetchSiteConfig: bindActionCreators(fetchSiteConfig, dispatch),
         setEditMode: bindActionCreators(setEditMode, dispatch),
         setImagePath: bindActionCreators(setImagePath, dispatch),
-        setTemplate: templateId => dispatch(actions.change('siteConfig.element.templateId', templateId))
+        setTemplate: templateId => dispatch(actions.change('siteConfig.element.templateId', templateId)),
+        upsertSiteConfig: bindActionCreators(upsertSiteConfig, dispatch)
     };
 };
 

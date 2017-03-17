@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
+import {fetch as fetchSiteConfig} from 'actions/siteConfig';
 import {confirmSignUp, login, sendNewConfirmationCode, setRenderingSite, signUpUser} from 'actions/user';
 
 import Footer1 from 'components/business/01/Footer';
@@ -23,11 +25,11 @@ const components = {
 };
 
 class Root extends Component {
-
     static propTypes = {
         children: PropTypes.node,
         confirmSignUp: PropTypes.func.isRequired,
         editMode: PropTypes.number,
+        fetchSiteConfig: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
         params: PropTypes.object,
@@ -47,10 +49,12 @@ class Root extends Component {
 
     constructor (props) {
         super(props);
-        if (!props.editMode) {
-            //TODO check for businessName and render business site or redirect
-            console.log('props', props);
-            props.setRenderingSite(props.params.businessName);
+        const {editMode, fetchSiteConfig} = props;
+        if (!editMode) {
+            const {params: {businessName}} = props;
+            // console.log('props', props);
+            fetchSiteConfig(businessName);
+            props.setRenderingSite(businessName);
         }
     }
 
@@ -71,13 +75,10 @@ class Root extends Component {
         }
     }
 
-    render () {
-        const {editMode, siteConfig} = this.props;
-        console.log('render siteConfig', siteConfig);
+    renderSite (editMode, siteConfig, userSite) {
         const Header = components[`header${siteConfig.templateId}`];
         const Footer = components[`footer${siteConfig.templateId}`];
-        const userSite = getUserSiteState(this.props.user);
-        return userSite ? (
+        return (
             <div style={{fontFamily: this.getFontFamily(siteConfig)}}>
                 <Header
                     buildSiteMode={editMode}
@@ -114,7 +115,30 @@ class Root extends Component {
                     form={this.props.siteConfigFooterForm}
                 />
             </div>
-        ) : null;
+        );
+    }
+
+    render () {
+        const {editMode, siteConfig} = this.props;
+        // console.log('render siteConfig', siteConfig);
+        const userSite = getUserSiteState(this.props.user);
+        if (userSite) {
+            if (siteConfig.isFetching) {
+                return (<Spinner show={siteConfig.isFetching} />);
+            }
+            if (siteConfig.fetchError) {
+                if (editMode) {
+                    //TODO maybe need to check the reason
+                    return this.renderSite(editMode, siteConfig.element, userSite);
+                } else {
+                    //TODO maybe better a not found page
+                    browserHistory.push('/');
+                }
+            } else {
+                return this.renderSite(editMode, siteConfig.element, userSite);
+            }
+        }
+        return null;
     }
 }
 
@@ -124,7 +148,7 @@ const mapStateToProps = (state) => {
         loginForm: state.userLoginForm,
         signUpConfirmationForm: state.userSignupConfirmationForm,
         signUpForm: state.userSignupForm,
-        siteConfig: state.siteConfig.element,
+        siteConfig: state.siteConfig,
         siteConfigFooterForm: state.siteConfigFooterForm,
         siteConfigHeaderForm: state.siteConfigHeaderForm,
         siteConfigState: state.siteConfig,
@@ -136,6 +160,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         confirmSignUp: bindActionCreators(confirmSignUp, dispatch),
+        fetchSiteConfig: bindActionCreators(fetchSiteConfig, dispatch),
         login: bindActionCreators(login, dispatch),
         sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch),
         setRenderingSite: bindActionCreators(setRenderingSite, dispatch),
