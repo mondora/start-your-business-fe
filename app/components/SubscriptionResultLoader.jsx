@@ -37,7 +37,7 @@ export default class SubscriptionResultLoader extends Component {
             'ATTENZIONE',
             'LE INFORMAZIONI DELLA CARTA DI CREDITO NON SONO CORRETTE',
             {
-                onClick: () => browserHistory.push('/choose-plan'),
+                onClick: () => window.location = '#/choose-plan',
                 text: '< TORNA INDIETRO'
             }
         );
@@ -54,7 +54,7 @@ export default class SubscriptionResultLoader extends Component {
             'ATTENZIONE',
             'LA SOTTOSCRIZIONE NON È STATA TERMINATA',
             {
-                onClick: () => browserHistory.push('/choose-plan'),
+                onClick: () => window.location = '#/choose-plan',
                 text: '< TORNA INDIETRO'
             }
         );
@@ -65,7 +65,7 @@ export default class SubscriptionResultLoader extends Component {
             'COMPLIMENTI!',
             'PAGAMENTO ANDATO A BUON FINE',
             {
-                onClick: () => browserHistory.push('/account'),
+                onClick: () => window.location = '#/account',
                 text: 'VAI ALL’AREA UTENTI>'
             }
         );

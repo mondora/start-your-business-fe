@@ -37,7 +37,7 @@ class BuildSite extends Component {
                 }
                 pageTitle={'CONFIGURA IL TUO SITO'}
                 saveButton={{
-                    onSave: () => browserHistory.push('/choose-plan'),
+                    onSave: () => window.location = '#/choose-plan',
                     text: 'SALVA E PROSEGUI >'
                 }}
                 {...this.props}

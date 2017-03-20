@@ -1,5 +1,7 @@
 import React from 'react';
-import {browserHistory, Router, Route} from 'react-router';
+import {useRouterHistory, Router, Route} from 'react-router';
+import createHistory from 'history/lib/createHashHistory';
+
 import {Provider} from 'react-redux';
 // import {syncHistoryWithStore} from 'react-router-redux';
 
@@ -21,12 +23,11 @@ import BusinessPaymentInfo from 'containers/business/PaymentInfo';
 import BusinessRoot from 'containers/business/Root';
 import BusinessSubscriptionResult from 'containers/business/SubscriptionResult';
 import BusinessUserInfo from 'containers/business/UserInfo';
-
 // const history = syncHistoryWithStore(browserHistory, store);
 
 export default (
     <Provider store={store}>
-        <Router history={browserHistory}>
+        <Router history={useRouterHistory(createHistory)({})}>
             <Route name='root' component={Root}>
                 <Route name='home' path='/' component={Home} />
                 <Route name='signup' path='/signup' component={SignUp} />

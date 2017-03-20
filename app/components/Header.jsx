@@ -92,7 +92,7 @@ class Header extends Component {
                     <Col xs={12} sm={6}>
                         <div style={styles.headerLogo}>
                             <img
-                                onClick={() => browserHistory.push('/')}
+                                onClick={() => window.location = '#/'}
                                 src='/_assets/images/common/logo.png'
                                 style={{
                                     cursor: 'pointer',

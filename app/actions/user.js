@@ -13,7 +13,7 @@ export const confirmSignUp = (username, confirmationCode, userPoolConfig) => {
             'SIGNUP_CONFIRMATION',
             {},
             {},
-            () => browserHistory.push(`/build-site/${md5(username)}`)
+            () => window.location = `#/build-site/${md5(username)}`
         ), userPoolConfig);
     };
 };
@@ -28,7 +28,7 @@ export const login = (username, password, userPoolConfig) => {
             'LOGIN',
             {username: username},
             {username: username},
-            () => browserHistory.push(`/build-site/${md5(username)}`)
+            () => window.location = `#/build-site/${md5(username)}`
         ), userPoolConfig);
     };
 };

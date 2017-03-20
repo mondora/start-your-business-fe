@@ -48,7 +48,7 @@ class UserMenu extends Component {
                         }}
                         scopeSelector='.dropdown-account'
                     />
-                    <MenuItem eventKey='1' onSelect={() => browserHistory.push('/account')}>
+                    <MenuItem eventKey='1' onSelect={() => window.location = '#/account'}>
                         {'Il mio account'}
                     </MenuItem>
                     <MenuItem divider={true} />

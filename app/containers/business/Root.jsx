@@ -132,7 +132,7 @@ class Root extends Component {
                     return this.renderSite(editMode, siteConfig.element, userSite);
                 } else {
                     //TODO maybe better a not found page
-                    browserHistory.push('/');
+                    window.location = '#/';
                 }
             } else {
                 return this.renderSite(editMode, siteConfig.element, userSite);
