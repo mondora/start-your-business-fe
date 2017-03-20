@@ -46,6 +46,12 @@ const styles = {
         color: colors.grey,
         fontSize: 12
     },
+    copyrightWrp: {
+        width: '50%',
+        '@media screen and (max-width: 500px)': {
+            width: '100%'
+        }
+    },
     bottomLegal: {
         '@media screen and (max-width: 767px)': {
             paddingTop: '10px'
@@ -55,7 +61,8 @@ const styles = {
         color: colors.lightGrey,
         fontSize: 14,
         '@media screen and (max-width: 991px)': {
-            marginBottom: 20
+            marginBottom: 20,
+            minHeight: '90px'
         }
     },
     footerColTitle: {
@@ -125,9 +132,11 @@ class Footer extends Component {
             <div style={styles.bottomFooterWrp}>
                 <div className='container-fluid' style={styles.maxContentWidth}>
                     <div style={styles.bottomFooter}>
-                        {this.renderTextField(isEditMode, 'bottom', '© 2017 Nome Azienda - PIVA: 0123456789',
-                            <span style={styles.bottomLegal}>{footerInfo.bottom}</span>
-                        )}
+                        <div style={styles.copyrightWrp}>
+                            {this.renderTextField(isEditMode, 'bottom', '© 2017 Nome Azienda - PIVA: 0123456789',
+                                <span style={styles.bottomLegal}>{footerInfo.bottom}</span>
+                            )}
+                        </div>
                         <FooterPayment />
                     </div>
                 </div>
