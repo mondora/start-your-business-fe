@@ -34,7 +34,7 @@ const styles = {
         color: colors.templateGreyText
     },
     subscriptionPriceWrp: {
-        padding: '10px 0',
+        padding: '10px',
         borderTop: `1px solid ${colors.lightGrey}`
     },
     subscriptionPrice: {

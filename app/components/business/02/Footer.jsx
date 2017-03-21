@@ -28,6 +28,12 @@ const styles = {
         color: colors.grey,
         fontSize: 12
     },
+    copyrightWrp: {
+        width: '50%',
+        '@media screen and (max-width: 500px)': {
+            width: '100%'
+        }
+    },
     bottomLegal: {
         '@media screen and (max-width: 767px)': {
             paddingTop: '10px'
@@ -113,13 +119,8 @@ class Footer extends Component {
         return (
             <div style={styles.bottomFooterWrp}>
                 <div className='container-fluid'>
-                    <div
-                        style={{
-                            ...styles.bottomFooter,
-                            ...styles.bottomFooter
-                        }}
-                    >
-                        <div>
+                    <div style={styles.bottomFooter}>
+                        <div style={styles.copyrightWrp}>
                             {this.renderTextField(isEditMode, 'bottom', '© 2017 Nome Azienda - PIVA: 0123456789',
                                 <span style={styles.bottomLegal}>{footerInfo.bottom}</span>
                             )}

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Col, Row} from 'react-bootstrap';
 
-import {signUpUser} from 'actions/user';
+import {signUpUser, login} from 'actions/user';
 
 import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
@@ -31,6 +31,8 @@ const styles = {
 
 class SignUp extends Component {
     static propTypes = {
+        login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object,
         signUpForm: PropTypes.object,
         signUpUser: PropTypes.func.isRequired,
         user: PropTypes.object
@@ -88,9 +90,12 @@ class SignUp extends Component {
                     <Row>
                         <Col xs={12} md={6} mdPush={6}>
                             <SignUpForm
+                                login={this.props.login}
+                                loginForm={this.props.loginForm}
                                 form={this.props.signUpForm}
                                 signUpUser={this.props.signUpUser}
                                 signUpState={userSite.signup}
+                                user={userSite}
                             />
                         </Col>
                         <Col xs={12} md={6} mdPull={6} style={{padding: '10px 25px'}}>
@@ -128,6 +133,7 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loginForm: state.userLoginForm,
         signUpForm: state.userSignupForm,
         user: state.user
     };
@@ -135,6 +141,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        login: bindActionCreators(login, dispatch),
         signUpUser: bindActionCreators(signUpUser, dispatch)
     };
 };

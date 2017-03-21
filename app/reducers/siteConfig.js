@@ -31,8 +31,7 @@ export const initialHeaderInfo = {
 
 export const initialIntroInfo = {
     introTitle: 'CASSETTINE BIOLOGICHE',
-    introText: `Scegliamo i prodotti migliori e te li consegnamo a
-                casa nella formula più adatta alle tue esigenze!`
+    introText: 'Scegliamo i prodotti migliori e te li consegnamo a casa nella formula più adatta alle tue esigenze!'
 };
 
 export const initialStepsInfo = {
@@ -40,23 +39,17 @@ export const initialStepsInfo = {
     titleStep1: 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI',
     titleStep2: 'RISPARMI E NON DOVRAI PENSARE A NULLA',
     titleStep3: 'POTRAI DISISCRIVERTI QUANDO VUOI',
-    textStep1: `Abbiamo pensato a tutti, ma se desideri
-                personalizzare il tuo ordine, chiama al 012-3456789`,
-    textStep2: `Ogni mese ti arriverà una cassettina con
-                frutta e verdura biologica di stagione`,
-    textStep3: `Se non sei soddisfatto del servizio, puoi decidere di
-                non ricevere più le nostre cassettine`
+    textStep1: 'Abbiamo pensato a tutti, ma se desideri personalizzare il tuo ordine, chiama al 012-3456789',
+    textStep2: 'Ogni mese ti arriverà una cassettina con frutta e verdura biologica di stagione',
+    textStep3: 'Se non sei soddisfatto del servizio, puoi decidere di non ricevere più le nostre cassettine'
 };
 
 export const initialOtherInfo = {
-    textBox: `Sappiamo che amerai i nostri prodotti, se però necessiti di una
-                formula personalizzata o se vuoi comunicarci qualcosa non esitare a scriverci!`,
-    textBox1: `Scopri altro riguardo ai nostri prodotti, sul nostro sito
-                troverai tutte le informazioni che cercavi`,
+    textBox: 'Sappiamo che amerai i nostri prodotti, se però necessiti di una formula personalizzata o se vuoi comunicarci qualcosa non esitare a scriverci!',
+    textBox1: 'Scopri altro riguardo ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi',
     buttonBox1: 'PER SAPERNE DI PIÙ',
     image1: null,
-    textBox2: `Hai delle domande riguardo al tuo ordine o desideri
-                sospendere le tue consegne?`,
+    textBox2: 'Hai delle domande riguardo al tuo ordine o desideri sospendere le tue consegne?',
     buttonBox2: 'SCRIVICI UN EMAIL',
     image2: null
 };

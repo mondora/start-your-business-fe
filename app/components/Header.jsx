@@ -58,7 +58,7 @@ class Header extends Component {
                 <div style={{marginRight: 10}}>
                     <LoginButton
                         backgroundColor={colors.transparent}
-                        border={`1px solid ${colors.grey}`}
+                        border={`1px solid ${colors.white}`}
                         height={40}
                         errorMessage={this.props.user.loginErrorMessage}
                         form={this.props.loginForm}

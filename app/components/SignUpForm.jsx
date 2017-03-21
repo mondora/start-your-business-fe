@@ -7,6 +7,7 @@ import Button from 'components/CustomButton';
 import FormErrorMessage from 'components/FormErrorMessage';
 import FormInput from 'components/FormInput';
 import FormInputCheckbox from 'components/FormInputCheckbox';
+import LoginButton from 'components/LoginButton';
 
 import {genericRequiredValidator, isCheckedValidator, requiredEmailValidator, requiredPasswordValidator} from 'lib/form-utils';
 
@@ -46,8 +47,11 @@ export default class SignUpForm extends Component {
         backgroundColor: PropTypes.string,
         businessUserPool: PropTypes.object,
         form: PropTypes.object.isRequired,
+        login: PropTypes.func.isRequired,
+        loginForm: PropTypes.object,
         signUpState: PropTypes.object.isRequired,
-        signUpUser: PropTypes.func.isRequired
+        signUpUser: PropTypes.func.isRequired,
+        user: PropTypes.object
     };
 
     signUpUser ({email, password, familyName, givenName}) {
@@ -161,6 +165,28 @@ export default class SignUpForm extends Component {
                         />
                     </div>
                 </label>
+
+                <div style={{fontWeight: 'bold', fontSize: '18px', color: colors.primaryColor}}>
+                    <div style={{float: 'left', padding: '7px 0'}}>
+                        {'Sei già registrato? Effettua il '}
+                    </div>
+                    <div style={{float: 'left', margin: '0 6px', borderBottom: `2px solid ${colors.primaryColor}`}}>
+                        <LoginButton
+                            backgroundColor={colors.transparent}
+                            border={`1px solid ${colors.transparent}`}
+                            height={30}
+                            padding={1}
+                            fontSize={18}
+                            textColor={colors.primaryColor}
+                            errorMessage={this.props.user.loginErrorMessage}
+                            form={this.props.loginForm}
+                            login={this.props.login}
+                            loginState={this.props.user.login}
+                            {...this.props}
+                        />
+                    </div>
+                </div>
+                <div style={{clear: 'both'}} />
             </Form>
         );
     }

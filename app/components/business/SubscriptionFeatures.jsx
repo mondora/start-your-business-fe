@@ -7,6 +7,11 @@ const styles = {
         padding: '15px 20px',
         fontSize: '1.1em'
     },
+    // subscriptionText: {
+    //     width: '100%',
+    //     display: 'flex',
+    //     flexDirection: 'row'
+    // },
     subscriptionIcon: {
         fontSize: 26,
         verticalAlign: 'middle',
@@ -25,14 +30,14 @@ export default class SubscriptionFeatures extends Component {
         const mainColor = this.props.bgColor;
         return (
             <div style={styles.subscriptionFeatures}>
-                <p style={{width: '100%', display: 'flex', flexDirection: 'row'}}>
+                <p style={styles.subscriptionText}>
                     <Glyphicon
                         glyph='glyphicon glyphicon-ok-circle'
                         style={{...styles.subscriptionIcon, ...{color: mainColor}}}
                     />
                     {this.props.feature1}
                 </p>
-                <p style={{width: '100%', display: 'flex', flexDirection: 'row'}}>
+                <p style={styles.subscriptionText}>
                     <Glyphicon
                         glyph='glyphicon glyphicon-ok-circle'
                         style={{...styles.subscriptionIcon, ...{color: mainColor}}}

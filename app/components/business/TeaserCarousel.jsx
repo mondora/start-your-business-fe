@@ -8,7 +8,12 @@ import {editModes} from 'constants/editModes';
 
 import * as colors from 'lib/colors';
 
-const commonStyles = {
+const styles = {
+    backgroundImageWidget: {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center'
+    },
     backgroundWidget: {
         backgroundColor: colors.blackOpacity,
         textAlign: 'center',
@@ -53,32 +58,41 @@ export default class TeaserCarousel extends Component {
 
     getImageUploaders (images, setImagePath) {
         return R.mapObjIndexed((img, key) =>
-            <ImageUploader
-                key={key}
-                setImagePath={(imagePath) => setImagePath(['element', 'teaserImages', key], imagePath)}
-            />
+            <div key={key} style={{marginBottom: 20}}>
+                <ImageUploader
+                    setImagePath={(imagePath) => setImagePath(['element', 'teaserImages', key], imagePath)}
+                />
+            </div>
         , images);
     }
 
     renderUploadForm () {
-        const {images, setImagePath} = this.props;
+        const {images, setImagePath, templateId} = this.props;
         const imageUploaders = this.getImageUploaders(images, setImagePath);
         return (
-            <div style={commonStyles.backgroundWidget}>
-                <p style={commonStyles.widgetText}>
-                    {'PUOI SCEGLIERE FINO A TRE IMMAGINI PER IL TEASER'}
-                    <br />
-                    {'ATTENZIONE! ALMENO UNA È OBBLIGATORIA'}
-                </p>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    {Object.keys(imageUploaders).map(key => imageUploaders[key])}
+            <div
+                style={{
+                    ...styles.backgroundImageWidget,
+                    ...{backgroundImage: `url(\'/_assets/images/template_0${templateId}/carousel01.jpg\')`}
+                }}
+            >
+                <div style={styles.backgroundWidget}>
+                    <p style={styles.widgetText}>
+                        {'PUOI SCEGLIERE FINO A TRE IMMAGINI PER IL TEASER'}
+                        <br />
+                        {'ATTENZIONE! ALMENO UNA È OBBLIGATORIA'}
+                    </p>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        {Object.keys(imageUploaders).map(key => imageUploaders[key])}
+                    </div>
+
                 </div>
             </div>
         );

@@ -7,8 +7,10 @@ export default class CustomButton extends Component {
     static propTypes = {
         backgroundColor: PropTypes.string,
         border: PropTypes.string,
+        fontSize: PropTypes.number,
         height: PropTypes.number,
         onClick: PropTypes.func,
+        padding: PropTypes.number,
         text: PropTypes.string,
         textColor: PropTypes.string,
         type: PropTypes.string
@@ -16,26 +18,29 @@ export default class CustomButton extends Component {
 
     static defaultProps = {
         backgroundColor: colors.primaryColor,
-        border: colors.transparent,
+        border: `1px solid ${colors.transparent}`,
         height: 52,
         textColor: colors.white,
-        type: 'button'
+        type: 'button',
+        fontSize: 52 / 3,
+        paddingLeft: 30,
+        paddingRight: 30
     };
 
     render () {
-        const {backgroundColor, border, height, onClick, text, textColor, type} = this.props;
+        const {backgroundColor, border, height, onClick, text, textColor, type, fontSize, padding} = this.props;
         return (
             <Button
                 style={{
                     backgroundColor: backgroundColor,
-                    borderColor: border,
+                    border: border,
                     height: height,
-                    paddingLeft: 30,
-                    paddingRight: 30,
-                    minWidth: 100,
+                    paddingLeft: padding ? padding : 30,
+                    paddingRight: padding ? padding : 30,
+                    minWidth: 60,
                     borderRadius: 100,
                     color: textColor,
-                    fontSize: height / 3,
+                    fontSize: fontSize ? fontSize : height / 3,
                     fontWeight: 800,
                     outline: 0,
                     outlineStyle: 'none',
