@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import Radium from 'radium';
-import {browserHistory} from 'react-router';
 
 import * as colors from 'lib/colors';
 

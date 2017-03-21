@@ -1,7 +1,6 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
-import {browserHistory} from 'react-router';
 
 import * as colors from 'lib/colors';
 

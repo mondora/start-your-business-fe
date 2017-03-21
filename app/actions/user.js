@@ -1,5 +1,4 @@
 import md5 from 'js-md5';
-import {browserHistory} from 'react-router';
 
 import {authenticateUser, confirmRegistration, resendConfirmationCode, signUp} from 'lib/aws-cognito-utils';
 

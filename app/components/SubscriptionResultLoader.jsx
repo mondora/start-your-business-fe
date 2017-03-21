@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {browserHistory} from 'react-router';
 import {getStoredState} from 'redux-persist';
 
 import {subscriptionStatus} from 'lib/subscription-utils';
