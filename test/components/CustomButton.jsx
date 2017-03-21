@@ -20,7 +20,7 @@ describe('Custom button', () => {
                     shallow(<CustomButton onClick={sinon.spy()} />)
                         .find(Button)
                         .prop('style')
-                ).to.include({backgroundColor: '#20bda9', borderColor: 'transparent'});
+                ).to.include({backgroundColor: '#20bda9', border: '1px solid transparent'});
             });
 
             it('renders button with provided color', () => {
@@ -28,7 +28,7 @@ describe('Custom button', () => {
                     shallow(<CustomButton backgroundColor={'#f1f1f1'} onClick={sinon.spy()} />)
                         .find(Button)
                         .prop('style')
-                ).to.include({backgroundColor: '#f1f1f1', borderColor: 'transparent'});
+                ).to.include({backgroundColor: '#f1f1f1', border: '1px solid transparent'});
             });
 
         });
