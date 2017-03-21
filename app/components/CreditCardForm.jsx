@@ -1,7 +1,6 @@
 import Radium from 'radium';
 import R from 'ramda';
 import React, {Component, PropTypes} from 'react';
-import {browserHistory} from 'react-router';
 
 class CreditCardForm extends Component {
     static propTypes = {
@@ -35,7 +34,7 @@ class CreditCardForm extends Component {
             for (let id in response) {
                 callbackUrl += `${id}=${encodeURIComponent(response[id])}&`;
             }
-            browserHistory.push(callbackUrl);
+            window.locatio = callbackUrl;
         }
     }
 

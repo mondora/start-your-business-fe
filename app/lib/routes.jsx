@@ -3,7 +3,6 @@ import {useRouterHistory, Router, Route} from 'react-router';
 import createHistory from 'history/lib/createHashHistory';
 
 import {Provider} from 'react-redux';
-// import {syncHistoryWithStore} from 'react-router-redux';
 
 import store from 'lib/redux-store';
 
@@ -23,7 +22,6 @@ import BusinessPaymentInfo from 'containers/business/PaymentInfo';
 import BusinessRoot from 'containers/business/Root';
 import BusinessSubscriptionResult from 'containers/business/SubscriptionResult';
 import BusinessUserInfo from 'containers/business/UserInfo';
-// const history = syncHistoryWithStore(browserHistory, store);
 
 export default (
     <Provider store={store}>
