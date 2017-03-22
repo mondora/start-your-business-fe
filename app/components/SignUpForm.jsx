@@ -70,7 +70,7 @@ export default class SignUpForm extends Component {
 
     render () {
         const {$form, confirmPassword} = this.props.form;
-        const {backgroundColor} = this.props;
+        const {backgroundColor, form, user} = this.props;
         const style = styles(backgroundColor);
         return (
             <Form
@@ -81,7 +81,7 @@ export default class SignUpForm extends Component {
                 style={style.formWrp}
             >
                 <FormInput
-                    field={this.props.form.givenName}
+                    field={form.givenName}
                     inputType='text'
                     label='Nome: *'
                     model='user.signup.givenName'
@@ -90,7 +90,7 @@ export default class SignUpForm extends Component {
                     style={style.blockWrp}
                 />
                 <FormInput
-                    field={this.props.form.familyName}
+                    field={form.familyName}
                     inputType='text'
                     label='Cognome: *'
                     model='user.signup.familyName'
@@ -99,7 +99,7 @@ export default class SignUpForm extends Component {
                     style={style.blockWrp}
                 />
                 <FormInput
-                    field={this.props.form.email}
+                    field={form.email}
                     inputType='email'
                     label='Email: *'
                     model='user.signup.email'
@@ -108,7 +108,7 @@ export default class SignUpForm extends Component {
                     style={style.blockWrp}
                 />
                 <FormInput
-                    field={this.props.form.password}
+                    field={form.password}
                     inputType='password'
                     label='Password: *'
                     model='user.signup.password'
@@ -130,7 +130,7 @@ export default class SignUpForm extends Component {
                     style={style.blockWrp}
                 />
                 <FormInputCheckbox
-                    field={this.props.form.privacyCheck}
+                    field={form.privacyCheck}
                     model='user.signup.privacyCheck'
                     text={
                         <span style={{...style.text, ...{cursor: 'pointer'}}}>
@@ -178,10 +178,10 @@ export default class SignUpForm extends Component {
                             padding={1}
                             fontSize={18}
                             textColor={colors.primaryColor}
-                            errorMessage={this.props.user.loginErrorMessage}
+                            errorMessage={user.loginErrorMessage}
                             form={this.props.loginForm}
                             login={this.props.login}
-                            loginState={this.props.user.login}
+                            loginState={user.login}
                             {...this.props}
                         />
                     </div>

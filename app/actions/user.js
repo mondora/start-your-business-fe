@@ -27,7 +27,7 @@ export const login = (username, password, userPoolConfig) => {
             'LOGIN',
             {username: username},
             {username: username},
-            () => window.location = `#/build-site/${md5(username)}`
+            () => window.location = `#/update-site/${md5(username)}`
         ), userPoolConfig);
     };
 };

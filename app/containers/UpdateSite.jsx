@@ -31,6 +31,9 @@ class BuildSite extends Component {
                     </Alert>
                 }
                 pageTitle={'AGGIORNA IL TUO SITO'}
+                resetButton={{
+                    text: 'ANNULLA IMPOSTAZIONI'
+                }}
                 saveButton={{
                     text: 'SALVA E PUBBLICA'
                 }}

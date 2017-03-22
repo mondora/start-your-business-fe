@@ -3,7 +3,6 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
-import {browserHistory} from 'react-router';
 
 import * as colors from 'lib/colors';
 
@@ -122,7 +121,7 @@ class UserAccount extends Component {
                                             <p>{'ONLINE DAL: 20.03.2017'}</p>
                                         </div>
                                         <Button
-                                            onClick={() => browserHistory.push('/build-site/')}
+                                            onClick={() => window.location = '#/update-site/NOMESITO'}
                                             height={40}
                                             text={'GESTISCI SITO'}
                                         />
