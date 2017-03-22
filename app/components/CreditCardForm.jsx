@@ -29,13 +29,14 @@ class CreditCardForm extends Component {
     handleZuoraResponse (response) {
         console.log('Response from call of credit card form:');
         console.log(response);
-        if (!response.success) {
-            let callbackUrl = '#/credit-card-result?';
-            for (let id in response) {
-                callbackUrl += `${id}=${encodeURIComponent(response[id])}&`;
-            }
-            window.location = callbackUrl;
-        }
+        //TODO understand why sometimes it's called right after rendering credit card component 
+        // if (!response.success) {
+        //     let callbackUrl = '#/credit-card-result?';
+        //     for (let id in response) {
+        //         callbackUrl += `${id}=${encodeURIComponent(response[id])}&`;
+        //     }
+        //     window.location = callbackUrl;
+        // }
     }
 
     render () {

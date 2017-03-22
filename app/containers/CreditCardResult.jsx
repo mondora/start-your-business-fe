@@ -11,10 +11,8 @@ export default class CreditCardResult extends Component {
         super(props);
         const {query} = props.location;
         const creditCardSuccess = this.isCreditCardSuccess(query);
-        console.log('i am here');
         getStoredState({whitelist: ['user'], keyPrefix: 'syb:'}, (err, state) => {
             const basePath = state.user.renderingSite ? `/${state.user.renderingSite}` : '';
-            console.log(window.top.location);
             window.top.location = `#${basePath}/subscription-result?creditCardSuccess=${creditCardSuccess}&refId=${query.refId}`;
         });
     }
