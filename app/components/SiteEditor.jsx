@@ -16,7 +16,10 @@ import BusinessHome from 'containers/business/Home';
 import BusinessRoot from 'containers/business/Root';
 
 const styles = {
-    buttonWrp: {
+    buttonResetWrp: {
+        float: 'left'
+    },
+    buttonSaveWrp: {
         float: 'right'
     }
 };
@@ -39,6 +42,7 @@ class SiteEditor extends Component {
         instructionMessage: PropTypes.node,
         pageTitle: PropTypes.string.isRequired,
         params: PropTypes.object.isRequired,
+        resetButton: PropTypes.object.isRequired,
         saveButton: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
         setImagePath: PropTypes.func.isRequired,
@@ -65,9 +69,25 @@ class SiteEditor extends Component {
         }
     }
 
+    resetTemplateSettings () {
+        console.log('reset');
+    }
+
+    renderResetButton () {
+        return (
+            <div style={styles.buttonResetWrp}>
+                <Button
+                    backgroundColor={colors.grey}
+                    onClick={::this.resetTemplateSettings}
+                    text={this.props.resetButton.text}
+                />
+            </div>
+        );
+    }
+
     renderSaveButton () {
         return (
-            <div style={styles.buttonWrp}>
+            <div style={styles.buttonSaveWrp}>
                 <Button
                     backgroundColor={colors.darkGrey}
                     onClick={::this.handleTemplateSaving}
@@ -142,10 +162,15 @@ class SiteEditor extends Component {
                             </div>
                         </Col>
                     </Row>
-                    <Row style={{marginBottom: 100}}>
-                        <Col xs={12}>
-                            {this.renderSaveButton()}
-                        </Col>
+                    <Row>
+                        <div style={{width:'calc(100% - 65px)', float: 'right', marginBottom: 100}}>
+                            <Col xs={12} sm={6}>
+                                {this.renderResetButton()}
+                            </Col>
+                            <Col xs={12} sm={6}>
+                                {this.renderSaveButton()}
+                            </Col>
+                        </div>
                     </Row>
                 </div>
             </div>
