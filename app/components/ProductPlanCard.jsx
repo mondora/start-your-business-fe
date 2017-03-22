@@ -62,7 +62,6 @@ const styles = {
 };
 
 class ProductPlanCard extends Component {
-
     static propTypes = {
         backgroundColor: PropTypes.string,
         onConfirm: PropTypes.func.isRequired,

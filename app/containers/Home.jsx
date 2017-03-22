@@ -6,6 +6,8 @@ import {bindActionCreators} from 'redux';
 
 import {getSYBProductPlans} from 'actions/products';
 import {login} from 'actions/user';
+
+import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
 
 import FaqSection from 'components/FaqSection';
@@ -109,7 +111,7 @@ class Home extends Component {
         );
     }
 
-    renderPlan () {
+    renderPlan (isLoggedIn) {
         return (
             <div style={styles.planWrp}>
                 <div className='container'>
@@ -128,6 +130,7 @@ class Home extends Component {
                         {this.renderAlert()}
                         <ProductPlanCardList
                             getSYBProductPlans={this.props.getSYBProductPlans}
+                            isLoggedIn={isLoggedIn}
                             productPlans={this.props.products.productPlans}
                         />
                     </div>
@@ -137,6 +140,7 @@ class Home extends Component {
     }
 
     render () {
+        const logged = getUserSiteState(this.props.user).isLoggedIn;
         return (
             <div style={{backgroundColor: colors.backgroundLightGrey}}>
                 <div style={styles.teaserWrp}>
@@ -157,13 +161,14 @@ class Home extends Component {
                         <HorizontalLine color={colors.primaryColor} width={100} />
                         <SignUpButton
                             backgroundColor={colors.white}
+                            loggedUrl={logged ? '#/account' : null}
                             textColor={colors.primaryColor}
                         />
                     </div>
                 </div>
                 <ProcessSection />
                 <TemplateSection />
-                {this.renderPlan()}
+                {this.renderPlan(logged)}
                 <FaqSection />
             </div>
         );

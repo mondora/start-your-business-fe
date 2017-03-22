@@ -18,6 +18,7 @@ export default class ProductPlanCardList extends Component {
         choosePlan: PropTypes.func,
         chosenPlanId: PropTypes.string,
         getSYBProductPlans: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool,
         productPlans: PropTypes.arrayOf(PropTypes.object).isRequired
     };
 
@@ -40,7 +41,7 @@ export default class ProductPlanCardList extends Component {
                 <ProductPlanCard
                     backgroundColor={cardColors[index]}
                     key={productPlan.id}
-                    onConfirm={() => console.log('confirm')}
+                    onConfirm={() => window.location = this.props.isLoggedIn ? '#/account' : '#/signup'}
                     productPlan={productPlan}
                 />
             );
