@@ -1,13 +1,13 @@
 import Radium from 'radium';
 import React, {PropTypes, Component} from 'react';
-import {Col, Row, Button, Image} from 'react-bootstrap';
+import {Col, Row, Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
 import {editModes} from 'constants/editModes';
 import {getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import ImageUploader from 'components/ImageUploader';
+import OtherInfoImage from 'components/business/OtherInfoImage';
 
 const styles = (siteColors) => ({
     boxContainer: {
@@ -105,27 +105,15 @@ class OtherInfo extends Component {
         );
     }
 
-    renderImage (imagePath, style, field) {
-        return this.props.buildSiteMode === editModes.UPLOAD_IMAGES ? (
-            <div>
-                <p>
-                    {'AGGIUNGI IMMAGINE'}
-                </p>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    <ImageUploader
-                        setImagePath={(imagePath) => this.props.setImagePath(['element', 'info', field], imagePath)}
-                    />
-                </div>
-            </div>
-        ) : (
-            <Image src={imagePath} style={style.boxImage} circle={true} />
+    renderImage (infoBox, index) {
+        const field = infoBox.field;
+        return (
+            <OtherInfoImage
+                key={index}
+                buildSiteMode={this.props.buildSiteMode}
+                imagePath={infoBox.imagePath}
+                setImagePath={(imagePath) => this.props.setImagePath(['element', 'info', field], imagePath)}
+            />
         );
     }
 
@@ -136,13 +124,23 @@ class OtherInfo extends Component {
             {
                 field: 'image1',
                 imagePath: image1 ? image1 : '/_assets/images/template_01/infobox1.jpg',
-                text: this.renderTextareaField(isEditMode, 'textBox1', 'Scopri altro riguardo ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi', textBox1),
+                text: this.renderTextareaField(
+                    isEditMode,
+                    'textBox1',
+                    'Scopri altro riguardo ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi',
+                    textBox1
+                ),
                 button: this.renderTextField(isEditMode, 'buttonBox1', 'PER SAPERNE DI PIÙ', buttonBox1)
             },
             {
                 field: 'image2',
                 imagePath: image2 ? image2 : '/_assets/images/template_01/infobox2.jpg',
-                text: this.renderTextareaField(isEditMode, 'textBox2', 'Hai delle domande riguardo al tuo ordine o desideri sospendere le tue consegne?', textBox2),
+                text: this.renderTextareaField(
+                    isEditMode,
+                    'textBox2',
+                    'Hai delle domande riguardo al tuo ordine o desideri sospendere le tue consegne?',
+                    textBox2
+                ),
                 button: this.renderTextField(isEditMode, 'buttonBox2', 'SCRIVICI UN EMAIL', buttonBox2)
             }
         ];
@@ -157,7 +155,7 @@ class OtherInfo extends Component {
                         <div key={index} style={style.boxWrp}>
                             <Row>
                                 <Col xs={12} md={5}>
-                                    {this.renderImage(infoBox.imagePath, style, infoBox.field)}
+                                    {this.renderImage(infoBox, index)}
                                 </Col>
                                 <Col xs={12} md={7}>
                                     <div style={style.textWrp}>

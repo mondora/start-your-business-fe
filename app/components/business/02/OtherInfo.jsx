@@ -1,13 +1,13 @@
 import Radium from 'radium';
 import React, {PropTypes, Component} from 'react';
-import {Button, Image} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 
 import {editModes} from 'constants/editModes';
 import {getTextAreaField, getTextField} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
-import ImageUploader from 'components/ImageUploader';
+import OtherInfoImage from 'components/business/OtherInfoImage';
 
 const styles = (siteColors) => ({
     boxContainer: {
@@ -35,11 +35,10 @@ const styles = (siteColors) => ({
         position: 'absolute',
         top: '-80px',
         left: '50%',
-        marginLeft: '-80px'
-    },
-    boxImage: {
-        width: 160,
-        height: 160,
+        borderRadius: '100%',
+        marginLeft: '-80px',
+        width: 164,
+        height: 164,
         textAlign: 'center',
         border: `2px solid ${colors.white}`
     },
@@ -83,7 +82,7 @@ const styles = (siteColors) => ({
         borderRadius: 0,
         color: siteColors.mainColor,
         border: 0,
-        marginBottom: 20
+        margin: '0px 5px 20px 0px'
     }
 });
 
@@ -111,7 +110,7 @@ class OtherInfo extends Component {
             placeholder,
             readNode,
             {textAlign: 'center'},
-            {margin: 0}
+            {margin: 0, minWidth: '200px'}
         );
     }
 
@@ -127,33 +126,31 @@ class OtherInfo extends Component {
         );
     }
 
-    renderImage (imagePath, style, field) {
-        return this.props.buildSiteMode === editModes.UPLOAD_IMAGES ? (
-            <div>
-                <p>
-                    {'AGGIUNGI IMMAGINE'}
-                </p>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    <ImageUploader
-                        setImagePath={(imagePath) => this.props.setImagePath(['element', 'info', field], imagePath)}
-                    />
-                </div>
-            </div>
-        ) : (
-            <Image src={imagePath} style={style.boxImage} circle={true} />
+    getInfoBox () {
+        const {image} = this.props.siteConfig.info;
+        return [
+            {
+                field: 'image',
+                imagePath: image ? image : '/_assets/images/template_02/infobox.jpg'
+            }
+        ];
+    }
+
+    renderImage (imagePath, index, infoBox) {
+        const field = infoBox.field;
+        return (
+            <OtherInfoImage
+                key={index}
+                buildSiteMode={this.props.buildSiteMode}
+                imagePath={imagePath}
+                setImagePath={(imagePath) => this.props.setImagePath(['element', 'info', field], imagePath)}
+            />
         );
     }
 
     render () {
-        const {textBox, buttonBox1, buttonBox2, image1} = this.props.siteConfig.info;
-        const imagePath = image1 ? image1 : '/_assets/images/template_02/infobox.jpg';
+        const {textBox, buttonBox1, buttonBox2, image} = this.props.siteConfig.info;
+        const imagePath = image ? image : '/_assets/images/template_02/infobox.jpg';
         const style = styles(this.props.siteConfig.colors);
         const {buildSiteMode} = this.props;
         const isEditMode = buildSiteMode === editModes.EDIT_TEXTS;
@@ -161,7 +158,9 @@ class OtherInfo extends Component {
             <Form model={'siteConfig.element.info'}>
                 <div style={style.boxContainer}>
                     <div style={style.imageWrp}>
-                        {this.renderImage(imagePath, style, 'image1')}
+                        {this.getInfoBox().map((index, infoBox) =>
+                            this.renderImage(imagePath, index, infoBox)
+                        )}
                     </div>
                     <div className='container-fluid'>
                         <div style={style.textWrp}>
