@@ -137,7 +137,7 @@ export default class SignUpForm extends Component {
                             {`  Acconsento e dichiaro di aver letto i termini
                             e condizioni del servizio e l’informativa sulla `}
                             <a
-                                href='/privacy'
+                                href='/#/privacy'
                                 style={{color: colors.darkGrey, textDecoration: 'underline'}}
                                 target='_blank'
                             >
