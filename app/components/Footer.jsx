@@ -34,7 +34,7 @@ const styles = {
 
 class Footer extends Component {
     sendEmail () {
-        window.location = 'mailto:support@email.com';
+        window.location = 'mailto:info@entova.it';
     }
     render () {
         return (
@@ -44,18 +44,17 @@ class Footer extends Component {
                         <Col xs={12} md={6} style={styles.footerCol}>
                             <div style={styles.textWrp}>
                                 <strong>
-                                    {`TeamSystem S.p.A. società con socio unico
-                                    soggetta all’attività di direzione e coordinamento
-                                    di TeamSystem Holding S.p.A.`}
-                                    <br /><br />
-                                    {'Sede Legale: Via Sandro Pertini, 88 - 61122 Pesaro (PU)'}
+                                    {`mondora S.r.l. società soggetta
+                                        all’attività di direzione e coordinamento di TeamSystem S.p.A. -
+                                        Sede: Via Nazionale 11 - 23013 Cosio Valtellino (SO)`}
+                                    <br />
                                 </strong>
                             </div>
                         </Col>
                         <Col xs={12} sm={6} md={3} style={styles.footerCol}>
                             <div style={styles.textWrp}>
                                 <a
-                                    href='/privacy'
+                                    href='/#/privacy'
                                     style={{color: colors.primaryColorLighter}}
                                     target='_blank'
                                 >
@@ -64,15 +63,15 @@ class Footer extends Component {
                                 <br />
                                 <span>
                                     <strong>{'Email. '}</strong>
-                                    <a href='mailto:support@email.com' style={{color: colors.primaryColorLighter}}>
-                                        {'support@email.com'}
+                                    <a href='mailto:info@entova.it' style={{color: colors.primaryColorLighter}}>
+                                        {'info@entova.it'}
                                     </a>
                                 </span>
                                 <br />
                                 <span>
                                     <strong>{'Tel: '}</strong>
-                                    <a href='tel:+39034212345678' style={{color: colors.primaryColorLighter}}>
-                                        {'+39 0342-12345678'}
+                                    <a href='tel:+3903421856264' style={{color: colors.primaryColorLighter}}>
+                                        {'+39 0342 1856 264 '}
                                     </a>
                                 </span>
                             </div>
@@ -100,8 +99,8 @@ class Footer extends Component {
                         <Row>
                             <Col xs={12}>
                                 <p style={{margin: '0', padding: '15px 0'}}>
-                                    {`© 2017 TeamSystem S.p.A. - PIVA: 01035310414
-                                    - Cap. Soc. € 24.000.000 I.v.  Tutti i diritti riservati.`}
+                                    {`© Copyright 2017 - mondora S.r.l. -
+                                        Partita Iva 03680680968. Tutti i diritti riservati`}
                                 </p>
                             </Col>
                         </Row>
