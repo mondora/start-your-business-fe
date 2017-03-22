@@ -34,8 +34,10 @@ export default class SubscriptionResultLoader extends Component {
     renderCreditCardFail () {
         //TODO understand the problem e define the next actions
         return this.props.renderContent(
-            'ATTENZIONE',
-            'LE INFORMAZIONI DELLA CARTA DI CREDITO NON SONO CORRETTE',
+            <p>
+                {'ATTENZIONE'}<br />
+                {'LE INFORMAZIONI DELLA CARTA DI CREDITO NON SONO CORRETTE'}
+            </p>,
             {
                 onClick: () => browserHistory.push('/choose-plan'),
                 text: '< TORNA INDIETRO'
@@ -51,8 +53,10 @@ export default class SubscriptionResultLoader extends Component {
     renderSubscriptionFail () {
         //TODO understand the problem e define the next actions
         return this.props.renderContent(
-            'ATTENZIONE',
-            'LA SOTTOSCRIZIONE NON È STATA TERMINATA',
+            <p>
+                {'ATTENZIONE'}<br />
+                {'LA SOTTOSCRIZIONE NON È STATA TERMINATA'}
+            </p>,
             {
                 onClick: () => browserHistory.push('/choose-plan'),
                 text: '< TORNA INDIETRO'
@@ -62,8 +66,10 @@ export default class SubscriptionResultLoader extends Component {
 
     renderSubscriptionSuccess () {
         return this.props.renderContent(
-            'COMPLIMENTI!',
-            'PAGAMENTO ANDATO A BUON FINE',
+            <p>
+                {'COMPLIMENTI!'}<br />
+                {'PAGAMENTO ANDATO A BUON FINE'}
+            </p>,
             {
                 onClick: () => browserHistory.push('/account'),
                 text: 'VAI ALL’AREA UTENTI>'
