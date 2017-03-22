@@ -19,13 +19,6 @@ deploy:
     local_dir: build
     skip_cleanup: true
     region: eu-west-1
-    endpoint: entova.it.s3-website.eu-central-1.amazonaws.com
-  - provider: s3
-    bucket: "www.entova.it"
-    local_dir: build
-    skip_cleanup: true
-    region: eu-west-1
-    endpoint: www.entova.it.s3-website.eu-central-1.amazonaws.com
 
 notifications:
   email:
