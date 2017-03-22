@@ -64,7 +64,7 @@ class SignUp extends Component {
             },
             {
                 icon: 'phone_grey',
-                title: 'MOBILE FRIENLY',
+                title: 'MOBILE FRIENDLY',
                 text:
                     `Tutti i Template Entova sono usufruibili
                     da smartphone e tablet.`
