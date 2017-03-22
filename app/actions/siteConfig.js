@@ -19,14 +19,14 @@ export const fetch = businessId => _fetch(`/businesses/${businessId}`);
 
 export const upsertSiteConfig = siteConfig => dispatch => {
     dispatch({
-        type: 'UPSERT_SITE_CONFIG_START'
+        type: UPSERT_SITE_CONFIG_START
     });
     axios.post('/businesses', siteConfig)
         .then(() => dispatch({
-            type: 'UPSERT_SITE_CONFIG_SUCCESS'
+            type: UPSERT_SITE_CONFIG_SUCCESS
         }))
         .catch(() => dispatch({
-            type: 'UPSERT_SITE_CONFIG_ERROR'
+            type: UPSERT_SITE_CONFIG_ERROR
         }));
 };
 

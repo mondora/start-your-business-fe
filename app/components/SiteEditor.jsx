@@ -42,7 +42,6 @@ class SiteEditor extends Component {
         instructionMessage: PropTypes.node,
         pageTitle: PropTypes.string.isRequired,
         params: PropTypes.object.isRequired,
-        resetButton: PropTypes.object.isRequired,
         saveButton: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
         setImagePath: PropTypes.func.isRequired,
@@ -69,17 +68,14 @@ class SiteEditor extends Component {
         }
     }
 
-    resetTemplateSettings () {
-        console.log('reset');
-    }
-
     renderResetButton () {
+        const {params: {businessId}, fetchSiteConfig} = this.props;
         return (
             <div style={styles.buttonResetWrp}>
                 <Button
                     backgroundColor={colors.grey}
-                    onClick={::this.resetTemplateSettings}
-                    text={this.props.resetButton.text}
+                    onClick={() => fetchSiteConfig(businessId)}
+                    text='ANNULLA IMPOSTAZIONI'
                 />
             </div>
         );
