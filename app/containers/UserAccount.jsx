@@ -3,6 +3,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
+import {browserHistory} from 'react-router';
 
 import * as colors from 'lib/colors';
 
@@ -11,16 +12,20 @@ import ChangePasswordForm from 'components/ChangePasswordForm';
 import CompanyInfoForm from 'components/CompanyInfoForm';
 import PageTeaser from 'components/PageTeaser';
 import PersonalInfoForm from 'components/PersonalInfoForm';
+import Button from 'components/CustomButton';
 import UserAccountSaveButton from 'components/UserAccountSaveButton';
 
 const styles = {
-    col: {
+    box: {
         backgroundColor: colors.primaryColorLighter,
         borderRadius: '5px',
-        padding: '20px'
+        padding: '20px',
+        marginBottom: '30px'
     },
-    row: {
-        margin: '0 20px 25px 20px'
+    boxTitle: {
+        fontSize: '20px',
+        fontWeight: 700,
+        margin: '0 0 20px 0'
     }
 };
 
@@ -30,6 +35,13 @@ class UserAccount extends Component {
         signUpForm: PropTypes.object
     };
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            isActive: false
+        };
+    }
+
     render () {
         return (
             <div>
@@ -37,28 +49,116 @@ class UserAccount extends Component {
                     pageTitle={'IL MIO ACCOUNT'}
                 />
                 <div className='container'>
-                    <Row style={styles.row}>
-                        <Col xs={12} md={6} style={styles.col}>
-                            <AccountSettingsForm form={this.props.signUpForm} />
+                    <Row>
+                        <Col xs={12} md={6}>
+                            <div style={styles.box}>
+                                <AccountSettingsForm
+                                    form={this.props.signUpForm}
+                                    titleStyle={styles.boxTitle}
+                                    marginBottom={0}
+                                    padding={0}
+                                />
+                            </div>
                         </Col>
-                        <Col xs={12} md={6} style={styles.col}>
-                            <ChangePasswordForm form={this.props.signUpForm} />
+                        <Col xs={12} md={6}>
+                            <div style={styles.box}>
+                                <ChangePasswordForm
+                                    form={this.props.signUpForm}
+                                    titleStyle={styles.boxTitle}
+                                    marginBottom={0}
+                                    padding={0}
+                                />
+                            </div>
                         </Col>
                     </Row>
-                    <Row style={styles.row}>
-                        <Col xs={12} md={6} style={styles.col}>
-                            {'FATTURAZIONE E PAGAMENTI:'}
-                            <Form model='billing' onSubmit={() => console.log('TODO save billing info')}>
-                                <CompanyInfoForm form={this.props.billingInformationForm} />
-                                <PersonalInfoForm form={this.props.billingInformationForm} />
-                                <UserAccountSaveButton />
-                            </Form>
+                    <Row>
+                        <Col xs={12} md={6}>
+                            <div style={styles.box}>
+                                <h3 style={styles.boxTitle}>{'FATTURAZIONE E PAGAMENTI:'}</h3>
+                                <Form model='billing' onSubmit={() => console.log('TODO save billing info')}>
+                                    <CompanyInfoForm form={this.props.billingInformationForm} />
+                                    <div style={{height: 1, backgroundColor: colors.lightGrey, margin: '12px 0'}} />
+                                    <PersonalInfoForm form={this.props.billingInformationForm} />
+                                    <div style={{height: 1, backgroundColor: colors.lightGrey, margin: '16px 0'}} />
+                                    <UserAccountSaveButton
+                                        isActive={() => this.setState({isActive: true})}
+                                    />
+                                </Form>
+                                <div style={{clear: 'both', paddingBottom: '20px'}} />
+                            </div>
                         </Col>
-                        <Col xs={12} md={6} style={styles.col}>
-                            {'MODIFICA METODO DI PAGAMENTO:'}
-                            {'AGGIORNA IL TUO SITO:'}
-                            {'STORIA PAGAMENTI:'}
-                            {'STORIA SOTTOSCRIZIONI:'}
+                        <Col xs={12} md={6}>
+                            <div style={styles.box}>
+                                <h3 style={styles.boxTitle}>{'MODIFICA METODO DI PAGAMENTO:'}</h3>
+                                <Button
+                                    backgroundColor={colors.white}
+                                    border={`1px solid ${colors.grey}`}
+                                    onClick={() => {}}
+                                    text='VISUALIZZA'
+                                    height={40}
+                                    textColor={colors.grey}
+                                    style={{float: 'right'}}
+                                />
+                                <div style={{clear: 'both'}} />
+                            </div>
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <div style={styles.box}>
+                                <Row>
+                                    <Col xs={12} sm={5} lg={4}>
+                                        <div
+                                            style={{
+                                                width: 130,
+                                                height: 180,
+                                                marginBottom: 20,
+                                                backgroundColor: colors.darkGrey
+                                            }}
+                                        />
+                                    </Col>
+                                    <Col xs={12} sm={7} lg={8}>
+                                        <h3 style={styles.boxTitle}>{'AGGIORNA IL TUO SITO:'}</h3>
+                                        <div>
+                                            <p style={{color: colors.primaryColor}}>{'NOMESITO'}</p>
+                                            <p>{'ONLINE DAL: 20.03.2017'}</p>
+                                        </div>
+                                        <Button
+                                            onClick={() => browserHistory.push('/build-site/')}
+                                            height={40}
+                                            text={'GESTISCI SITO'}
+                                        />
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <div style={styles.box}>
+                                <h3 style={styles.boxTitle}>{'STORIA PAGAMENTI:'}</h3>
+                                <Button
+                                    backgroundColor={colors.white}
+                                    border={`1px solid ${colors.grey}`}
+                                    onClick={() => {}}
+                                    text='VISUALIZZA'
+                                    height={40}
+                                    textColor={colors.grey}
+                                    style={{float: 'right'}}
+                                />
+                                <div style={{clear: 'both'}} />
+                            </div>
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <div style={styles.box}>
+                                <h3 style={styles.boxTitle}>{'STORIA SOTTOSCRIZIONI:'}</h3>
+                                <Button
+                                    backgroundColor={colors.white}
+                                    border={`1px solid ${colors.grey}`}
+                                    onClick={() => {}}
+                                    text='VISUALIZZA'
+                                    height={40}
+                                    textColor={colors.grey}
+                                    style={{float: 'right'}}
+                                />
+                                <div style={{clear: 'both'}} />
+                            </div>
                         </Col>
                     </Row>
                 </div>

@@ -85,7 +85,7 @@ export default class PersonalInfoForm extends Component {
                         field={this.props.form.houseNumber}
                         inputType='text'
                         model='billing.houseNumber'
-                        placeholder='Numero civico'
+                        placeholder='N. civico'
                         validator={genericRequiredValidator}
                         style={styles.input}
                     />

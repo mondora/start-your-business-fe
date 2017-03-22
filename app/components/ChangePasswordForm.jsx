@@ -24,9 +24,7 @@ const styles = {
     },
     formWrp: {
         backgroundColor: colors.primaryColorLighter,
-        borderRadius: '5px',
-        padding: '20px',
-        marginBottom: '30px'
+        borderRadius: '5px'
     },
     text: {
         color: colors.darkGrey,
@@ -41,20 +39,31 @@ const passwordsMatch = ({password, confirmPassword}) => {
 
 export default class ChangePasswordForm extends Component {
     static propTypes = {
-        form: PropTypes.object.isRequired
+        form: PropTypes.object.isRequired,
+        marginBottom: PropTypes.number,
+        padding: PropTypes.number,
+        titleStyle: PropTypes.object
     };
+
+    constructor (props) {
+        super(props);
+        this.state = {
+            isActive: false
+        };
+    }
 
     render () {
         const {$form, confirmPassword} = this.props.form;
+        const {padding, marginBottom} = this.props;
         return (
             <Form
                 model={'user.signup'}
                 onSubmit={() => console.log('TODO save new password')}
                 validateOn='submit'
                 validators={{'': {passwordsMatch}}}
-                style={styles.formWrp}
+                style={{...styles.formWrp, ...{marginBottom: marginBottom, padding: padding}}}
             >
-                {'AGGIORNA PASSWORD:'}
+                <h3 style={this.props.titleStyle}>{'AGGIORNA PASSWORD:'}</h3>
                 <FormInput
                     field={this.props.form.password}
                     inputType='password'
@@ -88,7 +97,9 @@ export default class ChangePasswordForm extends Component {
                 />
 
                 <label style={styles.blockWrp}>
-                    <UserAccountSaveButton />
+                    <UserAccountSaveButton
+                        isActive={() => this.setState({isActive: true})}
+                    />
                 </label>
             </Form>
         );

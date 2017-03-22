@@ -11,31 +11,45 @@ import {genericRequiredValidator, requiredEmailValidator} from 'lib/form-utils';
 const styles = {
     blockWrp: {
         width: '100%',
-        marginBottom: '20px'
+        marginBottom: 20
     },
     formWrp: {
         backgroundColor: colors.primaryColorLighter,
         borderRadius: '5px',
-        padding: '20px',
-        marginBottom: '30px'
+        padding: 20
+    },
+    infoStyle: {
+        fontWeight: 700,
+        color: colors.primaryColor
     }
 };
 
 export default class AccountSettingsForm extends Component {
     static propTypes = {
-        form: PropTypes.object.isRequired
+        form: PropTypes.object.isRequired,
+        marginBottom: PropTypes.number,
+        padding: PropTypes.number,
+        titleStyle: PropTypes.object
     };
 
+    constructor (props) {
+        super(props);
+        this.state = {
+            isActive: false
+        };
+    }
+
     render () {
+        const {padding, marginBottom} = this.props;
         return (
             <Form
                 model={'user.signup'}
                 onSubmit={() => console.log('TODO save user data')}
                 validateOn='submit'
-                style={styles.formWrp}
+                style={{...styles.formWrp, ...{marginBottom: marginBottom, padding: padding}}}
             >
-                {'IMPOSTAZIONI ACCOUNT:'}
-                {'Sottoscritto il:'}
+                <h3 style={this.props.titleStyle}>{'IMPOSTAZIONI ACCOUNT:'}</h3>
+                {/*<p style={styles.infoStyle}>{'Sottoscritto il:'}</p>*/}
                 <FormInput
                     field={this.props.form.givenName}
                     inputType='text'
@@ -65,7 +79,9 @@ export default class AccountSettingsForm extends Component {
                 />
 
                 <label style={styles.blockWrp}>
-                    <UserAccountSaveButton />
+                    <UserAccountSaveButton
+                        isActive={() => this.setState({isActive: true})}
+                    />
                 </label>
             </Form>
         );
