@@ -38,8 +38,7 @@ class DomainInput extends Component {
     }
 
     render () {
-        const {businessName, domainName} = this.props.form.site;
-        const {customDomain, disabled} = this.props;
+        const {customDomain, disabled, form: {businessName, domainName}} = this.props;
         return (
             <div style={styles.inputWrp}>
                 <span>{customDomain ? 'http://' : 'www.entova.it/'}</span>
@@ -47,7 +46,7 @@ class DomainInput extends Component {
                     disabled={disabled}
                     field={customDomain ? domainName : businessName}
                     inputType='text'
-                    model={`billing.site.${customDomain ? 'domainName' : 'businessName'}`}
+                    model={`siteConfig.element.site.${customDomain ? 'domainName' : 'businessName'}`}
                     validator={this.getValidator(disabled, customDomain)}
                     style={{width: '100%', margin: 0}}
                 />

@@ -1,10 +1,6 @@
 import {modeled} from 'react-redux-form';
 
 export const initialBillingState = {
-    site: {
-        businessName: '',
-        domainName: ''
-    },
     givenName: '',
     familyName: '',
     company: '',

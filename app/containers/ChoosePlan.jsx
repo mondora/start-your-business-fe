@@ -51,7 +51,8 @@ class ChoosePlan extends Component {
         getPaymentParams: PropTypes.func.isRequired,
         getSYBProductPlans: PropTypes.func.isRequired,
         payment: PropTypes.object,
-        products: PropTypes.object
+        products: PropTypes.object,
+        siteNameForm: PropTypes.object
     };
 
     submitBilling () {
@@ -77,7 +78,7 @@ class ChoosePlan extends Component {
                                         {'1. Scelta del piano (al momento il piano professional non è attivo):'}
                                     </p>
                                     <ProductPlanCardList
-                                        billingInformationForm={this.props.billingInformationForm}
+                                        siteNameForm={this.props.siteNameForm}
                                         chooseMode={true}
                                         choosePlan={this.props.choosePlan}
                                         chosenPlanId={chosenPlanId}
@@ -168,7 +169,8 @@ const mapStateToProps = (state) => {
     return {
         billingInformationForm: state.billingInformationForm,
         payment: state.payment,
-        products: state.products
+        products: state.products,
+        siteNameForm: state.siteNameForm
     };
 };
 

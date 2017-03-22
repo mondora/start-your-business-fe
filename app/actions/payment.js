@@ -16,17 +16,18 @@ export const getPaymentParams = () => {
     };
 };
 
-export const subscribeNewCustomer = (chosenPlanId, billingInfo, paymentMethodId) => {
+export const subscribeNewCustomer = (chosenPlanId, billingInfo, siteConfig, paymentMethodId) => {
     return dispatch => {
         callSubscribe(dispatch, chosenPlanId, billingInfo, paymentMethodId);
     };
 };
 
-export const subscribeNewSupplier = (chosenPlanId, billingInfo, paymentMethodId) => {
+export const subscribeNewSupplier = (chosenPlanId, billingInfo, siteConfig, paymentMethodId) => {
+    //TODO save site config under the chosen businessName
     return dispatch => {
         callSubscribe(dispatch, chosenPlanId, billingInfo, paymentMethodId, () => {
             //TODO manage own domain name when available instead of businessName
-            createAWSCognitoUserPool(dispatch, billingInfo.site.businessName);
+            createAWSCognitoUserPool(dispatch, siteConfig.site.businessName);
         });
     };
 };

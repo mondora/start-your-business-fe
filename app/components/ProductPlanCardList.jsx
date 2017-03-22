@@ -13,13 +13,13 @@ const cardColors = [
 
 export default class ProductPlanCardList extends Component {
     static propTypes = {
-        billingInformationForm: PropTypes.object,
         chooseMode: PropTypes.bool,
         choosePlan: PropTypes.func,
         chosenPlanId: PropTypes.string,
         getSYBProductPlans: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool,
-        productPlans: PropTypes.arrayOf(PropTypes.object).isRequired
+        productPlans: PropTypes.arrayOf(PropTypes.object).isRequired,
+        siteNameForm: PropTypes.object
     };
 
     componentDidMount () {
@@ -31,7 +31,7 @@ export default class ProductPlanCardList extends Component {
             return this.props.chooseMode ? (
                 <ChoosablePlanCard
                     backgroundColor={cardColors[index]}
-                    billingInformationForm={this.props.billingInformationForm}
+                    siteNameForm={this.props.siteNameForm}
                     isSelected={this.props.chosenPlanId === productPlan.id}
                     key={productPlan.id}
                     onSelect={() => this.props.choosePlan(productPlan.id)}

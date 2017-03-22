@@ -4,12 +4,13 @@ import {combineReducers} from 'redux';
 
 import billingInformation, {initialBillingState} from './billing-information';
 import siteConfig, {
+    initialBusinessSite,
     initialColors,
     initialFooterInfo,
     initialHeaderInfo,
     initialIntroInfo,
-    initialStepsInfo,
-    initialOtherInfo
+    initialOtherInfo,
+    initialStepsInfo
 } from './siteConfig';
 import payment from './payment';
 import products from './products';
@@ -29,9 +30,10 @@ const reducers = combineReducers({
     siteConfigFooterForm: formReducer('siteConfig.element.footer', initialFooterInfo),
     siteConfigHeaderForm: formReducer('siteConfig.element.header', initialHeaderInfo),
     siteConfigIntroForm: formReducer('siteConfig.element.intro', initialIntroInfo),
+    siteConfigOtherInfoForm: formReducer('siteConfig.element.info', initialOtherInfo),
     siteConfigStepsForm: formReducer('siteConfig.element.steps', initialStepsInfo),
     siteConfigSubscriptionsForm: formReducer('ui.productPlans.subscriptions', initialSubscriptionsInfo),
-    siteConfigOtherInfoForm: formReducer('siteConfig.element.info', initialOtherInfo),
+    siteNameForm: formReducer('siteConfig.element.site', initialBusinessSite),
     ui,
     user,
     userLoginForm: formReducer('user.login', initialLoginState),

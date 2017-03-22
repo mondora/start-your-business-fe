@@ -8,9 +8,9 @@ import reducers from 'reducers/index';
 const storageConfig = {
     whitelist: [
         'billing',
-        // 'businessSite', should not be persisted
         'payment',
         'products',
+        'siteConfig',
         'spinner',
         'user'
     ],

@@ -9,6 +9,11 @@ import {
 import {templatesIds} from 'lib/business-site-utils';
 import * as colors from 'lib/colors';
 
+export const initialBusinessSite = {
+    businessName: null,
+    domainName: null
+};
+
 export const initialColors = {
     mainColor: colors.templatePrimaryColor
 };
@@ -34,16 +39,6 @@ export const initialIntroInfo = {
     introText: 'Scegliamo i prodotti migliori e te li consegnamo a casa nella formula più adatta alle tue esigenze!'
 };
 
-export const initialStepsInfo = {
-    stepsTitle: 'COME FUNZIONA',
-    titleStep1: 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI',
-    titleStep2: 'RISPARMI E NON DOVRAI PENSARE A NULLA',
-    titleStep3: 'POTRAI DISISCRIVERTI QUANDO VUOI',
-    textStep1: 'Abbiamo pensato a tutti, ma se desideri personalizzare il tuo ordine, chiama al 012-3456789',
-    textStep2: 'Ogni mese ti arriverà una cassettina con frutta e verdura biologica di stagione',
-    textStep3: 'Se non sei soddisfatto del servizio, puoi decidere di non ricevere più le nostre cassettine'
-};
-
 export const initialOtherInfo = {
     textBox: 'Sappiamo che amerai i nostri prodotti, se però necessiti di una formula personalizzata o se vuoi comunicarci qualcosa non esitare a scriverci!',
     textBox1: 'Scopri altro riguardo ai nostri prodotti, sul nostro sito troverai tutte le informazioni che cercavi',
@@ -54,14 +49,25 @@ export const initialOtherInfo = {
     image2: null
 };
 
+export const initialStepsInfo = {
+    stepsTitle: 'COME FUNZIONA',
+    titleStep1: 'SCEGLI UNA TRA LE TRE SOTTOSCRIZIONI',
+    titleStep2: 'RISPARMI E NON DOVRAI PENSARE A NULLA',
+    titleStep3: 'POTRAI DISISCRIVERTI QUANDO VUOI',
+    textStep1: 'Abbiamo pensato a tutti, ma se desideri personalizzare il tuo ordine, chiama al 012-3456789',
+    textStep2: 'Ogni mese ti arriverà una cassettina con frutta e verdura biologica di stagione',
+    textStep3: 'Se non sei soddisfatto del servizio, puoi decidere di non ricevere più le nostre cassettine'
+};
+
 const initialSiteConfig = {
     colors: initialColors,
     footer: initialFooterInfo,
     header: initialHeaderInfo,
-    intro: initialIntroInfo,
-    steps: initialStepsInfo,
     info: initialOtherInfo,
+    intro: initialIntroInfo,
     logo: null,
+    site: initialBusinessSite,
+    steps: initialStepsInfo,
     teaserImages: {
         image1: null,
         image2: null,

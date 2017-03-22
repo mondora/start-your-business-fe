@@ -107,10 +107,10 @@ const styles = {
 class ChoosablePlanCard extends Component {
     static propTypes = {
         backgroundColor: PropTypes.string,
-        billingInformationForm: PropTypes.object.isRequired,
         isSelected: PropTypes.bool,
         onSelect: PropTypes.func.isRequired,
-        productPlan: PropTypes.object.isRequired
+        productPlan: PropTypes.object.isRequired,
+        siteNameForm: PropTypes.object.isRequired
     };
 
     static defaultProps = {
@@ -189,7 +189,7 @@ class ChoosablePlanCard extends Component {
                         <DomainInput
                             customDomain={allowOwnDomain(productPlan)}
                             disabled={!activePlan}
-                            form={this.props.billingInformationForm}
+                            form={this.props.siteNameForm}
                         />
                     </div>
                 </div>

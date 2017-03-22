@@ -30,11 +30,11 @@ class CreditCardForm extends Component {
         console.log('Response from call of credit card form:');
         console.log(response);
         if (!response.success) {
-            let callbackUrl = '/credit-card-result?';
+            let callbackUrl = '#/credit-card-result?';
             for (let id in response) {
                 callbackUrl += `${id}=${encodeURIComponent(response[id])}&`;
             }
-            window.locatio = callbackUrl;
+            window.location = callbackUrl;
         }
     }
 
