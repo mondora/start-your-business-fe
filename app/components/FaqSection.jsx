@@ -11,10 +11,12 @@ const styles = {
         backgroundColor: colors.white
     },
     faq: {
+        minHeight: '230px',
         paddingTop: 30,
         paddingBottom: 30,
         paddingLeft: 30,
         '@media screen and (max-width: 767px)': {
+            minHeight: 'auto',
             paddingLeft: 0,
             paddingTop: 20,
             paddingBottom: 20,
@@ -49,30 +51,26 @@ class FaqSection extends Component {
             {
                 question: 'Perchè mettere un business online a sottoscrizione?',
                 answer:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                    `I vantaggi di un modello di business a sottoscrizione sono molti. Potrai coltivare
+                    rapporti duraturi con i tuoi clienti, che sarai in grado di seguire passo passo per rispondere al meglio alle loro esigenze.`
             },
             {
                 question: 'Website aziendale e template personalizzato: come funziona?',
                 answer:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                    `Se hai già un sito web aziendale puoi facilmente aggiungere un link al template che hai creato.
+                    Se scegli il piano Professional, puoi creare il tuo dominio specifico per le sottoscrizioni. `
             },
             {
-                question: 'Quali features non sono comprese nella versione standard?',
+                question: 'Come posso modificare i miei dati?',
                 answer:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                    `Quando crei e salvi il tuo primo template ti chiederemo di creare un tuo account personale.
+                    Potrai accedere al tuo account su entova.it e modificare i tuoi dati in qualsiasi momento.`
             },
             {
-                question: 'Posso modificare il piano da Standard a Premium in un secondo momento?',
+                question: 'Quali sono i vantaggi dell’abbonamento professional?',
                 answer:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                    `Con l’abbonamento Professional potrai accedere ad una selezione più ampia di templates personalizzabili.
+                    Inoltre potrai creare il tuo dominio e il tuo indirizzo email, oltre ad avere assistenza con LiveChat.`
             }
         ];
     }
@@ -86,7 +84,7 @@ class FaqSection extends Component {
                         title={'DOMANDE FREQUENTI'}
                         description={
                             `Hai bisogno di aiuto o desideri ricevere maggiori
-                            informazioni su scais.io e i suoi servizi?
+                            informazioni su entova.it e i suoi servizi?
                             Ecco le risposte alle domande più frequenti`
                         }
                     />

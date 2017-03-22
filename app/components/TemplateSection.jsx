@@ -49,26 +49,17 @@ class TemplateSection extends Component {
             {
                 icon: 'responsive_white',
                 title: '100% RESPONSIVE',
-                text:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                text: 'il tuo template si adatta a tutti gli smartphone e tablet.'
             },
             {
                 icon: 'template_white',
-                title: '2 TEMPLATE ACCATTIVANTI',
-                text:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                title: 'DESIGN MODERNO',
+                text: 'con i nostri template, mostrai al meglio il tuo business.'
             },
             {
                 icon: 'customizable_white',
-                title: 'FACILI DA PERSONALIZZARE',
-                text:
-                    `Lorem ipsum Do commodo in proident enim in dolor
-                    cupidatat adipisicing dolore officia nisi aliqua incididunt
-                    Ut veniam lorem ipsum Consectetur ut in in eu do.`
+                title: 'PERSONALIZZAZIONE ONLINE',
+                text: 'bastano pochi click e sei subito pronto a partire!'
             }
         ];
     }

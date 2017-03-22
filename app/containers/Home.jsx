@@ -147,15 +147,15 @@ class Home extends Component {
                 <div style={styles.teaserWrp}>
                     <div className='container' style={{textAlign: 'center'}}>
                         <h2 style={{...styles.titleTeaser, ...{fontSize: 'calc(40px + 2vw)'}}}>
-                            {'NUTRI IL TUO'}
+                            {'INNOVA IL TUO'}
                         </h2>
                         <h1 style={{...styles.titleTeaser, ...{fontSize: 'calc(60px + 1vw)'}}}>
                             {'BUSINESS'}
                         </h1>
                         <div style={styles.textTeaser}>
                             {
-                                `Crea il tuo shop online in pochi secondi su entova.it e vendi i tuoi prodotti o
-                                servizi a sottoscrizione.`
+                                `Crea il tuo shop online in pochi secondi su entova.it e vendi i tuoi prodotti o servizi a sottoscrizione.
+                                Nutri il tuo business... con Entova`
                             }
                         </div>
                         <HorizontalLine color={colors.primaryColor} width={100} />
