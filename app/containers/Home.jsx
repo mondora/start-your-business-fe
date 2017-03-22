@@ -1,6 +1,6 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
-import {Alert, Glyphicon} from 'react-bootstrap';
+import {Alert, Glyphicon, Modal} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -10,6 +10,7 @@ import {login} from 'actions/user';
 import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
 
+import Button from 'components/CustomButton';
 import FaqSection from 'components/FaqSection';
 import HomeSectionTitle from 'components/HomeSectionTitle';
 import HorizontalLine from 'components/HorizontalLine';
@@ -72,6 +73,12 @@ const styles = {
 };
 
 class Home extends Component {
+
+    constructor () {
+        super();
+        this.state = {showWarningModal: true};
+    }
+
     static propTypes = {
         getSYBProductPlans: PropTypes.func.isRequired,
         login: PropTypes.func.isRequired,
@@ -140,8 +147,14 @@ class Home extends Component {
         );
     }
 
+    closeWarningModal () {
+        this.setState({showWarningModal: false});
+    }
+
     render () {
         const logged = getUserSiteState(this.props.user).isLoggedIn;
+        const {showWarningModal} = this.state;
+
         return (
             <div style={{backgroundColor: colors.backgroundLightGrey}}>
                 <div style={styles.teaserWrp}>
@@ -170,6 +183,37 @@ class Home extends Component {
                 <TemplateSection />
                 {this.renderPlan(logged)}
                 <FaqSection />
+                <Modal show={showWarningModal} onHide={::this.closeWarningModal}>
+                    <Modal.Header closeButton={true} style={{border: 0}}>
+                        <Modal.Title style={{textAlign: 'center'}}>
+                            <h2>{'Benvenuto in'}</h2>
+                            <img
+                                src='/_assets/images/common/logo.png'
+                                style={{
+                                    cursor: 'pointer',
+                                    maxHeight: 80,
+                                    margin: 10,
+                                    backgroundColor: colors.darkGrey,
+                                    borderRadius: 10
+                                }}
+                            />
+                        </Modal.Title>
+                    </Modal.Header>
+                    <HorizontalLine color={colors.primaryColor} width={60} />
+                    <Modal.Body style={{textAlign: 'center'}}>
+                        <div style={{paddingBottom: 25, fontSize: 18}}>
+                            <div>{'Stiamo ancora lavorando a questo prodotto.'}</div>
+                            <div>{'Al momento puoi registrarti, creare un template e salvarlo.'}</div>
+                            <div>{'La sottoscrizione al servizio e la creazione del tuo sito saranno disponibili a breve.'}</div>
+                        </div>
+                        <Button
+                            backgroundColor={colors.primaryColor}
+                            onClick={::this.closeWarningModal}
+                            text={'PROVA SUBITO'}
+                            type='submit'
+                        />
+                    </Modal.Body>
+                </Modal>
             </div>
         );
     }

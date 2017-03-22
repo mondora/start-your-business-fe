@@ -34,7 +34,7 @@ class BuildSite extends Component {
                         anche in seguito.`}
                     </Alert>
                 }
-                pageTitle={'CONFIGURA IL TUO SITO'}
+                pageTitle={'CREA E PERSONALIZZA'}
                 saveButton={{
                     onSave: () => window.location = '#/choose-plan',
                     text: 'SALVA E PROSEGUI >'

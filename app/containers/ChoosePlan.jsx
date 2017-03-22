@@ -68,7 +68,7 @@ class ChoosePlan extends Component {
                 />
                 <div className='container'>
                     <h3 style={styles.title}>
-                        {'CI SEI QUASI, UN ULTIMO PASSO PER COMINCIARE IL TUO BUSINESS'}
+                        {'CI SEI QUASI, UN ULTIMO PASSO PER RAGGIUNGERE I TUOI CLIENTI'}
                     </h3>
                     <Form model='billing' onSubmit={this.submitBilling}>
                         <Row>
