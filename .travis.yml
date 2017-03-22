@@ -15,12 +15,12 @@ script:
 
 deploy:
   - provider: s3
-    bucket: entova.it
+    bucket: "entova.it"
     local_dir: build
     skip_cleanup: true
     region: eu-west-1
   - provider: s3
-    bucket: www.entova.it
+    bucket: "www.entova.it"
     local_dir: build
     skip_cleanup: true
     region: eu-west-1
