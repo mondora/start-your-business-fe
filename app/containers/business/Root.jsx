@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {browserHistory} from 'react-router';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
@@ -132,7 +131,7 @@ class Root extends Component {
                     return this.renderSite(editMode, siteConfig.element, userSite);
                 } else {
                     //TODO maybe better a not found page
-                    browserHistory.push('/');
+                    window.location = '#/';
                 }
             } else {
                 return this.renderSite(editMode, siteConfig.element, userSite);

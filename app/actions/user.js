@@ -1,5 +1,4 @@
 import md5 from 'js-md5';
-import {browserHistory} from 'react-router';
 
 import {authenticateUser, confirmRegistration, resendConfirmationCode, signUp} from 'lib/aws-cognito-utils';
 
@@ -13,7 +12,7 @@ export const confirmSignUp = (username, confirmationCode, userPoolConfig) => {
             'SIGNUP_CONFIRMATION',
             {},
             {},
-            () => browserHistory.push(`/build-site/${md5(username)}`)
+            () => window.location = `#/build-site/${md5(username)}`
         ), userPoolConfig);
     };
 };
@@ -28,7 +27,7 @@ export const login = (username, password, userPoolConfig) => {
             'LOGIN',
             {username: username},
             {username: username},
-            () => browserHistory.push(`/build-site/${md5(username)}`)
+            () => window.location = `#/build-site/${md5(username)}`
         ), userPoolConfig);
     };
 };

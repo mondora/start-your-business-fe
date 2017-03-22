@@ -1,7 +1,6 @@
 import Radium from 'radium';
 import React, {Component, PropTypes} from 'react';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
-import {browserHistory} from 'react-router';
 
 import * as colors from 'lib/colors';
 
@@ -48,7 +47,7 @@ class UserMenu extends Component {
                         }}
                         scopeSelector='.dropdown-account'
                     />
-                    <MenuItem eventKey='1' onSelect={() => browserHistory.push('/account')}>
+                    <MenuItem eventKey='1' onSelect={() => window.location = '#/account'}>
                         {'Il mio account'}
                     </MenuItem>
                     <MenuItem divider={true} />

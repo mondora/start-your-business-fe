@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import Radium from 'radium';
-import {browserHistory} from 'react-router';
 
 import * as colors from 'lib/colors';
 
@@ -92,7 +91,7 @@ class Header extends Component {
                     <Col xs={12} sm={6}>
                         <div style={styles.headerLogo}>
                             <img
-                                onClick={() => browserHistory.push('/')}
+                                onClick={() => window.location = '#/'}
                                 src='/_assets/images/common/logo.png'
                                 style={{
                                     cursor: 'pointer',

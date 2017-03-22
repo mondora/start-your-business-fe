@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {browserHistory} from 'react-router';
 import {getStoredState} from 'redux-persist';
 
 import {subscriptionStatus} from 'lib/subscription-utils';
@@ -39,7 +38,7 @@ export default class SubscriptionResultLoader extends Component {
                 {'LE INFORMAZIONI DELLA CARTA DI CREDITO NON SONO CORRETTE'}
             </p>,
             {
-                onClick: () => browserHistory.push('/choose-plan'),
+                onClick: () => window.location = '#/choose-plan',
                 text: '< TORNA INDIETRO'
             }
         );
@@ -58,7 +57,7 @@ export default class SubscriptionResultLoader extends Component {
                 {'LA SOTTOSCRIZIONE NON È STATA TERMINATA'}
             </p>,
             {
-                onClick: () => browserHistory.push('/choose-plan'),
+                onClick: () => window.location = '#/choose-plan',
                 text: '< TORNA INDIETRO'
             }
         );
@@ -71,7 +70,7 @@ export default class SubscriptionResultLoader extends Component {
                 {'PAGAMENTO ANDATO A BUON FINE'}
             </p>,
             {
-                onClick: () => browserHistory.push('/account'),
+                onClick: () => window.location = '#/account',
                 text: 'VAI ALL’AREA UTENTI>'
             }
         );

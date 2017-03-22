@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {actions} from 'react-redux-form';
-import {browserHistory} from 'react-router';
 import {Alert} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 
@@ -40,7 +39,7 @@ class BuildSite extends Component {
                     text: 'ANNULLA IMPOSTAZIONI'
                 }}
                 saveButton={{
-                    onSave: () => browserHistory.push('/choose-plan'),
+                    onSave: () => window.location = '#/choose-plan',
                     text: 'SALVA E PROSEGUI >'
                 }}
                 {...this.props}
