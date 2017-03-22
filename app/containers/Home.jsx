@@ -46,8 +46,9 @@ const styles = {
         margin: '20px auto',
         width: '60%',
         textAlign: 'center',
-        fontSize: 'calc(18px + .25vw)',
-        lineHeight: 'calc(18px + 1vw)',
+        fontWeight: 700,
+        fontSize: 'calc(20px + .25vw)',
+        lineHeight: 'calc(20px + 1vw)',
         '@media screen and (max-width: 767px)': {
             width: '100%'
         }
@@ -145,17 +146,16 @@ class Home extends Component {
             <div style={{backgroundColor: colors.backgroundLightGrey}}>
                 <div style={styles.teaserWrp}>
                     <div className='container' style={{textAlign: 'center'}}>
-                        <h1 style={{...styles.titleTeaser, ...{fontSize: 'calc(60px + 1vw)'}}}>
-                            {'INIZIA ORA'}
-                        </h1>
                         <h2 style={{...styles.titleTeaser, ...{fontSize: 'calc(40px + 2vw)'}}}>
-                            {'IL TUO NUOVO BUSINESS'}
+                            {'NUTRI IL TUO'}
                         </h2>
+                        <h1 style={{...styles.titleTeaser, ...{fontSize: 'calc(60px + 1vw)'}}}>
+                            {'BUSINESS'}
+                        </h1>
                         <div style={styles.textTeaser}>
                             {
-                                `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua. Ut enim ad minim veniam.`
+                                `Crea il tuo shop online in pochi secondi su entova.it e vendi i tuoi prodotti o
+                                servizi a sottoscrizione.`
                             }
                         </div>
                         <HorizontalLine color={colors.primaryColor} width={100} />
