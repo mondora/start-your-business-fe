@@ -36,6 +36,9 @@ class BuildSite extends Component {
                     </Alert>
                 }
                 pageTitle={'CONFIGURA IL TUO SITO'}
+                resetButton={{
+                    text: 'ANNULLA IMPOSTAZIONI'
+                }}
                 saveButton={{
                     onSave: () => browserHistory.push('/choose-plan'),
                     text: 'SALVA E PROSEGUI >'
