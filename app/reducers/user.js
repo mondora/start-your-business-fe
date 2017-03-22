@@ -46,6 +46,8 @@ const user = (state = {
                 isLoggedIn: true,
                 username: action.username
             });
+        case 'LOGOUT_SUCCESS':
+            return getNewSiteState(state, defaultSiteState);
         case 'OPEN_SIGNUP_CONFIRMATION_MODAL':
             return getNewSiteState(state, {
                 isConfirmed: false,

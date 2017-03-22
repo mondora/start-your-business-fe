@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Radium from 'radium';
 
-import {confirmSignUp, login, sendNewConfirmationCode, setRenderingSite} from 'actions/user';
+import {confirmSignUp, login, logout, sendNewConfirmationCode, setRenderingSite} from 'actions/user';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -19,6 +19,7 @@ class Root extends Component {
         location: PropTypes.object.isRequired,
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
+        logout: PropTypes.func.isRequired,
         routes: PropTypes.array.isRequired,
         sendNewConfirmationCode: PropTypes.func.isRequired,
         setRenderingSite: PropTypes.func.isRequired,
@@ -44,6 +45,7 @@ class Root extends Component {
                 <Header
                     login={this.props.login}
                     loginForm={this.props.loginForm}
+                    logout={() => this.props.logout(userSite.username)}
                     user={userSite}
                 />
                 {this.props.children}
@@ -75,6 +77,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         confirmSignUp: bindActionCreators(confirmSignUp, dispatch),
         login: bindActionCreators(login, dispatch),
+        logout: bindActionCreators(logout, dispatch),
         sendNewConfirmationCode: bindActionCreators(sendNewConfirmationCode, dispatch),
         setRenderingSite: bindActionCreators(setRenderingSite, dispatch)
     };

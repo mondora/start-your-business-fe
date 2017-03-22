@@ -40,13 +40,14 @@ class Header extends Component {
     static propTypes = {
         login: PropTypes.func.isRequired,
         loginForm: PropTypes.object,
+        logout: PropTypes.func.isRequired,
         user: PropTypes.object
     };
 
     renderWelcomeWidget () {
         return (
             <UserMenu
-                logout={() => console.log('logout')}
+                logout={this.props.logout}
                 user={this.props.user}
             />
         );

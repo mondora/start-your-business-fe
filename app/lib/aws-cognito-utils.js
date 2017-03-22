@@ -133,3 +133,13 @@ export function signUp (email, password, attributes, callback, userPoolConfig) {
         callback({success: true});
     });
 }
+
+export function signOut (username, callback, userPoolConfig) {
+    const cognitoUser = getCognitoUser(username, userPoolConfig);
+    if (cognitoUser != null) {
+        cognitoUser.signOut();
+        callback({success: true});
+    } else {
+        callback({error: true});
+    }
+}

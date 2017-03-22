@@ -51,7 +51,7 @@ class UserMenu extends Component {
                         {'Il mio account'}
                     </MenuItem>
                     <MenuItem divider={true} />
-                    <MenuItem eventKey='2'>
+                    <MenuItem eventKey='2' onSelect={this.props.logout}>
                         {'Logout'}
                     </MenuItem>
                 </DropdownButton>

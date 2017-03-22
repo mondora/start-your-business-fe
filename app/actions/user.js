@@ -1,6 +1,6 @@
 import md5 from 'js-md5';
 
-import {authenticateUser, confirmRegistration, resendConfirmationCode, signUp} from 'lib/aws-cognito-utils';
+import {authenticateUser, confirmRegistration, resendConfirmationCode, signOut, signUp} from 'lib/aws-cognito-utils';
 
 export const confirmSignUp = (username, confirmationCode, userPoolConfig) => {
     return dispatch => {
@@ -28,6 +28,18 @@ export const login = (username, password, userPoolConfig) => {
             {username: username},
             {username: username},
             () => window.location = `#/update-site/${md5(username)}`
+        ), userPoolConfig);
+    };
+};
+
+export const logout = (username, userPoolConfig) => {
+    return dispatch => {
+        signOut(username, getDefaultCognitoCallback(
+            dispatch,
+            'LOGOUT',
+            {},
+            {},
+            () => window.location = '#/'
         ), userPoolConfig);
     };
 };
