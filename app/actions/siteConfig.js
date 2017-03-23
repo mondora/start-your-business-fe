@@ -1,3 +1,5 @@
+import md5 from 'js-md5';
+
 import axios from 'lib/axios';
 import {fetch as fetchFn} from 'lib/fetch';
 
@@ -17,11 +19,16 @@ const _fetch = fetchFn(
 
 export const fetch = businessId => _fetch(`/businesses/${businessId}`);
 
-export const upsertSiteConfig = siteConfig => dispatch => {
+export const upsertSiteConfig = (siteConfig, username) => dispatch => {
     dispatch({
         type: UPSERT_SITE_CONFIG_START
     });
-    axios.post('/businesses', siteConfig)
+    console.log(siteConfig);
+    console.log(username);
+    axios.post('/businesses', {
+        siteConfig,
+        userId: md5(username)
+    })
         .then(() => dispatch({
             type: UPSERT_SITE_CONFIG_SUCCESS
         }))

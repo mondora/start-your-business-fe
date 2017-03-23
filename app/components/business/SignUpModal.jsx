@@ -8,6 +8,7 @@ export default class SignUpModal extends Component {
         backgroundColor: PropTypes.string,
         businessUserPool: PropTypes.object,
         form: PropTypes.object.isRequired,
+        login: PropTypes.func.isRequired,
         onClose: PropTypes.func,
         show: PropTypes.bool,
         signUpState: PropTypes.object.isRequired,
@@ -32,6 +33,7 @@ export default class SignUpModal extends Component {
                             backgroundColor={this.props.backgroundColor}
                             businessUserPool={this.props.businessUserPool}
                             form={this.props.form}
+                            login={this.props.login}
                             signUpUser={this.props.signUpUser}
                             signUpState={this.props.signUpState}
                         />

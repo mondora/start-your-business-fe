@@ -7,7 +7,7 @@ import Home1 from 'components/business/01/Home';
 import Home2 from 'components/business/02/Home';
 
 import {setImagePath} from 'actions/siteConfig';
-import {signUpUser} from 'actions/user';
+import {login, signUpUser} from 'actions/user';
 
 import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
@@ -53,6 +53,7 @@ class Home extends Component {
 
     static propTypes = {
         editMode: PropTypes.number,
+        login: PropTypes.func.isRequired,
         productPlans: PropTypes.object,
         setImagePath: PropTypes.func.isRequired,
         signUpForm: PropTypes.object,
@@ -93,6 +94,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        login: bindActionCreators(login, dispatch),
         setImagePath: bindActionCreators(setImagePath, dispatch),
         signUpUser: bindActionCreators(signUpUser, dispatch)
     };

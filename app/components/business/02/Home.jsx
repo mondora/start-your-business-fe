@@ -36,6 +36,7 @@ export default class Home extends Component {
 
     static propTypes = {
         editMode: PropTypes.number,
+        login: PropTypes.func.isRequired,
         productPlans: PropTypes.object,
         setImagePath: PropTypes.func.isRequired,
         signUpForm: PropTypes.object,
@@ -54,6 +55,7 @@ export default class Home extends Component {
     render () {
         const {
             editMode,
+            login,
             productPlans,
             setImagePath,
             signUpForm,
@@ -84,6 +86,7 @@ export default class Home extends Component {
                         buildSiteMode={editMode}
                         form={siteConfigIntroForm}
                         introTitleStyle={homeStyles.introTitleStyle}
+                        login={login}
                         signUpForm={signUpForm}
                         signUpUser={signUpUser}
                         signUpState={signUpState}

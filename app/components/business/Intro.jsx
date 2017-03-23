@@ -26,6 +26,7 @@ export default class Intro extends Component {
         buttonStyle: PropTypes.object,
         form: PropTypes.object,
         introTitleStyle: PropTypes.object,
+        login: PropTypes.func.isRequired,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object.isRequired,
         signUpUser: PropTypes.func.isRequired,
@@ -65,11 +66,12 @@ export default class Intro extends Component {
     }
 
     renderModal () {
-        const {siteConfig, signUpForm, signUpUser, signUpState} = this.props;
+        const {login, siteConfig, signUpForm, signUpUser, signUpState} = this.props;
         return (
             <SignUpModal
                 backgroundColor={siteConfig.colors.mainColor}
                 form={signUpForm}
+                login={login}
                 onClose={() => this.setState({showSignUpModal: false})}
                 show={this.state.showSignUpModal}
                 signUpUser={signUpUser}

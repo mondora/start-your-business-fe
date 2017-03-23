@@ -93,8 +93,9 @@ function siteConfig (state = initialState, action) {
                 fetchError: null
             };
         case FETCH_SITE_CONFIG_SUCCESS:
+            //TODO check not empty payload
             return {
-                element: payload,
+                element: payload.length > 0 ? payload[0] : initialSiteConfig,
                 isFetching: false,
                 fetchError: null
             };

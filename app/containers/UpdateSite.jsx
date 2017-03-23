@@ -9,7 +9,7 @@ import {fetch as fetchSiteConfig, setImagePath, upsertSiteConfig} from 'actions/
 
 import SiteEditor from 'components/SiteEditor';
 
-class BuildSite extends Component {
+class UpdateSite extends Component {
 
     static propTypes = {
         editMode: PropTypes.number,
@@ -19,7 +19,8 @@ class BuildSite extends Component {
         setImagePath: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
-        upsertSiteConfig: PropTypes.func.isRequired
+        upsertSiteConfig: PropTypes.func.isRequired,
+        username: PropTypes.string
     };
 
     render () {
@@ -44,7 +45,8 @@ class BuildSite extends Component {
 const mapStateToProps = (state) => {
     return {
         editMode: state.ui.editMode,
-        siteConfig: state.siteConfig.element
+        siteConfig: state.siteConfig.element,
+        username: state.user.SYB.username
     };
 };
 
@@ -58,4 +60,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BuildSite);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateSite);

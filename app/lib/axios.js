@@ -3,9 +3,10 @@ import browser from 'detect-browser';
 
 import {API_URL} from 'config';
 
+//TODO enable credentials
 const instance = axios.create({
     baseURL: API_URL,
-    withCredentials: true
+    withCredentials: false
 });
 
 // Avoid using browser cache in IE
