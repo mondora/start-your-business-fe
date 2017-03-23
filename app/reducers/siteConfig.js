@@ -94,8 +94,9 @@ function siteConfig (state = initialState, action) {
             };
         case FETCH_SITE_CONFIG_SUCCESS:
             //TODO check not empty payload
+            console.log(payload);
             return {
-                element: payload.length > 0 ? payload[0] : initialSiteConfig,
+                element: payload.length > 0 ? payload[0].siteConfig : initialSiteConfig,
                 isFetching: false,
                 fetchError: null
             };
