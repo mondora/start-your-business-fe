@@ -38,7 +38,7 @@ class TemplateSection extends Component {
                             <StepCard
                                 number={1}
                                 text={`crea il tuo account su Entova.it per accedere
-                                    ai templates e mettere online il tuo business`}
+                                    ai template e mettere online il tuo business`}
                                 title={'REGISTRATI'}
                             />
                             <StepCard

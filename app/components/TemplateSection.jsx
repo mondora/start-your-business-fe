@@ -54,7 +54,7 @@ class TemplateSection extends Component {
             {
                 icon: 'template_white',
                 title: 'DESIGN MODERNO',
-                text: 'con i nostri template, mostrai al meglio il tuo business.'
+                text: 'con i nostri template, mostra al meglio il tuo business.'
             },
             {
                 icon: 'customizable_white',
@@ -89,7 +89,7 @@ class TemplateSection extends Component {
                         title={'SCEGLI UN TEMPLATE'}
                         description={
                             `Entova.it ti offre la possibilità di scegliere tra
-                            i vari templates preimpostati e di personalizzarli
+                            vari template preimpostati e di personalizzarli
                             come vuoi tu`
                         }
                     />

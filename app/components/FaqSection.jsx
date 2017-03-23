@@ -49,7 +49,7 @@ class FaqSection extends Component {
     getFaq () {
         return [
             {
-                question: 'Perchè mettere un business online a sottoscrizione?',
+                question: 'Perché mettere un business online a sottoscrizione?',
                 answer:
                     `I vantaggi di un modello di business a sottoscrizione sono molti. Potrai coltivare
                     rapporti duraturi con i tuoi clienti, che sarai in grado di seguire passo passo per rispondere al meglio alle loro esigenze.`
@@ -69,7 +69,7 @@ class FaqSection extends Component {
             {
                 question: 'Quali sono i vantaggi dell’abbonamento professional?',
                 answer:
-                    `Con l’abbonamento Professional potrai accedere ad una selezione più ampia di templates personalizzabili.
+                    `Con l’abbonamento Professional potrai accedere ad una selezione più ampia di template personalizzabili.
                     Inoltre potrai creare il tuo dominio e il tuo indirizzo email, oltre ad avere assistenza con LiveChat.`
             }
         ];
