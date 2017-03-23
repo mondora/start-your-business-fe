@@ -19,6 +19,11 @@ deploy:
     local_dir: build
     skip_cleanup: true
     region: eu-west-1
+  - provider: s3
+    bucket: "www.entova.it"
+    local_dir: build
+    skip_cleanup: true
+    region: eu-central-1
 
 notifications:
   email:
