@@ -80,6 +80,15 @@ export function confirmRegistration (username, confirmationCode, callback, userP
 
 export function createUserPool (businessName, callback) {
     cisp.createUserPool({
+        Policies: {
+            PasswordPolicy: {
+                MinimumLength: 8,
+                RequireLowercase: true,
+                RequireNumbers: true,
+                RequireSymbols: false,
+                RequireUppercase: true
+            }
+        },
         PoolName: businessName
     }, (err, result) => {
         if (err) {
@@ -88,7 +97,6 @@ export function createUserPool (businessName, callback) {
             return;
         }
         const userPoolId = result.UserPool.Id;
-        //TODO change password policy to remove special charachters
         cisp.createUserPoolClient({
             ClientName: 'StartYourBusiness',
             UserPoolId: userPoolId
