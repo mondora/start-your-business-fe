@@ -13,14 +13,17 @@ export function requiredEmailValidator (val) {
 }
 
 export function requiredPasswordValidator (val) {
-    /*** TODO
+    /***
         Minimum length 8
         Require numbers
-        Require special character
         Require uppercase letters
         Require lowercase letters
      ***/
-    return genericRequiredValidator(val);
+    return genericRequiredValidator(val) ||
+        (val.trim().length < 8 && 'La password deve essere lunga almeno 8 caratteri') ||
+        (!val.match(/.*[0-9].*/) && 'La password deve contenere almeno un numero') ||
+        (!val.match(/.*[A-Z].*/) && 'La password deve contenere almeno una lettera maiuscola') ||
+        (!val.match(/.*[a-z].*/) && 'La password deve contenere almeno una lettera miniscula');
 }
 
 export function requiredPriceValidator (val) {

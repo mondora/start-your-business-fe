@@ -88,6 +88,7 @@ export function createUserPool (businessName, callback) {
             return;
         }
         const userPoolId = result.UserPool.Id;
+        //TODO change password policy to remove special charachters
         cisp.createUserPoolClient({
             ClientName: 'StartYourBusiness',
             UserPoolId: userPoolId
