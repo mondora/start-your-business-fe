@@ -43,7 +43,7 @@ export default class AccountSettingsForm extends Component {
         const {padding, marginBottom} = this.props;
         return (
             <Form
-                model={'user.signup'}
+                model={'user.updateInfo'}
                 onSubmit={() => console.log('TODO save user data')}
                 validateOn='submit'
                 style={{...styles.formWrp, ...{marginBottom: marginBottom, padding: padding}}}
@@ -54,7 +54,7 @@ export default class AccountSettingsForm extends Component {
                     field={this.props.form.givenName}
                     inputType='text'
                     label='Nome:'
-                    model='user.signup.givenName'
+                    model='user.updateInfo.givenName'
                     placeholder='Nome'
                     validator={genericRequiredValidator}
                     style={styles.blockWrp}
@@ -63,7 +63,7 @@ export default class AccountSettingsForm extends Component {
                     field={this.props.form.familyName}
                     inputType='text'
                     label='Cognome: *'
-                    model='user.signup.familyName'
+                    model='user.updateInfo.familyName'
                     placeholder='Cognome'
                     validator={genericRequiredValidator}
                     style={styles.blockWrp}
@@ -72,7 +72,7 @@ export default class AccountSettingsForm extends Component {
                     field={this.props.form.email}
                     inputType='email'
                     label='Email: *'
-                    model='user.signup.email'
+                    model='user.updateInfo.email'
                     placeholder='youremail@email.it'
                     validator={requiredEmailValidator}
                     style={styles.blockWrp}

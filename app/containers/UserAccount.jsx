@@ -3,7 +3,11 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
+import {bindActionCreators} from 'redux';
 
+import {updatePassword} from 'actions/user';
+
+import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
 
 import AccountSettingsForm from 'components/AccountSettingsForm';
@@ -30,8 +34,11 @@ const styles = {
 
 class UserAccount extends Component {
     static propTypes = {
+        basicInfoForm: PropTypes.object,
         billingInformationForm: PropTypes.object,
-        signUpForm: PropTypes.object
+        passwordsForm: PropTypes.object,
+        updatePassword: PropTypes.func.isRequired,
+        user: PropTypes.object
     };
 
     constructor (props) {
@@ -42,6 +49,7 @@ class UserAccount extends Component {
     }
 
     render () {
+        const {username} = getUserSiteState(this.props.user);
         return (
             <div>
                 <PageTeaser
@@ -52,7 +60,7 @@ class UserAccount extends Component {
                         <Col xs={12} md={6}>
                             <div style={styles.box}>
                                 <AccountSettingsForm
-                                    form={this.props.signUpForm}
+                                    form={this.props.basicInfoForm}
                                     titleStyle={styles.boxTitle}
                                     marginBottom={0}
                                     padding={0}
@@ -62,10 +70,13 @@ class UserAccount extends Component {
                         <Col xs={12} md={6}>
                             <div style={styles.box}>
                                 <ChangePasswordForm
-                                    form={this.props.signUpForm}
+                                    form={this.props.passwordsForm}
                                     titleStyle={styles.boxTitle}
                                     marginBottom={0}
                                     padding={0}
+                                    updatePassword={(oldPassword, newPassword) =>
+                                        this.props.updatePassword(username, oldPassword, newPassword)
+                                    }
                                 />
                             </div>
                         </Col>
@@ -168,13 +179,16 @@ class UserAccount extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        basicInfoForm: state.userBasicInfoForm,
         billingInformationForm: state.billingInformationForm,
-        signUpForm: state.userSignupForm
+        passwordsForm: state.userPasswordsForm,
+        user: state.user
     };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
+        updatePassword: bindActionCreators(updatePassword, dispatch)
     };
 };
 

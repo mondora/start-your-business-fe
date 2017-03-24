@@ -7,6 +7,20 @@ export const initialConfirmationState = {
     errorMessage: null
 };
 
+export const initialBasicUserInfo = {
+    email: '',
+    errorMessage: null,
+    familyName: '',
+    givenName: ''
+};
+
+export const initialPasswordsState = {
+    confirmNewPassword: '',
+    errorMessage: null,
+    oldPassword: '',
+    newPassword: ''
+};
+
 export const initialSignupState = {
     confirmation: initialConfirmationState,
     confirmPassword: '',
@@ -29,6 +43,8 @@ const defaultSiteState = {
     isLoggedIn: false,
     login: initialLoginState,
     signup: initialSignupState,
+    updateInfo: initialBasicUserInfo,
+    updatePassword: initialPasswordsState,
     username: null
 };
 
@@ -90,6 +106,17 @@ const user = (state = {
                 },
                 isConfirmed: false,
                 username: action.username
+            });
+        case 'UPDATE_PASSWORD_FAIL':
+            return getNewSiteState(state, {
+                updatePassword: {
+                    ...siteState.updatePassword,
+                    errorMessage: action.error.message
+                }
+            });
+        case 'UPDATE_PASSWORD_SUCCESS':
+            return getNewSiteState(state, {
+                updatePassword: initialPasswordsState
             });
         default:
             return state;

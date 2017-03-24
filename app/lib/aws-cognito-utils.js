@@ -23,6 +23,8 @@ const sybUserPool = new CognitoUserPool({
 
 const cisp = new AWS.CognitoIdentityServiceProvider();
 
+const cognitoUserMap = {};
+
 function getUserPool (userPoolConfig) {
     return new CognitoUserPool({
         ClientId: userPoolConfig.clientId,
@@ -31,11 +33,15 @@ function getUserPool (userPoolConfig) {
 }
 
 function getCognitoUser (username, userPoolConfig) {
-    const userData = {
-        Username: username,
-        Pool: userPoolConfig ? getUserPool(userPoolConfig) : sybUserPool
-    };
-    return new CognitoUser(userData);
+    const key = userPoolConfig ? userPoolConfig.userPoolId : AWS_COGNITO.userPoolId;
+    if (!cognitoUserMap[key]) {
+        const userData = {
+            Username: username,
+            Pool: userPoolConfig ? getUserPool(userPoolConfig) : sybUserPool
+        };
+        cognitoUserMap[key] = new CognitoUser(userData);
+    }
+    return cognitoUserMap[key];
 }
 
 export function authenticateUser (username, password, callback, userPoolConfig) {
@@ -63,6 +69,19 @@ export function authenticateUser (username, password, callback, userPoolConfig) 
             console.error(err);
             callback({error: err});
         }
+    });
+}
+
+export function changePassword (username, oldPassword, newPassword, callback, userPoolConfig) {
+    const cognitoUser = getCognitoUser(username, userPoolConfig);
+    //TODO
+    cognitoUser.changePassword(oldPassword, newPassword, (err) => {
+        if (err) {
+            console.error(err);
+            callback({error: err});
+            return;
+        }
+        callback({success: true});
     });
 }
 

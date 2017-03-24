@@ -15,7 +15,13 @@ import siteConfig, {
 import payment from './payment';
 import products from './products';
 import spinner from './spinner';
-import user, {initialConfirmationState, initialLoginState, initialSignupState} from './user';
+import user, {
+    initialBasicUserInfo,
+    initialConfirmationState,
+    initialLoginState,
+    initialPasswordsState,
+    initialSignupState
+} from './user';
 import ui, {initialSubscriptionsInfo} from './ui';
 
 const reducers = combineReducers({
@@ -36,7 +42,9 @@ const reducers = combineReducers({
     siteNameForm: formReducer('siteConfig.element.site', initialBusinessSite),
     ui,
     user,
+    userBasicInfoForm: formReducer('user.updateInfo', initialBasicUserInfo),
     userLoginForm: formReducer('user.login', initialLoginState),
+    userPasswordsForm: formReducer('user.updatePassword', initialPasswordsState),
     userSignupForm: formReducer('user.signup', initialSignupState),
     userSignupConfirmationForm: formReducer('user.signup.confirmation', initialConfirmationState)
 });

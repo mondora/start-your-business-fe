@@ -33,8 +33,8 @@ const styles = {
     }
 };
 
-const passwordsMatch = ({password, confirmPassword}) => {
-    return password === confirmPassword;
+const passwordsMatch = ({newPassword, confirmNewPassword}) => {
+    return newPassword === confirmNewPassword;
 };
 
 export default class ChangePasswordForm extends Component {
@@ -42,64 +42,55 @@ export default class ChangePasswordForm extends Component {
         form: PropTypes.object.isRequired,
         marginBottom: PropTypes.number,
         padding: PropTypes.number,
-        titleStyle: PropTypes.object
+        titleStyle: PropTypes.object,
+        updatePassword: PropTypes.func.isRequired
     };
 
-    constructor (props) {
-        super(props);
-        this.state = {
-            isActive: false
-        };
-    }
-
     render () {
-        const {$form, confirmPassword} = this.props.form;
-        const {padding, marginBottom} = this.props;
+        const {form: {$form, confirmNewPassword, newPassword, oldPassword}, padding, marginBottom, updatePassword} = this.props;
         return (
             <Form
-                model={'user.signup'}
-                onSubmit={() => console.log('TODO save new password')}
+                model={'user.updatePassword'}
+                onSubmit={({newPassword, oldPassword}) => updatePassword(oldPassword, newPassword)}
                 validateOn='submit'
                 validators={{'': {passwordsMatch}}}
                 style={{...styles.formWrp, ...{marginBottom: marginBottom, padding: padding}}}
             >
                 <h3 style={this.props.titleStyle}>{'AGGIORNA PASSWORD:'}</h3>
                 <FormInput
-                    field={this.props.form.password}
+                    field={oldPassword}
                     inputType='password'
                     label='Password attuale:'
-                    model='user.signup.password'
+                    model='user.updatePassword.oldPassword'
                     placeholder='Fs4••••••••••••'
                     validator={requiredPasswordValidator}
                     style={styles.blockWrp}
                 />
                 <FormInput
-                    field={this.props.form.password}
+                    field={newPassword}
                     inputType='password'
                     label='Nuova password: *'
-                    model='user.signup.password'
+                    model='user.updatePassword.newPassword'
                     placeholder='R12••••••••••••'
                     validator={requiredPasswordValidator}
                     style={styles.blockWrp}
                 />
                 <FormInput
-                    error={() => confirmPassword.touched && !$form.valid && $form.submitFailed && $form.errors.passwordsMatch &&
+                    error={() => confirmNewPassword.touched && !$form.valid && $form.submitFailed && $form.errors.passwordsMatch &&
                         <strong style={styles.errorsWrp}>
                             {'La password di conferma non coincide'}
                         </strong>
                     }
-                    field={confirmPassword}
+                    field={confirmNewPassword}
                     inputType='password'
                     label='Ripeti password: *'
-                    model='user.signup.confirmPassword'
+                    model='user.updatePassword.confirmNewPassword'
                     placeholder='R12••••••••••••'
                     style={styles.blockWrp}
                 />
 
                 <label style={styles.blockWrp}>
-                    <UserAccountSaveButton
-                        isActive={() => this.setState({isActive: true})}
-                    />
+                    <UserAccountSaveButton isActive={oldPassword.valid && newPassword.valid} />
                 </label>
             </Form>
         );
