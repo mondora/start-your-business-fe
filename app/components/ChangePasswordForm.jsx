@@ -67,7 +67,7 @@ export default class ChangePasswordForm extends Component {
                 <FormInput
                     field={this.props.form.password}
                     inputType='password'
-                    label='Vecchia password:'
+                    label='Password attuale:'
                     model='user.signup.password'
                     placeholder='Fs4••••••••••••'
                     validator={requiredPasswordValidator}

@@ -46,7 +46,7 @@ class Footer extends Component {
                                 <strong>
                                     {`mondora S.r.l. società soggetta
                                         all’attività di direzione e coordinamento di TeamSystem S.p.A. -
-                                        Sede: Via Nazionale 11 - 23013 Cosio Valtellino (SO)`}
+                                        Sede: Via Umberto Visconti di Modrone 33, 20122 Milano`}
                                     <br />
                                 </strong>
                             </div>

@@ -28,10 +28,10 @@ class UpdateSite extends Component {
             <SiteEditor
                 instructionMessage={
                     <Alert bsStyle='success'>
-                        {'Fai le modifiche al tuo sito e salva per pubblicarle subito.'}
+                        {'Modifica il tuo sito, salva e pubblica!'}
                     </Alert>
                 }
-                pageTitle={'AGGIORNA IL TUO SITO'}
+                pageTitle={'CREA E PERSONALIZZA'}
                 saveButton={{
                     text: 'SALVA E PUBBLICA'
                 }}

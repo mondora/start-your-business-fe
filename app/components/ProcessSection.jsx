@@ -44,7 +44,7 @@ class TemplateSection extends Component {
                             <StepCard
                                 number={2}
                                 text={`e personalizzalo come vuoi tu, aggiungendo
-                                    logo, immagini e testo. Scegli le sottoscrizioni -
+                                    logo, immagini e testo. Scegli le sottoscrizioni
                                     con cui desideri vendere il tuo prodotto o servizio`}
                                 title={'SCEGLI UN TEMPLATE'}
                             />

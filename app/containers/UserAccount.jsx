@@ -123,7 +123,7 @@ class UserAccount extends Component {
                                         <Button
                                             onClick={() => window.location = '#/update-site/NOMESITO'}
                                             height={40}
-                                            text={'GESTISCI SITO'}
+                                            text={'MODIFICA'}
                                         />
                                     </Col>
                                 </Row>
