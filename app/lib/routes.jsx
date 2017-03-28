@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import {useRouterHistory, Router, Route} from 'react-router';
 import createHistory from 'history/lib/createHashHistory';
-
 import {Provider} from 'react-redux';
+
+import {GA_TRACKING_ID, NODE_ENV} from 'config';
 
 import store from 'lib/redux-store';
 
@@ -23,9 +25,19 @@ import BusinessRoot from 'containers/business/Root';
 import BusinessSubscriptionResult from 'containers/business/SubscriptionResult';
 import BusinessUserInfo from 'containers/business/UserInfo';
 
+ReactGA.initialize(GA_TRACKING_ID);
+
+function logPageView () {
+    console.log(NODE_ENV);
+    if (NODE_ENV === 'production') {
+        ReactGA.set({page: window.location.pathname});
+        ReactGA.pageview(window.location.pathname);
+    }
+}
+
 export default (
     <Provider store={store}>
-        <Router history={useRouterHistory(createHistory)({})}>
+        <Router history={useRouterHistory(createHistory)({})} onUpdate={logPageView}>
             <Route name='root' component={Root}>
                 <Route name='home' path='/' component={Home} />
                 <Route name='signup' path='/signup' component={SignUp} />

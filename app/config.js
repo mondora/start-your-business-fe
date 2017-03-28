@@ -12,3 +12,5 @@ export const AWS_REGION = window.APP_CONFIG.AWS_REGION;
 export const AWS_ACCESS_KEY = window.APP_CONFIG.AWS_ACCESS_KEY;
 export const AWS_SECRET_KEY = window.APP_CONFIG.AWS_SECRET_KEY;
 export const AWS_S3_BUCKET = window.APP_CONFIG.AWS_S3_BUCKET;
+
+export const GA_TRACKING_ID = window.APP_CONFIG.GA_TRACKING_ID;
