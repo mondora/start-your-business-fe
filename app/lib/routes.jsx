@@ -28,7 +28,6 @@ import BusinessUserInfo from 'containers/business/UserInfo';
 ReactGA.initialize(GA_TRACKING_ID);
 
 function logPageView () {
-    console.log(NODE_ENV);
     if (NODE_ENV === 'production') {
         ReactGA.set({page: window.location.pathname});
         ReactGA.pageview(window.location.pathname);
