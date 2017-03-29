@@ -53,6 +53,15 @@ const user = (state = {
 }, action) => {
     const siteState = state[getSiteName(state.renderingSite)];
     switch (action.type) {
+        case 'FETCH_USER_INFO_SUCCESS':
+            return getNewSiteState(state, {
+                updateInfo: {
+                    email: action.data.email,
+                    errorMessage: null,
+                    familyName: action.data.family_name,
+                    givenName: action.data.given_name
+                }
+            });
         case 'LOGIN_FAIL':
             return getNewSiteState(state, getLoginErrorState(siteState, action));
         case 'LOGIN_SUCCESS':

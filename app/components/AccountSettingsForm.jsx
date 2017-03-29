@@ -26,6 +26,7 @@ const styles = {
 
 export default class AccountSettingsForm extends Component {
     static propTypes = {
+        fetchUserInfo: PropTypes.func.isRequired,
         form: PropTypes.object.isRequired,
         marginBottom: PropTypes.number,
         padding: PropTypes.number,
@@ -39,6 +40,10 @@ export default class AccountSettingsForm extends Component {
         };
     }
 
+    componentDidMount () {
+        this.props.fetchUserInfo();
+    }
+    
     render () {
         const {padding, marginBottom} = this.props;
         return (

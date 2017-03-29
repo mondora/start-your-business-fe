@@ -74,7 +74,6 @@ export function authenticateUser (username, password, callback, userPoolConfig) 
 
 export function changePassword (username, oldPassword, newPassword, callback, userPoolConfig) {
     const cognitoUser = getCognitoUser(username, userPoolConfig);
-    //TODO
     cognitoUser.changePassword(oldPassword, newPassword, (err) => {
         if (err) {
             console.error(err);
@@ -132,6 +131,23 @@ export function createUserPool (businessName, callback) {
                     userPoolId: userPoolId
                 }
             });
+        });
+    });
+}
+
+export function getUserAttributes (username, callback, userPoolConfig) {
+    const cognitoUser = getCognitoUser(username, userPoolConfig);
+    cognitoUser.getUserAttributes((err, result) => {
+        if (err) {
+            console.error(err);
+            callback({error: err});
+            return;
+        }
+        let resultData = {};
+        result.forEach(item => resultData[item.getName()] = item.getValue());
+        callback({
+            success: true,
+            data: resultData
         });
     });
 }

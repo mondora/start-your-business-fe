@@ -4,6 +4,7 @@ import {
     authenticateUser,
     changePassword,
     confirmRegistration,
+    getUserAttributes,
     resendConfirmationCode,
     signOut,
     signUp
@@ -20,6 +21,18 @@ export const confirmSignUp = (username, confirmationCode, userPoolConfig) => {
             {},
             {},
             () => window.location = `#/build-site/${md5(username)}`
+        ), userPoolConfig);
+    };
+};
+
+export const fetchUserInfo = (username, userPoolConfig) => {
+    return dispatch => {
+        dispatch({
+            type: 'FETCH_USER_INFO_START'
+        });
+        getUserAttributes(username, getDefaultCognitoCallback(
+            dispatch,
+            'FETCH_USER_INFO'
         ), userPoolConfig);
     };
 };
@@ -91,17 +104,23 @@ function getDefaultCognitoCallback (dispatch, actionName, successObj = {}, failO
         if (result.success) {
             dispatch({
                 type: `${actionName}_SUCCESS`,
+                data: result.data,
                 ...successObj
             });
             if (successAction) {
                 successAction();
             }
         } else {
-            dispatch({
-                type: `${actionName}_FAIL`,
-                error: result.error,
-                ...failObj
-            });
+            if (result.error.message === 'User is not authenticated') {
+                dispatch({type: 'LOGOUT_SUCCESS'});
+                window.location = '#/';
+            } else {
+                dispatch({
+                    type: `${actionName}_FAIL`,
+                    error: result.error,
+                    ...failObj
+                });
+            }
         }
     };
 }

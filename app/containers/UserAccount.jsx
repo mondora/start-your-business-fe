@@ -5,7 +5,7 @@ import {Col, Row} from 'react-bootstrap';
 import {Form} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
 
-import {updatePassword} from 'actions/user';
+import {fetchUserInfo, updatePassword} from 'actions/user';
 
 import {getUserSiteState} from 'lib/auth-utils';
 import * as colors from 'lib/colors';
@@ -36,6 +36,7 @@ class UserAccount extends Component {
     static propTypes = {
         basicInfoForm: PropTypes.object,
         billingInformationForm: PropTypes.object,
+        fetchUserInfo: PropTypes.func.isRequired,
         passwordsForm: PropTypes.object,
         updatePassword: PropTypes.func.isRequired,
         user: PropTypes.object
@@ -48,8 +49,25 @@ class UserAccount extends Component {
         };
     }
 
+    renderAccountSettingsBox (username) {
+        return username ? (
+            <Col xs={12} md={6}>
+                <div style={styles.box}>
+                    <AccountSettingsForm
+                        fetchUserInfo={() => this.props.fetchUserInfo(username)}
+                        form={this.props.basicInfoForm}
+                        titleStyle={styles.boxTitle}
+                        marginBottom={0}
+                        padding={0}
+                    />
+                </div>
+            </Col>
+        ) : null;
+    }
+
     render () {
         const {username} = getUserSiteState(this.props.user);
+        console.log(username);
         return (
             <div>
                 <PageTeaser
@@ -57,16 +75,7 @@ class UserAccount extends Component {
                 />
                 <div className='container'>
                     <Row>
-                        <Col xs={12} md={6}>
-                            <div style={styles.box}>
-                                <AccountSettingsForm
-                                    form={this.props.basicInfoForm}
-                                    titleStyle={styles.boxTitle}
-                                    marginBottom={0}
-                                    padding={0}
-                                />
-                            </div>
-                        </Col>
+                        {this.renderAccountSettingsBox(username)}
                         <Col xs={12} md={6}>
                             <div style={styles.box}>
                                 <ChangePasswordForm
@@ -188,6 +197,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        fetchUserInfo: bindActionCreators(fetchUserInfo, dispatch),
         updatePassword: bindActionCreators(updatePassword, dispatch)
     };
 };

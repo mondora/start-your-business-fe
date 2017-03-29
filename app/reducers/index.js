@@ -42,6 +42,7 @@ const reducers = combineReducers({
     siteNameForm: formReducer('siteConfig.element.site', initialBusinessSite),
     ui,
     user,
+    //TODO find another way to dynamically manage the form for the right site
     userBasicInfoForm: formReducer('user.updateInfo', initialBasicUserInfo),
     userLoginForm: formReducer('user.login', initialLoginState),
     userPasswordsForm: formReducer('user.updatePassword', initialPasswordsState),

@@ -1,5 +1,4 @@
-import axios from 'axios';
-import {API_ENDPOINT} from 'config';
+import axios from 'lib/axios';
 
 export const choosePlan = productPlanId => ({
     type: 'CHOOSE_PLAN',
@@ -8,7 +7,7 @@ export const choosePlan = productPlanId => ({
 
 export const getSYBProductPlans = () => {
     return dispatch => {
-        axios.get(`https://${API_ENDPOINT}/products/start-your-business`)
+        axios.get('/products/start-your-business')
             .then(response => dispatch({
                 type: 'GET_SYB_PRODUCT_SUCCESS',
                 data: response.data
