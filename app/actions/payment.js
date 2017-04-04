@@ -1,6 +1,7 @@
 import axios from 'lib/axios';
 
 import {createUserPool} from 'lib/aws-cognito-utils';
+import {normalizeSubscriptions} from 'lib/zuora-products-utils';
 
 export const getPaymentParams = () => {
     return dispatch => {
@@ -21,14 +22,33 @@ export const subscribeNewCustomer = (chosenPlanId, billingInfo, siteConfig, paym
     };
 };
 
-export const subscribeNewSupplier = (chosenPlanId, billingInfo, siteConfig, paymentMethodId) => {
+export const subscribeNewSupplier = (chosenPlanId, billingInfo, siteConfig, paymentMethodId, subscriptions) => {
     //TODO save site config under the chosen businessName
     return dispatch => {
+        const {businessName} = siteConfig.site;
         callSubscribe(dispatch, chosenPlanId, billingInfo, paymentMethodId, () => {
             //TODO manage own domain name when available instead of businessName
-            createAWSCognitoUserPool(dispatch, siteConfig.site.businessName);
+            createAWSCognitoUserPool(dispatch, businessName);
         });
+        callSaveProduct(dispatch, businessName, normalizeSubscriptions(subscriptions));
     };
+};
+
+const callSaveProduct = (dispatch, businessName, productPlans, productId) => {
+    dispatch({
+        type: 'SAVE_PRODUCT_START'
+    });
+    axios.post('/products', {
+        businessName,
+        productPlans,
+        productId
+    })
+    .then(() => dispatch({
+        type: 'SAVE_PRODUCT_SUCCESS'
+    }))
+    .catch(() => dispatch({
+        type: 'SAVE_PRODUCT_FAIL'
+    }));
 };
 
 const callSubscribe = (dispatch, chosenPlanId, billingInfo, paymentMethodId, successCallback) => {

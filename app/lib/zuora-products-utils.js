@@ -60,7 +60,22 @@ export function allowOwnDomain (productPlan) {
     return productPlan.allowOwnDomain__c === 'Yes';
 }
 
-
 export function isActive (productPlan) {
     return productPlan.status === 'Active';
+}
+
+export function normalizeSubscriptions (subscriptions) {
+    let productPlans = [];
+    for (let i = 1; i < 4; i++) {
+        productPlans.push({
+            description: subscriptions[`subscriptionType${i}`],
+            frequency: subscriptions[`subscriptionFrequency${i}`],
+            price: subscriptions[`subscriptionPrice${i}`],
+            features: [
+                subscriptions[`subscriptionFeature${i}a`],
+                subscriptions[`subscriptionFeature${i}b`]
+            ]
+        });
+    }
+    return productPlans;
 }
