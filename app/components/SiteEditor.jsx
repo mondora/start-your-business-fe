@@ -47,6 +47,7 @@ class SiteEditor extends Component {
         setImagePath: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
+        subscriptions: PropTypes.object,
         upsertSiteConfig: PropTypes.func.isRequired,
         username: PropTypes.string
     };
@@ -58,8 +59,8 @@ class SiteEditor extends Component {
     }
 
     handleTemplateSaving () {
-        const {saveButton: {onSave}, upsertSiteConfig, siteConfig, username} = this.props;
-        upsertSiteConfig(siteConfig, username);
+        const {params: {businessId}, saveButton: {onSave}, upsertSiteConfig, siteConfig, subscriptions, username} = this.props;
+        upsertSiteConfig(businessId, siteConfig, username, subscriptions);
         if (onSave) {
             onSave();
         }

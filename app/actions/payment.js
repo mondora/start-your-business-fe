@@ -34,14 +34,18 @@ export const subscribeNewSupplier = (chosenPlanId, billingInfo, siteConfig, paym
     };
 };
 
-const callSaveProduct = (dispatch, businessName, productPlans, productId) => {
+export const updateProduct = (dispatch, businessName, subscriptions) => {
+    callSaveProduct(dispatch, businessName, normalizeSubscriptions(subscriptions), true);
+};
+
+const callSaveProduct = (dispatch, businessName, productPlans, update) => {
     dispatch({
         type: 'SAVE_PRODUCT_START'
     });
     axios.post('/products', {
         businessName,
         productPlans,
-        productId
+        update
     })
     .then(() => dispatch({
         type: 'SAVE_PRODUCT_SUCCESS'

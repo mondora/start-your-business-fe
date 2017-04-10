@@ -19,6 +19,7 @@ class BuildSite extends Component {
         setImagePath: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
+        subscriptions: PropTypes.object,
         upsertSiteConfig: PropTypes.func.isRequired,
         username: PropTypes.string
     };
@@ -51,6 +52,7 @@ const mapStateToProps = (state) => {
     return {
         editMode: state.ui.editMode,
         siteConfig: state.siteConfig.element,
+        subscriptions: state.ui.productPlans.subscriptions,
         username: state.user.SYB.username
     };
 };

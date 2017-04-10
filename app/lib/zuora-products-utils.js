@@ -68,6 +68,9 @@ export function normalizeSubscriptions (subscriptions) {
     let productPlans = [];
     for (let i = 1; i < 4; i++) {
         productPlans.push({
+            productPlanId: subscriptions[`productPlanId${i}`],
+            productRatePlanChargeId: subscriptions[`productRatePlanChargeId${i}`],
+            productRatePlanChargeTierId: subscriptions[`productRatePlanChargeTierId${i}`],
             description: subscriptions[`subscriptionType${i}`],
             frequency: subscriptions[`subscriptionFrequency${i}`],
             price: subscriptions[`subscriptionPrice${i}`],

@@ -1,5 +1,7 @@
 import md5 from 'js-md5';
 
+import {updateProduct} from 'actions/payment';
+
 import axios from 'lib/axios';
 import {fetch as fetchFn} from 'lib/fetch';
 
@@ -19,19 +21,23 @@ const _fetch = fetchFn(
 
 export const fetch = businessId => _fetch(`/businesses/${businessId}`);
 
-export const upsertSiteConfig = (siteConfig, username) => dispatch => {
+export const upsertSiteConfig = (businessId, siteConfig, username, subscriptions) => dispatch => {
     dispatch({
         type: UPSERT_SITE_CONFIG_START
     });
+    console.log(businessId);
     console.log(siteConfig);
     console.log(username);
     axios.post('/businesses', {
         siteConfig,
         userId: md5(username)
     })
-        .then(() => dispatch({
-            type: UPSERT_SITE_CONFIG_SUCCESS
-        }))
+        .then(() =>  {
+            dispatch({
+                type: UPSERT_SITE_CONFIG_SUCCESS
+            });
+            updateProduct(dispatch, businessId, subscriptions);
+        })
         .catch(() => dispatch({
             type: UPSERT_SITE_CONFIG_ERROR
         }));
