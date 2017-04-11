@@ -12,6 +12,7 @@ import siteConfig, {
     initialOtherInfo,
     initialStepsInfo
 } from './siteConfig';
+import siteProduct, {initialPlanInfo} from './siteProduct';
 import payment from './payment';
 import products from './products';
 import spinner from './spinner';
@@ -22,7 +23,7 @@ import user, {
     initialPasswordsState,
     initialSignupState
 } from './user';
-import ui, {initialSubscriptionsInfo} from './ui';
+import ui from './ui';
 
 const reducers = combineReducers({
     routing: routerReducer,
@@ -38,8 +39,15 @@ const reducers = combineReducers({
     siteConfigIntroForm: formReducer('siteConfig.element.intro', initialIntroInfo),
     siteConfigOtherInfoForm: formReducer('siteConfig.element.info', initialOtherInfo),
     siteConfigStepsForm: formReducer('siteConfig.element.steps', initialStepsInfo),
-    siteConfigSubscriptionsForm: formReducer('ui.productPlans.subscriptions', initialSubscriptionsInfo),
     siteNameForm: formReducer('siteConfig.element.site', initialBusinessSite),
+    //TODO find right model for array
+    siteProductPlansForm: formReducer('siteProduct.productPlans', initialPlanInfo(
+        'Titolo',
+        ['Prima caratteristica', 'Seconda caratteristica'],
+        'Prezzo',
+        'Frequenza'
+    )),
+    siteProduct,
     ui,
     user,
     //TODO find another way to dynamically manage the form for the right site

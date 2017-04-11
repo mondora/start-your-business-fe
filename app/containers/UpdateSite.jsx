@@ -15,11 +15,11 @@ class UpdateSite extends Component {
         editMode: PropTypes.number,
         fetchSiteConfig: PropTypes.func.isRequired,
         params: PropTypes.object.isRequired,
+        productPlans: PropTypes.array,
         setEditMode: PropTypes.func.isRequired,
         setImagePath: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
-        subscriptions: PropTypes.object,
         upsertSiteConfig: PropTypes.func.isRequired,
         username: PropTypes.string
     };
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
     return {
         editMode: state.ui.editMode,
         siteConfig: state.siteConfig.element,
-        subscriptions: state.ui.productPlans.subscriptions,
+        productPlans: state.siteProduct.productPlans,
         username: state.user.SYB.username
     };
 };

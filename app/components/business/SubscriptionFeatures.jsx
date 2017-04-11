@@ -7,11 +7,6 @@ const styles = {
         padding: '15px 20px',
         fontSize: '1.1em'
     },
-    // subscriptionText: {
-    //     width: '100%',
-    //     display: 'flex',
-    //     flexDirection: 'row'
-    // },
     subscriptionIcon: {
         fontSize: 26,
         verticalAlign: 'middle',
@@ -22,28 +17,22 @@ const styles = {
 export default class SubscriptionFeatures extends Component {
     static propTypes = {
         bgColor: PropTypes.string,
-        feature1: PropTypes.node,
-        feature2: PropTypes.node,
+        features: PropTypes.array
     };
 
     render () {
         const mainColor = this.props.bgColor;
         return (
             <div style={styles.subscriptionFeatures}>
-                <p style={styles.subscriptionText}>
-                    <Glyphicon
-                        glyph='glyphicon glyphicon-ok-circle'
-                        style={{...styles.subscriptionIcon, ...{color: mainColor}}}
-                    />
-                    {this.props.feature1}
-                </p>
-                <p style={styles.subscriptionText}>
-                    <Glyphicon
-                        glyph='glyphicon glyphicon-ok-circle'
-                        style={{...styles.subscriptionIcon, ...{color: mainColor}}}
-                    />
-                    {this.props.feature2}
-                </p>
+                {this.props.features.map((feat, index) =>
+                    <p key={index}>
+                        <Glyphicon
+                            glyph='glyphicon glyphicon-ok-circle'
+                            style={{...styles.subscriptionIcon, ...{color: mainColor}}}
+                        />
+                        {feat}
+                    </p>
+                )}
             </div>
         );
     }

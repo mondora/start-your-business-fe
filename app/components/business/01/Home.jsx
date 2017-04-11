@@ -34,7 +34,7 @@ export default class Home extends Component {
     static propTypes = {
         editMode: PropTypes.number,
         login: PropTypes.func.isRequired,
-        productPlans: PropTypes.object,
+        productPlans: PropTypes.array,
         setImagePath: PropTypes.func.isRequired,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
@@ -43,7 +43,7 @@ export default class Home extends Component {
         siteConfigIntroForm: PropTypes.object.isRequired,
         siteConfigOtherInfoForm: PropTypes.object.isRequired,
         siteConfigStepsForm: PropTypes.object.isRequired,
-        siteConfigSubscriptionsForm: PropTypes.object.isRequired,
+        siteProductPlansForm: PropTypes.object.isRequired,
         spinner: PropTypes.object,
         styles: PropTypes.object.isRequired
     };
@@ -80,9 +80,9 @@ export default class Home extends Component {
             signUpUser,
             siteConfigIntroForm,
             siteConfigStepsForm,
-            siteConfigSubscriptionsForm,
             siteConfigOtherInfoForm,
             siteConfig,
+            siteProductPlansForm,
             styles
         } = this.props;
         const homeStyles = componentStyles(siteConfig.colors);
@@ -109,7 +109,7 @@ export default class Home extends Component {
                         />
                         <SubscriptionsList
                             buildSiteMode={editMode}
-                            form={siteConfigSubscriptionsForm}
+                            form={siteProductPlansForm}
                             productPlans={productPlans}
                             siteConfig={siteConfig}
                         />

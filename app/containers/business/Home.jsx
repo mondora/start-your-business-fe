@@ -54,7 +54,7 @@ class Home extends Component {
     static propTypes = {
         editMode: PropTypes.number,
         login: PropTypes.func.isRequired,
-        productPlans: PropTypes.object,
+        productPlans: PropTypes.array,
         setImagePath: PropTypes.func.isRequired,
         signUpForm: PropTypes.object,
         signUpState: PropTypes.object,
@@ -63,7 +63,7 @@ class Home extends Component {
         siteConfigIntroForm: PropTypes.object,
         siteConfigOtherInfoForm: PropTypes.object,
         siteConfigStepsForm: PropTypes.object,
-        siteConfigSubscriptionsForm: PropTypes.object
+        siteProductPlansForm: PropTypes.object
     };
 
     render () {
@@ -81,14 +81,14 @@ const mapStateToProps = (state) => {
     const userSite = getUserSiteState(state.user);
     return {
         editMode: state.ui.editMode,
-        productPlans: state.ui.productPlans,
+        productPlans: state.siteProduct.productPlans,
         signUpForm: state.userSignupForm,
         signUpState: userSite.signup,
         siteConfig: state.siteConfig.element,
         siteConfigIntroForm: state.siteConfigIntroForm,
         siteConfigOtherInfoForm: state.siteConfigOtherInfoForm,
         siteConfigStepsForm: state.siteConfigStepsForm,
-        siteConfigSubscriptionsForm: state.siteConfigSubscriptionsForm
+        siteProductPlansForm: state.siteProductPlansForm
     };
 };
 

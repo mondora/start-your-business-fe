@@ -1,7 +1,6 @@
 import axios from 'lib/axios';
 
 import {createUserPool} from 'lib/aws-cognito-utils';
-import {normalizeSubscriptions} from 'lib/zuora-products-utils';
 
 export const getPaymentParams = () => {
     return dispatch => {
@@ -22,7 +21,7 @@ export const subscribeNewCustomer = (chosenPlanId, billingInfo, siteConfig, paym
     };
 };
 
-export const subscribeNewSupplier = (chosenPlanId, billingInfo, siteConfig, paymentMethodId, subscriptions) => {
+export const subscribeNewSupplier = (chosenPlanId, billingInfo, siteConfig, paymentMethodId, productPlans) => {
     //TODO save site config under the chosen businessName
     return dispatch => {
         const {businessName} = siteConfig.site;
@@ -30,12 +29,12 @@ export const subscribeNewSupplier = (chosenPlanId, billingInfo, siteConfig, paym
             //TODO manage own domain name when available instead of businessName
             createAWSCognitoUserPool(dispatch, businessName);
         });
-        callSaveProduct(dispatch, businessName, normalizeSubscriptions(subscriptions));
+        callSaveProduct(dispatch, businessName, productPlans);
     };
 };
 
-export const updateProduct = (dispatch, businessName, subscriptions) => {
-    callSaveProduct(dispatch, businessName, normalizeSubscriptions(subscriptions), true);
+export const updateProduct = (dispatch, businessName, productPlans) => {
+    callSaveProduct(dispatch, businessName, productPlans, true);
 };
 
 const callSaveProduct = (dispatch, businessName, productPlans, update) => {

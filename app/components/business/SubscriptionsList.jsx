@@ -71,68 +71,16 @@ class SubscriptionsList extends Component {
     static propTypes = {
         buildSiteMode: PropTypes.number,
         form: PropTypes.object,
-        productPlans: PropTypes.object.isRequired,
+        productPlans: PropTypes.array.isRequired,
         siteConfig: PropTypes.object.isRequired
     };
 
-    getSubscription (isEditMode) {
-        const siteColors = this.props.siteConfig.colors;
-        const {
-            subscriptionType1,
-            subscriptionType2,
-            subscriptionType3,
-            subscriptionFeature1a,
-            subscriptionFeature1b,
-            subscriptionFeature2a,
-            subscriptionFeature2b,
-            subscriptionFeature3a,
-            subscriptionFeature3b,
-            subscriptionPrice1,
-            subscriptionPrice2,
-            subscriptionPrice3,
-            subscriptionFrequency1,
-            subscriptionFrequency2,
-            subscriptionFrequency3,
-            subscriptionImage1,
-            subscriptionImage2,
-            subscriptionImage3
-        } = this.props.productPlans.subscriptions;
-        return [
-            {
-                bgColor: siteColors.mainColor,
-                type: this.renderTextField(isEditMode, 'subscriptionType1', 'CASSETTINA PICCOLA', subscriptionType1),
-                image: subscriptionImage1 ? subscriptionImage1 : 'subscription01.jpg',
-                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency1', frequencies[subscriptionFrequency1], frequenciesOptions),
-                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature1a', 'Adatta per un consumo mensile di una persona', subscriptionFeature1a),
-                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature1b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature1b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice1', '35', `€ ${subscriptionPrice1}`, requiredPriceValidator)
-            },
-            {
-                bgColor: siteColors.mainColor,
-                type: this.renderTextField(isEditMode, 'subscriptionType2', 'CASSETTINA PICCOLA', subscriptionType2),
-                image: subscriptionImage2 ? subscriptionImage2 : 'subscription02.jpg',
-                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency2', frequencies[subscriptionFrequency2], frequenciesOptions),
-                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature2a', 'Adatta per un consumo mensile di 2/3 persone', subscriptionFeature2a),
-                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature2b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature2b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice2', '45', `€ ${subscriptionPrice2}`, requiredPriceValidator)
-            },
-            {
-                bgColor: siteColors.mainColor,
-                type: this.renderTextField(isEditMode, 'subscriptionType3', 'CASSETTINA PICCOLA', subscriptionType3),
-                image: subscriptionImage3 ? subscriptionImage3 : 'subscription03.jpg',
-                frequency: getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency3', frequencies[subscriptionFrequency3], frequenciesOptions),
-                feature1: this.renderTextareaField(isEditMode, 'subscriptionFeature3a', 'Adatta per un consumo mensile di 4/5 persone', subscriptionFeature3a),
-                feature2: this.renderTextareaField(isEditMode, 'subscriptionFeature3b', 'Assortimento: verdura mista (frutta a richiesta)', subscriptionFeature3b),
-                price: this.renderTextField(isEditMode, 'subscriptionPrice3', '55', `€ ${subscriptionPrice3}`, requiredPriceValidator)
-            }
-        ];
-    }
-
     renderTextField (isEditMode, fieldName, placeholder, readNode, validator) {
+        //TODO change form model
         return getTextField(
             isEditMode,
             this.props.form[fieldName],
-            `ui.productPlans.subscriptions.${fieldName}`,
+            `siteProduct.productPlans.${fieldName}`,
             placeholder,
             readNode,
             {textAlign: 'center', color: colors.grey},
@@ -142,10 +90,11 @@ class SubscriptionsList extends Component {
     }
 
     renderTextareaField (isEditMode, fieldName, placeholder, readNode) {
+        //TODO change form model
         return getTextAreaField(
             isEditMode,
             this.props.form[fieldName],
-            `ui.productPlans.subscriptions.${fieldName}`,
+            `siteProduct.productPlans.${fieldName}`,
             placeholder,
             readNode,
             {color: colors.grey, textAlign: 'center'},
@@ -154,7 +103,7 @@ class SubscriptionsList extends Component {
     }
 
     renderSubscriptionTitle (isEditMode, style, templateId) {
-        const {subscriptionsTitle} = this.props.productPlans.subscriptions;
+        const {subscriptionsTitle} = this.props.siteConfig;
         return (
             <h2 style={style[`subscriptionsTitle${templateId}`]}>
                 {this.renderTextField(isEditMode, 'subscriptionsTitle', 'SCEGLI LA TUA SOTTOSCRIZIONE', subscriptionsTitle)}
@@ -162,23 +111,23 @@ class SubscriptionsList extends Component {
         );
     }
 
-    renderSubscription (isEditMode, style, templateId) {
+    renderProductPlans (isEditMode, style, templateId) {
         const Subscription = components[`subscription${templateId}`];
-        const getBgColor = ({bgColor}, index) =>
+        const getBgColor = (bgColor, index) =>
             templateId === templatesIds.TEMPLATE_1 ? Color(bgColor).alpha(0.3 * (2 + index)).rgb().string() : bgColor;
+        //TODO change form fields
         return (
             <div style={style[`subscription${templateId}`]}>
-                {this.getSubscription(isEditMode).map((subscriptionInfo, index) =>
+                {this.props.productPlans.map((plan, index) =>
                     <Subscription
                         key={index}
-                        bgColor={getBgColor(subscriptionInfo, index)}
-                        frequency={subscriptionInfo.frequency}
-                        feature1={subscriptionInfo.feature1}
-                        feature2={subscriptionInfo.feature2}
+                        bgColor={getBgColor(this.props.siteConfig.colors.mainColor, index)}
+                        frequency={getSelectField(isEditMode, 'businessSite.productPlans.subscriptions.subscriptionFrequency1', frequencies[plan.frequency], frequenciesOptions)}
+                        features={plan.features.map(feat => this.renderTextareaField(isEditMode, 'subscriptionFeature1a', 'Caratteristica', feat))}
                         imageUploadMode={this.props.buildSiteMode === editModes.UPLOAD_IMAGES}
-                        image={subscriptionInfo.image}
-                        price={subscriptionInfo.price}
-                        type={subscriptionInfo.type}
+                        image={plan.imagePath ? plan.imagePath : `subscription0${index+1}.jpg`}
+                        price={this.renderTextField(isEditMode, 'subscriptionPrice3', 'Prezzo', `€ ${plan.price}`, requiredPriceValidator)}
+                        type={this.renderTextField(isEditMode, 'subscriptionType3', 'Titolo', plan.type)}
                     />
                 )}
             </div>
@@ -189,12 +138,13 @@ class SubscriptionsList extends Component {
         const isEditMode = this.props.buildSiteMode === editModes.EDIT_TEXTS;
         const style = styles(this.props.siteConfig.colors);
         const {templateId} = this.props.siteConfig;
+        //TODO change form model
         return (
-            <Form model={'ui.productPlans.subscriptions'}>
+            <Form model={'siteProduct.productPlans'}>
                 <div style={style.subscriptionsContainer}>
                     {this.renderSubscriptionTitle(isEditMode, style, templateId)}
                     <div className='container-fluid'>
-                        {this.renderSubscription(isEditMode, style, templateId)}
+                        {this.renderProductPlans(isEditMode, style, templateId)}
                     </div>
                 </div>
             </Form>

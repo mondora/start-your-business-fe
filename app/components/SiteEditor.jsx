@@ -42,12 +42,12 @@ class SiteEditor extends Component {
         instructionMessage: PropTypes.node,
         pageTitle: PropTypes.string.isRequired,
         params: PropTypes.object.isRequired,
+        productPlans: PropTypes.array,
         saveButton: PropTypes.object.isRequired,
         setEditMode: PropTypes.func.isRequired,
         setImagePath: PropTypes.func.isRequired,
         setTemplate: PropTypes.func.isRequired,
         siteConfig: PropTypes.object,
-        subscriptions: PropTypes.object,
         upsertSiteConfig: PropTypes.func.isRequired,
         username: PropTypes.string
     };
@@ -59,8 +59,8 @@ class SiteEditor extends Component {
     }
 
     handleTemplateSaving () {
-        const {params: {businessId}, saveButton: {onSave}, upsertSiteConfig, siteConfig, subscriptions, username} = this.props;
-        upsertSiteConfig(businessId, siteConfig, username, subscriptions);
+        const {params: {businessId}, saveButton: {onSave}, upsertSiteConfig, siteConfig, productPlans, username} = this.props;
+        upsertSiteConfig(businessId, siteConfig, username, productPlans);
         if (onSave) {
             onSave();
         }

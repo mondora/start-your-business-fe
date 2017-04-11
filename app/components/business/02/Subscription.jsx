@@ -93,8 +93,7 @@ const styles = {
 class Subscription extends Component {
     static propTypes = {
         bgColor: PropTypes.string,
-        feature1: PropTypes.node,
-        feature2: PropTypes.node,
+        features: PropTypes.array,
         frequency: PropTypes.node,
         image: PropTypes.any,
         imageUploadMode: PropTypes.bool,
@@ -117,8 +116,7 @@ class Subscription extends Component {
                     </div>
                     <SubscriptionFeatures
                         bgColor={this.props.bgColor}
-                        feature1={this.props.feature1}
-                        feature2={this.props.feature2}
+                        features={this.props.features}
                     />
                 </div>
                 <div style={styles.subscriptionPriceWrp}>

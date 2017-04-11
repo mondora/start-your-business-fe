@@ -68,6 +68,7 @@ const initialSiteConfig = {
     logo: null,
     site: initialBusinessSite,
     steps: initialStepsInfo,
+    subscriptionsTitle: 'SCEGLI LA TUA SOTTOSCRIZIONE',
     teaserImages: {
         image1: null,
         image2: null,

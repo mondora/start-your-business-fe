@@ -17,13 +17,13 @@ export default class SubscriptionResultLoader extends Component {
         const creditCardSuccess = this.isCreditCardSuccess(query);
         if (creditCardSuccess) {
             //need to get data from stored state because of navigation from iframe
-            getStoredState({whitelist: ['billing', 'products', 'siteConfig', 'ui'], keyPrefix: 'syb:'}, (err, state) => {
+            getStoredState({whitelist: ['billing', 'products', 'siteConfig', 'siteProduct'], keyPrefix: 'syb:'}, (err, state) => {
                 props.subscribeNewCustomer(
                     state.products.chosenPlanId,
                     state.billing,
                     state.siteConfig.element,
                     query.refId,
-                    state.ui.productPlans.subscriptions
+                    state.siteProduct.productPlans
                 );
             });
         }

@@ -64,6 +64,7 @@ export function isActive (productPlan) {
     return productPlan.status === 'Active';
 }
 
+//TODO delete when no more needed
 export function normalizeSubscriptions (subscriptions) {
     let productPlans = [];
     for (let i = 1; i < 4; i++) {
